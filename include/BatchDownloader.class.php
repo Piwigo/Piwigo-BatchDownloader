@@ -20,13 +20,15 @@ class BatchDownloader
     
     $this->conf = $conf['batch_download'];
     $this->data = array(
-      'user_id' => $user['id'],
       'set_id' => 0,
+      'user_id' => $user['id'],
+      'date_creation' => '0000-00-00 00:00:00',
       'type' => null,
       'type_id' => null,
       'nb_zip' => 0,
       'last_zip' => 0,
       'nb_images' => 0,
+      'total_size' => 0,
       'status' => 'new',
       );
     $this->images = array();
@@ -36,16 +38,18 @@ class BatchDownloader
     {
       $query = '
 SELECT
+    date_creation,
     type,
     type_id,
     nb_zip,
     last_zip,
     nb_images,
+    total_size,
     status
   FROM '.BATCH_DOWNLOAD_TSETS.'
   WHERE
-    user_id = '.$this->data['user_id'].'
-    AND id = '.$set_id.'
+    id = '.$set_id.'
+    '.(!is_admin() ? 'AND user_id = '.$this->data['user_id'] : null).'
 ;';
       $result = pwg_query($query);
       
@@ -53,11 +57,13 @@ SELECT
       {
         $this->data['set_id'] = $set_id;
         list(
+          $this->data['date_creation'],
           $this->data['type'], 
           $this->data['type_id'], 
           $this->data['nb_zip'], 
           $this->data['last_zip'], 
           $this->data['nb_images'], 
+          $this->data['total_size'],
           $this->data['status']
           ) = pwg_db_fetch_row($result);
         
@@ -79,7 +85,7 @@ SELECT
 ;';
         $this->images = simple_hash_from_query($query, 'image_id', 'zip');
         
-        if (count($this->images) != $this->data['nb_images'])
+        if ( $this->data['status'] != 'done' and count($this->images) != $this->data['nb_images'] )
         {
           $this->updateParam('nb_images', count($this->images));
         }
@@ -104,6 +110,7 @@ INSERT INTO '.BATCH_DOWNLOAD_TSETS.'(
     nb_zip,
     last_zip,
     nb_images,
+    total_size,
     status
   ) 
   VALUES(
@@ -114,11 +121,15 @@ INSERT INTO '.BATCH_DOWNLOAD_TSETS.'(
     0,
     0,
     0,
+    0,
     "new"
   )
 ;';
       pwg_query($query);
       $this->data['set_id'] = pwg_db_insert_id();
+      
+      $date = pwg_query('SELECT FROM_UNIXTIME(NOW());');
+      list($this->data['date_creation']) = pwg_db_fetch_row($date);
       
       if (!empty($images))
       {
@@ -224,9 +235,9 @@ DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
   }
   
   /**
-   * clear
+   * clearImages
    */
-  function clear($reset=true)
+  function clearImages()
   {
     $this->images = array();
     
@@ -235,13 +246,6 @@ DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
   WHERE set_id = '.$this->data['set_id'].'
 ;';
     pwg_query($query);
-    
-    if ($reset)
-    {
-      $this->updateParam('nb_zip', 0);
-      $this->updateParam('last_zip', 0);
-      $this->updateParam('nb_images', 0);
-    }
   }
   
   /**
@@ -258,6 +262,8 @@ DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
   
   /**
    * createNextArchive
+   * @param: bool force all elements in one archive
+   * @return: string zip path or false
    */
   function createNextArchive($force_one_archive=false)
   {
@@ -276,13 +282,13 @@ DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
       if ($this->data['nb_images'] > $this->conf['max_elements'])
       {
         $images_ids = array_slice(array_keys($this->images), 0, $this->conf['max_elements']);
-        $this->clear(false);
+        $this->clearImages();
         $this->addImages($images_ids);
       }
       
       $this->getEstimatedArchiveNumber();
       
-      pwg_query('UPDATE '.BATCH_DOWNLOAD_TSETS.' SET date_creation = NOW() WHERE id = '.$this->data['set_id'].';');
+      $this->updateParam('date_creation', date('Y-m-d H:i:s'));
     }
     
     // get next images of the set
@@ -331,6 +337,8 @@ SELECT
         if ($total_size >= $this->conf['max_size']*1024 and !$force_one_archive) break;
       }
       
+      $this->updateParam('total_size', $this->data['total_size'] + $total_size);
+      
       // archive comment
       global $conf;
       $comment = 'Generated on '.date('r').' with PHP ZipArchive '.PHP_VERSION.' by Piwigo Advanced Downloader.';
@@ -357,7 +365,6 @@ UPDATE '.BATCH_DOWNLOAD_TIMAGES.'
       if (count($images_to_add) == count($images_added))
       {
         $this->updateParam('status', 'done');
-        $this->clear(false);
       }
       
       // over estimed
@@ -385,6 +392,7 @@ UPDATE '.BATCH_DOWNLOAD_TIMAGES.'
    */
   function getEstimatedTotalSize()
   {
+    if ($this->data['status'] == 'done') return $this->data['total_size'];
     if ($this->data['nb_images'] == 0) return 0;
     
     $image_ids = array_slice(array_keys($this->images), 0, $this->conf['max_elements']);
@@ -415,36 +423,27 @@ SELECT SUM(filesize) AS total
    */
   function getDownloadList($url='')
   {
-    $nb_archives = $this->getEstimatedArchiveNumber();
-    
     $out = '';
-    /*if ($this->data['status'] == 'done')
+    for ($i=1; $i<=$this->data['nb_zip']; $i++)
     {
-      $out.= '<li id="zip-1">Already downloaded</li>';
-    }*/
-    if (true)
-    {
-      for ($i=1; $i<=$this->data['nb_zip']; $i++)
+      $out.= '<li id="zip-'.$i.'">';
+      
+      if ($i < $this->data['last_zip']+1)
       {
-        $out.= '<li id="zip-'.$i.'">';
-        
-        if ($i < $this->data['last_zip']+1)
-        {
-          $out.= '<img src="'.BATCH_DOWNLOAD_PATH.'template/drive.png"> Archive #'.$i.' (already downloaded)';
-        }
-        else if ($i == $this->data['last_zip']+1)
-        {
-            $out.= '<a href="'.add_url_params($url, array('set_id'=>$this->data['set_id'],'zip'=>$i)).'" rel="nofollow" style="font-weight:bold;"' 
-              .($i!=1 ? 'onClick="return confirm(\'Starting download Archive #'.$i.' will destroy Archive #'.($i-1).', be sure you finish the download. Continue ?\');"' : null).
-              '><img src="'.BATCH_DOWNLOAD_PATH.'template/drive_go.png"> Archive #'.$i.' (ready)</a>';
-        }
-        else
-        {
-          $out.= '<img src="'.BATCH_DOWNLOAD_PATH.'template/drive.png"> Archive #'.$i.' (pending)';
-        }
-        
-        $out.= '</li>';
+        $out.= '<img src="'.BATCH_DOWNLOAD_PATH.'template/drive.png"> Archive #'.$i.' (already downloaded)';
       }
+      else if ($i == $this->data['last_zip']+1)
+      {
+          $out.= '<a href="'.add_url_params($url, array('set_id'=>$this->data['set_id'],'zip'=>$i)).'" rel="nofollow" style="font-weight:bold;"' 
+            .($i!=1 ? 'onClick="return confirm(\'Starting download Archive #'.$i.' will destroy Archive #'.($i-1).', be sure you finish the download. Continue ?\');"' : null).
+            '><img src="'.BATCH_DOWNLOAD_PATH.'template/drive_go.png"> Archive #'.$i.' (ready)</a>';
+      }
+      else
+      {
+        $out.= '<img src="'.BATCH_DOWNLOAD_PATH.'template/drive.png"> Archive #'.$i.' (pending)';
+      }
+      
+      $out.= '</li>';
     }
     
     return $out;
@@ -470,8 +469,8 @@ SELECT SUM(filesize) AS total
           (!empty($this->conf['archive_prefix']) ? $this->conf['archive_prefix'] .'_' : null).
           get_username($this->data['user_id']) .'_'. 
           $this->data['type'] .'-'. $this->data['type_id'] .'_'.
-          $this->data['user_id'] . $this->data['set_id'] .'_'.
-          ($this->data['nb_zip']!=1 ? 'part'. $i : null).
+          $this->data['user_id'] . $this->data['set_id'] .
+          ($this->data['nb_zip']!=1 ? '_part'. $i : null).
           '.zip';
   }
   
@@ -486,6 +485,7 @@ SELECT SUM(filesize) AS total
       'NB_ARCHIVES' => $this->data['nb_zip'],
       'TOTAL_SIZE' => ceil($this->getEstimatedTotalSize()/1024),
       'LINKS' => $this->getDownloadList(BATCH_DOWNLOAD_PUBLIC . 'init_zip'),
+      'DATE_CREATION' => format_date($this->data['date_creation'], true),
       );
         
     if ($this->data['status'] == 'new')
@@ -495,13 +495,39 @@ SELECT SUM(filesize) AS total
     
     switch ($this->data['type'])
     {
+      // calendar
       case 'calendar':
       {
-        $set['NAME'] = l10n('Calendar');
-        $set['COMMENT'] = $this->data['type_id'];
+        global $conf, $page;
+        $old_page = $page;
+        
+        $fields = array(
+          'created' => l10n('Creation date'),
+          'posted' => l10n('Post date'),
+          );
+        
+        $chronology = explode('-', $this->data['type_id']);
+        $page['chronology_field'] = $chronology[0];
+        $page['chronology_style'] = $chronology[1];
+        $page['chronology_view'] = $chronology[2];
+        $page['chronology_date'] = array_splice($chronology, 3);
+        
+        if (!class_exists('Calendar'))
+        {
+          include_once(PHPWG_ROOT_PATH.'include/calendar_'. $page['chronology_style'] .'.class.php');
+        }
+        $calendar = new Calendar();
+        $calendar->initialize('');
+        $display_name = strip_tags($calendar->get_display_name());
+        
+        $set['NAME'] = l10n('Calendar').': '.$fields[$page['chronology_field']].$display_name;
+        $set['sNAME'] = l10n('Calendar').': '.ltrim($display_name, $conf['level_separator']);
+        
+        $page = $old_page;
         break;
       }
       
+      // category
       case 'category':
       {
         $category = get_cat_info($this->data['type_id']);
@@ -511,68 +537,75 @@ SELECT SUM(filesize) AS total
         break;
       }
       
+      // flat
       case 'flat':
       {
         $set['NAME'] = l10n('Whole gallery');
         break;
       }
       
+      // tags
       case 'tags':
       {
         $tags = find_tags(explode(',', $this->data['type_id']));
-        $set['NAME'] = l10n('Tags');
+        $set['NAME'] = l10n('Tags').': ';
         
-        $set['COMMENT'] = ''; $first = true;
+        $first = true;
         foreach ($tags as $tag)
         {
           if ($first) $first = false;
-          else $set['COMMENT'].= ', ';
-          $set['COMMENT'].=
+          else $set['NAME'].= ', ';
+          $set['NAME'].=
             '<a href="' . make_index_url(array('tags'=>array($tag))) . '">'
             .trigger_event('render_tag_name', $tag['name'])
             .'</a>';
         }
-        
-        $set['sNAME'] = l10n('Tags').': '.strip_tags($set['COMMENT']);
         break;
       }
       
+      // search
       case 'search':
       {
         $set['NAME'] = '<a href="'.make_index_url(array('section'=>'search', 'search'=>$this->data['type_id'])).'">'.l10n('Search').'</a>';
         break;
       }
       
+      // favorites
       case 'favorites':
       {
         $set['NAME'] = '<a href="'.make_index_url(array('section'=>'favorites')).'">'.l10n('Your favorites').'</a>';
         break;
       }
       
+      // most_visited
       case 'most_visited':
       {
         $set['NAME'] = '<a href="'.make_index_url(array('section'=>'most_visited')).'">'.l10n('Most visited').'</a>';
         break;
       }
       
+      // best_rated
       case 'best_rated':
       {
         $set['NAME'] = '<a href="'.make_index_url(array('section'=>'best_rated')).'">'.l10n('Best rated').'</a>';
         break;
       }
       
+      // list
       case 'list':
       {
         $set['NAME'] = l10n('Random');
         break;
       }
       
+      // recent_pics
       case 'recent_pics':
       {
         $set['NAME'] = '<a href="'.make_index_url(array('section'=>'recent_pics')).'">'.l10n('Recent photos').'</a>';
         break;
       }
       
+      // selection
       // case 'selection':
       // {
         // $set['NAME'] = '';
@@ -581,7 +614,7 @@ SELECT SUM(filesize) AS total
       // }
     }
     
-    if (!isset($set['sNAME'])) $set['sNAME'] = $set['NAME'];
+    if (!isset($set['sNAME'])) $set['sNAME'] = strip_tags($set['NAME']);
     if (!isset($set['COMMENT'])) $set['COMMENT'] = null;
     
     return $set;

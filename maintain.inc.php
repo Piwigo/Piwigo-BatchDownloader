@@ -27,9 +27,10 @@ CREATE TABLE IF NOT EXISTS `' . $prefixeTable . 'download_sets` (
   `date_creation` datetime NOT NULL,
   `type` varchar(16) CHARACTER SET utf8 NOT NULL,
   `type_id` varchar(64) CHARACTER SET utf8 NOT NULL,
-  `nb_zip` smallint(2) NOT NULL DEFAULT 0,
-  `last_zip` smallint(2) NOT NULL DEFAULT 0,
+  `nb_zip` smallint(3) NOT NULL DEFAULT 0,
+  `last_zip` smallint(3) NOT NULL DEFAULT 0,
   `nb_images` mediumint(8) NOT NULL DEFAULT 0,
+  `total_size` int(10) NOT NULL DEFAULT 0,
   `status` enum("new","download","done") CHARACTER SET utf8 NOT NULL DEFAULT "new",
   PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1

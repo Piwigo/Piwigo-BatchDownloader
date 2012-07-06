@@ -17,3 +17,25 @@ input[name='max_size'], input[name='max_elements'] {
   display:inline-block;
   width:300px;
 }
+
+.table2 .action {
+  width:70px;
+}
+.table2 .user {
+  width:120px;
+}
+.table2 .date {
+  width:180px;
+}
+.table2 .size {
+  width:100px;
+}
+.table2 .images {
+  width:100px;
+}
+.table2 .archives {
+  width:110px;
+}
+.table2 .status {
+  width:100px;
+}

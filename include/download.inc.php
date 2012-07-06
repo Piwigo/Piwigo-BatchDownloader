@@ -17,7 +17,7 @@ switch ($page['sub_section'])
     if ( isset($_GET['cancel']) )
     {
       $BatchDownloader->deleteLastArchive();
-      $BatchDownloader->clear();
+      $BatchDownloader->clearImages();
       pwg_query('DELETE FROM '.BATCH_DOWNLOAD_TSETS.' WHERE id = '.$_GET['set_id'].';');
       $_SESSION['page_infos'][] = l10n('Download set deleted');
       redirect('index.php');

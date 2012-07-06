@@ -72,12 +72,13 @@ function batch_download_index_button()
       $BatchDownloader = new BatchDownloader('new', $page['items'], $set['type'], $set['id']);
       $BatchDownloader->getEstimatedArchiveNumber();
       
+      // if we plan only one zip with less elements than 'max_elements', the download starts immediately
       if (
         $BatchDownloader->getParam('nb_images') <= $conf['batch_download']['max_elements']
         and $BatchDownloader->getParam('nb_zip') == 1
       )
       {
-        $BatchDownloader->createNextArchive(true);
+        $BatchDownloader->createNextArchive(true); // make sure we have only one zip, even if 'max_size' is exceeded
         
         $u_download = BATCH_DOWNLOAD_PATH . 'download.php?set_id='.$BatchDownloader->getParam('set_id').'&amp;zip=1';
         
@@ -86,6 +87,7 @@ function batch_download_index_button()
         
         array_push($page['infos'], sprintf(l10n('The archive is downloading, if the download doesn\'t start automatically please <a href="%s">click here</a>'), $u_download));
       }
+      // oterwise we go to summary page
       else
       {
         redirect(BATCH_DOWNLOAD_PUBLIC . 'init_zip&amp;set_id='.$BatchDownloader->getParam('set_id'));
@@ -189,7 +191,7 @@ SELECT id
   {
     $BatchDownloader = new BatchDownloader($set_id);
     $BatchDownloader->deleteLastArchive();
-    $BatchDownloader->clear(false);
+    $BatchDownloader->clearImages();
     $BatchDownloader->updateParam('status', 'done');
   }
   
