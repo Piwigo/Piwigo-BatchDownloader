@@ -23,7 +23,7 @@ function batch_download_section_init()
     if (check_download_access() === false) access_denied();
     
     $page['section'] = 'download';
-    $page['title'] = l10n('Advanced Downloader').$conf['level_separator'].' ';
+    $page['title'] = l10n('Batch Downloader').$conf['level_separator'].' ';
     
     switch (@$tokens[1])
     {
@@ -56,7 +56,7 @@ function batch_download_page()
 /* add buttons on thumbnails list */
 function batch_download_index_button()
 {
-  global $page, $template, $user;
+  global $page, $template, $user, $conf;
   
   if ( !count($page['items']) or !isset($page['section']) ) return;
   
@@ -70,7 +70,26 @@ function batch_download_index_button()
     if ($set !== false)
     {
       $BatchDownloader = new BatchDownloader('new', $page['items'], $set['type'], $set['id']);
-      redirect(BATCH_DOWNLOAD_PUBLIC . 'init_zip&amp;set_id='.$BatchDownloader->getParam('set_id'));
+      $BatchDownloader->getEstimatedArchiveNumber();
+      
+      if (
+        $BatchDownloader->getParam('nb_images') <= $conf['batch_download']['max_elements']
+        and $BatchDownloader->getParam('nb_zip') == 1
+      )
+      {
+        $BatchDownloader->createNextArchive(true);
+        
+        $u_download = BATCH_DOWNLOAD_PATH . 'download.php?set_id='.$BatchDownloader->getParam('set_id').'&amp;zip=1';
+        
+        $null = null;
+        $template->block_footer_script(null, 'setTimeout("document.location.href = \''.$u_download.'\';", 1000);', $null, $null);
+        
+        array_push($page['infos'], sprintf(l10n('The archive is downloading, if the download doesn\'t start automatically please <a href="%s">click here</a>'), $u_download));
+      }
+      else
+      {
+        redirect(BATCH_DOWNLOAD_PUBLIC . 'init_zip&amp;set_id='.$BatchDownloader->getParam('set_id'));
+      }
     }
   }
   

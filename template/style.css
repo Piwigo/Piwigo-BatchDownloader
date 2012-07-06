@@ -1,0 +1,39 @@
+blockquote.comment {
+  margin:0 20px 0 20px;
+}
+
+ul.set-infos {
+  margin-top:30px;
+}
+
+ul.set-infos .error {
+  color:#f00;
+  font-weight:bold;
+  margin-bottom:10px;
+  list-style:none;
+}
+
+ul.download-links {
+  list-style:none;
+  padding-left:25px;
+}
+
+ul.download-links .warning {
+  color:#FF7F00;
+  font-weight:bold;
+  margin-top:10px;
+  margin-left:20px;
+}
+
+a.cancel-down {
+  display:inline-block;
+  margin-top:20px;
+  padding:2px 5px;
+  font-weight:bold;
+  color:#a11;
+  border:1px solid #a11;
+}
+  a.cancel-down:hover {
+    color:#f00;
+    border-color:#f00;
+  }

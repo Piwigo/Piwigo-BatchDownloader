@@ -259,7 +259,7 @@ DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
   /**
    * createNextArchive
    */
-  function createNextArchive()
+  function createNextArchive($force_one_archive=false)
   {
     // set already downloaded
     if ( $this->data['status'] == 'done' or $this->data['nb_images'] == 0 )
@@ -328,7 +328,7 @@ SELECT
         $this->images[ $row['id'] ] = $this->data['last_zip'];
         
         $total_size+= $row['filesize'];
-        if ($total_size >= $this->conf['max_size']*1024) break;
+        if ($total_size >= $this->conf['max_size']*1024 and !$force_one_archive) break;
       }
       
       // archive comment
@@ -357,6 +357,7 @@ UPDATE '.BATCH_DOWNLOAD_TIMAGES.'
       if (count($images_to_add) == count($images_added))
       {
         $this->updateParam('status', 'done');
+        $this->clear(false);
       }
       
       // over estimed
@@ -416,12 +417,12 @@ SELECT SUM(filesize) AS total
   {
     $nb_archives = $this->getEstimatedArchiveNumber();
     
-    $out = '<ul id="download_list">';
-    if ($this->data['status'] == 'done')
+    $out = '';
+    /*if ($this->data['status'] == 'done')
     {
       $out.= '<li id="zip-1">Already downloaded</li>';
-    }
-    else
+    }*/
+    if (true)
     {
       for ($i=1; $i<=$this->data['nb_zip']; $i++)
       {
@@ -429,23 +430,22 @@ SELECT SUM(filesize) AS total
         
         if ($i < $this->data['last_zip']+1)
         {
-          $out.= 'Archive #'.$i.' (already downloaded)';
+          $out.= '<img src="'.BATCH_DOWNLOAD_PATH.'template/drive.png"> Archive #'.$i.' (already downloaded)';
         }
         else if ($i == $this->data['last_zip']+1)
         {
-            $out.= '<a href="'.add_url_params($url, array('set_id'=>$this->data['set_id'],'zip'=>$i)).'" rel="nofollow"' 
+            $out.= '<a href="'.add_url_params($url, array('set_id'=>$this->data['set_id'],'zip'=>$i)).'" rel="nofollow" style="font-weight:bold;"' 
               .($i!=1 ? 'onClick="return confirm(\'Starting download Archive #'.$i.' will destroy Archive #'.($i-1).', be sure you finish the download. Continue ?\');"' : null).
-              '>Archive #'.$i.' (ready)</a>';
+              '><img src="'.BATCH_DOWNLOAD_PATH.'template/drive_go.png"> Archive #'.$i.' (ready)</a>';
         }
         else
         {
-          $out.= 'Archive #'.$i.' (pending)';
+          $out.= '<img src="'.BATCH_DOWNLOAD_PATH.'template/drive.png"> Archive #'.$i.' (pending)';
         }
         
         $out.= '</li>';
       }
     }
-    $out.= '</ul>';
     
     return $out;
   }
@@ -471,7 +471,8 @@ SELECT SUM(filesize) AS total
           get_username($this->data['user_id']) .'_'. 
           $this->data['type'] .'-'. $this->data['type_id'] .'_'.
           $this->data['user_id'] . $this->data['set_id'] .'_'.
-          'part'. $i .'.zip';
+          ($this->data['nb_zip']!=1 ? 'part'. $i : null).
+          '.zip';
   }
   
   /**
@@ -504,9 +505,9 @@ SELECT SUM(filesize) AS total
       case 'category':
       {
         $category = get_cat_info($this->data['type_id']);
-        $set['NAME'] = get_cat_display_name($category['upper_names']);
-        $set['sNAME'] = $category['name'];
-        $set['COMMENT'] = trigger_action('render_category_description', $category['comment']);
+        $set['NAME'] = l10n('Album').': '.get_cat_display_name($category['upper_names']);
+        $set['sNAME'] = l10n('Album').': '.trigger_event('render_category_name', $category['name']);
+        $set['COMMENT'] = trigger_event('render_category_description', $category['comment']);
         break;
       }
       
@@ -531,6 +532,8 @@ SELECT SUM(filesize) AS total
             .trigger_event('render_tag_name', $tag['name'])
             .'</a>';
         }
+        
+        $set['sNAME'] = l10n('Tags').': '.strip_tags($set['COMMENT']);
         break;
       }
       

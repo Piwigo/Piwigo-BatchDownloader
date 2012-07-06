@@ -18,7 +18,7 @@ include(BATCH_DOWNLOAD_PATH . 'admin/' . $page['tab'] . '.php');
 
 // template
 $template->assign(array(
-  'BATCH_DOWNLOAD_PATH'=> BATCH_DOWNLOAD_PATH,
+  'BATCH_DOWNLOAD_PATH' => BATCH_DOWNLOAD_PATH,
   'BATCH_DOWNLOAD_ADMIN' => BATCH_DOWNLOAD_ADMIN,
   ));
   

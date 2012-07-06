@@ -1,3 +1,5 @@
+{combine_css path=$BATCH_DOWNLOAD_PATH|@cat:"template/style.css"}
+
 {$MENUBAR}
 
 {if $set.U_DOWNLOAD}
@@ -17,25 +19,31 @@ setTimeout("document.location.href = '{$set.U_DOWNLOAD}';", 1000);
 {/if}
 
 
-<p>
-  <h3>{$set.NAME}</h3>
-  {if $set.COMMENT}<blockquote>{$set.COMMENT}</blockquote>{/if}
-  <span>{'%d images'|@translate|@sprintf:$set.NB_IMAGES}{if $set.U_EDIT_SET}, <a href="{$set.U_EDIT_SET}" rel="nofollow">{'Edit the set'|@translate}</a>{/if}</span>
-</p>
+<fieldset>
+  <legend>{'Download info'|@translate}</legend>
+  <h2>{$set.NAME}</h2>
+  {if $set.COMMENT}<blockquote class="comment">{$set.COMMENT}</blockquote>{/if}
+  
+  <ul class="set-infos">
+    <li class="error">{$elements_error}</li>
+    <li><b>{'%d images'|@translate|@sprintf:$set.NB_IMAGES}</b>{if $set.U_EDIT_SET}, <a href="{$set.U_EDIT_SET}" rel="nofollow">{'Edit the set'|@translate}</a>{/if}</li>
+    <li><b>{'Estimated size'|@translate}:</b> {$set.TOTAL_SIZE} MB</li>
+    <li><b>{'Estimated number of archives'|@translate}:</b> {$set.NB_ARCHIVES} <i>({'real number of archives can differ'|@translate})</i></li>
+  </ul>
+  
+  
+</fieldset>
 
-<p>
-  <b>{'Estimated size'|@translate}:</b> {$set.TOTAL_SIZE} MB<br>
-  <b>{'Estimated number of archives'|@translate}:</b> {$set.NB_ARCHIVES}<br>
-  <i>{'These datas are an estimation, real specs can differ'|@translate}</i>
-</p>
 
-<p>
-<b>Download links:</b>
-{$set.LINKS}
-</p>
-
-<p class="infos">
-{'<b>Warning:</b> all files will be deleted within %d hours'|@translate|@sprintf:$archive_timeout}
-</p>
+<fieldset>
+  <legend>{'Download links'|@translate}</legend>
+  
+  <ul class="download-links">
+    {$set.LINKS}
+    <li class="warning">{'<b>Warning:</b> all files will be deleted within %d hours'|@translate|@sprintf:$archive_timeout}</li>
+  </ul>
+  
+  {if $set.U_CANCEL}<a href="{$set.U_CANCEL}" class="cancel-down" onClick="return confirm('{'Are you sure?'|@translate}');">{'Cancel this download'|@translate}</a>{/if}
+</fieldset>
 
 </div>{* <!-- content --> *}

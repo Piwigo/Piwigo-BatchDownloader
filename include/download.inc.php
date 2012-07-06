@@ -14,17 +14,19 @@ switch ($page['sub_section'])
     
     $BatchDownloader = new BatchDownloader($_GET['set_id']);
     
-    if ($BatchDownloader->getParam('status') != 'done')
+    if ( isset($_GET['cancel']) )
     {
-      if (isset($_GET['zip']))
-      {
-        $BatchDownloader->deleteLastArchive();
-        $next_file = $BatchDownloader->createNextArchive();
-      }
-      else
-      {
-        $BatchDownloader->getEstimatedArchiveNumber();
-      }
+      $BatchDownloader->deleteLastArchive();
+      $BatchDownloader->clear();
+      pwg_query('DELETE FROM '.BATCH_DOWNLOAD_TSETS.' WHERE id = '.$_GET['set_id'].';');
+      $_SESSION['page_infos'][] = l10n('Download set deleted');
+      redirect('index.php');
+    }
+    
+    if ( isset($_GET['zip']) and $BatchDownloader->getParam('status') != 'done' and $_GET['zip'] > $BatchDownloader->getParam('last_zip') )
+    {
+      $BatchDownloader->deleteLastArchive();
+      $next_file = $BatchDownloader->createNextArchive();
     }
 
     $set = $BatchDownloader->getSetInfo();
@@ -32,17 +34,22 @@ switch ($page['sub_section'])
     if (isset($next_file))
     {
       $set['U_DOWNLOAD'] = BATCH_DOWNLOAD_PATH . 'download.php?set_id='.$_GET['set_id'].'&amp;zip='.$_GET['zip'];
-      array_push($page['infos'], sprintf(l10n('Archive #%d is downloading, if the download doesn\'t start automatically please <a href="%s">click here</a>'), $_GET['zip'], $set['U_DOWNLOAD']));
+      array_push($page['infos'], sprintf(l10n('The archive is downloading, if the download doesn\'t start automatically please <a href="%s">click here</a>'), $set['U_DOWNLOAD']));
     }
     
     if ($BatchDownloader->getParam('nb_images') > $conf['batch_download']['max_elements'])
     {
-      array_push($page['errors'], sprintf(
+      $template->assign('elements_error', sprintf(
         l10n('You choose to download %d pictures, but the system is limited to %d. You can edit the set, or the last %d pictures will not be downloaded.'),
         $BatchDownloader->getParam('nb_images'),
         $conf['batch_download']['max_elements'],
         $BatchDownloader->getParam('nb_images') - $conf['batch_download']['max_elements']
         ));
+    }
+    
+    if ($BatchDownloader->getParam('status') == 'new')
+    {
+      $set['U_CANCEL'] = BATCH_DOWNLOAD_PUBLIC . 'init_zip&amp;set_id='.$_GET['set_id'].'&amp;cancel';
     }
     
     $template->assign(array(
@@ -100,6 +107,8 @@ switch ($page['sub_section'])
     
     break;    
 }
+
+$template->assign('BATCH_DOWNLOAD_PATH', BATCH_DOWNLOAD_PATH);
 
 
 function batch_download_thumbnails_list_prefilter($content, &$smarty)

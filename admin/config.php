@@ -40,6 +40,10 @@ $sizes_names = array_map(create_function('$s', 'return l10n($s);'), $sizes_keys)
 $sizes_options = array_combine($sizes_keys, $sizes_names);
 $sizes_options['original'] = l10n('Original');
 
+// max values
+$conf['batch_download']['max_elements_value'] = isset($conf['batch_download_max_elements']) ? $conf['batch_download_max_elements'] : 1000;
+$conf['batch_download']['max_size_value'] = isset($conf['batch_download_max_size']) ? $conf['batch_download_max_size'] : 1000;
+
 $template->assign(array(
   'group_options' => $group_options,
   'level_options' => $level_options,
