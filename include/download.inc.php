@@ -62,6 +62,7 @@ switch ($page['sub_section'])
   
   /* edition page */
   case 'view':
+  {
     $self_url = BATCH_DOWNLOAD_PUBLIC . 'view&amp;set_id='.$_GET['set_id'];
     
     $template->set_filename('index', dirname(__FILE__).'/../template/view.tpl');
@@ -105,7 +106,8 @@ switch ($page['sub_section'])
     
     include(PHPWG_ROOT_PATH . 'include/category_default.inc.php');
     
-    break;    
+    break;
+  }
 }
 
 $template->assign('BATCH_DOWNLOAD_PATH', BATCH_DOWNLOAD_PATH);
@@ -115,7 +117,7 @@ function batch_download_thumbnails_list_prefilter($content, &$smarty)
 {
   $search = '<span class="thumbName">';
   
-  $add = '<a href="{$U_VIEW}&amp;remove={$thumbnail.id}">
+  $add = '<a href="{$U_VIEW}&amp;remove={$thumbnail.id}" rel="nofollow">
 <img src="{$BATCH_DOWNLOAD_PATH}template/image_delete.png" title="{\'Remove from download set\'|@translate}">
 </a>&nbsp;';
 

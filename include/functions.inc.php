@@ -44,6 +44,13 @@ function get_set_info_from_page()
       $batch_type = 'search';
       $batch_id = $page['search'];
       break;
+    case 'collections':
+      if (in_array(@$page['sub_section'], array('view','edit')))
+      {
+        $batch_type = 'collection';
+        $batch_id = $page['col_id'];
+      }
+      break;
     case 'favorites':
     case 'most_visited':
     case 'best_rated':

@@ -19,6 +19,7 @@ define('BATCH_DOWNLOAD_LOCAL',   PHPWG_ROOT_PATH . $conf['data_location'] . 'dow
 define('BATCH_DOWNLOAD_ADMIN',   get_root_url() . 'admin.php?page=plugin-' . basename(dirname(__FILE__)));
 define('BATCH_DOWNLOAD_PUBLIC',  make_index_url(array('section' => 'download')) . '/');
 
+
 if (class_exists('ZipArchive'))
 {
   add_event_handler('init', 'batch_download_init');
@@ -28,7 +29,7 @@ if (class_exists('ZipArchive'))
   
   add_event_handler('loc_end_index', 'batch_download_clean');
 
-  add_event_handler('loc_begin_index', 'batch_download_index_button');
+  add_event_handler('loc_end_index', 'batch_download_index_button', EVENT_HANDLER_PRIORITY_NEUTRAL+10);
 
   add_event_handler('blockmanager_register_blocks', 'batch_download_add_menublock');
   add_event_handler('blockmanager_apply', 'batch_download_applymenu');
@@ -37,6 +38,7 @@ if (class_exists('ZipArchive'))
   require(BATCH_DOWNLOAD_PATH . 'include/BatchDownloader.class.php');
   require(BATCH_DOWNLOAD_PATH . 'include/events.inc.php');
 }
+
 
 add_event_handler('get_admin_plugin_menu_links', 'batch_download_admin_menu');
 

@@ -38,6 +38,7 @@ class BatchDownloader
     {
       $query = '
 SELECT
+    user_id,
     date_creation,
     type,
     type_id,
@@ -57,6 +58,7 @@ SELECT
       {
         $this->data['set_id'] = $set_id;
         list(
+          $this->data['user_id'],
           $this->data['date_creation'],
           $this->data['type'], 
           $this->data['type_id'], 
@@ -67,7 +69,7 @@ SELECT
           $this->data['status']
           ) = pwg_db_fetch_row($result);
         
-        // make sur all pictures of the set exists
+        // make sur all pictures of the set exist
         $query = '
 DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
   WHERE image_id NOT IN (
@@ -605,13 +607,20 @@ SELECT SUM(filesize) AS total
         break;
       }
       
-      // selection
-      // case 'selection':
-      // {
-        // $set['NAME'] = '';
-        // $set['COMMENT'] = '';
-        // break;
-      // }
+      // collection
+      case 'collection':
+      {
+        try
+        {
+          $UserCollection = new UserCollection($this->data['type_id']);
+          $set['NAME'] = l10n('Collection').': <a href="'.USER_COLLEC_PUBLIC.'view/'.$UserCollection->getParam('col_id').'">'.$UserCollection->getParam('name').'</a>';
+        }
+        catch (Exception $e)
+        {
+          $set['NAME'] = l10n('Collection').': #'.$this->data['type_id'].' (deleted)';
+        }
+        break;
+      }
     }
     
     if (!isset($set['sNAME'])) $set['sNAME'] = strip_tags($set['NAME']);

@@ -95,11 +95,21 @@ function batch_download_index_button()
     }
   }
   
+  if ($page['section'] == 'collections')
+  {
+    $url = $_SERVER['REQUEST_URI'];
+  }
+  else
+  {
+    $url = duplicate_index_url(array(), array('action'));
+  }
+  
   // toolbar button
-  $button = '<li><a href="'. duplicate_index_url(array(), array('action')) .'&amp;action=advdown_set" title="'.l10n('Download all pictures of this selection').'" class="pwg-state-default pwg-button" rel="nofollow">
+  $button = '<li><a href="'. $url .'&amp;action=advdown_set" title="'.l10n('Download all pictures of this selection').'" class="pwg-state-default pwg-button" rel="nofollow">
 			<span class="pwg-icon" style="background:url(\'' . BATCH_DOWNLOAD_PATH . 'template/zip.png\') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">'.l10n('Advanced Downloader').'</span>
 		</a></li>';
   $template->concat('PLUGIN_INDEX_ACTIONS', $button);
+  $template->concat('COLLECTION_ACTIONS', $button);
 }
 
 
@@ -177,23 +187,26 @@ function batch_download_clean()
   $conf['batch_download']['last_clean'] = time();
   conf_update_param('batch_download', serialize($conf['batch_download']));
   
-  // set old sets as done
+  // set old sets as done and clean images table
   $query = '
-SELECT id 
-  FROM '.BATCH_DOWNLOAD_TSETS.'
-  WHERE 
+DELETE i
+  FROM '.BATCH_DOWNLOAD_TIMAGES.' AS i
+    INNER JOIN '.BATCH_DOWNLOAD_TSETS.' AS s
+    ON i.set_id = s.id
+  WHERE
+    status != "done" AND
     date_creation < DATE_SUB(NOW(), INTERVAL '.$conf['batch_download']['archive_timeout'].' HOUR)
-    AND status != "done"
 ;';
-  $sets = array_from_query($query, 'id');
+  pwg_query($query);
   
-  foreach ($sets as $set_id)
-  {
-    $BatchDownloader = new BatchDownloader($set_id);
-    $BatchDownloader->deleteLastArchive();
-    $BatchDownloader->clearImages();
-    $BatchDownloader->updateParam('status', 'done');
-  }
+  $query = '
+UPDATE '.BATCH_DOWNLOAD_TSETS.'
+  SET status = "done"
+  WHERE 
+    status != "done" AND
+    date_creation < DATE_SUB(NOW(), INTERVAL '.$conf['batch_download']['archive_timeout'].' HOUR)
+;';
+  pwg_query($query);
   
   // remove old archives
   $zips = glob(BATCH_DOWNLOAD_LOCAL . 'u-*/*.zip');
