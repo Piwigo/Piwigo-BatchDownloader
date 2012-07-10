@@ -1,0 +1,1 @@
+Allows users to download pictures sets in ZIP. Compatible with User Collections.

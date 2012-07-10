@@ -82,7 +82,7 @@ $("input[name='max_elements']").change(function() {ldelim}
     </li>
     <li>
       <label>
-        <span class="property">{'Delete unterminated downloads after'|@translate}</span>
+        <span class="property">{'Delete downloads after'|@translate}</span>
         <input type="text" name="archive_timeout" value="{$batch_download.archive_timeout}" size="3"> {'hours'|@translate}
       </label>
     </li>

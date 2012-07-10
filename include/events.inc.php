@@ -33,7 +33,7 @@ function batch_download_section_init()
         break;
       case 'view':
         $page['sub_section'] = 'view';
-        $page['title'].= l10n('Edit set');
+        $page['title'].= l10n('Edit the set');
         break;
       default:
         redirect('index.php');
@@ -106,7 +106,7 @@ function batch_download_index_button()
   
   // toolbar button
   $button = '<li><a href="'. $url .'&amp;action=advdown_set" title="'.l10n('Download all pictures of this selection').'" class="pwg-state-default pwg-button" rel="nofollow">
-			<span class="pwg-icon" style="background:url(\'' . BATCH_DOWNLOAD_PATH . 'template/zip.png\') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">'.l10n('Advanced Downloader').'</span>
+			<span class="pwg-icon" style="background:url(\'' . BATCH_DOWNLOAD_PATH . 'template/zip.png\') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">'.l10n('Batch Downloader').'</span>
 		</a></li>';
   $template->concat('PLUGIN_INDEX_ACTIONS', $button);
   $template->concat('COLLECTION_ACTIONS', $button);
@@ -129,11 +129,12 @@ SELECT id
   WHERE
     user_id = '.$user['id'].'
     AND status != "done"
+  LIMIT 1
 ;';
   $result = pwg_query($query);
   if (!pwg_db_num_rows($result)) return;
   
-  $menu->register_block(new RegisteredBlock('mbAdvancedDownloader', l10n('Downloads'), 'AdvancedDownloader'));
+  $menu->register_block(new RegisteredBlock('mbBatchDownloader', l10n('Batch Downloader'), 'BatchDownloader'));
 }
 
 function batch_download_applymenu($menu_ref_arr)
@@ -141,7 +142,7 @@ function batch_download_applymenu($menu_ref_arr)
   global $template, $conf, $user;
   
   $menu = &$menu_ref_arr[0];
-  $block = $menu->get_block('mbAdvancedDownloader');
+  $block = $menu->get_block('mbBatchDownloader');
   
   if ($block != null)
   {
@@ -170,7 +171,7 @@ SELECT id
     
     $template->set_template_dir(BATCH_DOWNLOAD_PATH . 'template/');
     $block->set_title(l10n('Downloads'));
-    $block->template = 'menublock.tpl';
+    $block->template = 'menublock_batch_down.tpl';
     $block->data = $data;
   }
 }

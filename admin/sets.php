@@ -11,10 +11,11 @@ if (isset($_GET['delete']))
 }
 if (isset($_GET['cancel']))
 {
-  $BatchDownloader = new BatchDownloader($_GET['cancel']);
+  $BatchDownloader = new BatchDownloader($_GET['cancel']);  
+  $BatchDownloader->updateParam('total_size', $BatchDownloader->getEstimatedTotalSize());
+  $BatchDownloader->updateParam('status', 'done');
   $BatchDownloader->deleteLastArchive();
   $BatchDownloader->clearImages();
-  $BatchDownloader->updateParam('status', 'done');
 }
 
 
@@ -93,7 +94,7 @@ $page['type_items'] = array(
   'best_rated' => l10n('Best rated'),
   'list' => l10n('Random'),
   'recent_pics' => l10n('Recent photos'),
-  // 'selection' => l10n('Selection'),
+  'collection' => l10n('User collection'),
   );
 
 $page['order_by_items'] = array(

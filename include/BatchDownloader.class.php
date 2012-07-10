@@ -430,7 +430,7 @@ SELECT SUM(filesize) AS total
     {
       $out.= '<li id="zip-'.$i.'">';
       
-      if ($i < $this->data['last_zip']+1)
+      if ($this->data['status'] == 'done' or $i < $this->data['last_zip']+1)
       {
         $out.= '<img src="'.BATCH_DOWNLOAD_PATH.'template/drive.png"> Archive #'.$i.' (already downloaded)';
       }
