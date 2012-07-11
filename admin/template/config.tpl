@@ -52,7 +52,7 @@ $("input[name='max_elements']").change(function() {ldelim}
           {html_options options=$group_options selected=$batch_download.groups}
         </select>
       {else}
-        {'There is no group in this gallery.'|@translate} <a href="admin.php?page=group_list">{'Groups management'|@translate}</a>
+        {'There is no group in this gallery.'|@translate} <a href="admin.php?page=group_list">{'Group management'|@translate}</a>
       {/if}
       </label>
     </li>
@@ -71,7 +71,7 @@ $("input[name='max_elements']").change(function() {ldelim}
   <legend>{'Archives'|@translate}</legend>
   
   <ul>
-    <li>
+    <li style="display:none;">
       <label>
         <span class="property">{'Maximum photo size'|@translate}</span>
         <select name="photo_size">

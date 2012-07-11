@@ -18,14 +18,20 @@ input[name='max_size'], input[name='max_elements'] {
   width:300px;
 }
 
+.table2 .throw {
+  font-size:100%;
+}
+TABLE.table2 THEAD TD {
+  padding: 0 5px !important;
+}
 .table2 .action {
   width:70px;
 }
 .table2 .user {
-  width:120px;
+  width:150px;
 }
 .table2 .date {
-  width:180px;
+  width:190px;
 }
 .table2 .size {
   width:100px;
@@ -37,5 +43,9 @@ input[name='max_size'], input[name='max_elements'] {
   width:110px;
 }
 .table2 .status {
-  width:100px;
+  width:80px;
 }
+
+.ui-slider { background:#666;border-radius:2px;border:1px solid #888; }
+.ui-slider .ui-slider-handle { border:1px solid #ccc;background:#444;border-radius:0.6em; }
+.ui-slider .ui-slider-range { background:#888;border-radius:2px; }

@@ -329,8 +329,8 @@ SELECT
       $images_added = array();
       $total_size = 0;
       foreach ($images_to_add as $row)
-      {
-        $zip->addFile(PHPWG_ROOT_PATH . $row['path'], $row['id'].'_'.$row['name'].'.'.get_extension($row['file']));
+      {        
+        $zip->addFile(PHPWG_ROOT_PATH . $row['path'], $row['id'].'_'.str2url($row['name']).'.'.get_extension($row['file']));
         
         array_push($images_added, $row['id']);
         $this->images[ $row['id'] ] = $this->data['last_zip'];
@@ -343,7 +343,7 @@ SELECT
       
       // archive comment
       global $conf;
-      $comment = 'Generated on '.date('r').' with PHP ZipArchive '.PHP_VERSION.' by Piwigo Advanced Downloader.';
+      $comment = 'Generated on '.date('r').' with PHP ZipArchive '.PHP_VERSION.' by Piwigo Batch Downloader.';
       $comment.= "\n".$conf['gallery_title'].' - '.get_absolute_root_url();
       if (!empty($this->conf['archive_comment']))
       {
