@@ -1,14 +1,19 @@
 {combine_css path=$BATCH_DOWNLOAD_PATH|@cat:"template/style.css"}
 
-{$MENUBAR}
-
 {if $set.U_DOWNLOAD}
 {footer_script}
 setTimeout("document.location.href = '{$set.U_DOWNLOAD}';", 1000);
 {/footer_script}
 {/if}
 
+{if $themeconf.name != "stripped" and $themeconf.parent != "stripped" and $themeconf.name != "simple-grey" and $themeconf.parent != "simple"}
+  {$MENUBAR}
+{else}
+  {assign var="intern_menu" value="true"}
+{/if}
 <div id="content" class="content{if isset($MENUBAR)} contentWithMenu{/if}">
+{if $intern_menu}{$MENUBAR}{/if}
+
 <div class="titrePage">
   <ul class="categoryActions"></ul>
   <h2>{$TITLE}</h2>

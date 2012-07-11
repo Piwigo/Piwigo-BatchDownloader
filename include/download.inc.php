@@ -30,13 +30,18 @@ switch ($page['sub_section'])
         $BatchDownloader->deleteLastArchive();
         $next_file = $BatchDownloader->createNextArchive();
       }
-
+      
       $set = $BatchDownloader->getSetInfo();
       
       if (isset($next_file))
       {
         $set['U_DOWNLOAD'] = BATCH_DOWNLOAD_PATH . 'download.php?set_id='.$_GET['set_id'].'&amp;zip='.$_GET['zip'];
         array_push($page['infos'], sprintf(l10n('The archive is downloading, if the download doesn\'t start automatically please <a href="%s">click here</a>'), $set['U_DOWNLOAD']));
+      }
+      
+      if ($BatchDownloader->getParam('status') == 'new' and $BatchDownloader->getParam('nb_images') > 0)
+      {
+        $set['U_EDIT_SET'] = BATCH_DOWNLOAD_PUBLIC . 'view&amp;set_id='.$_GET['set_id'];
       }
       
       if ($BatchDownloader->getParam('nb_images') > $conf['batch_download']['max_elements'])
@@ -127,44 +132,15 @@ $template->assign('BATCH_DOWNLOAD_PATH', BATCH_DOWNLOAD_PATH);
 
 function batch_download_thumbnails_list_prefilter($content, &$smarty)
 {
-  // custom style
-  $search[0] = '{/html_style}';
-  $replace[0] = '.thumbnails  .wrap1 {ldelim} position:relative; }
-.removeSet {ldelim} width:100%;height:16px;display:none;position:absolute;top:0;background:rgba(0,0,0,0.8);padding:2px;border-radius:2px;font-size:0.8em; }
-.wrap1:hover .removeSet {ldelim} display:block; }'
-.$search[0];
-
-  // links
-  $search[1] = '<span class="wrap1">';
-  $replace[1] = $search[1].'
+  // add links
+  $search = '<span class="wrap1">';
+  $replace = $search.'
 {strip}<a class="removeSet" href="{$U_VIEW}&amp;remove={$thumbnail.id}" data-id="{$thumbnail.id}" rel="nofollow">
 {\'Remove from download set\'|@translate}&nbsp;<img src="{$BATCH_DOWNLOAD_PATH}template/image_delete.png" title="{\'Remove from download set\'|@translate}">
 </a>{/strip}';
 
-  // AJAX request
-  $search[2] = '{/html_style}';
-  $replace[2] = $search[2].'
-{footer_script require=\'jquery\'}
-jQuery(".removeSet").click(function() {ldelim}
-  var toggle_id = jQuery(this).data("id");
-  var $trigger = jQuery(this);
-  
-  jQuery.ajax({ldelim}
-    type: "POST",
-    url: "{$BATCH_DOWNLOAD_PATH}remove_image.php",
-    data: {ldelim} "set_id": "{$SET_ID}", "toggle_id": toggle_id }
-  }).done(function(msg) {ldelim}
-    if (msg == "false") {ldelim}
-      $trigger.parent(".wrap1").hide("fast", function() {ldelim} $trigger.remove() });
-      jQuery(".nbImages").html(jQuery(".nbImages").html() -1);
-    } else {ldelim}
-      $trigger.html(\'{\'Un unknown error occured\'|@translate}\');
-    }
-  });
-  
-  return false;
-});
-{/footer_script}';
+  // custom CSS and AJAX request
+  $content.= file_get_contents(BATCH_DOWNLOAD_PATH.'template/thumbnails_css_js.tpl');
 
   return str_replace($search, $replace, $content);
 }

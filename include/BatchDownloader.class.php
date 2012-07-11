@@ -425,6 +425,11 @@ SELECT SUM(filesize) AS total
    */
   function getDownloadList($url='')
   {
+    if ($this->data['nb_images'] == 0)
+    {
+      return '<b>'.l10n('No archive').'</b>';
+    }
+    
     $out = '';
     for ($i=1; $i<=$this->data['nb_zip']; $i++)
     {
@@ -489,11 +494,6 @@ SELECT SUM(filesize) AS total
       'LINKS' => $this->getDownloadList(BATCH_DOWNLOAD_PUBLIC . 'init_zip'),
       'DATE_CREATION' => format_date($this->data['date_creation'], true),
       );
-        
-    if ($this->data['status'] == 'new')
-    {
-      $set['U_EDIT_SET'] = BATCH_DOWNLOAD_PUBLIC . 'view&amp;set_id='.$this->data['set_id'];
-    }
     
     switch ($this->data['type'])
     {
