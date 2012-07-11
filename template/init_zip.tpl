@@ -19,6 +19,7 @@ setTimeout("document.location.href = '{$set.U_DOWNLOAD}';", 1000);
 {/if}
 
 
+{if $set}
 <fieldset>
   <legend>{'Download info'|@translate}</legend>
   <h2>{$set.NAME}</h2>
@@ -26,15 +27,12 @@ setTimeout("document.location.href = '{$set.U_DOWNLOAD}';", 1000);
   
   <ul class="set-infos">
     <li class="error">{$elements_error}</li>
-    <li><b>{'%d images'|@translate|@sprintf:$set.NB_IMAGES}</b>{if $set.U_EDIT_SET}, <a href="{$set.U_EDIT_SET}" rel="nofollow">{'Edit the set'|@translate}</a>{/if}</li>
+    <li><b>{'%d photos'|@translate|@sprintf:$set.NB_IMAGES}</b>{if $set.U_EDIT_SET}, <a href="{$set.U_EDIT_SET}" rel="nofollow">{'Edit the set'|@translate}</a>{/if}</li>
     <li><b>{'Estimated size'|@translate}:</b> {$set.TOTAL_SIZE} MB</li>
     <li><b>{'Estimated number of archives'|@translate}:</b> {$set.NB_ARCHIVES} <i>({'real number of archives can differ'|@translate})</i></li>
     <li><b>{'Created on'|@translate}:</b> {$set.DATE_CREATION}</li>
   </ul>
-  
-  
 </fieldset>
-
 
 <fieldset>
   <legend>{'Download links'|@translate}</legend>
@@ -44,7 +42,8 @@ setTimeout("document.location.href = '{$set.U_DOWNLOAD}';", 1000);
     <li class="warning">{'<b>Warning:</b> all files will be deleted within %d hours'|@translate|@sprintf:$archive_timeout}</li>
   </ul>
   
-  {if $set.U_CANCEL}<a href="{$set.U_CANCEL}" class="cancel-down" onClick="return confirm('{'Are you sure?'|@translate}');">{'Cancel this download'|@translate}</a>{/if}
+  <a href="{$set.U_CANCEL}" class="cancel-down" onClick="return confirm('{'Are you sure?'|@translate}');">{'Cancel this download'|@translate}</a>
 </fieldset>
+{/if}
 
 </div>{* <!-- content --> *}

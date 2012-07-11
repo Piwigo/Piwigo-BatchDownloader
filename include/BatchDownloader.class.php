@@ -94,7 +94,7 @@ SELECT
       }
       else
       {
-        trigger_error('BatchDownloader::__construct, invalid set id', E_USER_ERROR);
+        throw new Exception(l10n('Invalid dowload set'));
       }
     }
     // create a new set
@@ -269,7 +269,7 @@ DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
    */
   function createNextArchive($force_one_archive=false)
   {
-    // set already downloaded
+    // set already downloaded (we should never be there !)
     if ( $this->data['status'] == 'done' or $this->data['nb_images'] == 0 )
     {
       trigger_error('BatchDownloader::createNextArchive, the set is empty', E_USER_ERROR);

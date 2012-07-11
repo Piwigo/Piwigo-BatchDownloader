@@ -23,7 +23,7 @@ function batch_download_section_init()
     if (check_download_access() === false) access_denied();
     
     $page['section'] = 'download';
-    $page['title'] = l10n('Batch Downloader').$conf['level_separator'].' ';
+    $page['title'] = '<a href="'.get_absolute_root_url().'">'.l10n('Home').'</a>'.$conf['level_separator'].l10n('Batch Downloader').$conf['level_separator'];
     
     switch (@$tokens[1])
     {
@@ -163,7 +163,7 @@ SELECT id
       
       array_push($data, array(
         'URL' => BATCH_DOWNLOAD_PUBLIC . 'init_zip&amp;set_id='.$BatchDownloader->getParam('set_id'),
-        'TITLE' => strip_tags($set['COMMENT']),
+        'TITLE' => str_replace('"', "'", strip_tags($set['COMMENT'])),
         'NAME' => $set['sNAME'],
         'COUNT' => $set['NB_IMAGES'],
         ));

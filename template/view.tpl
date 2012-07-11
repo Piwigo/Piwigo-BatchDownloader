@@ -13,7 +13,7 @@
 <p>
   <h3>{$set.NAME}</h3>
   {if $set.COMMENT}<blockquote>{$set.COMMENT}</blockquote>{/if}
-  <span>{'%d images'|@translate|@sprintf:$set.NB_IMAGES}</span>
+  {'Nb images'|@translate}: <span class="nbImages">{$set.NB_IMAGES}</span>
 </p>
 
 

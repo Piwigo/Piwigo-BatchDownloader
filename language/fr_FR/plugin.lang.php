@@ -31,6 +31,7 @@ $lang['Set type'] = 'Type de lot';
 $lang['Delete this set'] = 'Supprimer ce lot';
 $lang['Cancel this set'] = 'Annuler ce lot';
 $lang['Download info'] = 'Informations sur le téléchargement';
+$lang['Estimated size'] = 'Taille estimée';
 $lang['Estimated number of archives'] = 'Nombre estimé d\'archives';
 $lang['real number of archives can differ'] = 'le nombre réel d\'archives peut différer';
 $lang['Download links'] = 'Liens de téléchargement';
