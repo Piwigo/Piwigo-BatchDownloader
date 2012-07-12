@@ -1,0 +1,2 @@
+Allows users to download pictures sets in ZIP. Compatible with User Collections.
+Ermöglicht Benutzern Foto-Sammlungen als ZIP Datei herunterzuladen. Kompatibel mit der Erweiterung "User Collections".
