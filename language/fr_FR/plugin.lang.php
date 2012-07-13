@@ -38,5 +38,9 @@ $lang['Download links'] = 'Liens de téléchargement';
 $lang['<b>Warning:</b> all files will be deleted within %d hours'] = '<b>Attention:</b> les fichiers seront supprimés dans %d heures';
 $lang['Cancel this download'] = 'Annuler ce téléchargement';
 $lang['Return to download page'] = 'Retourner à la page de téléchargement';
+$lang['Warning: ZipArchive doesn\'t accept special characters like accentuated ones, angle quotes (») and non-latin alphabets.'] = 'Attention: ZipArchive n\'accepte pas les caractères spéciaux comme les caractères accentués, les guillemets (») et les alphabets non-latin.';
+$lang['Unable to find ZipArchive PHP extension, Batch Downloader can\'t work without this extension.'] = 'Impossible de trouver l\'extension PHP ZipArchive, Batch Downloader ne peut fonctionner sans cette extension';
+$lang['Remove from download set'] = 'Supprimer du lot';
+$lang['Confirm the download of %d pictures?'] = 'Confirmer le téléchargementde %d photos ?';
 
 ?>

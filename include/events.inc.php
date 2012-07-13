@@ -80,7 +80,7 @@ function batch_download_index_button()
       {
         $BatchDownloader->createNextArchive(true); // make sure we have only one zip, even if 'max_size' is exceeded
         
-        $u_download = BATCH_DOWNLOAD_PATH . 'download.php?set_id='.$BatchDownloader->getParam('set_id').'&amp;zip=1';
+        $u_download = BATCH_DOWNLOAD_PATH . 'download.php?set_id='.$BatchDownloader->getParam('id').'&amp;zip=1';
         
         $null = null;
         $template->block_footer_script(null, 'setTimeout("document.location.href = \''.$u_download.'\';", 1000);', $null, $null);
@@ -90,7 +90,7 @@ function batch_download_index_button()
       // oterwise we go to summary page
       else
       {
-        redirect(BATCH_DOWNLOAD_PUBLIC . 'init_zip&amp;set_id='.$BatchDownloader->getParam('set_id'));
+        redirect(BATCH_DOWNLOAD_PUBLIC . 'init_zip&amp;set_id='.$BatchDownloader->getParam('id'));
       }
     }
   }
@@ -105,8 +105,9 @@ function batch_download_index_button()
   }
   
   // toolbar button
-  $button = '<li><a href="'. $url .'&amp;action=advdown_set" title="'.l10n('Download all pictures of this selection').'" class="pwg-state-default pwg-button" rel="nofollow">
-			<span class="pwg-icon" style="background:url(\'' . BATCH_DOWNLOAD_PATH . 'template/zip.png\') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">'.l10n('Batch Downloader').'</span>
+  $button = '<li><a href="'. $url .'&amp;action=advdown_set" title="'.l10n('Download all pictures of this selection').'" class="pwg-state-default pwg-button" rel="nofollow"
+    onClick="return confirm(\''.sprintf(l10n('Confirm the download of %d pictures?'), count($page['items'])).'\');">
+			<span class="pwg-icon batch-downloader-icon" style="background:url(\'' . BATCH_DOWNLOAD_PATH . 'template/zip.png\') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">'.l10n('Batch Downloader').'</span>
 		</a></li>';
   $template->concat('PLUGIN_INDEX_ACTIONS', $button);
   $template->concat('COLLECTION_ACTIONS', $button);
@@ -162,7 +163,7 @@ SELECT id
       $set = $BatchDownloader->getSetInfo();
       
       array_push($data, array(
-        'URL' => BATCH_DOWNLOAD_PUBLIC . 'init_zip&amp;set_id='.$BatchDownloader->getParam('set_id'),
+        'URL' => BATCH_DOWNLOAD_PUBLIC . 'init_zip&amp;set_id='.$BatchDownloader->getParam('id'),
         'TITLE' => str_replace('"', "'", strip_tags($set['COMMENT'])),
         'NAME' => $set['sNAME'],
         'COUNT' => $set['NB_IMAGES'],

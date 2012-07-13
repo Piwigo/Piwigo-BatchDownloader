@@ -109,8 +109,10 @@ $("input[name='max_elements']").change(function() {ldelim}
     <li>
       <label>
         <span class="property">{'Archive comment'|@translate} :</span><br>
-        <textarea name="archive_comment" rows="5" style="width:450px;">{$batch_download.archive_comment}</textarea>
+        <textarea name="archive_comment" rows="5" style="width:450px;">{$batch_download_comment}</textarea>
       </label>
+      <br>
+      <i>{'Warning: ZipArchive doesn\'t accept special characters like accentuated ones, angle quotes (») and non-latin alphabets.'|@translate}</i>
     </li>
   </ul>
 </fieldset>

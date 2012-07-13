@@ -1,6 +1,6 @@
 {html_style}
 .thumbnails  .wrap1 {ldelim} position:relative; }
-.removeSet {ldelim} width:100%;height:16px;display:none;position:absolute;top:0;background:rgba(0,0,0,0.8);padding:2px;border-radius:2px;font-size:0.8em;z-index:100;color:#eee;white-space:nowrap; }
+.wrap1 .removeSet {ldelim} width:100%;height:16px;display:none;position:absolute;top:0;background:rgba(0,0,0,0.8);padding:2px;border-radius:2px;font-size:10px;z-index:100;color:#eee;white-space:nowrap; }
 .wrap1:hover .removeSet {ldelim} display:block; 
 {/html_style}
 

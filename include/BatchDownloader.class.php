@@ -19,8 +19,9 @@ class BatchDownloader
     global $user, $conf;
     
     $this->conf = $conf['batch_download'];
+    $this->conf['archive_acomment'] = $conf['batch_download_comment'];
     $this->data = array(
-      'set_id' => 0,
+      'id' => 0,
       'user_id' => $user['id'],
       'date_creation' => '0000-00-00 00:00:00',
       'type' => null,
@@ -38,6 +39,7 @@ class BatchDownloader
     {
       $query = '
 SELECT
+    id,
     user_id,
     date_creation,
     type,
@@ -56,18 +58,10 @@ SELECT
       
       if (pwg_db_num_rows($result))
       {
-        $this->data['set_id'] = $set_id;
-        list(
-          $this->data['user_id'],
-          $this->data['date_creation'],
-          $this->data['type'], 
-          $this->data['type_id'], 
-          $this->data['nb_zip'], 
-          $this->data['last_zip'], 
-          $this->data['nb_images'], 
-          $this->data['total_size'],
-          $this->data['status']
-          ) = pwg_db_fetch_row($result);
+        $this->data = array_merge(
+          $this->data,
+          pwg_db_fetch_assoc($result)
+          );
         
         // make sur all pictures of the set exist
         $query = '
@@ -83,7 +77,7 @@ SELECT
     image_id,
     zip
   FROM '.BATCH_DOWNLOAD_TIMAGES.'
-  WHERE set_id = '.$this->data['set_id'].'
+  WHERE set_id = '.$this->data['id'].'
 ;';
         $this->images = simple_hash_from_query($query, 'image_id', 'zip');
         
@@ -128,7 +122,7 @@ INSERT INTO '.BATCH_DOWNLOAD_TSETS.'(
   )
 ;';
       pwg_query($query);
-      $this->data['set_id'] = pwg_db_insert_id();
+      $this->data['id'] = pwg_db_insert_id();
       
       $date = pwg_query('SELECT FROM_UNIXTIME(NOW());');
       list($this->data['date_creation']) = pwg_db_fetch_row($date);
@@ -152,7 +146,7 @@ INSERT INTO '.BATCH_DOWNLOAD_TSETS.'(
   function updateParam($name, $value)
   {
     $this->data[$name] = $value;
-    pwg_query('UPDATE '.BATCH_DOWNLOAD_TSETS.' SET '.$name.' = "'.$value.'" WHERE id = '.$this->data['set_id'].';');
+    pwg_query('UPDATE '.BATCH_DOWNLOAD_TSETS.' SET '.$name.' = "'.$value.'" WHERE id = '.$this->data['id'].';');
   }
   
   /**
@@ -200,7 +194,7 @@ INSERT INTO '.BATCH_DOWNLOAD_TSETS.'(
     $query = '
 DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
   WHERE 
-    set_id = '.$this->data['set_id'].'
+    set_id = '.$this->data['id'].'
     AND image_id IN('.implode(',', $image_ids).')
 ;';
     pwg_query($query);
@@ -224,7 +218,7 @@ DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
       if ($this->isInSet($image_id)) continue;
       
       $this->images[ $image_id ] = 0;
-      array_push($inserts, array('set_id'=>$this->data['set_id'], 'image_id'=>$image_id, 'zip'=>0));
+      array_push($inserts, array('set_id'=>$this->data['id'], 'image_id'=>$image_id, 'zip'=>0));
     }
     
     mass_inserts(
@@ -245,7 +239,7 @@ DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
     
     $query = '
 DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
-  WHERE set_id = '.$this->data['set_id'].'
+  WHERE set_id = '.$this->data['id'].'
 ;';
     pwg_query($query);
   }
@@ -347,7 +341,7 @@ SELECT
       $comment.= "\n".$conf['gallery_title'].' - '.get_absolute_root_url();
       if (!empty($this->conf['archive_comment']))
       {
-        $comment.= "\n\n".$this->conf['archive_comment'];
+        $comment.= "\n\n".wordwrap(remove_accents($this->conf['archive_comment']), 60);
       }
       $zip->setArchiveComment($comment);
       
@@ -358,7 +352,7 @@ SELECT
 UPDATE '.BATCH_DOWNLOAD_TIMAGES.'
   SET zip = '.$this->data['last_zip'].'
   WHERE
-    set_id = '.$this->data['set_id'].'
+    set_id = '.$this->data['id'].'
     AND image_id IN('.implode(',', $images_added).')
 ;';
       pwg_query($query);
@@ -441,7 +435,7 @@ SELECT SUM(filesize) AS total
       }
       else if ($i == $this->data['last_zip']+1)
       {
-          $out.= '<a href="'.add_url_params($url, array('set_id'=>$this->data['set_id'],'zip'=>$i)).'" rel="nofollow" style="font-weight:bold;"' 
+          $out.= '<a href="'.add_url_params($url, array('set_id'=>$this->data['id'],'zip'=>$i)).'" rel="nofollow" style="font-weight:bold;"' 
             .($i!=1 ? 'onClick="return confirm(\'Starting download Archive #'.$i.' will destroy Archive #'.($i-1).', be sure you finish the download. Continue ?\');"' : null).
             '><img src="'.BATCH_DOWNLOAD_PATH.'template/drive_go.png"> Archive #'.$i.' (ready)</a>';
       }
@@ -476,7 +470,7 @@ SELECT SUM(filesize) AS total
           (!empty($this->conf['archive_prefix']) ? $this->conf['archive_prefix'] .'_' : null).
           get_username($this->data['user_id']) .'_'. 
           $this->data['type'] .'-'. $this->data['type_id'] .'_'.
-          $this->data['user_id'] . $this->data['set_id'] .
+          $this->data['user_id'] . $this->data['id'] .
           ($this->data['nb_zip']!=1 ? '_part'. $i : null).
           '.zip';
   }

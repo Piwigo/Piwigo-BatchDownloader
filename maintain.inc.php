@@ -8,7 +8,6 @@ define(
     'level'           => 0,
     'photo_size'      => 'original',
     'archive_prefix'  => 'piwigo',
-    'archive_comment' => null,
     'archive_timeout' => 48, /* hours */
     'max_elements'    => 500,
     'max_size'        => 100, /* MB */
@@ -48,6 +47,7 @@ CREATE TABLE IF NOT EXISTS `' . $prefixeTable . 'download_sets_images` (
   pwg_query($query);
 
   conf_update_param('batch_download', batch_download_default_config);
+  conf_update_param('batch_download_comment', null);
   
   mkdir($conf['data_location'] . 'download_archives/', 0755);
 }
@@ -56,9 +56,12 @@ function plugin_activate()
 {
   global $conf;
 
-  if (empty($conf['batch_download']))
+  if (empty($conf['batch_download_comment']))
   {
-    conf_update_param('batch_download', batch_download_default_config);
+    $new_conf = unserialize($conf['batch_download']);
+    unset($new_conf['archive_comment']);
+    conf_update_param('batch_download', serialize($new_conf));
+    conf_update_param('batch_download_comment', null);
   }
   
   if (!file_exists($conf['data_location'] . 'download_archives/'))

@@ -13,6 +13,11 @@ $tabsheet->add('config', l10n('Configuration'), BATCH_DOWNLOAD_ADMIN . '-config'
 $tabsheet->select($page['tab']);
 $tabsheet->assign();
 
+if (!class_exists('ZipArchive'))
+{
+  array_push($page['errors'], l10n('Unable to find ZipArchive PHP extension, Batch Downloader can\'t work without this extension.'));
+}
+
 // include page
 include(BATCH_DOWNLOAD_PATH . 'admin/' . $page['tab'] . '.php');
 
