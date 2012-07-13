@@ -22,7 +22,7 @@ $lang['Download permissions'] = 'Permissions de téléchargement';
 $lang['User groups'] = 'Groupes d\'utilisateurs';
 $lang['Archives'] = 'Archives';
 $lang['Maximum photo size'] = 'Taille maximale des photo';
-$lang['Delete unterminated downloads after'] = 'Supprimer les téléchargements après';
+$lang['Delete downloads after'] = 'Supprimer les téléchargements après';
 $lang['Maximum number of photos per download set'] = 'Nombre maximal de photos par lot';
 $lang['Maximum size of each archive (in Megabytes)'] = 'Taille maximale de chaque archive (en Megaoctets)';
 $lang['Archive prefix'] = 'Préfixe de l\'archive';
@@ -42,5 +42,7 @@ $lang['Warning: ZipArchive doesn\'t accept special characters like accentuated o
 $lang['Unable to find ZipArchive PHP extension, Batch Downloader can\'t work without this extension.'] = 'Impossible de trouver l\'extension PHP ZipArchive, Batch Downloader ne peut fonctionner sans cette extension';
 $lang['Remove from download set'] = 'Supprimer du lot';
 $lang['Confirm the download of %d pictures?'] = 'Confirmer le téléchargementde %d photos ?';
+$lang['Remove all finished downloads'] = 'Supprimer tous les téléchargements terminés';
+$lang['hours'] = 'heures';
 
 ?>

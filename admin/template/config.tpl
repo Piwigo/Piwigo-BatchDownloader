@@ -89,7 +89,7 @@ $("input[name='max_elements']").change(function() {ldelim}
     <li>
       <label>
         <span class="property">{'Maximum number of photos per download set'|@translate}</span>
-        <div id="max_elements""></div>
+        <div id="max_elements"></div>
         <input type="text" name="max_elements" value="{$batch_download.max_elements}" size="5">
       </label>
     </li>

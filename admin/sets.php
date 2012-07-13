@@ -17,6 +17,19 @@ if (isset($_GET['cancel']))
   $BatchDownloader->deleteLastArchive();
   $BatchDownloader->clearImages();
 }
+if (isset($_POST['delete_done']))
+{
+  $query = '
+DELETE s, i
+  FROM '.BATCH_DOWNLOAD_TSETS.' AS s
+    LEFT JOIN '.BATCH_DOWNLOAD_TIMAGES.' AS i
+    ON i.set_id = s.id
+  WHERE
+    status = "done" AND
+    date_creation < DATE_SUB(NOW(), INTERVAL 1 HOUR)
+;';
+  pwg_query($query);
+}
 
 
 // filter
@@ -61,6 +74,7 @@ $sets = simple_hash_from_query($query, 'id', 'username');
 foreach ($sets as $set_id => $username)
 {
   $set = new BatchDownloader($set_id);
+  
   $template->append('sets', array_merge(
     $set->getSetInfo(),
     array(

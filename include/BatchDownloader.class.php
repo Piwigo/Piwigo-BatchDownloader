@@ -606,6 +606,7 @@ SELECT SUM(filesize) AS total
       {
         try
         {
+          if (!class_exists('UserCollection')) throw new Exception();
           $UserCollection = new UserCollection($this->data['type_id']);
           $set['NAME'] = l10n('Collection').': <a href="'.USER_COLLEC_PUBLIC.'view/'.$UserCollection->getParam('id').'">'.$UserCollection->getParam('name').'</a>';
         }

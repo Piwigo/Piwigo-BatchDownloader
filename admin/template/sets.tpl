@@ -63,8 +63,8 @@
     <td>{$set.NB_IMAGES}</td>
     <td>{$set.NB_ARCHIVES}</td>
     <td>
-      {$set.STATUS}
-      {if $set.STATUS == 'download'}({$set.LAST_ZIP}/{$set.NB_ARCHIVES}){/if}
+      {$set.STATUS|@translate}
+      {if $set.STATUS == 'download'}<i style="font-size:0.8em;">({$set.LAST_ZIP}/{$set.NB_ARCHIVES})</i>{/if}
     </td>
     <td style="padding-left:25px;">
       <a href="{$set.U_DELETE}" title="{'Delete this set'|@translate}" onClick="return confirm('{'Are your sure?'|@translate}');"><img src="admin/themes/default/icon/delete.png"></a>
@@ -79,3 +79,8 @@
   </tr>
   {/if}
 </table>
+
+<form action="{$F_FILTER_ACTION}" method="post">
+<p><label><input type="checkbox" name="delete_done" value="1"> {'Remove all finished downloads'|@translate}</label>
+<input type="submit" value="{'Submit'|@translate}"></p>
+</form>

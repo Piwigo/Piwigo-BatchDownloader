@@ -42,5 +42,7 @@ $lang['Warning: ZipArchive doesn\'t accept special characters like accentuated o
 $lang['Unable to find ZipArchive PHP extension, Batch Downloader can\'t work without this extension.'] = 'Unable to find ZipArchive PHP extension, Batch Downloader can\'t work without this extension.';
 $lang['Remove from download set'] = 'Remove from download set';
 $lang['Confirm the download of %d pictures?'] = 'Confirm the download of %d pictures?';
+$lang['Remove all finished downloads'] = 'Remove all finished downloads';
+$lang['hours'] = 'hours';
 
 ?>
