@@ -1,0 +1,1 @@
+Dod iespēju lietotājiem lejupielādēt attēlu sarakstus (kārtojumus) ZIP formā. Savietojams ar Lietotāja Kolekcijām.
