@@ -1,0 +1,1 @@
+Permite a los usuarios descargar conjuntos de imágenes en formato ZIP. Compatible con las colecciones de usuario.
