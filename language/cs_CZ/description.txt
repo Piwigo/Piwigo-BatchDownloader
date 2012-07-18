@@ -1,0 +1,1 @@
+Umožňuje uživatelům nahrát sady obrázků v ZIP. Slučitelné s Uživatelskými výběry.
