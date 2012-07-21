@@ -1,0 +1,1 @@
+Povoliť používateľom sťahovať sady fotiek v ZIP. Kompatibilné s používateľskými sadami.
