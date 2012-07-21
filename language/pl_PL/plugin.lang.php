@@ -42,4 +42,7 @@ $lang['Remove all finished downloads'] = 'Usuń wszystkie zakończone pobrania';
 $lang['The archive is downloading, if the download doesn\'t start automatically please <a href="%s">click here</a>'] = 'Archiwum jest pobierane, jeśli pobieranie nie rozpocznie się automatycznie <a href="%s">kliknij tutaj</a>';
 $lang['done'] = 'Ukończono';
 $lang['hours'] = 'godzin';
+$lang['Confirm the download of %d pictures?'] = 'Potwierdź pobieranie %d obrazów.';
+$lang['Delete this set'] = 'Usuń ten zestaw';
+$lang['Set type'] = 'Określ rodzaj';
 ?>
