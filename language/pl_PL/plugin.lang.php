@@ -45,4 +45,6 @@ $lang['hours'] = 'godzin';
 $lang['Confirm the download of %d pictures?'] = 'Potwierdź pobieranie %d obrazów.';
 $lang['Delete this set'] = 'Usuń ten zestaw';
 $lang['Set type'] = 'Określ rodzaj';
+$lang['Return to download page'] = 'Wróć do strony pobierania';
+$lang['Unable to find ZipArchive PHP extension, Batch Downloader can\'t work without this extension.'] = 'Nie mogę znaleźć rozszerzenia PHP: ZipArchive, bez niego nie będę działać';
 ?>
