@@ -2,7 +2,7 @@
 define('PHPWG_ROOT_PATH', '../../');
 include(PHPWG_ROOT_PATH.'include/common.inc.php');
 
-check_status(ACCESS_CLASSIC);
+check_status(ACCESS_GUEST);
 
 try {
   $BatchDownloader = new BatchDownloader($_GET['set_id']);
