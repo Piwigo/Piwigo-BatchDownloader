@@ -424,6 +424,8 @@ SELECT SUM(filesize) AS total
       return '<b>'.l10n('No archive').'</b>';
     }
     
+    $root_url = get_root_url();
+    
     $out = '';
     for ($i=1; $i<=$this->data['nb_zip']; $i++)
     {
@@ -431,17 +433,17 @@ SELECT SUM(filesize) AS total
       
       if ($this->data['status'] == 'done' or $i < $this->data['last_zip']+1)
       {
-        $out.= '<img src="'.BATCH_DOWNLOAD_PATH.'template/drive.png"> Archive #'.$i.' (already downloaded)';
+        $out.= '<img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/drive.png"> Archive #'.$i.' (already downloaded)';
       }
       else if ($i == $this->data['last_zip']+1)
       {
           $out.= '<a href="'.add_url_params($url, array('set_id'=>$this->data['id'],'zip'=>$i)).'" rel="nofollow" style="font-weight:bold;"' 
             .($i!=1 ? 'onClick="return confirm(\'Starting download Archive #'.$i.' will destroy Archive #'.($i-1).', be sure you finish the download. Continue ?\');"' : null).
-            '><img src="'.BATCH_DOWNLOAD_PATH.'template/drive_go.png"> Archive #'.$i.' (ready)</a>';
+            '><img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/drive_go.png"> Archive #'.$i.' (ready)</a>';
       }
       else
       {
-        $out.= '<img src="'.BATCH_DOWNLOAD_PATH.'template/drive.png"> Archive #'.$i.' (pending)';
+        $out.= '<img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/drive.png"> Archive #'.$i.' (pending)';
       }
       
       $out.= '</li>';
@@ -608,7 +610,8 @@ SELECT SUM(filesize) AS total
         {
           if (!class_exists('UserCollection')) throw new Exception();
           $UserCollection = new UserCollection($this->data['type_id']);
-          $set['NAME'] = l10n('Collection').': <a href="'.USER_COLLEC_PUBLIC.'view/'.$UserCollection->getParam('id').'">'.$UserCollection->getParam('name').'</a>';
+          $infos = $UserCollection->getCollectionInfo();
+          $set['NAME'] = l10n('Collection').': <a href="'.$infos['U_PUBLIC'].'">'.$UserCollection->getParam('name').'</a>';
         }
         catch (Exception $e)
         {

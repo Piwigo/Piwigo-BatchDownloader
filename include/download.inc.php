@@ -22,7 +22,7 @@ switch ($page['sub_section'])
         $BatchDownloader->clearImages();
         pwg_query('DELETE FROM '.BATCH_DOWNLOAD_TSETS.' WHERE id = '.$_GET['set_id'].';');
         $_SESSION['page_infos'][] = l10n('Download set deleted');
-        redirect('index.php');
+        redirect(get_root_url());
       }
       
       if ( isset($_GET['zip']) and $BatchDownloader->getParam('status') != 'done' and $_GET['zip'] > $BatchDownloader->getParam('last_zip') )
@@ -35,13 +35,13 @@ switch ($page['sub_section'])
       
       if (isset($next_file))
       {
-        $set['U_DOWNLOAD'] = BATCH_DOWNLOAD_PATH . 'download.php?set_id='.$_GET['set_id'].'&amp;zip='.$_GET['zip'];
+        $set['U_DOWNLOAD'] = get_root_url().BATCH_DOWNLOAD_PATH . 'download.php?set_id='.$_GET['set_id'].'&amp;zip='.$_GET['zip'];
         array_push($page['infos'], sprintf(l10n('The archive is downloading, if the download doesn\'t start automatically please <a href="%s">click here</a>'), $set['U_DOWNLOAD']));
       }
       
       if ($BatchDownloader->getParam('status') == 'new' and $BatchDownloader->getParam('nb_images') > 0)
       {
-        $set['U_EDIT_SET'] = BATCH_DOWNLOAD_PUBLIC . 'view&amp;set_id='.$_GET['set_id'];
+        $set['U_EDIT_SET'] = add_url_params(BATCH_DOWNLOAD_PUBLIC . 'view', array('set_id'=>$_GET['set_id']));
       }
       
       if ($BatchDownloader->getParam('nb_images') > $conf['batch_download']['max_elements'])
@@ -54,7 +54,7 @@ switch ($page['sub_section'])
           ));
       }
       
-      $set['U_CANCEL'] = BATCH_DOWNLOAD_PUBLIC . 'init_zip&amp;set_id='.$_GET['set_id'].'&amp;cancel';
+      $set['U_CANCEL'] = add_url_params(BATCH_DOWNLOAD_PUBLIC . 'init_zip', array('set_id'=>$_GET['set_id'], 'cancel'=>'true'));
       
       $template->assign(array(
         'set' => $set,
@@ -72,13 +72,13 @@ switch ($page['sub_section'])
   /* edition page */
   case 'view':
   {
-    $self_url = BATCH_DOWNLOAD_PUBLIC . 'view&amp;set_id='.$_GET['set_id'];
+    $self_url = add_url_params(BATCH_DOWNLOAD_PUBLIC . 'view', array('set_id'=>$_GET['set_id']));
     
     $template->set_filename('index', dirname(__FILE__).'/../template/view.tpl');
     $template->assign(array(
       'BATCH_DOWNLOAD_PATH' => BATCH_DOWNLOAD_PATH,
       'U_VIEW' => $self_url,
-      'U_INIT_ZIP' => BATCH_DOWNLOAD_PUBLIC . 'init_zip&amp;set_id='.$_GET['set_id'],
+      'U_INIT_ZIP' => add_url_params(BATCH_DOWNLOAD_PUBLIC . 'init_zip', array('set_id'=>$_GET['set_id'])),
       'SET_ID' => $_GET['set_id'],
       ));
     
@@ -136,7 +136,7 @@ function batch_download_thumbnails_list_prefilter($content, &$smarty)
   $search = '<span class="wrap1">';
   $replace = $search.'
 {strip}<a class="removeSet" href="{$U_VIEW}&amp;remove={$thumbnail.id}" data-id="{$thumbnail.id}" rel="nofollow">
-{\'Remove from download set\'|@translate}&nbsp;<img src="{$BATCH_DOWNLOAD_PATH}template/image_delete.png" title="{\'Remove from download set\'|@translate}">
+{\'Remove from download set\'|@translate}&nbsp;<img src="{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/image_delete.png" title="{\'Remove from download set\'|@translate}">
 </a>{/strip}';
 
   // custom CSS and AJAX request

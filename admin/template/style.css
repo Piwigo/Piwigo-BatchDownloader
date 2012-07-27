@@ -45,7 +45,3 @@ TABLE.table2 THEAD TD {
 .table2 .status {
   width:120px;
 }
-
-.ui-slider { background:#666;border-radius:2px;border:1px solid #888; }
-.ui-slider .ui-slider-handle { border:1px solid #ccc;background:#444;border-radius:0.6em; }
-.ui-slider .ui-slider-range { background:#888;border-radius:2px; }

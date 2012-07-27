@@ -17,7 +17,6 @@ define('BATCH_DOWNLOAD_TSETS',   $prefixeTable . 'download_sets');
 define('BATCH_DOWNLOAD_TIMAGES', $prefixeTable . 'download_sets_images');
 define('BATCH_DOWNLOAD_LOCAL',   PHPWG_ROOT_PATH . $conf['data_location'] . 'download_archives/');
 define('BATCH_DOWNLOAD_ADMIN',   get_root_url() . 'admin.php?page=plugin-' . basename(dirname(__FILE__)));
-define('BATCH_DOWNLOAD_PUBLIC',  make_index_url(array('section' => 'download')) . '/');
 
 
 if (class_exists('ZipArchive'))

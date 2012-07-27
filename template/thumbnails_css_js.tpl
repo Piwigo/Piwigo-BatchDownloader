@@ -11,7 +11,7 @@ jQuery(".removeSet").click(function() {ldelim}
   
   jQuery.ajax({ldelim}
     type: "POST",
-    url: "{$BATCH_DOWNLOAD_PATH}remove_image.php",
+    url: "{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}remove_image.php",
     data: {ldelim} "set_id": "{$SET_ID}", "toggle_id": toggle_id }
   }).done(function(msg) {ldelim}
     if (msg == "false") {ldelim}

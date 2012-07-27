@@ -18,6 +18,8 @@ function batch_download_section_init()
 {
   global $tokens, $page, $conf;
   
+  define('BATCH_DOWNLOAD_PUBLIC',  make_index_url(array('section' => 'download')) . '/');
+  
   if ($tokens[0] == 'download')
   {
     if (check_download_access() === false) access_denied();
@@ -80,7 +82,7 @@ function batch_download_index_button()
       {
         $BatchDownloader->createNextArchive(true); // make sure we have only one zip, even if 'max_size' is exceeded
         
-        $u_download = BATCH_DOWNLOAD_PATH . 'download.php?set_id='.$BatchDownloader->getParam('id').'&amp;zip=1';
+        $u_download = get_root_url().BATCH_DOWNLOAD_PATH . 'download.php?set_id='.$BatchDownloader->getParam('id').'&amp;zip=1';
         
         $null = null;
         $template->block_footer_script(null, 'setTimeout("document.location.href = \''.$u_download.'\';", 1000);', $null, $null);
@@ -90,7 +92,7 @@ function batch_download_index_button()
       // oterwise we go to summary page
       else
       {
-        redirect(BATCH_DOWNLOAD_PUBLIC . 'init_zip&amp;set_id='.$BatchDownloader->getParam('id'));
+        redirect(add_url_params(BATCH_DOWNLOAD_PUBLIC . 'init_zip', array('set_id'=>$BatchDownloader->getParam('id'))));
       }
     }
   }
@@ -104,11 +106,13 @@ function batch_download_index_button()
     $url = duplicate_index_url(array(), array('action'));
   }
   
+  $url = add_url_params($url, array('action'=>'advdown_set'));
+  
   // toolbar button
   $button = '<script type="text/javascript">var batchdown_count = '.count($page['items']).'; var batchdown_string = "'.l10n('Confirm the download of %d pictures?').'";</script>
-    <li><a href="'. $url .'&amp;action=advdown_set" title="'.l10n('Download all pictures of this selection').'" class="pwg-state-default pwg-button" rel="nofollow"
+    <li><a href="'. $url .'" title="'.l10n('Download all pictures of this selection').'" class="pwg-state-default pwg-button" rel="nofollow"
     onClick="return confirm(batchdown_string.replace(\'%d\', batchdown_count));">
-			<span class="pwg-icon batch-downloader-icon" style="background:url(\'' . BATCH_DOWNLOAD_PATH . 'template/zip.png\') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">'.l10n('Batch Downloader').'</span>
+			<span class="pwg-icon batch-downloader-icon" style="background:url(\'' . get_root_url().BATCH_DOWNLOAD_PATH . 'template/zip.png\') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">'.l10n('Batch Downloader').'</span>
 		</a></li>';
   $template->concat('PLUGIN_INDEX_ACTIONS', $button);
   $template->concat('COLLECTION_ACTIONS', $button);
@@ -164,7 +168,7 @@ SELECT id
       $set = $BatchDownloader->getSetInfo();
       
       array_push($data, array(
-        'URL' => BATCH_DOWNLOAD_PUBLIC . 'init_zip&amp;set_id='.$BatchDownloader->getParam('id'),
+        'URL' => add_url_params(BATCH_DOWNLOAD_PUBLIC . 'init_zip', array('set_id'=>$BatchDownloader->getParam('id'))),
         'TITLE' => str_replace('"', "'", strip_tags($set['COMMENT'])),
         'NAME' => $set['sNAME'],
         'COUNT' => $set['NB_IMAGES'],
