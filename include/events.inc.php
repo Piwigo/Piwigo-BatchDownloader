@@ -18,7 +18,7 @@ function batch_download_section_init()
 {
   global $tokens, $page, $conf;
   
-  define('BATCH_DOWNLOAD_PUBLIC',  make_index_url(array('section' => 'download')) . '/');
+  define('BATCH_DOWNLOAD_PUBLIC', make_index_url(array('section' => 'download')) . '/');
   
   if ($tokens[0] == 'download')
   {
@@ -150,6 +150,8 @@ function batch_download_applymenu($menu_ref_arr)
   $menu = &$menu_ref_arr[0];
   $block = $menu->get_block('mbBatchDownloader');
   
+  if (!defined('BATCH_DOWNLOAD_PUBLIC')) define('BATCH_DOWNLOAD_PUBLIC', make_index_url(array('section' => 'download')) . '/');
+  
   if ($block != null)
   {
     $query = '
@@ -217,11 +219,15 @@ UPDATE '.BATCH_DOWNLOAD_TSETS.'
   
   // remove old archives
   $zips = glob(BATCH_DOWNLOAD_LOCAL . 'u-*/*.zip');
-  foreach ($zips as $zip)
+  
+  if (is_array($zips))
   {
-    if (filemtime($zip) < time()-$conf['batch_download']['archive_timeout']*3600)
+    foreach ($zips as $zip)
     {
-      unlink($zip);
+      if (filemtime($zip) < time()-$conf['batch_download']['archive_timeout']*3600)
+      {
+        unlink($zip);
+      }
     }
   }
 }
