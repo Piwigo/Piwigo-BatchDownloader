@@ -1,15 +1,13 @@
-{if $themeconf.name != "stripped" and $themeconf.parent != "stripped" and $themeconf.name != "simple-grey" and $themeconf.parent != "simple"}
-  {$MENUBAR}
+{* <!-- Menubar & titrePage --> *}
+{if $themeconf.name == "stripped" or $themeconf.parent == "stripped"}
+  {include file=$BATCH_DOWNLOAD_ABS_PATH|@cat:'template/themes/stripped.tpl'}
+  {assign var="clear" value="true"}
+{elseif $themeconf.name == "simple-grey" or $themeconf.parent == "simple"}
+  {include file=$BATCH_DOWNLOAD_ABS_PATH|@cat:'template/themes/simple.tpl'}
+  {assign var="clear" value="true"}
 {else}
-  {assign var="intern_menu" value="true"}
+  {include file=$BATCH_DOWNLOAD_ABS_PATH|@cat:'template/themes/default.tpl'}
 {/if}
-<div id="content" class="content{if isset($MENUBAR)} contentWithMenu{/if}">
-{if $intern_menu}{$MENUBAR}{/if}
-
-<div class="titrePage">
-  <ul class="categoryActions"></ul>
-  <h2>{$TITLE}</h2>
-</div>{* <!-- titrePage --> *}
 
 {if isset($errors) or not empty($infos)}
 {include file='infos_errors.tpl'}
@@ -37,4 +35,5 @@
 {if !empty($navbar)}{include file='navigation_bar.tpl'|@get_extent:'navbar'}{/if}
 {/if}
 
+{if $clear}<div style="clear: both;"></div>{/if}
 </div>{* <!-- content --> *}

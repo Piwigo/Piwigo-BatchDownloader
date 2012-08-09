@@ -127,7 +127,10 @@ switch ($page['sub_section'])
   }
 }
 
-$template->assign('BATCH_DOWNLOAD_PATH', BATCH_DOWNLOAD_PATH);
+$template->assign(array(
+  'BATCH_DOWNLOAD_PATH' => BATCH_DOWNLOAD_PATH,
+  'BATCH_DOWNLOAD_ABS_PATH' => realpath(BATCH_DOWNLOAD_PATH).'/',
+  ));
 
 
 function batch_download_thumbnails_list_prefilter($content, &$smarty)
