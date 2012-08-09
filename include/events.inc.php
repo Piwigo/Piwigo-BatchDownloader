@@ -18,8 +18,6 @@ function batch_download_section_init()
 {
   global $tokens, $page, $conf;
   
-  define('BATCH_DOWNLOAD_PUBLIC', make_index_url(array('section' => 'download')) . '/');
-  
   if ($tokens[0] == 'download')
   {
     if (check_download_access() === false) access_denied();
@@ -149,8 +147,6 @@ function batch_download_applymenu($menu_ref_arr)
   
   $menu = &$menu_ref_arr[0];
   $block = $menu->get_block('mbBatchDownloader');
-  
-  if (!defined('BATCH_DOWNLOAD_PUBLIC')) define('BATCH_DOWNLOAD_PUBLIC', make_index_url(array('section' => 'download')) . '/');
   
   if ($block != null)
   {

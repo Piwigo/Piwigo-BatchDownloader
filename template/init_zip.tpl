@@ -49,5 +49,6 @@ setTimeout("document.location.href = '{$set.U_DOWNLOAD}';", 1000);
 </fieldset>
 {/if}
 
-{if $clear}<div style="clear: both;"></div>{/if}
+{if $clear}<div style="clear: both;"></div>
+</div>{/if}
 </div>{* <!-- content --> *}

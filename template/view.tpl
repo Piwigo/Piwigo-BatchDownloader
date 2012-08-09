@@ -35,5 +35,6 @@
 {if !empty($navbar)}{include file='navigation_bar.tpl'|@get_extent:'navbar'}{/if}
 {/if}
 
-{if $clear}<div style="clear: both;"></div>{/if}
+{if $clear}<div style="clear: both;"></div>
+</div>{/if}
 </div>{* <!-- content --> *}

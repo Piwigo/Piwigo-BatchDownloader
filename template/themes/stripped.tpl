@@ -7,3 +7,4 @@
 
 <div id="content" {if !$stripped.hideMenu}class="menuShown"{/if}>
 {$MENUBAR}
+<div id="content_cell">

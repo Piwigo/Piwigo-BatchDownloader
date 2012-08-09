@@ -529,9 +529,16 @@ SELECT SUM(filesize) AS total
       case 'category':
       {
         $category = get_cat_info($this->data['type_id']);
-        $set['NAME'] = l10n('Album').': '.get_cat_display_name($category['upper_names']);
-        $set['sNAME'] = l10n('Album').': '.trigger_event('render_category_name', $category['name']);
-        $set['COMMENT'] = trigger_event('render_category_description', $category['comment']);
+        if ($category == null)
+        {
+          $set['NAME'] = l10n('Album').': #'.$this->data['type_id'].' (deleted)';
+        }
+        else
+        {
+          $set['NAME'] = l10n('Album').': '.get_cat_display_name($category['upper_names']);
+          $set['sNAME'] = l10n('Album').': '.trigger_event('render_category_name', $category['name']);
+          $set['COMMENT'] = trigger_event('render_category_description', $category['comment']);
+        }
         break;
       }
       
