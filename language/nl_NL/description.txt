@@ -1,0 +1,1 @@
+Sta gebruikers toe om plaatjes sets te downloaden als ZIP. Compatibel met User Collections.
