@@ -27,7 +27,7 @@ function batch_download_install()
   }
 
   // archives directory
-  if (!file_exists($conf['data_location'] . 'download_archives/'))
+  if ( file_exists($conf['data_location']) and !file_exists($conf['data_location'] . 'download_archives/') )
   {
     mkdir($conf['data_location'] . 'download_archives/', 0755);
   }
