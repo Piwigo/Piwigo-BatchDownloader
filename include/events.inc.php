@@ -3,16 +3,6 @@ defined('BATCH_DOWNLOAD_PATH') or die('Hacking attempt!');
 
 # this file contains all functions directly called by the triggers #
 
-/* unserialize conf and load language */
-function batch_download_init()
-{
-  global $conf;
-  
-  $conf['batch_download'] = unserialize($conf['batch_download']);
-  load_language('plugin.lang', BATCH_DOWNLOAD_PATH);
-}
-
-
 /* define page section from url */
 function batch_download_section_init()
 {

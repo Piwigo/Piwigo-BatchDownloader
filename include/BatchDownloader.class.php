@@ -324,7 +324,7 @@ SELECT
       $total_size = 0;
       foreach ($images_to_add as $row)
       {        
-        $zip->addFile(PHPWG_ROOT_PATH . $row['path'], $row['id'].'_'.str2url($row['name']).'.'.get_extension($row['file']));
+        $zip->addFile(PHPWG_ROOT_PATH . $row['path'], $row['id'].'_'.get_filename_wo_extension($row['file']).'.'.get_extension($row['path']));
         
         array_push($images_added, $row['id']);
         $this->images[ $row['id'] ] = $this->data['last_zip'];
