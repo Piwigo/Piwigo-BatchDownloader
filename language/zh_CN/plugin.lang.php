@@ -21,18 +21,18 @@
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
 $lang['Random'] = '随机';
-$lang['Nb images'] = '特定图片';
-$lang['Nb archives'] = '特定文档';
+$lang['Nb images'] = '相片数量';
+$lang['Nb archives'] = '文件数量';
 $lang['Remove from download set'] = '从下载设置中删除';
 $lang['Warning: ZipArchive doesn\'t accept special characters like accentuated ones, angle quotes (») and non-latin alphabets.'] = '警告：ZipArchive 不接受特殊字符，例如：重音符号、引号和非拉丁字母。';
-$lang['real number of archives can differ'] = '实际文档数量可能不一致';
+$lang['real number of archives can differ'] = '实际文件数量可能不一致';
 $lang['hours'] = '小时';
-$lang['download'] = '下载';
+$lang['download'] = '下载中';
 $lang['done'] = '完成';
 $lang['You choose to download %d pictures, but the system is limited to %d. You can edit the set, or the last %d pictures will not be downloaded.'] = '你选择要下载 %d 张图片, 但是系统限制只能下载 %d 张图片。你可以编辑这个设置， 否则最后的 %d 张图片将不会被下载。';
 $lang['You can not edit this set'] = '你不能编辑这个设置';
 $lang['Whole gallery'] = '整个相册';
-$lang['User collection'] = '用户选择';
+$lang['User collection'] = '用户选定';
 $lang['User groups'] = '用户组';
 $lang['Unable to find ZipArchive PHP extension, Batch Downloader can\'t work without this extension.'] = '没有找到 ZipArchive 扩展，批量下载器缺少这个扩展不能工作。';
 $lang['Total size'] = '总大小';
@@ -40,13 +40,13 @@ $lang['The archive is downloading, if the download doesn\'t start automatically 
 $lang['Set type'] = '类型';
 $lang['Return to download page'] = '返回下载页面';
 $lang['Download set deleted'] = '删除下载设置';
-$lang['Remove all finished downloads'] = '移动所有已完成下载';
+$lang['Remove all finished downloads'] = '删除所有已完成下载历史';
 $lang['Estimated number of archives'] = '估计文档数量';
 $lang['Downloads'] = '下载';
-$lang['Archives'] = '文档';
-$lang['Archive prefix'] = '文档前缀';
-$lang['Archive comment'] = '文档评论';
-$lang['Maximum size of each archive (in Megabytes)'] = '每个文档图片最大尺寸（M）';
+$lang['Archives'] = '文件';
+$lang['Archive prefix'] = '文件名前缀';
+$lang['Archive comment'] = '文件注释';
+$lang['Maximum size of each archive (in Megabytes)'] = '单个文件最大大小（M）';
 $lang['Maximum photo size'] = '最大图片大小';
 $lang['Maximum number of photos per download set'] = '每次最大下载图片数量设置';
 $lang['Generate ZIP'] = '生成ZIP';
