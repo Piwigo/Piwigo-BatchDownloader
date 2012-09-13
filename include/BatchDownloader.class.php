@@ -19,7 +19,6 @@ class BatchDownloader
     global $user, $conf;
     
     $this->conf = $conf['batch_download'];
-    $this->conf['archive_acomment'] = $conf['batch_download_comment'];
     $this->data = array(
       'id' => 0,
       'user_id' => $user['id'],
@@ -269,6 +268,8 @@ DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
       trigger_error('BatchDownloader::createNextArchive, the set is empty', E_USER_ERROR);
     }
     
+    global $conf;
+    
     // first zip
     if ($this->data['last_zip'] == 0)
     {
@@ -313,11 +314,7 @@ SELECT
       $this->updateParam('last_zip', $this->data['last_zip']+1);
       $zip_path = $this->getArchivePath();
       
-      $zip = new ZipArchive;
-      if ($zip->open($zip_path, ZipArchive::CREATE) !== true)
-      {
-        trigger_error('BatchDownloader::createNextArchive, unable to open ZIP archive', E_USER_ERROR);
-      }
+      $zip = new myZip($zip_path, isset($conf['batch_download_force_pclzip']));
       
       // add images until size limit is reach, or all images are added
       $images_added = array();
@@ -336,12 +333,11 @@ SELECT
       $this->updateParam('total_size', $this->data['total_size'] + $total_size);
       
       // archive comment
-      global $conf;
-      $comment = 'Generated on '.date('r').' with PHP ZipArchive '.PHP_VERSION.' by Piwigo Batch Downloader.';
+      $comment = 'Generated on '.date('r').' with PHP '.PHP_VERSION.' by Piwigo Batch Downloader.';
       $comment.= "\n".$conf['gallery_title'].' - '.get_absolute_root_url();
-      if (!empty($this->conf['archive_comment']))
+      if (!empty($conf['batch_download_comment']))
       {
-        $comment.= "\n\n".wordwrap(remove_accents($this->conf['archive_comment']), 60);
+        $comment.= "\n\n".wordwrap(remove_accents($conf['batch_download_comment']), 60);
       }
       $zip->setArchiveComment($comment);
       
@@ -628,10 +624,81 @@ SELECT SUM(filesize) AS total
       }
     }
     
-    if (!isset($set['sNAME'])) $set['sNAME'] = strip_tags($set['NAME']);
+    if (!isset($set['sNAME']))   $set['sNAME'] = strip_tags($set['NAME']);
     if (!isset($set['COMMENT'])) $set['COMMENT'] = null;
     
     return $set;
+  }
+}
+
+
+/**
+ * small class implementing basic ZIP creation
+ * with ZipArchive or PclZip
+ */
+class myZip
+{
+  private $lib;
+  private $zip;
+  
+  function __construct($zip_path, $pclzip=false)
+  {
+    if ( class_exists('ZipArchive') and !$pclzip )
+    {
+      $this->lib = 'zipa';
+      
+      $this->zip = new ZipArchive;
+      if ($this->zip->open($zip_path, ZipArchive::CREATE) !== true)
+      {
+        trigger_error('BatchDownloader::createNextArchive, unable to open ZIP archive (ZipArchive)', E_USER_ERROR);
+      }
+    }
+    else
+    {
+      $this->lib = 'pcl';
+      
+      require_once(BATCH_DOWNLOAD_PATH.'include/pclzip.lib.php');
+      $this->zip = new PclZip($zip_path);
+      
+      // create a temporary file for archive creation
+      touch(BATCH_DOWNLOAD_LOCAL.'temp.txt');
+      
+      if ($this->zip->create(BATCH_DOWNLOAD_LOCAL.'temp.txt', PCLZIP_OPT_REMOVE_ALL_PATH) == 0)
+      {
+        trigger_error('BatchDownloader::createNextArchive, unable to open ZIP archive (PclZip)', E_USER_ERROR);
+      }
+      
+      unlink(BATCH_DOWNLOAD_LOCAL.'temp.txt');
+      $this->zip->delete(PCLZIP_OPT_BY_NAME, 'temp.txt');
+    }
+  }
+  
+  function addFile($path, $filename)
+  {
+    if ($this->lib == 'zipa')
+    {
+      $this->zip->addFile($path, $filename);
+    }
+    else
+    {
+      $this->zip->add($path, PCLZIP_OPT_REMOVE_ALL_PATH);
+    }
+  }
+  
+  function setArchiveComment($comment)
+  {
+    if ($this->lib == 'zipa')
+    {
+      $this->zip->setArchiveComment($comment);
+    }
+  }
+  
+  function close()
+  {
+    if ($this->lib == 'zipa')
+    {
+      $this->zip->close();
+    }
   }
 }
 

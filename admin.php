@@ -16,7 +16,7 @@ $tabsheet->assign();
 
 if (!class_exists('ZipArchive'))
 {
-  array_push($page['errors'], l10n('Unable to find ZipArchive PHP extension, Batch Downloader can\'t work without this extension.'));
+  array_push($page['warnings'], l10n('Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'));
 }
 
 // include page

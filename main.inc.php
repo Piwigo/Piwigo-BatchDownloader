@@ -18,27 +18,24 @@ define('BATCH_DOWNLOAD_TIMAGES', $prefixeTable . 'download_sets_images');
 define('BATCH_DOWNLOAD_LOCAL',   PHPWG_ROOT_PATH . $conf['data_location'] . 'download_archives/');
 define('BATCH_DOWNLOAD_ADMIN',   get_root_url() . 'admin.php?page=plugin-BatchDownloader');
 define('BATCH_DOWNLOAD_PUBLIC',  get_absolute_root_url() . make_index_url(array('section' => 'download')) . '/');
-define('BATCH_DOWNLOAD_VERSION', '1.0.3');
+define('BATCH_DOWNLOAD_VERSION', '1.0.4');
 
 
 add_event_handler('init', 'batch_download_init');
 
-if (class_exists('ZipArchive'))
-{
-  add_event_handler('loc_end_section_init', 'batch_download_section_init');
-  add_event_handler('loc_end_index', 'batch_download_page');
-  
-  add_event_handler('loc_end_index', 'batch_download_clean');
+add_event_handler('loc_end_section_init', 'batch_download_section_init');
+add_event_handler('loc_end_index', 'batch_download_page');
 
-  add_event_handler('loc_end_index', 'batch_download_index_button', EVENT_HANDLER_PRIORITY_NEUTRAL+10);
+add_event_handler('loc_end_index', 'batch_download_clean');
 
-  add_event_handler('blockmanager_register_blocks', 'batch_download_add_menublock');
-  add_event_handler('blockmanager_apply', 'batch_download_applymenu');
-  
-  include_once(BATCH_DOWNLOAD_PATH . 'include/BatchDownloader.class.php');
-  include_once(BATCH_DOWNLOAD_PATH . 'include/functions.inc.php');
-  include_once(BATCH_DOWNLOAD_PATH . 'include/events.inc.php');
-}
+add_event_handler('loc_end_index', 'batch_download_index_button', EVENT_HANDLER_PRIORITY_NEUTRAL+10);
+
+add_event_handler('blockmanager_register_blocks', 'batch_download_add_menublock');
+add_event_handler('blockmanager_apply', 'batch_download_applymenu');
+
+include_once(BATCH_DOWNLOAD_PATH . 'include/BatchDownloader.class.php');
+include_once(BATCH_DOWNLOAD_PATH . 'include/functions.inc.php');
+include_once(BATCH_DOWNLOAD_PATH . 'include/events.inc.php');
 
 if (defined('IN_ADMIN'))
 {
@@ -48,7 +45,7 @@ if (defined('IN_ADMIN'))
 
 
 /**
- * unserialize conf and load language
+ * update plugin & unserialize conf & load language
  */
 function batch_download_init()
 {

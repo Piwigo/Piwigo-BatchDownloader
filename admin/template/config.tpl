@@ -106,6 +106,7 @@ $("input[name='max_elements']").change(function() {ldelim}
         <input type="text" name="archive_prefix" value="{$batch_download.archive_prefix}">
       </label>
     </li>
+  {if $use_ziparchive}
     <li>
       <label>
         <span class="property">{'Archive comment'|@translate} :</span><br>
@@ -114,8 +115,23 @@ $("input[name='max_elements']").change(function() {ldelim}
       <br>
       <i>{'Warning: ZipArchive doesn\'t accept special characters like accentuated ones, angle quotes (») and non-latin alphabets.'|@translate}</i>
     </li>
+  {else}
+    <input type="hidden" name="archive_comment" value="">
+  {/if}
   </ul>
 </fieldset>
 
 <p class="formButtons"><input type="submit" name="save_config" value="{'Save Settings'|@translate}"></p>  
+
+<fieldset>
+  <legend>{'Environment'|@translate}</legend>
+  
+  <b>PHP</b> {$PHP_VERSION}<br>
+{if $use_ziparchive}
+  <b>ZipArchive</b> {$PHP_VERSION}
+{else}
+  <b>PclZip</b> 2.8.2
+{/if}
+</fieldset>
+  
 </form>

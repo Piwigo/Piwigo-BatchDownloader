@@ -51,6 +51,8 @@ $template->assign(array(
   'sizes_options' => $sizes_options,
   'batch_download' => $conf['batch_download'],
   'batch_download_comment' => stripslashes($conf['batch_download_comment']),
+  'use_ziparchive' => class_exists('ZipArchive') && !isset($conf['batch_downloader_force_pclzip']),
+  'PHP_VERSION' => PHP_VERSION,
   ));
 
 
