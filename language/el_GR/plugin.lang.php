@@ -62,7 +62,7 @@ $lang['real number of archives can differ'] = 'ο πραγματικός αρι�
 $lang['Confirm the download of %d pictures?'] = 'Επιβεβαιώστε τη λήψη %d φωτογραφιών';
 $lang['Remove all finished downloads'] = 'Απομάκρυνση όλων των ολοκληρωμένων λήψεων';
 $lang['Remove from download set'] = 'Αφαιρέστε από το σετ λήψεων';
-$lang['Unable to find ZipArchive PHP extension, Batch Downloader can\'t work without this extension.'] = 'Δεν είναι δυνατόν να βρεθεί η επέκταση ZipArchive PHP, Batch Downloader δεν μπορεί να λειτουργήσει χωρίς αυτή την επέκταση.';
 $lang['Warning: ZipArchive doesn\'t accept special characters like accentuated ones, angle quotes (») and non-latin alphabets.'] = 'Προειδοποίηση: Το ZipArchive δεν δέχεται ειδικούς χαρακτήρες, όπως τονιζόμενους, εισαγωγικά (») και μη-λατινικό αλφάβητο.';
 $lang['hours'] = 'Ώρες';
+$lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'Αδύνατο να βρεθεί η επέκταση ZipArchive PHP, το Batch Downloader θα χρησιμοποιήσει το  PclZip, αλλά με ελαττωμένη επίδοση. ';
 ?>
