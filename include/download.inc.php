@@ -22,7 +22,7 @@ switch ($page['sub_section'])
         $BatchDownloader->clearImages();
         pwg_query('DELETE FROM '.BATCH_DOWNLOAD_TSETS.' WHERE id = '.$_GET['set_id'].';');
         $_SESSION['page_infos'][] = l10n('Download set deleted');
-        redirect(get_root_url());
+        redirect(get_absolute_root_url());
       }
       
       if ( isset($_GET['zip']) and $BatchDownloader->getParam('status') != 'done' and $_GET['zip'] > $BatchDownloader->getParam('last_zip') )

@@ -79,8 +79,6 @@ foreach ($sets as $set_id => $username)
     $set->getSetInfo(),
     array(
       'USERNAME' => $username,
-      'STATUS' => $set->getParam('status'),
-      'LAST_ZIP' => $set->getParam('last_zip'),
       'U_DELETE' => BATCH_DOWNLOAD_ADMIN . '-sets&amp;delete='.$set->getParam('id'),
       'U_CANCEL' => BATCH_DOWNLOAD_ADMIN . '-sets&amp;cancel='.$set->getParam('id'),
     )

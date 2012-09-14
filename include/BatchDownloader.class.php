@@ -29,6 +29,7 @@ class BatchDownloader
       'last_zip' => 0,
       'nb_images' => 0,
       'total_size' => 0,
+      'estimated_total_size' => 0,
       'status' => 'new',
       );
     $this->images = array();
@@ -313,7 +314,6 @@ SELECT
       // open zip
       $this->updateParam('last_zip', $this->data['last_zip']+1);
       $zip_path = $this->getArchivePath();
-      
       $zip = new myZip($zip_path, isset($conf['batch_download_force_pclzip']));
       
       // add images until size limit is reach, or all images are added
@@ -382,10 +382,11 @@ UPDATE '.BATCH_DOWNLOAD_TIMAGES.'
    * getEstimatedTotalSize
    * @return: int
    */
-  function getEstimatedTotalSize()
+  function getEstimatedTotalSize($force=false)
   {
     if ($this->data['status'] == 'done') return $this->data['total_size'];
     if ($this->data['nb_images'] == 0) return 0;
+    if ( !empty($this->data['estimated_total_size']) and !$force ) return $this->data['estimated_total_size'];
     
     $image_ids = array_slice(array_keys($this->images), 0, $this->conf['max_elements']);
     
@@ -395,6 +396,7 @@ SELECT SUM(filesize) AS total
   WHERE id IN ('.implode(',', $image_ids).')
 ;';
     list($total) = pwg_db_fetch_row(pwg_query($query));
+    $this->data['estimated_total_size'] = $total;
     return $total;
   }
   
@@ -461,32 +463,27 @@ SELECT SUM(filesize) AS total
     }
     
     if ($i === null) $i = $this->data['last_zip'];
+    $set = $this->getNames();
     
     include_once(PHPWG_ROOT_PATH . 'admin/include/functions.php');
     
-    return BATCH_DOWNLOAD_LOCAL .'u-'. $this->data['user_id'] .'/'.
-          (!empty($this->conf['archive_prefix']) ? $this->conf['archive_prefix'] .'_' : null).
-          get_username($this->data['user_id']) .'_'. 
-          $this->data['type'] .'-'. $this->data['type_id'] .'_'.
-          $this->data['user_id'] . $this->data['id'] .
-          ($this->data['nb_zip']!=1 ? '_part'. $i : null).
-          '.zip';
+    $path = BATCH_DOWNLOAD_LOCAL . 'u-'. $this->data['user_id'] . '/';
+    $path.= !empty($this->conf['archive_prefix']) ? $this->conf['archive_prefix'] . '_' : null;
+    $path.= get_username($this->data['user_id']) . '_';
+    $path.= $set['BASENAME'] . '_';
+    $path.= $this->data['user_id'] . $this->data['id'];
+    $path.= $this->data['nb_zip']!=1 ? '_part' . $i : null;
+    $path.= '.zip';
+    
+    return $path;
   }
   
   /**
-   * getSetInfo
+   * getNames
    * @return: array
    */
-  function getSetInfo()
-  {
-    $set = array(
-      'NB_IMAGES' => $this->data['nb_images'],
-      'NB_ARCHIVES' => $this->data['nb_zip'],
-      'TOTAL_SIZE' => ceil($this->getEstimatedTotalSize()/1024),
-      'LINKS' => $this->getDownloadList(BATCH_DOWNLOAD_PUBLIC . 'init_zip'),
-      'DATE_CREATION' => format_date($this->data['date_creation'], true),
-      );
-    
+  function getNames()
+  {    
     switch ($this->data['type'])
     {
       // calendar
@@ -516,6 +513,7 @@ SELECT SUM(filesize) AS total
         
         $set['NAME'] = l10n('Calendar').': '.$fields[$page['chronology_field']].$display_name;
         $set['sNAME'] = l10n('Calendar').': '.ltrim($display_name, $conf['level_separator']);
+        $set['BASENAME'] = 'calendar-'.$page['chronology_field'].'-'.implode('-',$page['chronology_date']);
         
         $page = $old_page;
         break;
@@ -528,12 +526,26 @@ SELECT SUM(filesize) AS total
         if ($category == null)
         {
           $set['NAME'] = l10n('Album').': #'.$this->data['type_id'].' (deleted)';
+          $set['BASENAME'] = 'album'.$this->data['type_id'];
         }
         else
         {
           $set['NAME'] = l10n('Album').': '.get_cat_display_name($category['upper_names']);
           $set['sNAME'] = l10n('Album').': '.trigger_event('render_category_name', $category['name']);
           $set['COMMENT'] = trigger_event('render_category_description', $category['comment']);
+          
+          if (!empty($category['permalink']))
+          {
+            $set['BASENAME'] = 'album-'.$category['permalink'];
+          }
+          else if ( ($name = str2url($category['name'])) != null )
+          {
+            $set['BASENAME'] = 'album-'.$name;
+          }
+          else
+          {
+            $set['BASENAME'] = 'album'.$this->data['type_id'];
+          }
         }
         break;
       }
@@ -542,6 +554,7 @@ SELECT SUM(filesize) AS total
       case 'flat':
       {
         $set['NAME'] = l10n('Whole gallery');
+        $set['BASENAME'] = 'all-gallery';
         break;
       }
       
@@ -550,6 +563,7 @@ SELECT SUM(filesize) AS total
       {
         $tags = find_tags(explode(',', $this->data['type_id']));
         $set['NAME'] = l10n('Tags').': ';
+        $set['BASENAME'] = 'tags';
         
         $first = true;
         foreach ($tags as $tag)
@@ -560,6 +574,7 @@ SELECT SUM(filesize) AS total
             '<a href="' . make_index_url(array('tags'=>array($tag))) . '">'
             .trigger_event('render_tag_name', $tag['name'])
             .'</a>';
+          $set['BASENAME'].= '-'.$tag['url_name'];
         }
         break;
       }
@@ -568,6 +583,7 @@ SELECT SUM(filesize) AS total
       case 'search':
       {
         $set['NAME'] = '<a href="'.make_index_url(array('section'=>'search', 'search'=>$this->data['type_id'])).'">'.l10n('Search').'</a>';
+        $set['BASENAME'] = 'search'.$this->data['type_id'];
         break;
       }
       
@@ -575,6 +591,7 @@ SELECT SUM(filesize) AS total
       case 'favorites':
       {
         $set['NAME'] = '<a href="'.make_index_url(array('section'=>'favorites')).'">'.l10n('Your favorites').'</a>';
+        $set['BASENAME'] = 'favorites';
         break;
       }
       
@@ -582,6 +599,7 @@ SELECT SUM(filesize) AS total
       case 'most_visited':
       {
         $set['NAME'] = '<a href="'.make_index_url(array('section'=>'most_visited')).'">'.l10n('Most visited').'</a>';
+        $set['BASENAME'] = 'most-visited';
         break;
       }
       
@@ -589,6 +607,7 @@ SELECT SUM(filesize) AS total
       case 'best_rated':
       {
         $set['NAME'] = '<a href="'.make_index_url(array('section'=>'best_rated')).'">'.l10n('Best rated').'</a>';
+        $set['BASENAME'] = 'best-rated';
         break;
       }
       
@@ -596,6 +615,7 @@ SELECT SUM(filesize) AS total
       case 'list':
       {
         $set['NAME'] = l10n('Random');
+        $set['BASENAME'] = 'random';
         break;
       }
       
@@ -603,6 +623,7 @@ SELECT SUM(filesize) AS total
       case 'recent_pics':
       {
         $set['NAME'] = '<a href="'.make_index_url(array('section'=>'recent_pics')).'">'.l10n('Recent photos').'</a>';
+        $set['BASENAME'] = 'recent-pics';
         break;
       }
       
@@ -615,19 +636,49 @@ SELECT SUM(filesize) AS total
           $UserCollection = new UserCollection($this->data['type_id']);
           $infos = $UserCollection->getCollectionInfo();
           $set['NAME'] = l10n('Collection').': <a href="'.$infos['U_PUBLIC'].'">'.$UserCollection->getParam('name').'</a>';
+          
+          if ( ($name = str2url($UserCollection->getParam('name'))) != null)
+          {
+            $set['BASENAME'] = 'collection-'.$name;
+          }
+          else
+          {
+            $set['BASENAME'] = 'collection'.$this->data['type_id'];
+          }
         }
         catch (Exception $e)
         {
           $set['NAME'] = l10n('Collection').': #'.$this->data['type_id'].' (deleted)';
+          $set['BASENAME'] = 'collection'.$this->data['type_id'];
         }
         break;
       }
     }
     
-    if (!isset($set['sNAME']))   $set['sNAME'] = strip_tags($set['NAME']);
-    if (!isset($set['COMMENT'])) $set['COMMENT'] = null;
+    if (!isset($set['sNAME']))    $set['sNAME'] = strip_tags($set['NAME']);
+    if (!isset($set['COMMENT']))  $set['COMMENT'] = null;
+    if (!isset($set['BASENAME'])) $set['BASENAME'] = $this->data['type'] . $this->data['type_id'];
     
     return $set;
+  }
+  
+  /**
+   * getSetInfo
+   * @return: array
+   */
+  function getSetInfo()
+  {    
+    $set = array(
+      'NB_IMAGES' =>     $this->data['nb_images'],
+      'NB_ARCHIVES' =>   $this->data['nb_zip'],
+      'STATUS' =>        $this->data['status'],
+      'LAST_ZIP' =>      $this->data['last_zip'],
+      'TOTAL_SIZE' =>    ceil($this->getEstimatedTotalSize()/1024),
+      'LINKS' =>         $this->getDownloadList(BATCH_DOWNLOAD_PUBLIC . 'init_zip'),
+      'DATE_CREATION' => format_date($this->data['date_creation'], true),
+      );
+    
+    return array_merge($set, $this->getNames());
   }
 }
 
