@@ -49,7 +49,6 @@ $lang['real number of archives can differ'] = 'det reelle antal arkiver kan vari
 $lang['Set type'] = 'Set type';
 $lang['The archive is downloading, if the download doesn\'t start automatically please <a href="%s">click here</a>'] = 'Arkivet bliver downloadet. Hvis download ikke starter automatisk <a href="%s">klik her</a>';
 $lang['Total size'] = 'Samlet størrelse';
-$lang['Unable to find ZipArchive PHP extension, Batch Downloader can\'t work without this extension.'] = 'Kan ikke finde ZipArchive PHP udvidelse. Betch Downloader fungerer ikke uden denne udvidelse.';
 $lang['User collection'] = 'Bruger samling';
 $lang['User groups'] = 'Bruger grupper';
 $lang['Whole gallery'] = 'Hele galleriet';
@@ -64,4 +63,5 @@ $lang['Return to download page'] = 'Tilbage til download side';
 $lang['Delete downloads after'] = 'Slet download efter';
 $lang['Confirm the download of %d pictures?'] = 'Bekræft download af %d billeder?';
 $lang['<b>Warning:</b> all files will be deleted within %d hours'] = '<b>Advarsel:</b> Alle filer vil blive slettet indenfor %d timer';
+$lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'Kan ikke finde ZipArchive PHP udvidelse, Batch Downloader vil bruge PclZip i stedet, men med dårligere ydelse.';
 ?>
