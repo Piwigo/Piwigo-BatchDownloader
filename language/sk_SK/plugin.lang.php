@@ -53,7 +53,6 @@ $lang['Return to download page'] = 'Späť na nahranú stránku';
 $lang['Set type'] = 'Nastaviť typ';
 $lang['The archive is downloading, if the download doesn\'t start automatically please <a href="%s">click here</a>'] = 'Archív sa nahráva, pokiaľ nahrávanie nezačne automaticky, prosím  <a href="%s">tu kliknite</a>';
 $lang['Total size'] = 'Celková veľkosť';
-$lang['Unable to find ZipArchive PHP extension, Batch Downloader can\'t work without this extension.'] = 'Nenájdené ZipArchive PHP rozšírenie, Dávkové sťahovanie nemôže bez tohto rozšírenia pracovať';
 $lang['User collection'] = 'Používateľský výber';
 $lang['User groups'] = 'Používateľské skupiny';
 $lang['Warning: ZipArchive doesn\'t accept special characters like accentuated ones, angle quotes (») and non-latin alphabets.'] = 'Upozornenie: ZipArchive nemôže akceptovať špeciálne znaky, ako sú zvýraznené znaky, úvodzovky typu (») a non-latin abecedy.';
@@ -64,4 +63,5 @@ $lang['done'] = 'vykonané';
 $lang['download'] = 'stiahnuť';
 $lang['hours'] = 'hodiny';
 $lang['real number of archives can differ'] = 'skutočný počet archívov sa môže líšiť';
+$lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'Nie je možné nájsť ZipArchive PHP prídavok, Hromadný sťahovač namiesto toho použie PclZip, ale so zhoršeným výkonom.';
 ?>
