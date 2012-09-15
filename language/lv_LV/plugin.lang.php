@@ -53,7 +53,6 @@ $lang['Return to download page'] = 'Atgriezties lejuplādes lapā';
 $lang['Set type'] = 'Iestatīt tipu';
 $lang['The archive is downloading, if the download doesn\'t start automatically please <a href="%s">click here</a>'] = 'Šis arhīvs tiek lejuplādēts, ja lejuplāde nesākas automātiski, lūdzu <a href="%s">klikšķiniet šeit</a>';
 $lang['Total size'] = 'Absolūtais izmērs';
-$lang['Unable to find ZipArchive PHP extension, Batch Downloader can\'t work without this extension.'] = 'Nav iespējams atrast ZIP Arhīva PHP paplašinājumu, Grupas Lejuplādētājs bez šī paplašinājuma nedarbojas';
 $lang['User collection'] = 'Lietotāja kolekcija';
 $lang['User groups'] = 'Lietotāju grupas';
 $lang['Warning: ZipArchive doesn\'t accept special characters like accentuated ones, angle quotes (») and non-latin alphabets.'] = 'Uzmanību: Zip Arhīvs neatbalsta speciālos simbolus, kā šādas (»)pēdiņas un nelatīņu alfabētus.';
@@ -64,4 +63,5 @@ $lang['done'] = 'darīts';
 $lang['download'] = 'lejuplādēt';
 $lang['hours'] = 'stundas';
 $lang['real number of archives can differ'] = 'reālais arhīvu skaits var atšķirties';
+$lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'Nevar atrast ZipArchive PHP paplašinājumu, tā vietā grupas Lejupielādētājs izmantos PclZip, bet tas mazinās veiktspēju.';
 ?>
