@@ -53,7 +53,6 @@ $lang['Return to download page'] = 'İndirme sayfasına dön';
 $lang['Set type'] = 'Grup tipi';
 $lang['The archive is downloading, if the download doesn\'t start automatically please <a href="%s">click here</a>'] = 'Arşiv indiriliyor, eğer indirme otomatik olarak başlamadıysa lütfen <a href="%s">buraya tıklayınız</a>';
 $lang['Total size'] = 'Toplam büyüklük';
-$lang['Unable to find ZipArchive PHP extension, Batch Downloader can\'t work without this extension.'] = 'ZipArchive PHP uzantısı bulunamadı, Yığın İndirme (Batch Downloader) bu uzantı olmadan çalışamaz.';
 $lang['User collection'] = 'Kullanıcı koleksiyonu';
 $lang['User groups'] = 'Kullanıcı grubu';
 $lang['Warning: ZipArchive doesn\'t accept special characters like accentuated ones, angle quotes (») and non-latin alphabets.'] = 'Uyarı: ZipArchive uzantısı; latin olmayan karakterler, uzantılı harfler (ĞŞ) ve açılı tırnak (») gibi özel karakterleri kabul etmez.';
@@ -64,4 +63,5 @@ $lang['done'] = 'yapıldı';
 $lang['download'] = 'indir';
 $lang['hours'] = 'saat';
 $lang['real number of archives can differ'] = 'gerçek arşiv sayısı değişebilir';
+$lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'ZipArchive PHP uzantısı bulunamadı. BatchDownloader PclZip \'i kullanacak ama performansı daha düşük olacaktır.';
 ?>
