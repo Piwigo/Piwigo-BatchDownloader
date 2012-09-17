@@ -53,7 +53,6 @@ $lang['Return to download page'] = 'Повернення до сторінки �
 $lang['Set type'] = 'Встановіть тип';
 $lang['The archive is downloading, if the download doesn\'t start automatically please <a href="%s">click here</a>'] = 'Завантаження архіву, якщо завантаження не запускається автоматично будь ласка <a href="%s">натисніть тут</a>';
 $lang['Total size'] = 'Загальний розмір';
-$lang['Unable to find ZipArchive PHP extension, Batch Downloader can\'t work without this extension.'] = 'Не вдається знайти ZipArchive PHP розширення, пакетний Downloader не може працювати без цього розширення.';
 $lang['User collection'] = 'Колекція користувача';
 $lang['User groups'] = 'Групи користувачів';
 $lang['Warning: ZipArchive doesn\'t accept special characters like accentuated ones, angle quotes (») and non-latin alphabets.'] = 'Увага: ZipArchive не приймає спеціальні символи , такі як кутові лапки (») і букви нелатинських алфавітів.';
@@ -64,4 +63,5 @@ $lang['done'] = 'готово';
 $lang['download'] = 'завантаження';
 $lang['hours'] = 'годин';
 $lang['real number of archives can differ'] = 'реальне число архівів може відрізнятися';
+$lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'Не вдалося знайти PHP-розширення ZipArchive, замість нього Batch Downloader буде використовувати PclZip, але із зниженою продуктивністю.';
 ?>
