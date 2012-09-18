@@ -1,1 +1,1 @@
-Giver mulighed for at brugere kan downloade samlinger af billeder som ZIP filer. Kompatibel med plugin'et User Collections.
+Giver mulighed for at brugere kan downloade samlinger af billeder som ZIP-filer. Kompatibel med plugin'en User Collections.
