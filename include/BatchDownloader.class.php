@@ -708,7 +708,7 @@ class myZip
     {
       $this->lib = 'pcl';
       
-      require_once(BATCH_DOWNLOAD_PATH.'include/pclzip.lib.php');
+      require_once(PHPWG_ROOT_PATH.'admin/include/pclzip.lib.php');
       $this->zip = new PclZip($zip_path);
       
       // create a temporary file for archive creation

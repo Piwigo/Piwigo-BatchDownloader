@@ -18,7 +18,7 @@ define('BATCH_DOWNLOAD_TIMAGES', $prefixeTable . 'download_sets_images');
 define('BATCH_DOWNLOAD_LOCAL',   PHPWG_ROOT_PATH . $conf['data_location'] . 'download_archives/');
 define('BATCH_DOWNLOAD_ADMIN',   get_root_url() . 'admin.php?page=plugin-BatchDownloader');
 define('BATCH_DOWNLOAD_PUBLIC',  get_absolute_root_url() . make_index_url(array('section' => 'download')) . '/');
-define('BATCH_DOWNLOAD_VERSION', '1.0.4');
+define('BATCH_DOWNLOAD_VERSION', 'auto');
 
 
 add_event_handler('init', 'batch_download_init');
