@@ -112,8 +112,8 @@ $page['type_items'] = array(
 $page['order_by_items'] = array(
   'date_creation' => l10n('Creation date'),
   'total_size' => l10n('Total size'),
-  'nb_images' => l10n('Nb images'),
-  'nb_archives' => l10n('Nb archives'),
+  'nb_images' => l10n('Number of images'),
+  'nb_archives' => l10n('Number of archives'),
   );
 
 $page['direction_items'] = array(

@@ -20,7 +20,7 @@
 // | Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, |
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
-$lang['Nb images'] = 'Brak zdjęć';
+$lang['Number of images'] = 'Brak zdjęć';
 $lang['Total size'] = 'Rozmiar całkowity';
 $lang['Whole gallery'] = 'Cała galeria';
 $lang['You can not edit this set'] = 'Nie możesz edytować tego zestawu';
@@ -55,7 +55,7 @@ $lang['Cancel this set'] = 'Anuluj ten zestaw';
 $lang['Delete downloads after'] = 'Usuń pobrane po';
 $lang['Download all pictures of this selection'] = 'Pobierz wszystkie zdjęcia których dotyczy wybór';
 $lang['Download set deleted'] = 'Wybór pobierania usunięty';
-$lang['Nb archives'] = 'Archiwa Nb';
+$lang['Number of archives'] = 'Archiwa Nb';
 $lang['Remove from download set'] = 'Usuń z wyboru pobierania';
 $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'Nie znaleziono ZipArchive PHP, Pobieranie Wsadowe użyje zamiast tego PclZip ale spadnie jakość pobranych plików';
 $lang['User collection'] = 'Kolekcja użytkownika';

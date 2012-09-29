@@ -20,9 +20,10 @@ input[name='max_size'], input[name='max_elements'] {
 
 .table2 .throw {
   font-size:100%;
+  line-height: 1em;
 }
 TABLE.table2 THEAD TD {
-  padding: 0 5px !important;
+  padding: 3px 5px !important;
 }
 .table2 .action {
   width:70px;

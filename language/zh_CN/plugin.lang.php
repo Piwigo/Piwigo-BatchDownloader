@@ -21,8 +21,8 @@
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
 $lang['Random'] = '随机';
-$lang['Nb images'] = '相片数量';
-$lang['Nb archives'] = '文件数量';
+$lang['Number of images'] = '相片数量';
+$lang['Number of archives'] = '文件数量';
 $lang['Remove from download set'] = '从下载设置中删除';
 $lang['Warning: ZipArchive doesn\'t accept special characters like accentuated ones, angle quotes (») and non-latin alphabets.'] = '警告：ZipArchive 不接受特殊字符，例如：重音符号、引号和非拉丁字母。';
 $lang['real number of archives can differ'] = '实际文件数量可能不一致';

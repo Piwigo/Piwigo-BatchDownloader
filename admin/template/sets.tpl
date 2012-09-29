@@ -47,8 +47,8 @@
       <td class="type">{'Set type'|@translate}</td>
       <td class="date">{'Creation date'|@translate}</td>
       <td class="size">{'Total size'|@translate}</td>
-      <td class="images">{'Nb images'|@translate}</td>
-      <td class="archives">{'Nb archives'|@translate}</td>
+      <td class="images">{'Number of images'|@translate}</td>
+      <td class="archives">{'Number of archives'|@translate}</td>
       <td class="status">{'Status'|@translate}</td>
       <td class="action">{'Actions'|@translate}</td>
     </tr>
