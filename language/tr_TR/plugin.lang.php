@@ -62,4 +62,6 @@ $lang['download'] = 'indir';
 $lang['hours'] = 'saat';
 $lang['real number of archives can differ'] = 'gerçek arşiv sayısı değişebilir';
 $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'ZipArchive PHP uzantısı bulunamadı. BatchDownloader PclZip \'i kullanacak ama performansı daha düşük olacaktır.';
+$lang['Number of archives'] = 'Arşiv sayısı';
+$lang['Number of images'] = 'Fotoğraf sayısı';
 ?>
