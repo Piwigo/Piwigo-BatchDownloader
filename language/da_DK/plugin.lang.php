@@ -62,4 +62,6 @@ $lang['Delete downloads after'] = 'Slet download efter';
 $lang['Confirm the download of %d pictures?'] = 'Bekræft download af %d billeder?';
 $lang['<b>Warning:</b> all files will be deleted within %d hours'] = '<b>Advarsel:</b> Alle filer vil blive slettet inden for %d timer';
 $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'Kan ikke finde  PHP-udvidelsen ZipArchive, Batch Downloader benytter i stedet PclZip, men med forringet ydeevne.';
+$lang['Number of archives'] = 'Antal arkiver';
+$lang['Number of images'] = 'Antal fotografier';
 ?>
