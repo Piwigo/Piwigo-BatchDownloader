@@ -62,4 +62,6 @@ $lang['Remove from download set'] = 'Vom Download Set entfernen';
 $lang['Warning: ZipArchive doesn\'t accept special characters like accentuated ones, angle quotes (») and non-latin alphabets.'] = 'Warnung: Das ZipArchive akzeptiert keine Sonderzeichen Zeichen';
 $lang['hours'] = 'Stunden';
 $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'Kann die PHP ZipArchive Erweiterung nicht finden, Batch Downloader wird anstatt PclZip verwenden, jedoch mit verminderter Leistung.';
+$lang['Number of archives'] = 'Anzahl der Archive';
+$lang['Number of images'] = 'Anzahl der Bilder';
 ?>
