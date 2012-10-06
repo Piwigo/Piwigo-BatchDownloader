@@ -57,9 +57,11 @@ $lang['Warning: ZipArchive doesn\'t accept special characters like accentuated o
 $lang['Whole gallery'] = 'Celá galerie';
 $lang['You can not edit this set'] = 'Nemúžete editovat tuto sadu';
 $lang['You choose to download %d pictures, but the system is limited to %d. You can edit the set, or the last %d pictures will not be downloaded.'] = 'Vybrali jste k nahrání %d obrázků, ale systém je omezen na %d. Změňte sadu nebo posledních %d obrázků nebude nahráno.';
-$lang['done'] = 'uděláno';
+$lang['done'] = 'hotovo';
 $lang['download'] = 'stáhnout';
 $lang['hours'] = 'hodiny';
 $lang['real number of archives can differ'] = 'opravdový počet archivů se může lišit';
 $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'Rozšíření ZipArchive PHP nenalezeno, Batch Downloader použije místo toho PclZip, ale výkon bude snížen.';
+$lang['Number of archives'] = 'Počet archivů';
+$lang['Number of images'] = 'Počet fotek';
 ?>
