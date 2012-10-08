@@ -34,7 +34,6 @@ $lang['You can not edit this set'] = '你不能编辑这个设置';
 $lang['Whole gallery'] = '整个相册';
 $lang['User collection'] = '用户选定';
 $lang['User groups'] = '用户组';
-$lang['Unable to find ZipArchive PHP extension, Batch Downloader can\'t work without this extension.'] = '没有找到 ZipArchive 扩展，批量下载器缺少这个扩展不能工作。';
 $lang['Total size'] = '总大小';
 $lang['The archive is downloading, if the download doesn\'t start automatically please <a href="%s">click here</a>'] = '文档正在下载中，如果没有开始自动下载请点击<a href="%s">这里</a>';
 $lang['Set type'] = '类型';
@@ -64,4 +63,5 @@ $lang['Cancel this set'] = '取消这个设置';
 $lang['Cancel this download'] = '取消本次下载';
 $lang['Batch Downloader'] = '批量下载器';
 $lang['<b>Warning:</b> all files will be deleted within %d hours'] = '<b>警告：</b> 所有文件将会在 %d 小时内被删除';
+$lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = '未发现PHP的ZipArchive扩展，打包下载器将使用PclZip作为替代，但表现将会不佳。';
 ?>
