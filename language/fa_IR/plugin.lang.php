@@ -50,7 +50,6 @@ $lang['Return to download page'] = 'بازگشت به صفحه ی دانلود';
 $lang['Set type'] = 'نوع دسته';
 $lang['The archive is downloading, if the download doesn\'t start automatically please <a href="%s">click here</a>'] = 'آرشیو در حال دانلود می باشد، اگر دانلود بطور خودکار آغاز نشد <a href="%s">اینجا کلیک کنید</a>';
 $lang['Total size'] = 'مجموع حجم';
-$lang['Unable to find ZipArchive PHP extension, Batch Downloader can\'t work without this extension.'] = 'گشترش دهنده ی ZipArchive PHP پیدا نشد، دانلود کننده ی دسته ای نمی تواند بدون این گسترش دهنده کار کند.';
 $lang['User groups'] = 'گروه های کاربری';
 $lang['Warning: ZipArchive doesn\'t accept special characters like accentuated ones, angle quotes (») and non-latin alphabets.'] = 'هشدار: گسترش دهنده ی ZipArchive حروف خاص مانند حروف برجسته، علامت های نقل قول (») و حروف غیرانگلیسی را قبول نمی کند.';
 $lang['Whole gallery'] = 'تمام گالری';
@@ -59,4 +58,10 @@ $lang['You choose to download %d pictures, but the system is limited to %d. You 
 $lang['done'] = 'انجام شد';
 $lang['download'] = 'دانلود';
 $lang['hours'] = 'ساعت';
+$lang['real number of archives can differ'] = 'شماره ی واقعی از آرشیو میتواند متفاوت باشد';
+$lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'قادر نیست به پیدا کردن فرمت دسته دانلود استفاده خواهد کرد از pclzip اما با عملکرد تخریب';
+$lang['Number of images'] = 'شماره عکس ها';
+$lang['Number of archives'] = 'شماره آرشیو';
+$lang['Archive prefix'] = 'بایگانی پیشوند';
+$lang['Archive comment'] = 'بایگانی نظرات';
 ?>
