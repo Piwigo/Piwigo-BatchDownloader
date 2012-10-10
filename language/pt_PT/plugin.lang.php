@@ -23,7 +23,6 @@
 $lang['done'] = 'feito';
 $lang['You choose to download %d pictures, but the system is limited to %d. You can edit the set, or the last %d pictures will not be downloaded.'] = 'Você escolheu descarregar %d imagens, mas o sistema está limitado a %d. Você pode editar o conjunto, ou as últimas %d imagens  não serão baixadas.';
 $lang['Warning: ZipArchive doesn\'t accept special characters like accentuated ones, angle quotes (») and non-latin alphabets.'] = 'Aviso: O arquivo Zip não aceita caracteres especiais, como os acentuados, citações angulares (») e alfabetos não latinos.';
-$lang['Unable to find ZipArchive PHP extension, Batch Downloader can\'t work without this extension.'] = 'Não se localiza a arquivo ZIP de extenção PHP; Descarga em lote não pode ser feita sem este arquivo ';
 $lang['download'] = 'Descarregar';
 $lang['hours'] = 'horas';
 $lang['real number of archives can differ'] = 'O número real de arquivos pode ser diferente';
@@ -64,4 +63,5 @@ $lang['Downloads'] = 'Descargas';
 $lang['Edit the set'] = 'Editar o conjunto';
 $lang['Estimated number of archives'] = 'Número estimado de arquivos';
 $lang['Estimated size'] = 'Tamanho estimado';
+$lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'impossível encontrar a extensão PHP ZipArchive, Batch Downloader vai utilizar PclZip em substituição, mas com desempenhos degradados. ';
 ?>
