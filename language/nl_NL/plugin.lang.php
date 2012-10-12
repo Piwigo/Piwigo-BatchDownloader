@@ -35,7 +35,6 @@ $lang['Return to download page'] = 'Ga terug naar download pagina';
 $lang['Set type'] = 'Stel type in';
 $lang['The archive is downloading, if the download doesn\'t start automatically please <a href="%s">click here</a>'] = 'Het archief wordt gedownload, als de download niet automatisch start <a href="%s">hier klikken</a> a.u.b.';
 $lang['Total size'] = 'Totale grootte';
-$lang['Unable to find ZipArchive PHP extension, Batch Downloader can\'t work without this extension.'] = 'Kan ZipArchive PHP extensie niet vinden, Batch Downloader kan zonder deze extensie niet werken ';
 $lang['User collection'] = 'Gebruiker collectie';
 $lang['User groups'] = 'Gebruiker groepen';
 $lang['Warning: ZipArchive doesn\'t accept special characters like accentuated ones, angle quotes (») and non-latin alphabets.'] = 'Waarschuwing: ZipArchive accepteert geen speciale tekens zoals accenten, groter/kleiner dan(») en non-latin karakters.';
@@ -62,4 +61,7 @@ $lang['Downloads'] = 'Downloads';
 $lang['Edit the set'] = 'Pas de set aan';
 $lang['Estimated number of archives'] = 'Geschat aantal archieven';
 $lang['Estimated size'] = 'Geschatte grootte';
+$lang['Number of archives'] = 'aantal archieven';
+$lang['Number of images'] = 'aantal fotos';
+$lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'kan ZipArchive PHP extensie niet vinden, Batch downlaoder zal PclZip gebruiken, dit zorgt voor verminderde prestaties.';
 ?>
