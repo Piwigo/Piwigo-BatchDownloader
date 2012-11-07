@@ -321,7 +321,7 @@ SELECT
       $total_size = 0;
       foreach ($images_to_add as $row)
       {        
-        $zip->addFile(PHPWG_ROOT_PATH . $row['path'], $row['id'].'_'.get_filename_wo_extension($row['file']).'.'.get_extension($row['path']));
+        $zip->addFile(PHPWG_ROOT_PATH . $row['path'], $row['id'].'_'.stripslashes(get_filename_wo_extension($row['file'])).'.'.get_extension($row['path']));
         
         array_push($images_added, $row['id']);
         $this->images[ $row['id'] ] = $this->data['last_zip'];
@@ -436,7 +436,7 @@ SELECT SUM(filesize) AS total
       else if ($i == $this->data['last_zip']+1)
       {
           $out.= '<a href="'.add_url_params($url, array('set_id'=>$this->data['id'],'zip'=>$i)).'" rel="nofollow" style="font-weight:bold;"' 
-            .($i!=1 ? 'onClick="return confirm(\'Starting download Archive #'.$i.' will destroy Archive #'.($i-1).', be sure you finish the download. Continue ?\');"' : null).
+            .($i!=1 ? ' onClick="return confirm(\''.addslashes(sprintf(l10n('Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'), $i, $i-1)).'\');"' : null).
             '><img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/drive_go.png"> Archive #'.$i.' (ready)</a>';
       }
       else
@@ -459,7 +459,7 @@ SELECT SUM(filesize) AS total
   {
     if (!file_exists(BATCH_DOWNLOAD_LOCAL . 'u-' .$this->data['user_id']. '/'))
     {
-      mkdir(BATCH_DOWNLOAD_LOCAL . 'u-' .$this->data['user_id']. '/', 0755, true);
+      mkgetdir(BATCH_DOWNLOAD_LOCAL . 'u-' .$this->data['user_id']. '/');
     }
     
     if ($i === null) $i = $this->data['last_zip'];

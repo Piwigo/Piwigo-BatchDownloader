@@ -1,7 +1,8 @@
 <?php
 if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 
-include_once(PHPWG_PLUGINS_PATH . 'BatchDownloader/include/install.inc.php');
+defined('BATCH_DOWNLOAD_ID') or define('BATCH_DOWNLOAD_ID', basename(dirname(__FILE__)));
+include_once(PHPWG_PLUGINS_PATH . BATCH_DOWNLOAD_ID . '/include/install.inc.php');
 
 function plugin_install() 
 {

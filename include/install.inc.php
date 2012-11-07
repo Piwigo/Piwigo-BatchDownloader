@@ -27,9 +27,9 @@ function batch_download_install()
   }
 
   // archives directory
-  if ( file_exists($conf['data_location']) and !file_exists($conf['data_location'] . 'download_archives/') )
+  if ( file_exists($conf['data_location']) )
   {
-    mkdir($conf['data_location'] . 'download_archives/', 0755);
+    mkgetdir($conf['data_location'] . 'download_archives/', MKGETDIR_DEFAULT&~MKGETDIR_DIE_ON_ERROR);
   }
 
   // create tables

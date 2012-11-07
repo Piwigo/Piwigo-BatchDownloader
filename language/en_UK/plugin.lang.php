@@ -44,5 +44,6 @@ $lang['Remove from download set'] = 'Remove from download set';
 $lang['Confirm the download of %d pictures?'] = 'Confirm the download of %d pictures?';
 $lang['Remove all finished downloads'] = 'Remove all finished downloads';
 $lang['hours'] = 'hours';
+$lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?';
 
 ?>
