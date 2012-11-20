@@ -24,7 +24,7 @@ $lang['<b>Warning:</b> all files will be deleted within %d hours'] = '<b>Uzmanī
 $lang['Archive comment'] = 'Arhīva komentārs';
 $lang['Archive prefix'] = 'Arhīva prefikss';
 $lang['Archives'] = 'Arhīvi';
-$lang['Batch Downloader'] = 'Grupaa Lejuplādētājs';
+$lang['Batch Downloader'] = 'Grupas Lejuplādētājs';
 $lang['Cancel this download'] = 'Atcelt šo lejuplādi';
 $lang['Cancel this set'] = 'Atcelt šo sarakstu';
 $lang['Confirm the download of %d pictures?'] = 'Apstiprināt %d attēlu lejuplādi ';
@@ -38,7 +38,7 @@ $lang['Download permissions'] = 'Lejuplādes atļaujas';
 $lang['Download set deleted'] = 'Lejuplādes saraksts izdzēsts';
 $lang['Downloads'] = 'Lejuplādes';
 $lang['Edit the set'] = 'Rediģēt sarakstu';
-$lang['Estimated number of archives'] = 'Aplestais arhīvu skaits';
+$lang['Estimated number of archives'] = 'Aplēstais arhīvu skaits';
 $lang['Estimated size'] = 'Aplēstais izmērs';
 $lang['Generate ZIP'] = 'Izveidot ZIP';
 $lang['Maximum number of photos per download set'] = 'Maksimālais attēlu skaits lejuplādes sarakstā';
@@ -64,4 +64,6 @@ $lang['download'] = 'lejuplādēt';
 $lang['hours'] = 'stundas';
 $lang['real number of archives can differ'] = 'reālais arhīvu skaits var atšķirties';
 $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'Nevar atrast ZipArchive PHP paplašinājumu, tā vietā grupas Lejupielādētājs izmantos PclZip, bet tas mazinās veiktspēju.';
+$lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Sākot lejupielādēt Arhīvu #%d tiks iznīcināts Arhīvs #%d, pārliecinieties, ka lejupielāde ir pabeigta.
+Turpināt?   ';
 ?>
