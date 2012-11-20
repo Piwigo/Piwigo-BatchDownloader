@@ -64,4 +64,5 @@ $lang['real number of archives can differ'] = 'gerçek arşiv sayısı değişeb
 $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'ZipArchive PHP uzantısı bulunamadı. BatchDownloader PclZip \'i kullanacak ama performansı daha düşük olacaktır.';
 $lang['Number of archives'] = 'Arşiv sayısı';
 $lang['Number of images'] = 'Fotoğraf sayısı';
+$lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = '#%d arşivini indirmeye başlamanız #%d arşivini kaybedecektir. Arşivi indirdiğinizden emin olun. Devam edilsin mi?';
 ?>
