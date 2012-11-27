@@ -64,4 +64,5 @@ $lang['<b>Warning:</b> all files will be deleted within %d hours'] = '<b>Advarse
 $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'Kan ikke finde  PHP-udvidelsen ZipArchive, Batch Downloader benytter i stedet PclZip, men med forringet ydeevne.';
 $lang['Number of archives'] = 'Antal arkiver';
 $lang['Number of images'] = 'Antal fotografier';
+$lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Hvis du begynder at hente Archive #%d, vil Archive #%d blive slettet, så vær sikker på at din download er afsluttet. Fortsæt?';
 ?>
