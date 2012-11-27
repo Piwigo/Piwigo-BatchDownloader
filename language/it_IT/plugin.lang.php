@@ -64,4 +64,5 @@ $lang['real number of archives can differ'] = 'Il numero reale degli archivi pu�
 $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'Impossibile trovare l\'estensione PHP ZipArchive, Batch Downloader utilizzerà PclZip ma con performance inferiore.';
 $lang['Number of archives'] = 'Numero di cartelle';
 $lang['Number of images'] = 'Numero di foto';
+$lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Inizia il download Archivio #%d cancellerà Archivio #%d, assicurarsi di terminare il download. Continuare?';
 ?>
