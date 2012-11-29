@@ -64,4 +64,5 @@ $lang['Warning: ZipArchive doesn\'t accept special characters like accentuated o
 $lang['You choose to download %d pictures, but the system is limited to %d. You can edit the set, or the last %d pictures will not be downloaded.'] = 'Wybrałeś %d zdjęć ale limit systemu wynosi %d. Możesz wyedytować swój wybór albo ostatnich %d nie będzie pobranych';
 $lang['download'] = 'pobierz';
 $lang['real number of archives can differ'] = 'rzeczywista liczba archiwów może się różnić';
+$lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Rozpoczynam ściąganie archiwum #%d zniszczy archiwum #%d, Upewnij się, że ukończono ściąganie. Kontynuować ?';
 ?>
