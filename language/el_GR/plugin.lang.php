@@ -65,4 +65,5 @@ $lang['hours'] = 'Ώρες';
 $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'Αδύνατο να βρεθεί η επέκταση ZipArchive PHP, το Batch Downloader θα χρησιμοποιήσει το  PclZip, αλλά με ελαττωμένη επίδοση. ';
 $lang['Number of images'] = 'Αριθμός φωτογραφιών';
 $lang['Number of archives'] = 'Αριθμός των συμπιεσμένων αρχείων';
+$lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Ξεκινώντας τη λήψη του Αρχείου #%d θα καταστρέψει το Αρχείο #%d, βεβαιωθείτε ότι έχετε ολοκληρώσει το κατέβασμα. Συνεχίστε?';
 ?>
