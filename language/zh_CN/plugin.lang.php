@@ -64,4 +64,5 @@ $lang['Cancel this download'] = '取消本次下载';
 $lang['Batch Downloader'] = '批量下载器';
 $lang['<b>Warning:</b> all files will be deleted within %d hours'] = '<b>警告：</b> 所有文件将会在 %d 小时内被删除';
 $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = '未发现PHP的ZipArchive扩展，打包下载器将使用PclZip作为替代，但表现将会不佳。';
+$lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = '正在开始下载的存档 #%d 将会损坏存档 #%d，请确认你已完成下载。继续吗？';
 ?>
