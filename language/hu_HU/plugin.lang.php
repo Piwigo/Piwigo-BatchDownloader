@@ -56,4 +56,7 @@ $lang['Download set deleted'] = 'Letöltés készlet törölve';
 $lang['Downloads'] = 'Letöltések';
 $lang['Edit the set'] = 'Készlet szerkesztése';
 $lang['Estimated size'] = 'Becsült méret';
+$lang['You can not edit this set'] = 'Nem tudja szerkeszteni a készletet';
+$lang['<b>Warning:</b> all files will be deleted within %d hours'] = '<b>Figyelem:</b> azösszes fájl törlésre kerül %d órán belül';
+$lang['Estimated number of archives'] = 'Archívum becsült száma';
 ?>
