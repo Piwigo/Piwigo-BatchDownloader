@@ -27,7 +27,7 @@ function plugin_uninstall()
   pwg_query('DROP TABLE IF EXISTS `' . $prefixeTable . 'download_sets`;');
   pwg_query('DROP TABLE IF EXISTS `' . $prefixeTable . 'download_sets_images`;');
   
-  rrmdir($conf['data_location'].'download_archives/');
+  rrmdir(PHPWG_ROOT_PATH . $conf['data_location'] . 'download_archives/');
 }
 
 
