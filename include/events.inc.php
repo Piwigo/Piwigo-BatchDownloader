@@ -100,7 +100,7 @@ function batch_download_index_button()
   $button = '<script type="text/javascript">var batchdown_count = '.count($page['items']).'; var batchdown_string = "'.l10n('Confirm the download of %d pictures?').'";</script>
     <li><a href="'. $url .'" title="'.l10n('Download all pictures of this selection').'" class="pwg-state-default pwg-button" rel="nofollow"
     onClick="return confirm(batchdown_string.replace(\'%d\', batchdown_count));">
-			<span class="pwg-icon batch-downloader-icon" style="background:url(\'' . get_root_url().BATCH_DOWNLOAD_PATH . 'template/zip.png\') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">'.l10n('Batch Downloader').'</span>
+			<span class="pwg-icon batch-downloader-icon" style="background:url(\'' . get_root_url().BATCH_DOWNLOAD_PATH . 'template/zip.png\') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">'.l10n('Download').'</span>
 		</a></li>';
   $template->concat('PLUGIN_INDEX_ACTIONS', $button);
   $template->concat('COLLECTION_ACTIONS', $button);

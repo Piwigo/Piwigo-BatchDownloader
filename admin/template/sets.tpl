@@ -67,8 +67,8 @@
       {if $set.STATUS == 'download'}<i style="font-size:0.8em;">({$set.LAST_ZIP}/{$set.NB_ARCHIVES})</i>{/if}
     </td>
     <td style="padding-left:25px;">
-      <a href="{$set.U_DELETE}" title="{'Delete this set'|@translate}" onClick="return confirm('{'Are your sure?'|@translate}');"><img src="admin/themes/default/icon/delete.png"></a>
-      {if $set.STATUS != 'done'}<a href="{$set.U_CANCEL}" title="{'Cancel this set'|@translate}" onClick="return confirm('{'Are your sure?'|@translate}');"><img src="admin/themes/default/icon/permissions.png"></a>{/if}
+      <a href="{$set.U_DELETE}" title="{'Delete this set'|@translate}" onClick="return confirm('{'Are your sure?'|@translate}');"><img src="{$themeconf.admin_icon_dir}/delete.png"></a>
+      {if $set.STATUS != 'done'}<a href="{$set.U_CANCEL}" title="{'Cancel this set'|@translate}" onClick="return confirm('{'Are your sure?'|@translate}');"><img src="{$themeconf.admin_icon_dir}/permissions.png"></a>{/if}
     </td>
   </tr>
   {/foreach}
