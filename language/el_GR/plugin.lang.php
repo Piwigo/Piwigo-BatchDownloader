@@ -66,4 +66,5 @@ $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip
 $lang['Number of images'] = 'Αριθμός φωτογραφιών';
 $lang['Number of archives'] = 'Αριθμός των συμπιεσμένων αρχείων';
 $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Ξεκινώντας τη λήψη του Αρχείου #%d θα καταστρέψει το Αρχείο #%d, βεβαιωθείτε ότι έχετε ολοκληρώσει το κατέβασμα. Συνεχίστε?';
+$lang['Warning: Only registered users can use Batch Downloader.'] = 'Προειδοποίηση: Μόνο οι εγγεγραμμένοι χρήστες μπορούν να χρησιμοποιήσουν Batch Downloader.';
 ?>
