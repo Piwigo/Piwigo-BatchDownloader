@@ -45,5 +45,6 @@ $lang['Confirm the download of %d pictures?'] = 'Confirm the download of %d pict
 $lang['Remove all finished downloads'] = 'Remove all finished downloads';
 $lang['hours'] = 'hours';
 $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?';
+$lang['Warning: Only registered users can use Batch Downloader.'] = 'Warning: Only registered users can use Batch Downloader.';
 
 ?>

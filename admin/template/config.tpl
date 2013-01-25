@@ -64,6 +64,9 @@ $("input[name='max_elements']").change(function() {ldelim}
         </select>
       </label>
     </li>
+    <li>
+      <i>{'Warning: Only registered users can use Batch Downloader.'|@translate}</i>
+    </li>
   </ul>
 </fieldset>
 
