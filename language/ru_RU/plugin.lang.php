@@ -65,4 +65,5 @@ $lang['hours'] = 'часов';
 $lang['real number of archives can differ'] = 'реальное число архивов может отличаться';
 $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'Невозможно найти PHP расширение ZipArchive, вместо него Batch Downloader будет использовать PclZip, что приведет к потере производительности.  ';
 $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Запуск загрузки архива #%d уничтожит архив #%d, убедитесь, что вы закончите загрузку. Продолжить?';
+$lang['Warning: Only registered users can use Batch Downloader.'] = 'Предупреждение: Только зарегистрированные пользователи могут использовать Batch Downloader';
 ?>
