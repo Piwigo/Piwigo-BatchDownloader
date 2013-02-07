@@ -64,4 +64,6 @@ $lang['real number of archives can differ'] = 'skutočný počet archívov sa m�
 $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'Nie je možné nájsť ZipArchive PHP prídavok, Hromadný sťahovač namiesto toho použie PclZip, ale so zhoršeným výkonom.';
 $lang['Number of images'] = 'Počet fotiek';
 $lang['Number of archives'] = 'Počet archívov';
+$lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Spustenie download archív #%d prepíše archív #%d, po ukončení nahrávania. Pokračovať?';
+$lang['Warning: Only registered users can use Batch Downloader.'] = 'Upozornenie: Len registrovaní používatelia môžu používať  Batch Downloader.';
 ?>
