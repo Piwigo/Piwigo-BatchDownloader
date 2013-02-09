@@ -20,7 +20,7 @@
 // | Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, |
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
-$lang['<b>Warning:</b> all files will be deleted within %d hours'] = '<b>Обережно:</b> всі файли буде видалено протягом %d годин';
+$lang['<b>Warning:</b> all files will be deleted within %d hours'] = '<b>Увага:</b> всі файли буде видалено протягом %d годин';
 $lang['Archive comment'] = 'Коментар архіву';
 $lang['Archive prefix'] = 'Префікс архіву';
 $lang['Archives'] = 'Архіви';
@@ -65,4 +65,5 @@ $lang['hours'] = 'годин';
 $lang['real number of archives can differ'] = 'реальне число архівів може відрізнятися';
 $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'Не вдалося знайти PHP-розширення ZipArchive, замість нього Batch Downloader буде використовувати PclZip, але із зниженою продуктивністю.';
 $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Початок завантаження архіву #%d, архів буде знищений #%d, переконайтеся, що ви завершити завантаження. Продовжити?';
+$lang['Warning: Only registered users can use Batch Downloader.'] = 'Увага : Тільки зареєстровані користувачі можуть використовувати Пакетний Завантажувач.';
 ?>
