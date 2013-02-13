@@ -1,0 +1,1 @@
+Võimaldab kasutajatel alla laadida piltide partiisid ZIPina. Kokkusobiv User Collections'iga.
