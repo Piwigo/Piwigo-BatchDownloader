@@ -64,4 +64,6 @@ $lang['Edit the set'] = 'Editar o conjunto';
 $lang['Estimated number of archives'] = 'Número estimado de arquivos';
 $lang['Estimated size'] = 'Tamanho estimado';
 $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'impossível encontrar a extensão PHP ZipArchive, Batch Downloader vai utilizar PclZip em substituição, mas com desempenhos degradados. ';
+$lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Iniciando o download do Arquivo #% irá destruir o Arquivo #%, certifique-se que termina o download. Continuar?';
+$lang['Warning: Only registered users can use Batch Downloader.'] = 'Aviso: Apenas utilizadores registados podem usar o Batch Downloader';
 ?>
