@@ -12,23 +12,32 @@ function batch_download_section_init()
   {
     if (check_download_access() === false) access_denied();
     
+    add_event_handler('loc_begin_page_header', 'batch_download_page_header');
+    
     $page['section'] = 'download';
-    $page['title'] = '<a href="'.get_absolute_root_url().'">'.l10n('Home').'</a>'.$conf['level_separator'].l10n('Batch Downloader').$conf['level_separator'];
+    $page['section_title'] = '<a href="'.get_absolute_root_url().'">'.l10n('Home').'</a>'.$conf['level_separator'].l10n('Batch Downloader').$conf['level_separator'];
+    $page['title'] = l10n('Batch Downloader');
     
     switch (@$tokens[1])
     {
       case 'init_zip':
         $page['sub_section'] = 'init_zip';
-        $page['title'].= l10n('Generate ZIP');
+        $page['section_title'].= l10n('Generate ZIP');
         break;
       case 'view':
         $page['sub_section'] = 'view';
-        $page['title'].= l10n('Edit the set');
+        $page['section_title'].= l10n('Edit the set');
         break;
       default:
         redirect('index.php');
     }
   }
+}
+
+function batch_download_page_header()
+{
+  global $page;
+  $page['body_id'] = 'theBatchDownloader';
 }
 
 /* download section */

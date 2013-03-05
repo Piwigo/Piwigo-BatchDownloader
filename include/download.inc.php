@@ -136,8 +136,8 @@ $template->assign(array(
 function batch_download_thumbnails_list_prefilter($content, &$smarty)
 {
   // add links
-  $search = '<span class="wrap1">';
-  $replace = $search.'
+  $search = '#(<li>|<li class="gthumb">)#';
+  $replace = '$1
 {strip}<a class="removeSet" href="{$U_VIEW}&amp;remove={$thumbnail.id}" data-id="{$thumbnail.id}" rel="nofollow">
 {\'Remove from download set\'|@translate}&nbsp;<img src="{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/image_delete.png" title="{\'Remove from download set\'|@translate}">
 </a>{/strip}';
@@ -145,7 +145,7 @@ function batch_download_thumbnails_list_prefilter($content, &$smarty)
   // custom CSS and AJAX request
   $content.= file_get_contents(BATCH_DOWNLOAD_PATH.'template/thumbnails_css_js.tpl');
 
-  return str_replace($search, $replace, $content);
+  return preg_replace($search, $replace, $content);
 }
 
 ?>
