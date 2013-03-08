@@ -59,4 +59,9 @@ $lang['Estimated size'] = 'Becsült méret';
 $lang['You can not edit this set'] = 'Nem tudja szerkeszteni a készletet';
 $lang['<b>Warning:</b> all files will be deleted within %d hours'] = '<b>Figyelem:</b> azösszes fájl törlésre kerül %d órán belül';
 $lang['Estimated number of archives'] = 'Archívum becsült száma';
+$lang['You choose to download %d pictures, but the system is limited to %d. You can edit the set, or the last %d pictures will not be downloaded.'] = '%d képet választott ki letöltésre, de a rendszer csak %d képet tud letölteni. Szerkessze a készletet, vagy az utolsó %d kép nem fog letöltődni.';
+$lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'Nem található ZipArchive PHP kiterjesztés, a Batch Downloader a pclzip-et fogja használni helyette, de csökkenti a teljesítményt.';
+$lang['Warning: Only registered users can use Batch Downloader.'] = 'Figyelem: Csak regisztrált felhasználók használhatják a Batch Downloader-t.';
+$lang['Warning: ZipArchive doesn\'t accept special characters like accentuated ones, angle quotes (») and non-latin alphabets.'] = 'Figyelem: a ZIP archívum nem tartalmazhat speciális, ékezetes karaktereket, idézőjelet, (») vagy a nem latin abc betűit.';
+$lang['Cancel this set'] = 'Készlet visszavonása';
 ?>
