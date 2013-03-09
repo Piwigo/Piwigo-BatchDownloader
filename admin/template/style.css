@@ -46,3 +46,13 @@ TABLE.table2 THEAD TD {
 .table2 .status {
   width:120px;
 }
+
+.showInfo {
+  position:static;
+  display:inline-block;
+  padding:1px 6px;
+  width:4px;
+  height:14px;
+  line-height:14px;
+  font-size:0.8em;
+}

@@ -46,5 +46,6 @@ $lang['Remove all finished downloads'] = 'Supprimer tous les téléchargements t
 $lang['hours'] = 'heures';
 $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Le démarrage du téléchargement de l\'archive #%d détruira l\'archive #%d, soyez sûr de terminer le téléchargement avant de continuer.';
 $lang['Warning: Only registered users can use Batch Downloader.'] = 'Attention: seuls les utilisateurs enregistrés peuvent utiliser Batch Downloader.';
+$lang['What can be downloaded?'] = 'Qu\'est-ce qui peut être téléchargé ?';
 
 ?>

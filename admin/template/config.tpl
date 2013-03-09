@@ -33,6 +33,14 @@ $("#max_elements").slider({ldelim}
 $("input[name='max_elements']").change(function() {ldelim}
   $("#max_elements").slider("value", $(this).val());
 });
+
+jQuery(".showInfo").tipTip({ldelim}
+  delay: 0,
+  fadeIn: 200,
+  fadeOut: 200,
+  maxWidth: '300px',
+  defaultPosition: 'bottom'
+});
 {/footer_script}
 
 <div class="titrePage">
@@ -63,6 +71,13 @@ $("input[name='max_elements']").change(function() {ldelim}
           {html_options options=$level_options selected=$batch_download.level}
         </select>
       </label>
+    </li>
+    <li>
+      <span class="property">{'What can be downloaded?'|@translate}</span>
+      <label><input type="checkbox" name="what[categories]" {if in_array('categories',$batch_download.what)}checked="checked"{/if}/> {'Albums'|@translate}</label>
+      {if $USER_COLLEC_LOADED}<label><input type="checkbox" name="what[collections]" {if in_array('collections',$batch_download.what)}checked="checked"{/if}/> {'Collections'|@translate}</label>{/if}
+      <label><input type="checkbox" name="what[specials]" {if in_array('specials',$batch_download.what)}checked="checked"{/if}/> {'Specials'|@translate}</label>
+          <a class="showInfo" title="{'Most visited'|@translate}, {'Random photos'|@translate}, {'Best rated'|@translate}...">i</a>
     </li>
     <li>
       <i>{'Warning: Only registered users can use Batch Downloader.'|@translate}</i>

@@ -3,9 +3,12 @@ if (!defined('BATCH_DOWNLOAD_PATH')) die('Hacking attempt!');
 
 if (isset($_POST['save_config']))
 {
+  if (!defined('USER_COLLEC_ID')) $_POST['what']['collections'] = 'on';
+  
   $conf['batch_download'] = array(
     'groups'          => isset($_POST['groups']) ? $_POST['groups'] : array(),
     'level'           => $_POST['level'],
+    'what'            => isset($_POST['what']) ? array_keys($_POST['what']) : array(),
     'photo_size'      => $_POST['photo_size'],
     'archive_prefix'  => trim($_POST['archive_prefix']),
     'archive_timeout' => intval($_POST['archive_timeout']),
@@ -18,6 +21,7 @@ if (isset($_POST['save_config']))
   conf_update_param('batch_download', serialize($conf['batch_download']));
   conf_update_param('batch_download_comment', $conf['batch_download_comment']);
 }
+
 
 // groups
 $query = '
@@ -43,12 +47,14 @@ $sizes_options['original'] = l10n('Original');
 
 // max values
 $conf['batch_download']['max_elements_value'] = isset($conf['batch_download_max_elements']) ? $conf['batch_download_max_elements'] : 1000;
-$conf['batch_download']['max_size_value'] = isset($conf['batch_download_max_size']) ? $conf['batch_download_max_size'] : 500;
+$conf['batch_download']['max_size_value'] =     isset($conf['batch_download_max_size']) ?     $conf['batch_download_max_size'] :     500;
+
 
 $template->assign(array(
   'group_options' => $group_options,
   'level_options' => $level_options,
   'sizes_options' => $sizes_options,
+  'USER_COLLEC_LOADED' => defined('USER_COLLEC_ID'),
   'batch_download' => $conf['batch_download'],
   'batch_download_comment' => stripslashes($conf['batch_download_comment']),
   'use_ziparchive' => class_exists('ZipArchive') && !isset($conf['batch_downloader_force_pclzip']),

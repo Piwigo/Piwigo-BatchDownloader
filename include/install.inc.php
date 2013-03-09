@@ -8,22 +8,35 @@ function batch_download_install()
   // configuration
   if (empty($conf['batch_download']))
   {
-    $batch_download_default_config = serialize(array(
+    $batch_download_default_config = array(
       'groups'          => array(),
       'level'           => 0,
+      'what'            => array('categories','specials','collections'),
       'photo_size'      => 'original',
       'archive_prefix'  => 'piwigo',
       'archive_timeout' => 48, /* hours */
       'max_elements'    => 500,
       'max_size'        => 100, /* MB */
       'last_clean'      => time(),
-      ));
-    
-    conf_update_param('batch_download', $batch_download_default_config);
-    conf_update_param('batch_download_comment', null);
-    
-    $conf['batch_download'] = $batch_download_default_config;
+      );
+      
+    $conf['batch_download'] = serialize($batch_download_default_config);
     $conf['batch_download_comment'] = null;
+    
+    conf_update_param('batch_download', $conf['batch_download']);
+    conf_update_param('batch_download_comment', $conf['batch_download_comment']);
+  }
+  else
+  {
+    $new_conf = is_string($conf['batch_download']) ? unserialize($conf['batch_download']) : $conf['batch_download'];
+    
+    if (empty($new_conf['what']))
+    {
+      $new_conf['what'] = array('categories','specials','collections');
+      
+      $conf['batch_download'] = serialize($new_conf);
+      conf_update_param('batch_download', $conf['batch_download']);
+    }
   }
 
   // archives directory

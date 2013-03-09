@@ -57,9 +57,27 @@ function batch_download_index_button()
 {
   global $page, $template, $user, $conf;
   
+  // check accesses
   if ( !count($page['items']) or !isset($page['section']) ) return;
   
   if (check_download_access() === false) return;
+  
+  switch ($page['section'])
+  {
+  case 'categories':
+    if (!isset($page['category'])) return; // don't download the full gallery in flat mode !
+    
+    if (!in_array('categories', $conf['batch_download']['what'])) return;
+    break;
+    
+  case 'collections':
+    if (!in_array('collections', $conf['batch_download']['what'])) return;
+    break;
+    
+  default:
+    if (!in_array('specials', $conf['batch_download']['what'])) return;
+  }
+  
   
   // download the set
   if ( isset($_GET['action']) and $_GET['action']=='advdown_set' )
