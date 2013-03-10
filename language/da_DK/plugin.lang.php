@@ -66,4 +66,5 @@ $lang['Number of archives'] = 'Antal arkiver';
 $lang['Number of images'] = 'Antal fotografier';
 $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Hvis du begynder at hente Archive #%d, vil Archive #%d blive slettet, så vær sikker på at din download er afsluttet. Fortsæt?';
 $lang['Warning: Only registered users can use Batch Downloader.'] = 'Advarsel: Kun registrerede brugere kan benytte Batch Downloader.';
+$lang['What can be downloaded?'] = 'Hvad kan downloades?';
 ?>
