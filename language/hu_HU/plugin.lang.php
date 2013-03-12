@@ -64,4 +64,7 @@ $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip
 $lang['Warning: Only registered users can use Batch Downloader.'] = 'Figyelem: Csak regisztrált felhasználók használhatják a Batch Downloader-t.';
 $lang['Warning: ZipArchive doesn\'t accept special characters like accentuated ones, angle quotes (») and non-latin alphabets.'] = 'Figyelem: a ZIP archívum nem tartalmazhat speciális, ékezetes karaktereket, idézőjelet, (») vagy a nem latin abc betűit.';
 $lang['Cancel this set'] = 'Készlet visszavonása';
+$lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Archívum #%d letöltése az Archívum megsemmisítéséhez vezet, győződj meg róla, hogy befejezted a letöltést mielőtt folytatod';
+$lang['What can be downloaded?'] = 'Mi letölthető?';
+$lang['real number of archives can differ'] = 'Az archívum valós számai különbözőek lehetnek';
 ?>
