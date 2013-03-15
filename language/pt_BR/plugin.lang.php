@@ -66,4 +66,5 @@ $lang['Edit the set'] = 'Editar o conjunto';
 $lang['Estimated number of archives'] = 'Número estimado de arquivos';
 $lang['Estimated size'] = 'Tamanho estimado';
 $lang['Warning: Only registered users can use Batch Downloader.'] = 'Aviso: Somente usuários registrados podem usar Batch Downloader.';
+$lang['What can be downloaded?'] = 'O que pode ser baixado?';
 ?>
