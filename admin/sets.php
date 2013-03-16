@@ -121,24 +121,16 @@ $page['direction_items'] = array(
   'ASC' => l10n('ascending'),
   );
 
-$template->assign('status_options', $page['status_items']);
-$template->assign('status_selected',
-    isset($_POST['status']) ? $_POST['status'] : '');
-
-$template->assign('type_options', $page['type_items']);
-$template->assign('type_selected',
-    isset($_POST['type']) ? $_POST['type'] : '');
-
-$template->assign('order_options', $page['order_by_items']);
-$template->assign('order_selected',
-    isset($_POST['order_by']) ? $_POST['order_by'] : '');
-
-$template->assign('direction_options', $page['direction_items']);
-$template->assign('direction_selected',
-    isset($_POST['direction']) ? $_POST['direction'] : '');
-
-
 $template->assign(array(
+  'status_options' => $page['status_items'],
+  'status_selected' => isset($_POST['status']) ? $_POST['status'] : '',
+  'type_options' => $page['type_items'],
+  'type_selected' => isset($_POST['type']) ? $_POST['type'] : '',
+  'order_options' => $page['order_by_items'],
+  'order_selected' => isset($_POST['order_by']) ? $_POST['order_by'] : '',
+  'direction_options' => $page['direction_items'],
+  'direction_selected' => isset($_POST['direction']) ? $_POST['direction'] : '',
+
   'F_USERNAME' => @htmlentities($_POST['username'], ENT_COMPAT, 'UTF-8'),
   'F_FILTER_ACTION' => BATCH_DOWNLOAD_ADMIN . '-sets',
   ));

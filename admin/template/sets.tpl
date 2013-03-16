@@ -7,33 +7,35 @@
 <form class="filter" method="post" name="filter" action="{$F_FILTER_ACTION}">
 <fieldset>
   <legend>{'Filter'|@translate}</legend>
-  <input type="hidden" name="page" value="user_list">
-
-  <label>{'Username'|@translate} <input type="text" name="username" value="{$F_USERNAME}"></label>
 
   <label>
-  {'Set type'|@translate}
-  {html_options name=type options=$type_options selected=$type_selected}
+    {'Username'|@translate}
+    <input type="text" name="username" value="{$F_USERNAME}">
+  </label>
+
+  <label>
+    {'Set type'|@translate}
+    {html_options name=type options=$type_options selected=$type_selected}
   </label>
   
   <label>
-  {'Status'|@translate}
-  {html_options name=status options=$status_options selected=$status_selected}
+    {'Status'|@translate}
+    {html_options name=status options=$status_options selected=$status_selected}
   </label>
 
   <label>
-  {'Sort by'|@translate}
-  {html_options name=order_by options=$order_options selected=$order_selected}
+    {'Sort by'|@translate}
+    {html_options name=order_by options=$order_options selected=$order_selected}
   </label>
 
   <label>
-  {'Sort order'|@translate}
-  {html_options name=direction options=$direction_options selected=$direction_selected}
+    {'Sort order'|@translate}
+    {html_options name=direction options=$direction_options selected=$direction_selected}
   </label>
 
   <label>
-  &nbsp;
-  <span><input class="submit" type="submit" name="filter" value="{'Submit'|@translate}"> <a href="{$F_FILTER_ACTION}">{'Reset'|@translate}</a></span>
+    &nbsp;
+    <span><input class="submit" type="submit" name="filter" value="{'Submit'|@translate}"> <a href="{$F_FILTER_ACTION}">{'Reset'|@translate}</a></span>
   </label>
 
 </fieldset>
