@@ -67,4 +67,5 @@ $lang['real number of archives can differ'] = 'rzeczywista liczba archiwów moż
 $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Rozpoczynam ściąganie archiwum #%d zniszczy archiwum #%d, Upewnij się, że ukończono ściąganie. Kontynuować ?';
 $lang['Warning: Only registered users can use Batch Downloader.'] = 'UWAGA: Tylko zarejestrowani użytkownicy mogą korzystać z Batch Downloader';
 $lang['What can be downloaded?'] = 'Co może zostać pobrane?';
+$lang['No result'] = 'Brak wyników';
 ?>
