@@ -66,4 +66,5 @@ $lang['Number of images'] = 'aantal fotos';
 $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'kan ZipArchive PHP extensie niet vinden, Batch downlaoder zal PclZip gebruiken, dit zorgt voor verminderde prestaties.';
 $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Wanneer je start met het downloaden van archief #%d, verwijdert het archief #%d, doorgaan? ';
 $lang['Warning: Only registered users can use Batch Downloader.'] = 'Waarschuwing: Alleen geregistreerde gebruikers kunnen gebruik maken van Batch Downloader.';
+$lang['No result'] = 'Geen resultaat';
 ?>
