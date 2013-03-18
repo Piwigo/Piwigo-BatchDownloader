@@ -67,4 +67,5 @@ $lang['Number of images'] = 'Anzahl der Bilder';
 $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Das herunterladen des Archiv #%d wird das vorhandene Archiv #%d löschen, stelle sicher das der Download vollständig beendet wird. Weiter?';
 $lang['Warning: Only registered users can use Batch Downloader.'] = 'Warnung: Nur registrierte Benutzer können den Bach-Downloader nutzen.';
 $lang['What can be downloaded?'] = 'Was kann heruntergeladen werden? ';
+$lang['No result'] = 'kein Ergebnis';
 ?>
