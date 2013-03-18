@@ -68,4 +68,5 @@ $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finis
 Turpināt?   ';
 $lang['Warning: Only registered users can use Batch Downloader.'] = 'Uzmanību: Grupas Lejupielādētāju var izmantot tikai reģistrētie lietotāji.';
 $lang['What can be downloaded?'] = 'Ko būtu iespējams lejpielādēt?';
+$lang['No result'] = 'Nav rezultātu';
 ?>
