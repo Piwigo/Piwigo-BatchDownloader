@@ -67,4 +67,5 @@ $lang['Number of archives'] = 'Počet archívov';
 $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Spustenie download archív #%d prepíše archív #%d, po ukončení nahrávania. Pokračovať?';
 $lang['Warning: Only registered users can use Batch Downloader.'] = 'Upozornenie: Len registrovaní používatelia môžu používať  Batch Downloader.';
 $lang['No result'] = 'Bez výsledku';
+$lang['What can be downloaded?'] = 'Čo môže byť stiahnuté?';
 ?>
