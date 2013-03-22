@@ -66,4 +66,6 @@ $lang['Downloads'] = 'Allalaadimised';
 $lang['Edit the set'] = 'Toimeta partiid';
 $lang['Estimated number of archives'] = 'Arvestuslik arhiivide arv';
 $lang['Estimated size'] = 'Arvestuslik suurus';
+$lang['No result'] = 'Tulemusteta';
+$lang['What can be downloaded?'] = 'Mida alla laadida?';
 ?>
