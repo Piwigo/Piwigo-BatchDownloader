@@ -66,4 +66,6 @@ $lang['Archive prefix'] = 'بایگانی کردن پیشوند';
 $lang['Archive comment'] = 'بایگانی کردن دیدگاه';
 $lang['Warning: Only registered users can use Batch Downloader.'] = 'هشدار: تنها کاربران عضو می‌توانند از دانلود کننده‌ی دسته‌ای استفاده کنند.';
 $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'با آغاز دانلود آرشیو #%d، آرشیو #%d از بین می‌رود. ادامه می‌دهید؟';
+$lang['No result'] = 'بدون نتیجه';
+$lang['What can be downloaded?'] = 'چه چیزی می‌تواند دانلود شود؟';
 ?>
