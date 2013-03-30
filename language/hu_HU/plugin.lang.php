@@ -67,4 +67,5 @@ $lang['Cancel this set'] = 'Készlet visszavonása';
 $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Archívum #%d letöltése az Archívum megsemmisítéséhez vezet, győződj meg róla, hogy befejezted a letöltést mielőtt folytatod';
 $lang['What can be downloaded?'] = 'Mi letölthető?';
 $lang['real number of archives can differ'] = 'Az archívum valós számai különbözőek lehetnek';
+$lang['No result'] = 'Nincs találat';
 ?>
