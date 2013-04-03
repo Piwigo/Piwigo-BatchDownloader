@@ -67,4 +67,5 @@ $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip
 $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Wanneer je start met het downloaden van archief #%d, verwijdert het archief #%d, doorgaan? ';
 $lang['Warning: Only registered users can use Batch Downloader.'] = 'Waarschuwing: Alleen geregistreerde gebruikers kunnen gebruik maken van Batch Downloader.';
 $lang['No result'] = 'Geen resultaat';
+$lang['What can be downloaded?'] = 'Wat kan er gedownload worden?';
 ?>
