@@ -66,4 +66,6 @@ $lang['Number of archives'] = 'Počet archivů';
 $lang['Number of images'] = 'Počet fotek';
 $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Spuštění stahování Archívu #%d zruší Archiv #%d, ujistěte se, že stahování skončilo. Pokračovat?';
 $lang['Warning: Only registered users can use Batch Downloader.'] = 'Varování: Pouze registrovaní uživatelé mohou používat Dávkové stahování';
+$lang['What can be downloaded?'] = 'Co může být staženo?';
+$lang['No result'] = 'Žádný výsledek';
 ?>
