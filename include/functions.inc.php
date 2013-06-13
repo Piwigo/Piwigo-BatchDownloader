@@ -100,4 +100,20 @@ SELECT 1 FROM '.USER_GROUP_TABLE.'
   return true;
 }
 
+// https://bugs.php.net/bug.php?id=61636
+function readlargefile($fullfile)
+{
+  $fp = fopen($fullfile, 'rb');
+
+  if ($fp)
+  {
+    while (!feof($fp))
+    {
+      print(fread($fp, 2097152));
+    }
+
+    fclose($fp);
+  }
+}
+
 ?>
