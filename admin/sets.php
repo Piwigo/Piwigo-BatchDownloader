@@ -57,7 +57,10 @@ if (isset($_POST['filter']))
   
   if ($_POST['status'] != -1)
   {
-    array_push($where_clauses, 'status = "'.$_POST['status'].'"');
+    if ($_POST['status'] == 'new')
+      array_push($where_clauses, '(status = "new" OR status = "ready")');
+    else
+      array_push($where_clauses, 'status = "'.$_POST['status'].'"');
   }
   
   $order_by = $_POST['order_by'].' '.$_POST['direction'];

@@ -53,5 +53,8 @@ $lang['Unknown'] = 'Unknown';
 $lang['Preparation'] = 'Preparation';
 $lang['Please wait, your download is being prepared. This page will refresh automatically refresh when it is ready.'] = 'Please wait, your download is being prepared. This page will refresh automatically refresh when it is ready.';
 $lang['%d MB'] = '%d MB';
+$lang['Archive #%d (already downloaded)'] = 'Archive #%d (already downloaded)';
+$lang['Archive #%d (ready)'] = 'Archive #%d (ready)';
+$lang['Archive #%d (pending)'] = 'Archive #%d (pending)';
 
 ?>

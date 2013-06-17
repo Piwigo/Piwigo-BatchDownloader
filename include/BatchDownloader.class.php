@@ -607,17 +607,17 @@ SELECT SUM(filesize) AS total
       
       if ($this->data['status'] == 'done' or $i < $this->data['last_zip']+1)
       {
-        $out.= '<img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/images/drive_error.png"> Archive #'.$i.' (already downloaded)';
+        $out.= '<img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/images/drive_error.png"> '.sprintf(l10n('Archive #%d (already downloaded)'), $i);
       }
       else if ($i == $this->data['last_zip']+1)
       {
           $out.= '<a href="'.add_url_params($url, array('set_id'=>$this->data['id'],'zip'=>$i)).'" rel="nofollow" style="font-weight:bold;"' 
             .($i!=1 ? ' onClick="return confirm(\''.addslashes(sprintf(l10n('Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'), $i, $i-1)).'\');"' : null).
-            '><img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/images/drive_go.png"> Archive #'.$i.' (ready)</a>';
+            '><img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/images/drive_go.png">  '.sprintf(l10n('Archive #%d (ready)'), $i).'</a>';
       }
       else
       {
-        $out.= '<img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/images/drive.png"> Archive #'.$i.' (pending)';
+        $out.= '<img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/images/drive.png">  '.sprintf(l10n('Archive #%d (pending)'), $i);
       }
       
       $out.= '</li>';
