@@ -68,4 +68,5 @@ $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finis
 $lang['Warning: Only registered users can use Batch Downloader.'] = 'Advarsel: Kun registrerede brugere kan benytte Batch Downloader.';
 $lang['What can be downloaded?'] = 'Hvad kan downloades?';
 $lang['No result'] = 'Ingen fundet';
+$lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Beklager, der er intet af downloade.  Nogle filer kan være blevet fravalgt, på grund af <i title="Autorisationstyperne er: %s">filtypebegrænsninger</i>.';
 ?>
