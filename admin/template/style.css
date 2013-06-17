@@ -56,3 +56,12 @@ TABLE.table2 THEAD TD {
   line-height:14px;
   font-size:0.8em;
 }
+
+.advanced span {
+  font-family: 'Courrier New',monospace;
+  font-size: 11pt;
+  font-style:normal;
+}
+.advanced dd:not(:last-child) {
+  margin-bottom:1em;
+}

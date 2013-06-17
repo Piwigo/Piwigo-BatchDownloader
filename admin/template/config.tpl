@@ -30,18 +30,24 @@ $("#max_elements").slider({ldelim}
     $("input[name='max_elements']").val(ui.value);
   }
 });
-$("input[name='max_elements']").change(function() {ldelim}
+{literal}
+$("input[name='max_elements']").change(function() {
   $("#max_elements").slider("value", $(this).val());
 });
 
-jQuery(".showInfo").tipTip({ldelim}
+jQuery(".showInfo").tipTip({
   delay: 0,
   fadeIn: 200,
   fadeOut: 200,
   maxWidth: '300px',
   defaultPosition: 'bottom'
 });
-{/footer_script}
+
+$(".show_advanced").click(function() {
+  $(this).slideUp();
+  $(".advanced").slideDown();
+});
+{/literal}{/footer_script}
 
 <div class="titrePage">
 	<h2>Batch Downloader</h2>
@@ -151,5 +157,15 @@ jQuery(".showInfo").tipTip({ldelim}
   <b>PclZip</b> 2.8.2
 {/if}
 </fieldset>
+
+<fieldset>
+  <legend>{'Advanced features'|@translate}</legend>
   
+  <dl class="advanced" style="display:none;">
+    {$ADVANCED_CONF}
+  </dl>
+  
+  <span class="show_advanced buttonLike">{'Display'|@translate}</span>
+</fieldset>
+
 </form>

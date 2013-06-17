@@ -8,15 +8,6 @@ Author: Mistic
 Author URI: http://www.strangeplanet.fr
 */
 
-/*
- * advanced config:
- * $conf['batch_download_max_elements']   max value of the elements slider (default 1000)
- * $conf['batch_download_max_size']       max value of the size slider (default 500)
- * $conf['batch_download_force_pclzip']   if true, force the usage of PclZip instead of ZipArchive
- * $conf['batch_download_direct']         if true, the download script will redirect to the zip instead of deliver it through PHP
- * $conf['batch_download_additional_ext'] array containing downloadable filetypes (case sensitive), default is $conf['picture_ext']
- */
-
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
 global $conf, $prefixeTable;

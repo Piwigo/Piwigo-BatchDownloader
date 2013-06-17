@@ -59,6 +59,7 @@ $template->assign(array(
   'batch_download_comment' => stripslashes($conf['batch_download_comment']),
   'use_ziparchive' => class_exists('ZipArchive') && !isset($conf['batch_downloader_force_pclzip']),
   'PHP_VERSION' => PHP_VERSION,
+  'ADVANCED_CONF' => load_language('advanced.html', BATCH_DOWNLOAD_PATH, array('return'=>true))
   ));
 
 
