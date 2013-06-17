@@ -49,5 +49,9 @@ $lang['Warning: Only registered users can use Batch Downloader.'] = 'Attention: 
 $lang['What can be downloaded?'] = 'Qu\'est-ce qui peut être téléchargé ?';
 $lang['No result'] = 'Aucun résultat';
 $lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Désolé, il n\'y a rien à télécharger. Certains fichiers ont peut-être été exclu à cause de <i title="Les types autorisés sont : %s">leur type</i>.';
+$lang['Unknown'] = 'Inconnu';
+$lang['Preparation'] = 'Préparation';
+$lang['Please wait, your download is being prepared. This page will refresh automatically refresh when it is ready.'] = 'Veuillez patienter, votre téléchargement est en cours de préparation. La page se refraîchira automatiquement une fois terminé.';
+$lang['%d MB'] = '%d Mio';
 
 ?>

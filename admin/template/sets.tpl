@@ -61,7 +61,7 @@
     <td>{$set.USERNAME}</td>
     <td>{$set.NAME}</td>
     <td style="text-align:center;">{$set.DATE_CREATION}</td>
-    <td>{$set.TOTAL_SIZE} MB</td>
+    <td>{$set.TOTAL_SIZE}</td>
     <td>{$set.NB_IMAGES}</td>
     <td>{$set.NB_ARCHIVES}</td>
     <td>

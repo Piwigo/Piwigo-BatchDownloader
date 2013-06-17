@@ -17,6 +17,8 @@ jQuery(".removeSet").click(function() {ldelim}
     if (msg == "false") {ldelim}
       $trigger.parent("li").hide("fast", function() {ldelim} $trigger.remove() });
       jQuery(".nbImagesSet").html(parseInt(jQuery(".nbImagesSet").html()) -1);
+      
+      if (typeof GThumb == "object") GThumb.build();
     } else {ldelim}
       $trigger.html('{'Un unknown error occured'|@translate}');
     }

@@ -12,27 +12,22 @@ setTimeout("document.location.href = '{$set.U_DOWNLOAD}';", 1000);
 
 {footer_script}
 var derivatives = {ldelim}
-	elements: ["{'","'|@implode:$missing_derivatives}"],
-	done: 0,
-	total: {$missing_derivatives|@count},
-	
-	finished: function() {ldelim}
-		return derivatives.done == derivatives.total;
-	}
+  elements: ["{'","'|@implode:$missing_derivatives}"],
+  done: 0,
+  total: {$missing_derivatives|@count},
+  
+  finished: function() {ldelim}
+    return derivatives.done == derivatives.total;
+  }
 };
 
-function progress(success) {ldelim}
-  jQuery('#progressBar').progressBar(derivatives.done, {ldelim}
-    max: derivatives.total,
-    textFormat: 'fraction',
-    boxImage: '{$ROOT_PATH}themes/default/images/progressbar.gif',
-    barImage: '{$ROOT_PATH}themes/default/images/progressbg_red.gif'
+function progress() {ldelim}
+  jQuery('#progressBar').progressBar(derivatives.done/derivatives.total*100, {ldelim}
+    width: 300,
+    height: 24,
+    boxImage: '{$ROOT_PATH}{$BATCH_DOWNLOAD_PATH}template/images/progress_box.png',
+    barImage: '{$ROOT_PATH}{$BATCH_DOWNLOAD_PATH}template/images/progress_bar.png'
   });
-  if (success !== undefined) {ldelim}
-		var type = success ? '.regenerateSuccess': '.regenerateError',
-			s = parseInt(jQuery(type).html());
-		jQuery(type).html(++s);
-	}
 }
 
 {literal}
@@ -44,11 +39,9 @@ var queuedManager = jQuery.manageAjax.create('queued', {
 
 function next_derivative() {
   if (derivatives.finished()) {
-		alert("finish");
+    setTimeout("location.reload(true)", 1000);
     return;
-	}
-  
-  $("#damn").append(derivatives.elements[ derivatives.done ]+"<br>");
+  }
   
   jQuery.manageAjax.add("queued", {
     type: 'GET', 
@@ -56,21 +49,19 @@ function next_derivative() {
     dataType: 'json',
     success: function(data) {
       derivatives.done++;
-      progress(true);
+      progress();
       next_derivative();
     },
     error: function(data) {
       derivatives.done++;
-      progress(false);
+      progress();
       next_derivative();
     }
   });
 }
 
-$("#begin").click(function() {
-  progress();
-  next_derivative();
-});
+progress();
+setTimeout("next_derivative()", 1000);
 {/literal}{/footer_script}
 
 {/if}
@@ -102,7 +93,7 @@ $("#begin").click(function() {
     <li class="error">{$elements_error}</li>
     <li><b>{'%d photos'|@translate|@sprintf:$set.NB_IMAGES}</b>{if $set.U_EDIT_SET}, <a href="{$set.U_EDIT_SET}" rel="nofollow">{'Edit the set'|@translate}</a>{/if}</li>
     <li><b>{'Size'|@translate}:</b> {$set.SIZE} {if $set.SIZE_INFO}<span class="downloadSizeDetails">({$set.SIZE_INFO})</span>{/if}</li>
-    <li><b>{'Estimated size'|@translate}:</b> {$set.TOTAL_SIZE} MB</li>
+    <li><b>{'Estimated size'|@translate}:</b> {$set.TOTAL_SIZE}</li>
     <li><b>{'Estimated number of archives'|@translate}:</b> {$set.NB_ARCHIVES} <i>({'real number of archives can differ'|@translate})</i></li>
     <li><b>{'Created on'|@translate}:</b> {$set.DATE_CREATION}</li>
   </ul>
@@ -110,23 +101,16 @@ $("#begin").click(function() {
 
 {if $missing_derivatives}
 <fieldset>
-  <legend>Stuff happening</legend>
+  <legend>{'Preparation'|@translate}</legend>
   
-  <a id="begin">GO</a>
+  <p>{'Please wait, your download is being prepared. This page will refresh automatically refresh when it is ready.'|@translate}</p>
   
-  <div id="regenerationMsg" class="bulkAction">
-    <span class="progressBar" id="progressBar"></span>
-  </div>
+  <div id="progressBar"></div>
   
-  <span class="regenerateSuccess">0</span> -
-  <span class="regenerateError">0</span>
-  
-  <div id="damn">
-  </div>
+  <a href="{$set.U_CANCEL}" class="cancel-down" onClick="return confirm('{'Are you sure?'|@translate}');">{'Cancel this download'|@translate}</a>
 </fieldset>
-{/if}
 
-{if $zip_links}
+{elseif $zip_links}
 <fieldset>
   <legend>{'Download links'|@translate}</legend>
   

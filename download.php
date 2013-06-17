@@ -8,6 +8,11 @@ try {
   $BatchDownloader = new BatchDownloader($_GET['set_id']);
   $file = $BatchDownloader->getArchivePath();
   
+  if (!file_exists($file))
+  {
+    throw new Exception('Unable to locate file.');
+  }
+  
   if (isset($conf['batch_download_direct']) and $conf['batch_download_direct'])
   {
     header('Location: '.$file);

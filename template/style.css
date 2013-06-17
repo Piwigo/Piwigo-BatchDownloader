@@ -3,7 +3,7 @@ blockquote.comment {
 }
 
 ul.set-infos {
-  margin-top:30px;
+  margin-top:20px;
 }
 
 ul.set-infos .error {
@@ -27,7 +27,7 @@ ul.download-links .warning {
 
 a.cancel-down {
   display:inline-block;
-  margin-top:20px;
+  margin-top:10px;
   padding:2px 5px;
   font-weight:bold;
   color:#a11;
@@ -38,4 +38,26 @@ a.cancel-down {
     border-color:#f00;
   }
   
-.downloadSizeDetails {font-style:italic; font-size:80%;}
+.downloadSizeDetails {
+  font-style:italic;
+  font-size:80%;
+}
+
+#progressBar {
+  width:300px;
+  position:relative;
+}
+#progressBar_pbImage {
+  border-radius:12px;
+}
+#progressBar_pbText {
+  color:white;
+  font-weight:bold;
+  font-size:16px;
+  line-height:16px;
+  position:absolute;
+  right:5px;
+  top:50%;
+  margin-top:-9px;
+  text-shadow:0 0 3px #000;
+}

@@ -29,7 +29,7 @@ jQuery().ready(function() {
 
 <script type="text/javascript"></script>
 <li><a href="{$BATCH_DWN_URL}" id="batchDownloadLink" title="{'Download all pictures of this selection'|@translate}" class="pwg-state-default pwg-button" rel="nofollow">
-  <span class="pwg-icon batch-downloader-icon" style="background:url('{$ROOT_PATH}{$BATCH_DOWNLOAD_PATH}template/zip.png') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">{'Download'|@translate}</span>
+  <span class="pwg-icon batch-downloader-icon" style="background:url('{$ROOT_PATH}{$BATCH_DOWNLOAD_PATH}template/images/zip.png') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">{'Download'|@translate}</span>
 </a></li>
 
 <div id="batchDownloadBox" class="switchBox" style="display:none">

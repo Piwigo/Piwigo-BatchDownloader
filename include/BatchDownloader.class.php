@@ -297,7 +297,7 @@ SELECT image_id, filemtime FROM '.IMAGE_SIZES_TABLE.'
     }
     
     $query = '
-SELECT id, path, representative_ext, width, height, rotation
+SELECT id, path, width, height, rotation
   FROM '.IMAGES_TABLE.'
   WHERE id IN('.implode(',', $image_ids).')
   ORDER BY id DESC
@@ -306,30 +306,50 @@ SELECT id, path, representative_ext, width, height, rotation
     $result = pwg_query($query);
     while ($row = pwg_db_fetch_assoc($result))
     {
-      $src_image = new SrcImage($row);
-      if ($src_image->is_mimetype()) continue;
+      $src_image = new SrcImage($row); // don't give representive_ext
       
-      $derivative = new DerivativeImage($this->data['size'], $src_image);
-      // if ($this->data['size'] != $derivative->get_type()) continue;
-      
-      $filemtime = @filemtime($derivative->get_path());
-      
-      if ($filemtime===false || $filemtime<$last_mod_time)
+      // no-image files
+      if ($src_image->is_mimetype())
       {
-        $urls[] = $root_url.$derivative->get_url().$uid;
+        if ($update && in_array($row['id'], $to_update))
+        {          
+          $inserts[ $row['id'] ] = array(
+            'image_id' => $row['id'],
+            'type' => $this->data['size'],
+            'width' => 0,
+            'height' => 0,
+            'filesize' => filesize(PHPWG_ROOT_PATH.$row['path'])/1024,
+            'filemtime' => filemtime(PHPWG_ROOT_PATH.$row['path']),
+            );
+        }
       }
-      else if ($update && in_array($row['id'], $to_update))
+      // images files
+      else
       {
-        $imagesize = getimagesize($derivative->get_path());
+        $derivative = new DerivativeImage($this->data['size'], $src_image);
+        // if ($this->data['size'] != $derivative->get_type()) continue;
         
-        $inserts[ $row['id'] ] = array(
-          'image_id' => $row['id'],
-          'type' => $this->data['size'],
-          'width' => $imagesize[0],
-          'height' => $imagesize[1],
-          'filesize' => filesize($derivative->get_path())/1024,
-          'filemtime' => $filemtime,
-          );
+        $filemtime = @filemtime($derivative->get_path());
+        $src_mtime = @filemtime(PHPWG_ROOT_PATH.$row['path']);
+        if ($src_mtime===false) continue;
+        
+        if ($filemtime===false || $filemtime<$last_mod_time || $filemtime<$src_mtime)
+        {
+          $urls[] = $root_url.$derivative->get_url().$uid;
+        }
+        else if ($update && in_array($row['id'], $to_update))
+        {
+          $imagesize = getimagesize($derivative->get_path());
+          
+          $inserts[ $row['id'] ] = array(
+            'image_id' => $row['id'],
+            'type' => $this->data['size'],
+            'width' => $imagesize[0],
+            'height' => $imagesize[1],
+            'filesize' => filesize($derivative->get_path())/1024,
+            'filemtime' => $filemtime,
+            );
+        }
       }
     }
     
@@ -343,7 +363,7 @@ DELETE FROM '.IMAGE_SIZES_TABLE.'
       
       mass_inserts(
         IMAGE_SIZES_TABLE,
-        array('image_id','type','width','height','filesize'),
+        array('image_id','type','width','height','filesize','filemtime'),
         $inserts
         );
     }
@@ -409,8 +429,7 @@ DELETE FROM '.IMAGE_SIZES_TABLE.'
       $query = '
 SELECT
     id, name, file, path,
-    representative_ext, rotation,
-    filesize, width, height
+    rotation, filesize, width, height
   FROM '.IMAGES_TABLE.'
   WHERE id IN ('.implode(',', $images_to_add).')
 ;';
@@ -437,19 +456,36 @@ SELECT image_id, filesize
       $total_size = 0;
       foreach ($images_to_add as $row)
       {
+        if (!file_exists(PHPWG_ROOT_PATH.$row['path']))
+        {
+          $this->removeImages(array($row['id']));
+          continue;
+        }
+        
         if ($this->data['size'] == 'original')
         {
-          $zip->addFile(PHPWG_ROOT_PATH . $row['path'], $row['id'].'_'.stripslashes(get_filename_wo_extension($row['file'])).'.'.get_extension($row['path']));
+          $zip->addFile(PHPWG_ROOT_PATH.$row['path'], $row['id'].'_'.stripslashes(get_filename_wo_extension($row['file'])).'.'.get_extension($row['path']));
           $total_size+= $row['filesize'];
         }
         else
         {
-          $src_image = new SrcImage($row);
-          $derivative = new DerivativeImage($this->data['size'], $src_image);
-          $path = $derivative->get_path();
-      
-          $zip->addFile($path, $row['id'].'_'.stripslashes(get_filename_wo_extension(basename($path))).'.'.get_extension($path));
-          $total_size+= $filesizes[ $row['id'] ];
+          $src_image = new SrcImage($row); // don't give representive_ext
+          
+          // no-image files
+          if ($src_image->is_mimetype())
+          {
+            $zip->addFile(PHPWG_ROOT_PATH.$row['path'], $row['id'].'_'.stripslashes(get_filename_wo_extension($row['file'])).'.'.get_extension($row['path']));
+            $total_size+= $row['filesize'];
+          }
+          // images files
+          else
+          {
+            $derivative = new DerivativeImage($this->data['size'], $src_image);
+            $path = $derivative->get_path();
+        
+            $zip->addFile($path, $row['id'].'_'.stripslashes(get_filename_wo_extension(basename($path))).'.'.get_extension($path));
+            $total_size+= $filesizes[ $row['id'] ];
+          }
         }
         
         array_push($images_added, $row['id']);
@@ -571,17 +607,17 @@ SELECT SUM(filesize) AS total
       
       if ($this->data['status'] == 'done' or $i < $this->data['last_zip']+1)
       {
-        $out.= '<img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/drive.png"> Archive #'.$i.' (already downloaded)';
+        $out.= '<img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/images/drive_error.png"> Archive #'.$i.' (already downloaded)';
       }
       else if ($i == $this->data['last_zip']+1)
       {
           $out.= '<a href="'.add_url_params($url, array('set_id'=>$this->data['id'],'zip'=>$i)).'" rel="nofollow" style="font-weight:bold;"' 
             .($i!=1 ? ' onClick="return confirm(\''.addslashes(sprintf(l10n('Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'), $i, $i-1)).'\');"' : null).
-            '><img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/drive_go.png"> Archive #'.$i.' (ready)</a>';
+            '><img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/images/drive_go.png"> Archive #'.$i.' (ready)</a>';
       }
       else
       {
-        $out.= '<img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/drive.png"> Archive #'.$i.' (pending)';
+        $out.= '<img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/images/drive.png"> Archive #'.$i.' (pending)';
       }
       
       $out.= '</li>';
@@ -612,7 +648,7 @@ SELECT SUM(filesize) AS total
     $path.= get_username($this->data['user_id']) . '_';
     $path.= $set['BASENAME'] . '_';
     $path.= $this->data['user_id'] . $this->data['id'];
-    $path.= $this->getEstimatedArchiveNumber()!=1 ? '_part' . $i : null;
+    $path.= '_part' . $i;
     $path.= '.zip';
     
     return $path;
@@ -810,14 +846,13 @@ SELECT SUM(filesize) AS total
   {    
     $set = array(
       'NB_IMAGES' =>     $this->data['nb_images'],
-      'NB_ARCHIVES' =>   $this->data['status']=='new' ? l10n('unknown') : $this->getEstimatedArchiveNumber(),
+      'NB_ARCHIVES' =>   $this->data['status']=='new' ? l10n('Unknown') : $this->getEstimatedArchiveNumber(),
       'STATUS' =>        $this->data['status'],
       'LAST_ZIP' =>      $this->data['last_zip'],
-      'TOTAL_SIZE' =>    $this->data['status']=='new' ? l10n('unknown') : ceil($this->getEstimatedTotalSize()/1024),
-      // 'LINKS' =>         $this->getDownloadList(BATCH_DOWNLOAD_PUBLIC . 'init_zip'),
+      'TOTAL_SIZE' =>    $this->data['status']=='new' ? l10n('Unknown') : sprintf(l10n('%d MB'), ceil($this->getEstimatedTotalSize()/1024)),
       'DATE_CREATION' => format_date($this->data['date_creation'], true),
       'SIZE_ID' =>       $this->data['size'],
-      'SIZE' =>          l10n($this->data['size']),
+      'SIZE' =>          $this->data['size']=='original' ? l10n('Original') : l10n($this->data['size']),
       );
       
     if ($this->data['size'] != 'original')

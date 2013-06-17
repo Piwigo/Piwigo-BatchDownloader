@@ -10,7 +10,7 @@ switch ($page['sub_section'])
   /* download page */
   case 'init_zip':
   {
-    $template->set_filename('index', dirname(__FILE__) . '/../template/init_zip.tpl');
+    $template->set_filename('index', realpath(BATCH_DOWNLOAD_PATH . 'template/init_zip.tpl'));
     
     try
     {
@@ -54,7 +54,7 @@ switch ($page['sub_section'])
           {
             $template->assign('missing_derivatives', $missing_derivatives);
           }
-          // set ready
+          // set is ready
           else
           {
             $BatchDownloader->updateParam('status', 'ready');
@@ -107,7 +107,7 @@ switch ($page['sub_section'])
   {
     $self_url = add_url_params(BATCH_DOWNLOAD_PUBLIC . 'view', array('set_id'=>$_GET['set_id']));
     
-    $template->set_filename('index', dirname(__FILE__).'/../template/view.tpl');
+    $template->set_filename('index', realpath(BATCH_DOWNLOAD_PATH . 'template/view.tpl'));
     $template->assign(array(
       'BATCH_DOWNLOAD_PATH' => BATCH_DOWNLOAD_PATH,
       'U_VIEW' => $self_url,
@@ -119,7 +119,7 @@ switch ($page['sub_section'])
     {
       $BatchDownloader = new BatchDownloader($_GET['set_id']);
       
-      if ($BatchDownloader->getParam('status') != 'new')
+      if ($BatchDownloader->getParam('status') != 'new' && $BatchDownloader->getParam('status') != 'ready')
       {
         array_push($page['errors'], l10n('You can not edit this set'));
         break;
