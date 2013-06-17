@@ -3,17 +3,18 @@
 Plugin Name: Batch Downloader
 Version: auto
 Description: Allows users to download pictures sets in ZIP. Compatible with User Collections.
-Plugin URI: http://piwigo.org/ext/extension_view.php?eid=616
+Plugin URI: auto
 Author: Mistic
 Author URI: http://www.strangeplanet.fr
 */
 
 /*
  * advanced config:
- * $conf['batch_download_max_elements']  max value of the elements slider (default 1000)
- * $conf['batch_download_max_size']      max value of the size slider (default 500)
- * $conf['batch_download_force_pclzip']  if true, force the usage of PclZip instead of ZipArchive
- * $conf['batch_download_direct']        if true, the download script will redirect to the zip instead of deliver it through PHP
+ * $conf['batch_download_max_elements']   max value of the elements slider (default 1000)
+ * $conf['batch_download_max_size']       max value of the size slider (default 500)
+ * $conf['batch_download_force_pclzip']   if true, force the usage of PclZip instead of ZipArchive
+ * $conf['batch_download_direct']         if true, the download script will redirect to the zip instead of deliver it through PHP
+ * $conf['batch_download_additional_ext'] array containing downloadable filetypes (case sensitive), default is $conf['picture_ext']
  */
 
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
@@ -90,6 +91,12 @@ WHERE id = "'. BATCH_DOWNLOAD_ID .'"';
   }
   
   $conf['batch_download'] = unserialize($conf['batch_download']);
+  $conf['batch_download']['allowed_ext'] = $conf['picture_ext'];
+  if (!empty($conf['batch_download_additional_ext']))
+  {
+    $conf['batch_download']['allowed_ext'] = array_merge($conf['batch_download']['allowed_ext'], $conf['batch_download_additional_ext']);
+  }
+  
   load_language('plugin.lang', BATCH_DOWNLOAD_PATH);
 }
 

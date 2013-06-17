@@ -5,9 +5,8 @@ if (!defined('BATCH_DOWNLOAD_PATH')) die('Hacking attempt!');
 if (isset($_GET['delete']))
 {
   $BatchDownloader = new BatchDownloader($_GET['delete']);
-  $BatchDownloader->deleteLastArchive();
-  $BatchDownloader->clearImages();
-  pwg_query('DELETE FROM '.BATCH_DOWNLOAD_TSETS.' WHERE id = '.$_GET['delete'].';');
+  $BatchDownloader->delete();
+  unset($BatchDownloader);
 }
 if (isset($_GET['cancel']))
 {
@@ -16,6 +15,7 @@ if (isset($_GET['cancel']))
   $BatchDownloader->updateParam('status', 'done');
   $BatchDownloader->deleteLastArchive();
   $BatchDownloader->clearImages();
+  unset($BatchDownloader);
 }
 if (isset($_POST['delete_done']))
 {
@@ -83,6 +83,8 @@ foreach ($sets as $set_id => $username)
       'U_CANCEL' => BATCH_DOWNLOAD_ADMIN . '-sets&amp;cancel='.$set->getParam('id'),
     )
     ));
+  
+  unset($set);
 }
 
 

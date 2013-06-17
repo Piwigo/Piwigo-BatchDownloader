@@ -208,14 +208,23 @@ DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
    */
   function addImages($image_ids)
   {
+    global $conf;
+    
     if (empty($image_ids) or !is_array($image_ids)) return;
     
-    $image_ids = array_unique($image_ids);
+    $query = '
+SELECT id, file
+  FROM '.IMAGES_TABLE.'
+  WHERE id IN('.implode(',', array_unique($image_ids)).')
+;';
+    $images = simple_hash_from_query($query, 'id', 'file');
+    
     $inserts = array();
     
-    foreach ($image_ids as $image_id)
+    foreach ($images as $image_id => $file)
     {
       if ($this->isInSet($image_id)) continue;
+      if (!in_array(get_extension($file), $conf['batch_download']['allowed_ext'])) continue;
       
       $this->images[ $image_id ] = 0;
       array_push($inserts, array('set_id'=>$this->data['id'], 'image_id'=>$image_id, 'zip'=>0));
@@ -679,6 +688,16 @@ SELECT SUM(filesize) AS total
       );
     
     return array_merge($set, $this->getNames());
+  }
+  
+  /**
+   * delete
+   */
+  function delete()
+  {
+    $this->deleteLastArchive();
+    $this->clearImages();
+    pwg_query('DELETE FROM '.BATCH_DOWNLOAD_TSETS.' WHERE id = '.$this->data['id'].';');
   }
 }
 
