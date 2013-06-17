@@ -68,4 +68,5 @@ $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finis
 $lang['Warning: Only registered users can use Batch Downloader.'] = 'Upozornenie: Len registrovaní používatelia môžu používať  Batch Downloader.';
 $lang['No result'] = 'Bez výsledku';
 $lang['What can be downloaded?'] = 'Čo môže byť stiahnuté?';
+$lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Prepáčte, ale nie je nič na prevzatie. Niektoré súbory môžu byť vylúčené z dôvodu <i title="Povolené sú: %s"> typy súborov pre obmedzenia</i>.';
 ?>
