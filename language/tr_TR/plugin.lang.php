@@ -28,7 +28,7 @@ $lang['Batch Downloader'] = 'Toplu İndirme';
 $lang['Cancel this download'] = 'İndirme işleminden vazgeç';
 $lang['Cancel this set'] = 'Bu gruptan vazgeç';
 $lang['Confirm the download of %d pictures?'] = '%d adet resmi indirmeyi onaylıyor musunuz?';
-$lang['Delete downloads after'] = 'İndirme sonrası sil';
+$lang['Delete downloads after'] = 'İndirdikten sonra sil';
 $lang['Delete this set'] = 'Bu grubu sil';
 $lang['Download all pictures of this selection'] = 'Bu seçimin tüm resimlerini indir';
 $lang['Download history'] = 'İndirme geçmişi';
@@ -68,4 +68,5 @@ $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finis
 $lang['Warning: Only registered users can use Batch Downloader.'] = 'Uyarı: Batch Downloader sadece kayıtlı kullanıcılar tarafından kullanabilir.';
 $lang['What can be downloaded?'] = 'Ne indirilebilir ?';
 $lang['No result'] = 'Sonuç yok';
+$lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Üzgünüz, indirilecek bir şey yok. <i title="İzin verilen tipler: %s"> dosya tipi kısıtlaması sebebiyle</i> bazı dosyalar hariç tutulmuş olabilirler.';
 ?>
