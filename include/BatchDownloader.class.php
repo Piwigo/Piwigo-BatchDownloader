@@ -13,8 +13,9 @@ class BatchDownloader
    * @param: array images
    * @param: string set type ('album'|'tag'|'selection')
    * @param: int set type id (for retrieving album infos for instance)
+   * @param: string size to download
    */
-  function __construct($set_id, $images=array(), $type=null, $type_id=null)
+  function __construct($set_id, $images=array(), $type=null, $type_id=null, $size='original')
   {
     global $user, $conf;
     
@@ -25,6 +26,7 @@ class BatchDownloader
       'date_creation' => '0000-00-00 00:00:00',
       'type' => null,
       'type_id' => null,
+      'size' => 'original',
       'nb_zip' => 0,
       'last_zip' => 0,
       'nb_images' => 0,
@@ -38,17 +40,7 @@ class BatchDownloader
     if (preg_match('#^[0-9]+$#', $set_id))
     {
       $query = '
-SELECT
-    id,
-    user_id,
-    date_creation,
-    type,
-    type_id,
-    nb_zip,
-    last_zip,
-    nb_images,
-    total_size,
-    status
+SELECT *
   FROM '.BATCH_DOWNLOAD_TSETS.'
   WHERE
     id = '.$set_id.'
@@ -94,8 +86,18 @@ SELECT
     // create a new set
     else if ($set_id == 'new')
     {
+      if ($size != 'original')
+      {
+        $type_map = array_keys(ImageStdParams::get_defined_type_map());
+        if (!in_array($size, $type_map))
+        {
+          throw new Exception(sprintf(l10n('Invalid size %s'), $size));
+        }
+      }
+  
       $this->data['type'] = $type;
       $this->data['type_id'] = $type_id;
+      $this->data['size'] = $size;
       
       $query = '
 INSERT INTO '.BATCH_DOWNLOAD_TSETS.'(
@@ -103,6 +105,7 @@ INSERT INTO '.BATCH_DOWNLOAD_TSETS.'(
     date_creation,
     type,
     type_id,
+    size,
     nb_zip,
     last_zip,
     nb_images,
@@ -114,6 +117,7 @@ INSERT INTO '.BATCH_DOWNLOAD_TSETS.'(
     NOW(),
     "'.$this->data['type'].'",
     "'.$this->data['type_id'].'",
+    "'.$this->data['size'].'",
     0,
     0,
     0,
@@ -254,6 +258,100 @@ DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
   }
   
   /**
+   * get missing derivatives files
+   * @return: array of i.php urls
+   */
+  function getMissingDerivatives($update=false)
+  {
+    if ($this->data['size'] == 'original')
+    {
+      return array();
+    }
+    
+    global $conf;
+    
+    $root_url = get_root_url();
+    $uid = '&b='.time();
+    
+    $params = ImageStdParams::get_by_type($this->data['size']);
+    $last_mod_time = $params->last_mod_time;
+    
+    $image_ids = array_keys($this->images);
+    $to_update = $urls = $inserts = array();
+    
+    $conf['question_mark_in_urls'] = $conf['php_extension_in_urls'] = true;
+    $conf['derivative_url_style'] = 2; //script
+    
+    // images which we need to update stats
+    if ($update)
+    {
+      $query = '
+SELECT image_id, filemtime FROM '.IMAGE_SIZES_TABLE.'
+  WHERE image_id IN('.implode(',', $image_ids).')
+    AND type = "'.$this->data['size'].'"
+;';
+      $registered = array_from_query($query, 'image_id', 'filemtime');
+      
+      $to_update = array_filter($registered, create_function('$t', 'return $t<'.$last_mod_time.';'));
+      $to_update = array_merge($to_update, array_diff($image_ids, $registered));
+    }
+    
+    $query = '
+SELECT id, path, representative_ext, width, height, rotation
+  FROM '.IMAGES_TABLE.'
+  WHERE id IN('.implode(',', $image_ids).')
+  ORDER BY id DESC
+;';
+
+    $result = pwg_query($query);
+    while ($row = pwg_db_fetch_assoc($result))
+    {
+      $src_image = new SrcImage($row);
+      if ($src_image->is_mimetype()) continue;
+      
+      $derivative = new DerivativeImage($this->data['size'], $src_image);
+      // if ($this->data['size'] != $derivative->get_type()) continue;
+      
+      $filemtime = @filemtime($derivative->get_path());
+      
+      if ($filemtime===false || $filemtime<$last_mod_time)
+      {
+        $urls[] = $root_url.$derivative->get_url().$uid;
+      }
+      else if ($update && in_array($row['id'], $to_update))
+      {
+        $imagesize = getimagesize($derivative->get_path());
+        
+        $inserts[ $row['id'] ] = array(
+          'image_id' => $row['id'],
+          'type' => $this->data['size'],
+          'width' => $imagesize[0],
+          'height' => $imagesize[1],
+          'filesize' => filesize($derivative->get_path())/1024,
+          'filemtime' => $filemtime,
+          );
+      }
+    }
+    
+    if (!empty($inserts))
+    {
+      $query = '
+DELETE FROM '.IMAGE_SIZES_TABLE.'
+  WHERE image_id IN('.implode(',', array_keys($inserts)).')
+;';
+      pwg_query($query);
+      
+      mass_inserts(
+        IMAGE_SIZES_TABLE,
+        array('image_id','type','width','height','filesize'),
+        $inserts
+        );
+    }
+    
+    return $urls;
+  }
+  
+  /**
    * deleteLastArchive
    */
   function deleteLastArchive()
@@ -310,15 +408,24 @@ DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
     {
       $query = '
 SELECT
-    id,
-    name,
-    file,
-    path,
-    filesize
+    id, name, file, path,
+    representative_ext, rotation,
+    filesize, width, height
   FROM '.IMAGES_TABLE.'
   WHERE id IN ('.implode(',', $images_to_add).')
 ;';
       $images_to_add = hash_from_query($query, 'id');
+      
+      if ($this->data['size'] != 'original')
+      {
+        $query = '
+SELECT image_id, filesize
+  FROM '.IMAGE_SIZES_TABLE.'
+  WHERE image_id IN ('.implode(',', array_keys($images_to_add)).')
+    AND type = "'.$this->data['size'].'"
+;';
+        $filesizes = simple_hash_from_query($query, 'image_id', 'filesize');
+      }
       
       // open zip
       $this->updateParam('last_zip', $this->data['last_zip']+1);
@@ -329,13 +436,25 @@ SELECT
       $images_added = array();
       $total_size = 0;
       foreach ($images_to_add as $row)
-      {        
-        $zip->addFile(PHPWG_ROOT_PATH . $row['path'], $row['id'].'_'.stripslashes(get_filename_wo_extension($row['file'])).'.'.get_extension($row['path']));
+      {
+        if ($this->data['size'] == 'original')
+        {
+          $zip->addFile(PHPWG_ROOT_PATH . $row['path'], $row['id'].'_'.stripslashes(get_filename_wo_extension($row['file'])).'.'.get_extension($row['path']));
+          $total_size+= $row['filesize'];
+        }
+        else
+        {
+          $src_image = new SrcImage($row);
+          $derivative = new DerivativeImage($this->data['size'], $src_image);
+          $path = $derivative->get_path();
+      
+          $zip->addFile($path, $row['id'].'_'.stripslashes(get_filename_wo_extension(basename($path))).'.'.get_extension($path));
+          $total_size+= $filesizes[ $row['id'] ];
+        }
         
         array_push($images_added, $row['id']);
         $this->images[ $row['id'] ] = $this->data['last_zip'];
         
-        $total_size+= $row['filesize'];
         if ($total_size >= $this->conf['max_size']*1024 and !$force_one_archive) break;
       }
       
@@ -369,12 +488,12 @@ UPDATE '.BATCH_DOWNLOAD_TIMAGES.'
       }
       
       // over estimed
-      if ( $this->data['status'] == 'done' and $this->data['last_zip'] < $this->data['nb_zip'] )
+      if ($this->data['status'] == 'done')
       {
         $this->updateParam('nb_zip', $this->data['last_zip']);
       }
       // under estimed
-      else if ( $this->data['last_zip'] == $this->data['nb_zip'] and $this->data['status'] != 'done' )
+      else if ($this->data['last_zip'] == $this->data['nb_zip'])
       {
         $this->updateParam('nb_zip', $this->data['last_zip']+1);
       }
@@ -399,11 +518,23 @@ UPDATE '.BATCH_DOWNLOAD_TIMAGES.'
     
     $image_ids = array_slice(array_keys($this->images), 0, $this->conf['max_elements']);
     
-    $query = '
+    if ($this->data['size'] == 'original')
+    {
+      $query = '
 SELECT SUM(filesize) AS total
   FROM '.IMAGES_TABLE.'
   WHERE id IN ('.implode(',', $image_ids).')
 ;';
+    }
+    else
+    {
+      $query = '
+SELECT SUM(filesize) AS total
+  FROM '.IMAGE_SIZES_TABLE.'
+  WHERE image_id IN ('.implode(',', $image_ids).')
+;';
+    }
+    
     list($total) = pwg_db_fetch_row(pwg_query($query));
     $this->data['estimated_total_size'] = $total;
     return $total;
@@ -415,9 +546,9 @@ SELECT SUM(filesize) AS total
    */
   function getEstimatedArchiveNumber()
   {
-    $nb_zip = ceil( $this->getEstimatedTotalSize() / ($this->conf['max_size']*1024) );
-    $this->updateParam('nb_zip', $nb_zip);
-    return $nb_zip;
+    if ($this->data['status'] == 'done') return $this->data['nb_zip'];
+    
+    return ceil( $this->getEstimatedTotalSize() / ($this->conf['max_size']*1024) );
   }
   
   /**
@@ -434,7 +565,7 @@ SELECT SUM(filesize) AS total
     $root_url = get_root_url();
     
     $out = '';
-    for ($i=1; $i<=$this->data['nb_zip']; $i++)
+    for ($i=1; $i<=$this->getEstimatedArchiveNumber(); $i++)
     {
       $out.= '<li id="zip-'.$i.'">';
       
@@ -481,7 +612,7 @@ SELECT SUM(filesize) AS total
     $path.= get_username($this->data['user_id']) . '_';
     $path.= $set['BASENAME'] . '_';
     $path.= $this->data['user_id'] . $this->data['id'];
-    $path.= $this->data['nb_zip']!=1 ? '_part' . $i : null;
+    $path.= $this->getEstimatedArchiveNumber()!=1 ? '_part' . $i : null;
     $path.= '.zip';
     
     return $path;
@@ -679,13 +810,21 @@ SELECT SUM(filesize) AS total
   {    
     $set = array(
       'NB_IMAGES' =>     $this->data['nb_images'],
-      'NB_ARCHIVES' =>   $this->data['nb_zip'],
+      'NB_ARCHIVES' =>   $this->data['status']=='new' ? l10n('unknown') : $this->getEstimatedArchiveNumber(),
       'STATUS' =>        $this->data['status'],
       'LAST_ZIP' =>      $this->data['last_zip'],
-      'TOTAL_SIZE' =>    ceil($this->getEstimatedTotalSize()/1024),
-      'LINKS' =>         $this->getDownloadList(BATCH_DOWNLOAD_PUBLIC . 'init_zip'),
+      'TOTAL_SIZE' =>    $this->data['status']=='new' ? l10n('unknown') : ceil($this->getEstimatedTotalSize()/1024),
+      // 'LINKS' =>         $this->getDownloadList(BATCH_DOWNLOAD_PUBLIC . 'init_zip'),
       'DATE_CREATION' => format_date($this->data['date_creation'], true),
+      'SIZE_ID' =>       $this->data['size'],
+      'SIZE' =>          l10n($this->data['size']),
       );
+      
+    if ($this->data['size'] != 'original')
+    {
+      $params = ImageStdParams::get_by_type($this->data['size']);
+      $set['SIZE_INFO'] = $params->sizing->ideal_size[0].' x '.$params->sizing->ideal_size[1];
+    }
     
     return array_merge($set, $this->getNames());
   }

@@ -16,6 +16,7 @@ defined('BATCH_DOWNLOAD_ID') or define('BATCH_DOWNLOAD_ID', basename(dirname(__F
 define('BATCH_DOWNLOAD_PATH',    PHPWG_PLUGINS_PATH . BATCH_DOWNLOAD_ID . '/');
 define('BATCH_DOWNLOAD_TSETS',   $prefixeTable . 'download_sets');
 define('BATCH_DOWNLOAD_TIMAGES', $prefixeTable . 'download_sets_images');
+define('IMAGE_SIZES_TABLE',      $prefixeTable . 'image_sizes');
 define('BATCH_DOWNLOAD_LOCAL',   PHPWG_ROOT_PATH . $conf['data_location'] . 'download_archives/');
 define('BATCH_DOWNLOAD_ADMIN',   get_root_url() . 'admin.php?page=plugin-' . BATCH_DOWNLOAD_ID);
 define('BATCH_DOWNLOAD_PUBLIC',  get_absolute_root_url() . make_index_url(array('section' => 'download')) . '/');

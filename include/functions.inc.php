@@ -59,16 +59,15 @@ function get_set_info_from_page()
       $batch_type = $page['section'];
       $batch_id = 0;
       break;
+    default:
+      return false;
   }
   
-  if ( isset($batch_type) and isset($batch_id) )
-  {
-    return array('type'=>$batch_type, 'id'=>$batch_id);
-  }
-  else
-  {
-    return false;
-  }
+  return array(
+    'type' => $batch_type,
+    'id' => $batch_id,
+    'size' => isset($_GET['down_size']) ? $_GET['down_size'] : 'original',
+    );
 }
 
 /**

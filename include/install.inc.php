@@ -12,7 +12,7 @@ function batch_download_install()
       'groups'          => array(),
       'level'           => 0,
       'what'            => array('categories','specials','collections'),
-      'photo_size'      => 'original',
+      'photo_size'      => 'original', // not used
       'archive_prefix'  => 'piwigo',
       'archive_timeout' => 48, /* hours */
       'max_elements'    => 500,
@@ -51,15 +51,16 @@ CREATE TABLE IF NOT EXISTS `' . $prefixeTable . 'download_sets` (
   `id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `user_id` smallint(5) NOT NULL,
   `date_creation` datetime NOT NULL,
-  `type` varchar(16) CHARACTER SET utf8 NOT NULL,
-  `type_id` varchar(64) CHARACTER SET utf8 NOT NULL,
+  `type` varchar(16) NOT NULL,
+  `type_id` varchar(64) NOT NULL,
+  `size` varchar(16) NOT NULL DEFAULT "original",
   `nb_zip` smallint(3) NOT NULL DEFAULT 0,
   `last_zip` smallint(3) NOT NULL DEFAULT 0,
   `nb_images` mediumint(8) NOT NULL DEFAULT 0,
   `total_size` int(10) NOT NULL DEFAULT 0,
-  `status` enum("new","download","done") CHARACTER SET utf8 NOT NULL DEFAULT "new",
+  `status` enum("new","ready","download","done") NOT NULL DEFAULT "new",
   PRIMARY KEY (`id`)
-) DEFAULT CHARSET=utf8 AUTO_INCREMENT=1
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1
 ;';
   pwg_query($query);
   
@@ -69,9 +70,32 @@ CREATE TABLE IF NOT EXISTS `' . $prefixeTable . 'download_sets_images` (
   `image_id` mediumint(8) NOT NULL,
   `zip` smallint(5) NOT NULL DEFAULT 0,
   UNIQUE KEY `UNIQUE` (`set_id`,`image_id`)
-) DEFAULT CHARSET=utf8
+) ENGINE=MyISAM DEFAULT CHARSET=utf8
 ;';
   pwg_query($query);
+  
+  $query = '
+CREATE TABLE IF NOT EXISTS `' . $prefixeTable . 'image_sizes` (
+  `image_id` mediumint(8) NOT NULL,
+  `type` varchar(16) NOT NULL,
+  `width` smallint(9) NOT NULL,
+  `height` smallint(9) NOT NULL,
+  `filesize` mediumint(9) NOT NULL,
+  `filemtime` int(16) NOT NULL,
+  PRIMARY KEY (`image_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8
+;';
+  pwg_query($query);
+  
+  // add a "size" column to download_sets
+  $result = pwg_query('SHOW COLUMNS FROM `' . $prefixeTable . 'download_sets` LIKE "size";');
+  if (!pwg_db_num_rows($result))
+  {      
+    pwg_query('ALTER TABLE `' . $prefixeTable . 'download_sets` ADD `size` varchar(16) NOT NULL DEFAULT "original";');
+  }
+  
+  // add "ready" status
+  pwg_query('ALTER TABLE `' . $prefixeTable . 'download_sets` CHANGE `status` `status` enum("new","ready","download","done") NOT NULL DEFAULT "new";');
 }
 
 ?>

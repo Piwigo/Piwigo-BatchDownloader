@@ -16,6 +16,7 @@ switch ($page['sub_section'])
     {
       $BatchDownloader = new BatchDownloader($_GET['set_id']);
       
+      // delete set
       if ( isset($_GET['cancel']) )
       {
         $BatchDownloader->deleteLastArchive();
@@ -25,25 +26,14 @@ switch ($page['sub_section'])
         redirect(get_absolute_root_url());
       }
       
-      if ( isset($_GET['zip']) and $BatchDownloader->getParam('status') != 'done' and $_GET['zip'] > $BatchDownloader->getParam('last_zip') )
+      // prepare next zip
+      if ( isset($_GET['zip']) and $BatchDownloader->getParam('status') != 'new' and $BatchDownloader->getParam('status') != 'done' and $_GET['zip'] > $BatchDownloader->getParam('last_zip') )
       {
         $BatchDownloader->deleteLastArchive();
         $next_file = $BatchDownloader->createNextArchive();
       }
       
-      $set = $BatchDownloader->getSetInfo();
-      
-      if (isset($next_file))
-      {
-        $set['U_DOWNLOAD'] = get_root_url().BATCH_DOWNLOAD_PATH . 'download.php?set_id='.$_GET['set_id'].'&amp;zip='.$_GET['zip'];
-        array_push($page['infos'], sprintf(l10n('The archive is downloading, if the download doesn\'t start automatically please <a href="%s">click here</a>'), $set['U_DOWNLOAD']));
-      }
-      
-      if ($BatchDownloader->getParam('status') == 'new' and $BatchDownloader->getParam('nb_images') > 0)
-      {
-        $set['U_EDIT_SET'] = add_url_params(BATCH_DOWNLOAD_PUBLIC . 'view', array('set_id'=>$_GET['set_id']));
-      }
-      
+      // alert limit overflow
       if ($BatchDownloader->getParam('nb_images') > $conf['batch_download']['max_elements'])
       {
         $template->assign('elements_error', sprintf(
@@ -53,8 +43,51 @@ switch ($page['sub_section'])
           $BatchDownloader->getParam('nb_images') - $conf['batch_download']['max_elements']
           ));
       }
+      else
+      {
+        if ($BatchDownloader->getParam('status') == 'new')
+        {
+          $missing_derivatives = $BatchDownloader->getMissingDerivatives(true);
+        
+          // generate missing files
+          if (count($missing_derivatives))
+          {
+            $template->assign('missing_derivatives', $missing_derivatives);
+          }
+          // set ready
+          else
+          {
+            $BatchDownloader->updateParam('status', 'ready');
+          }
+        }
+        
+        // display download links
+        if ($BatchDownloader->getParam('status') != 'new')
+        {
+          $template->assign('zip_links', $BatchDownloader->getDownloadList(BATCH_DOWNLOAD_PUBLIC . 'init_zip'));
+        }
+      }
       
-      $set['U_CANCEL'] = add_url_params(BATCH_DOWNLOAD_PUBLIC . 'init_zip', array('set_id'=>$_GET['set_id'], 'cancel'=>'true'));
+      $set = $BatchDownloader->getSetInfo();
+      
+      // link to the zip
+      if (isset($next_file))
+      {
+        $set['U_DOWNLOAD'] = get_root_url().BATCH_DOWNLOAD_PATH . 'download.php?set_id='.$_GET['set_id'].'&amp;zip='.$_GET['zip'];
+        $page['infos'][] = sprintf(l10n('The archive is downloading, if the download doesn\'t start automatically please <a href="%s">click here</a>'), $set['U_DOWNLOAD']);
+      }
+      
+      // link to edit page
+      if ($BatchDownloader->getParam('status') != 'download' and $BatchDownloader->getParam('status') != 'done' and $BatchDownloader->getParam('nb_images') > 0)
+      {
+        $set['U_EDIT_SET'] = add_url_params(BATCH_DOWNLOAD_PUBLIC . 'view', array('set_id'=>$_GET['set_id']));
+      }
+      
+      // cancel link
+      if ($BatchDownloader->getParam('status') != 'done')
+      {
+        $set['U_CANCEL'] = add_url_params(BATCH_DOWNLOAD_PUBLIC . 'init_zip', array('set_id'=>$_GET['set_id'], 'cancel'=>'true'));
+      }
       
       $template->assign(array(
         'set' => $set,

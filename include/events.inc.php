@@ -86,16 +86,15 @@ function batch_download_index_button()
     
     if ($set !== false)
     {
-      $BatchDownloader = new BatchDownloader('new', $page['items'], $set['type'], $set['id']);
+      $BatchDownloader = new BatchDownloader('new', $page['items'], $set['type'], $set['id'], $set['size']);
       
       if ($BatchDownloader->getParam('nb_images') != 0)
       {
-        $BatchDownloader->getEstimatedArchiveNumber();
-        
         // if we plan only one zip with less elements than 'max_elements', the download starts immediately
         if (
           $BatchDownloader->getParam('nb_images') <= $conf['batch_download']['max_elements']
-          and $BatchDownloader->getParam('nb_zip') == 1
+          and $BatchDownloader->getParam('size') == 'original'
+          and $BatchDownloader->getEstimatedArchiveNumber() == 1
         )
         {
           $BatchDownloader->createNextArchive(true); // make sure we have only one zip, even if 'max_size' is exceeded
@@ -132,15 +131,39 @@ function batch_download_index_button()
     $url = duplicate_index_url(array(), array('action'));
   }
   
-  $url = add_url_params($url, array('action'=>'advdown_set'));
+  $url = add_url_params($url, array('action'=>'advdown_set', 'down_size'=>''));
   
   // toolbar button
-  $button = '<script type="text/javascript">var batchdown_count = '.count($page['items']).'; var batchdown_string = "'.l10n('Confirm the download of %d pictures?').'";</script>
-    <li><a href="'. $url .'" title="'.l10n('Download all pictures of this selection').'" class="pwg-state-default pwg-button" rel="nofollow"
-    onClick="return confirm(batchdown_string.replace(\'%d\', batchdown_count));">
-			<span class="pwg-icon batch-downloader-icon" style="background:url(\'' . get_root_url().BATCH_DOWNLOAD_PATH . 'template/zip.png\') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">'.l10n('Download').'</span>
-		</a></li>';
-  $template->concat('PLUGIN_INDEX_ACTIONS', $button);
+  $template->set_filename('batchdwn_button', realpath(BATCH_DOWNLOAD_PATH.'template/download_button.tpl'));
+  $template->assign(array(
+    'BATCH_DOWNLOAD_PATH' => BATCH_DOWNLOAD_PATH,
+    'BATCH_DWN_COUNT' => count($page['items']),
+    'BATCH_DWN_URL' => $url,
+    ));
+    
+  $type_map = ImageStdParams::get_defined_type_map();
+  foreach ($type_map as $params)
+  {
+    $template->append(
+      'BATCH_DOWNLOAD_SIZES',
+      array(
+        'TYPE' => $params->type,
+        'DISPLAY' => l10n($params->type),
+        'SIZE' => $params->sizing->ideal_size[0].' x '.$params->sizing->ideal_size[1],
+        )
+      );
+  }
+  $template->append(
+    'BATCH_DOWNLOAD_SIZES',
+    array(
+      'TYPE' => 'original',
+      'DISPLAY' => l10n('Original'),
+      'SIZE' => null,
+      )
+    );
+    
+  $button = $template->parse('batchdwn_button', true);
+  $template->add_index_button($button, 50);
   $template->concat('COLLECTION_ACTIONS', $button);
 }
 
