@@ -1,1 +1,1 @@
-Sta gebruikers toe om plaatjes sets te downloaden als ZIP. Compatibel met User Collections.
+Sta gebruikers toe om meerdere afbeeldingen tegelijk te downloaden als ZIP. Werkt goed samen met pluging: User Collections.
