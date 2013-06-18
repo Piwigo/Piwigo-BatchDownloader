@@ -69,4 +69,12 @@ Turpināt?   ';
 $lang['Warning: Only registered users can use Batch Downloader.'] = 'Uzmanību: Grupas Lejupielādētāju var izmantot tikai reģistrētie lietotāji.';
 $lang['What can be downloaded?'] = 'Ko būtu iespējams lejpielādēt?';
 $lang['No result'] = 'Nav rezultātu';
+$lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Atvainojiet, šeit nav ko lejupielādēt.Dažī faili ir izslēgti, jo  <i title="Neatļautie tipi ir : %s">filetype restrictions</i>';
+$lang['Please wait, your download is being prepared. This page will refresh automatically refresh when it is ready.'] = 'Lūdzu uzgaidiet, jūsu lejupielāde tiek gatavota. Šī lapa atjaunināsies automātiski, kad būs gatava.';
+$lang['Unknown'] = 'Nezināms';
+$lang['Preparation'] = 'Sagatavošana';
+$lang['Archive #%d (ready)'] = 'Arhīvs #%d (kārtībā)';
+$lang['Archive #%d (pending)'] = 'Arhīvs #%d (kavējas)';
+$lang['Archive #%d (already downloaded)'] = 'Arhīvs #%d (jau lejupielādēts)';
+$lang['%d MB'] = '%d MB';
 ?>
