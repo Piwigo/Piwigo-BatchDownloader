@@ -69,4 +69,11 @@ $lang['Warning: Only registered users can use Batch Downloader.'] = 'Upozornenie
 $lang['No result'] = 'Bez výsledku';
 $lang['What can be downloaded?'] = 'Čo môže byť stiahnuté?';
 $lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Prepáčte, ale nie je nič na prevzatie. Niektoré súbory môžu byť vylúčené z dôvodu <i title="Povolené sú: %s"> typy súborov pre obmedzenia</i>.';
+$lang['Please wait, your download is being prepared. This page will refresh automatically refresh when it is ready.'] = 'Čakajte, stiahnutie sa pripravuje. Stránka bude automaticky obnovená, keď bude pripravená.';
+$lang['Preparation'] = 'Príprava';
+$lang['Unknown'] = 'Neznámy';
+$lang['Archive #%d (ready)'] = 'Archív #%d (pripravený)';
+$lang['Archive #%d (pending)'] = 'Archív #%d (čaká)';
+$lang['Archive #%d (already downloaded)'] = 'Archív #%d (bol stiahnutý)';
+$lang['%d MB'] = '%d MB';
 ?>
