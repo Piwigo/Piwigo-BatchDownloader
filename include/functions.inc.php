@@ -33,7 +33,7 @@ function get_set_info_from_page()
       else if (isset($page['flat'])) // this is for the whole gallery only, flat mode for category is above
       {
         $batch_type = 'flat';
-        $batch_id = 0;
+        $batch_id = null;
       }
       break;
     case 'tags':
@@ -57,7 +57,7 @@ function get_set_info_from_page()
     case 'list':
     case 'recent_pics':
       $batch_type = $page['section'];
-      $batch_id = 0;
+      $batch_id = null;
       break;
     default:
       return false;

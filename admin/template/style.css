@@ -37,6 +37,9 @@ TABLE.table2 THEAD TD {
 .table2 .size {
   width:100px;
 }
+.table2 .img_size {
+  width:120px;
+}
 .table2 .images {
   width:100px;
 }

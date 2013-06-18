@@ -63,7 +63,19 @@ if (isset($_POST['filter']))
       array_push($where_clauses, 'status = "'.$_POST['status'].'"');
   }
   
-  $order_by = $_POST['order_by'].' '.$_POST['direction'];
+  if ($_POST['size'] != -1)
+  {
+    array_push($where_clauses, 'size = "'.$_POST['size'].'"');
+  }
+  
+  if ($_POST['order_by'] == 'size')
+  {
+    $order_by = 'FIND_IN_SET(size, "square,thumb,2small,xsmall,small,medium,large,xlarge,xxlarge,original") '.$_POST['direction'];
+  }
+  else
+  {
+    $order_by = $_POST['order_by'].' '.$_POST['direction'];
+  }
 }
 
 
@@ -121,11 +133,21 @@ $page['type_items'] = array(
   'collection' => l10n('User collection'),
   );
 
+$page['size_items'] = array(
+  -1 => '------------',
+  );
+foreach (ImageStdParams::get_defined_type_map() as $params)
+{
+  $page['size_items'][ $params->type ] = l10n($params->type);
+}
+$page['size_items']['original'] = l10n('Original');
+
 $page['order_by_items'] = array(
   'date_creation' => l10n('Creation date'),
   'total_size' => l10n('Total size'),
   'nb_images' => l10n('Number of images'),
   'nb_archives' => l10n('Number of archives'),
+  'size' => l10n('Photo sizes'),
   );
 
 $page['direction_items'] = array(
@@ -138,6 +160,8 @@ $template->assign(array(
   'status_selected' => isset($_POST['status']) ? $_POST['status'] : '',
   'type_options' => $page['type_items'],
   'type_selected' => isset($_POST['type']) ? $_POST['type'] : '',
+  'size_options' => $page['size_items'],
+  'size_selected' => isset($_POST['size']) ? $_POST['size'] : '',
   'order_options' => $page['order_by_items'],
   'order_selected' => isset($_POST['order_by']) ? $_POST['order_by'] : '',
   'direction_options' => $page['direction_items'],

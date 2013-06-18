@@ -140,9 +140,8 @@ function batch_download_index_button()
     'BATCH_DWN_COUNT' => count($page['items']),
     'BATCH_DWN_URL' => $url,
     ));
-    
-  $type_map = ImageStdParams::get_defined_type_map();
-  foreach ($type_map as $params)
+  
+  foreach (ImageStdParams::get_defined_type_map() as $params)
   {
     $template->append(
       'BATCH_DOWNLOAD_SIZES',

@@ -92,7 +92,7 @@ setTimeout("next_derivative()", 1000);
   <ul class="set-infos">
     <li class="error">{$elements_error}</li>
     <li><b>{'%d photos'|@translate|@sprintf:$set.NB_IMAGES}</b>{if $set.U_EDIT_SET}, <a href="{$set.U_EDIT_SET}" rel="nofollow">{'Edit the set'|@translate}</a>{/if}</li>
-    <li><b>{'Size'|@translate}:</b> {$set.SIZE} {if $set.SIZE_INFO}<span class="downloadSizeDetails">({$set.SIZE_INFO})</span>{/if}</li>
+    <li><b>{'Photo sizes'|@translate}:</b> {if $set.SIZE=='original'}{'Original'|@translate}{else}{$set.SIZE|@translate}{/if} {if $set.SIZE_INFO}<span class="downloadSizeDetails">({$set.SIZE_INFO})</span>{/if}</li>
     <li><b>{'Estimated size'|@translate}:</b> {$set.TOTAL_SIZE}</li>
     <li><b>{'Estimated number of archives'|@translate}:</b> {$set.NB_ARCHIVES} <i>({'real number of archives can differ'|@translate})</i></li>
     <li><b>{'Created on'|@translate}:</b> {$set.DATE_CREATION}</li>

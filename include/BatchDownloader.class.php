@@ -11,8 +11,8 @@ class BatchDownloader
    * __construct
    * @param: mixed set id (##|'new')
    * @param: array images
-   * @param: string set type ('album'|'tag'|'selection')
-   * @param: int set type id (for retrieving album infos for instance)
+   * @param: string set type (calendar,category,flat,tags,search,favorites,most_visited,best_rated,list,recent_pics,collection)
+   * @param: mixed set type id (for calendar,category,tags,search,collection)
    * @param: string size to download
    */
   function __construct($set_id, $images=array(), $type=null, $type_id=null, $size='original')
@@ -31,8 +31,8 @@ class BatchDownloader
       'last_zip' => 0,
       'nb_images' => 0,
       'total_size' => 0,
-      'estimated_total_size' => 0,
       'status' => 'new',
+      'estimated_total_size' => 0, // not in db
       );
     $this->images = array();
     
@@ -42,8 +42,7 @@ class BatchDownloader
       $query = '
 SELECT *
   FROM '.BATCH_DOWNLOAD_TSETS.'
-  WHERE
-    id = '.$set_id.'
+  WHERE id = '.$set_id.'
     '.(!is_admin() ? 'AND user_id = '.$this->data['user_id'] : null).'
 ;';
       $result = pwg_query($query);
@@ -55,7 +54,7 @@ SELECT *
           pwg_db_fetch_assoc($result)
           );
         
-        // make sur all pictures of the set exist
+        // make sure all pictures of the set exist
         $query = '
 DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
   WHERE image_id NOT IN (
@@ -65,9 +64,7 @@ DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
         pwg_query($query);
       
         $query = '
-SELECT
-    image_id,
-    zip
+SELECT *
   FROM '.BATCH_DOWNLOAD_TIMAGES.'
   WHERE set_id = '.$this->data['id'].'
 ;';
@@ -88,8 +85,8 @@ SELECT
     {
       if ($size != 'original')
       {
-        $type_map = array_keys(ImageStdParams::get_defined_type_map());
-        if (!in_array($size, $type_map))
+        $types = array_keys(ImageStdParams::get_defined_type_map());
+        if (!in_array($size, $types))
         {
           throw new Exception(sprintf(l10n('Invalid size %s'), $size));
         }
@@ -165,7 +162,7 @@ INSERT INTO '.BATCH_DOWNLOAD_TSETS.'(
   
   /**
    * getImages
-   * @return: array
+   * @return: array(image_id => zip_idx)
    */
   function getImages()
   {
@@ -212,8 +209,6 @@ DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
    */
   function addImages($image_ids)
   {
-    global $conf;
-    
     if (empty($image_ids) or !is_array($image_ids)) return;
     
     $query = '
@@ -228,17 +223,24 @@ SELECT id, file
     foreach ($images as $image_id => $file)
     {
       if ($this->isInSet($image_id)) continue;
-      if (!in_array(get_extension($file), $conf['batch_download']['allowed_ext'])) continue;
+      if (!in_array(get_extension($file), $this->conf['allowed_ext'])) continue;
       
       $this->images[ $image_id ] = 0;
-      array_push($inserts, array('set_id'=>$this->data['id'], 'image_id'=>$image_id, 'zip'=>0));
+      $inserts[] = array(
+        'set_id' => $this->data['id'],
+        'image_id' => $image_id,
+        'zip' => 0,
+        );
     }
     
-    mass_inserts(
-      BATCH_DOWNLOAD_TIMAGES,
-      array('set_id', 'image_id', 'zip'),
-      $inserts
-      );
+    if (count($inserts))
+    {
+      mass_inserts(
+        BATCH_DOWNLOAD_TIMAGES,
+        array('set_id','image_id','zip'),
+        $inserts
+        );
+    }
       
     $this->updateParam('nb_images', count($this->images));
   }
@@ -258,7 +260,8 @@ DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
   }
   
   /**
-   * get missing derivatives files
+   * getMissingDerivatives
+   * @param: bool update, if true, update IMAGE_SIZES with FS datas
    * @return: array of i.php urls
    */
   function getMissingDerivatives($update=false)
@@ -267,8 +270,6 @@ DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
     {
       return array();
     }
-    
-    global $conf;
     
     $root_url = get_root_url();
     $uid = '&b='.time();
@@ -279,14 +280,19 @@ DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
     $image_ids = array_keys($this->images);
     $to_update = $urls = $inserts = array();
     
+    global $conf;
+    $conf['old_question_mark_in_urls'] = $conf['question_mark_in_urls'];
+    $conf['old_php_extension_in_urls'] = $conf['php_extension_in_urls'];
+    $conf['old_derivative_url_style'] = $conf['derivative_url_style'];
     $conf['question_mark_in_urls'] = $conf['php_extension_in_urls'] = true;
-    $conf['derivative_url_style'] = 2; //script
+    $conf['derivative_url_style'] = 2;
     
     // images which we need to update stats
     if ($update)
     {
       $query = '
-SELECT image_id, filemtime FROM '.IMAGE_SIZES_TABLE.'
+SELECT image_id, filemtime
+  FROM '.IMAGE_SIZES_TABLE.'
   WHERE image_id IN('.implode(',', $image_ids).')
     AND type = "'.$this->data['size'].'"
 ;';
@@ -327,7 +333,6 @@ SELECT id, path, width, height, rotation
       else
       {
         $derivative = new DerivativeImage($this->data['size'], $src_image);
-        // if ($this->data['size'] != $derivative->get_type()) continue;
         
         $filemtime = @filemtime($derivative->get_path());
         $src_mtime = @filemtime(PHPWG_ROOT_PATH.$row['path']);
@@ -367,6 +372,10 @@ DELETE FROM '.IMAGE_SIZES_TABLE.'
         $inserts
         );
     }
+    
+    $conf['question_mark_in_urls'] = $conf['old_question_mark_in_urls'];
+    $conf['php_extension_in_urls'] = $conf['old_php_extension_in_urls'];
+    $conf['derivative_url_style'] = $conf['old_derivative_url_style'];
     
     return $urls;
   }
@@ -411,7 +420,7 @@ DELETE FROM '.IMAGE_SIZES_TABLE.'
         $this->addImages($images_ids);
       }
       
-      $this->getEstimatedArchiveNumber();
+      $this->getEstimatedArchiveNumber(true);
       
       $this->updateParam('date_creation', date('Y-m-d H:i:s'));
     }
@@ -571,20 +580,21 @@ SELECT SUM(filesize) AS total
 ;';
     }
     
-    list($total) = pwg_db_fetch_row(pwg_query($query));
-    $this->data['estimated_total_size'] = $total;
-    return $total;
+    list($this->data['estimated_total_size']) = pwg_db_fetch_row(pwg_query($query));
+    return $this->data['estimated_total_size'];
   }
   
   /**
    * getEstimatedArchiveNumber
    * @return: int
    */
-  function getEstimatedArchiveNumber()
+  function getEstimatedArchiveNumber($force=false)
   {
     if ($this->data['status'] == 'done') return $this->data['nb_zip'];
+    if ( !empty($this->data['nb_zip']) and !$force ) return $this->data['nb_zip'];
     
-    return ceil( $this->getEstimatedTotalSize() / ($this->conf['max_size']*1024) );
+    $this->updateParam('nb_zip', ceil( $this->getEstimatedTotalSize($force) / ($this->conf['max_size']*1024) ));
+    return $this->data['nb_zip'];
   }
   
   /**
@@ -648,15 +658,18 @@ SELECT SUM(filesize) AS total
     $path.= get_username($this->data['user_id']) . '_';
     $path.= $set['BASENAME'] . '_';
     $path.= $this->data['user_id'] . $this->data['id'];
-    $path.= '_part' . $i;
-    $path.= '.zip';
+    $path.= '_part' . $i . '.zip';
     
     return $path;
   }
   
   /**
    * getNames
-   * @return: array
+   * @return: array 
+   *    NAME, set name with HTML
+   *    sNAME, set name without HTML
+   *    BASENAME, set filename
+   *    COMMENT, set comment
    */
   function getNames()
   {    
@@ -847,12 +860,11 @@ SELECT SUM(filesize) AS total
     $set = array(
       'NB_IMAGES' =>     $this->data['nb_images'],
       'NB_ARCHIVES' =>   $this->data['status']=='new' ? l10n('Unknown') : $this->getEstimatedArchiveNumber(),
-      'STATUS' =>        $this->data['status'],
+      'STATUS' =>        $this->data['status']=='ready' ? 'new' : $this->data['status'],
       'LAST_ZIP' =>      $this->data['last_zip'],
       'TOTAL_SIZE' =>    $this->data['status']=='new' ? l10n('Unknown') : sprintf(l10n('%d MB'), ceil($this->getEstimatedTotalSize()/1024)),
       'DATE_CREATION' => format_date($this->data['date_creation'], true),
-      'SIZE_ID' =>       $this->data['size'],
-      'SIZE' =>          $this->data['size']=='original' ? l10n('Original') : l10n($this->data['size']),
+      'SIZE' =>          $this->data['size'],
       );
       
     if ($this->data['size'] != 'original')

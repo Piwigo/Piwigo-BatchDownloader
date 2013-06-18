@@ -19,6 +19,11 @@
   </label>
   
   <label>
+    {'Photo sizes'|@translate}
+    {html_options name=size options=$size_options selected=$size_selected}
+  </label>
+  
+  <label>
     {'Status'|@translate}
     {html_options name=status options=$status_options selected=$status_selected}
   </label>
@@ -48,9 +53,10 @@
       <td class="user">{'Username'|@translate}</td>
       <td class="type">{'Set type'|@translate}</td>
       <td class="date">{'Creation date'|@translate}</td>
-      <td class="size">{'Total size'|@translate}</td>
+      <td class="img_size">{'Photo sizes'|@translate}</td>
       <td class="images">{'Number of images'|@translate}</td>
       <td class="archives">{'Number of archives'|@translate}</td>
+      <td class="size">{'Total size'|@translate}</td>
       <td class="status">{'Status'|@translate}</td>
       <td class="action">{'Actions'|@translate}</td>
     </tr>
@@ -61,9 +67,10 @@
     <td>{$set.USERNAME}</td>
     <td>{$set.NAME}</td>
     <td style="text-align:center;">{$set.DATE_CREATION}</td>
-    <td>{$set.TOTAL_SIZE}</td>
+    <td>{if $set.SIZE=='original'}{'Original'|@translate}{else}{$set.SIZE|@translate}{/if}</td>
     <td>{$set.NB_IMAGES}</td>
     <td>{$set.NB_ARCHIVES}</td>
+    <td>{$set.TOTAL_SIZE}</td>
     <td>
       {$set.STATUS|@translate}
       {if $set.STATUS == 'download'}<i style="font-size:0.8em;">({$set.LAST_ZIP}/{$set.NB_ARCHIVES})</i>{/if}
