@@ -31,6 +31,8 @@ if (defined('IN_ADMIN'))
 }
 else
 {
+  add_event_handler('init', 'batch_downloader_remove_image');
+  
   add_event_handler('loc_end_section_init', 'batch_download_section_init');
   add_event_handler('loc_end_index', 'batch_download_page');
 

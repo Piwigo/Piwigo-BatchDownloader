@@ -172,7 +172,7 @@ function batch_download_thumbnails_list_prefilter($content, &$smarty)
   $search = '#(<li>|<li class="gthumb">)#';
   $replace = '$1
 {strip}<a class="removeSet" href="{$U_VIEW}&amp;remove={$thumbnail.id}" data-id="{$thumbnail.id}" rel="nofollow">
-{\'Remove from download set\'|@translate}&nbsp;<img src="{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/image_delete.png" title="{\'Remove from download set\'|@translate}">
+{\'Remove from download set\'|@translate}&nbsp;<img src="{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/images/image_delete.png" title="{\'Remove from download set\'|@translate}">
 </a>{/strip}';
 
   // custom CSS and AJAX request

@@ -11,15 +11,23 @@ jQuery(".removeSet").click(function() {ldelim}
   
   jQuery.ajax({ldelim}
     type: "POST",
-    url: "{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}remove_image.php",
-    data: {ldelim} "set_id": "{$SET_ID}", "toggle_id": toggle_id }
-  }).done(function(msg) {ldelim}
-    if (msg == "false") {ldelim}
-      $trigger.parent("li").hide("fast", function() {ldelim} $trigger.remove() });
-      jQuery(".nbImagesSet").html(parseInt(jQuery(".nbImagesSet").html()) -1);
-      
-      if (typeof GThumb == "object") GThumb.build();
-    } else {ldelim}
+    url: "{$ROOT_URL}index.php",
+    data: {ldelim}
+      action: "bd_remove_image",
+      set_id: "{$SET_ID}",
+      toggle_id: toggle_id
+    },
+    success: function(msg) {ldelim}
+      if (msg == "ok") {ldelim}
+        $trigger.parent("li").hide("fast", function() {ldelim} $trigger.remove() });
+        jQuery(".nbImagesSet").html(parseInt(jQuery(".nbImagesSet").html()) -1);
+        
+        if (typeof GThumb == "object") GThumb.build();
+      } else {ldelim}
+        $trigger.html('{'Un unknown error occured'|@translate}');
+      }
+    },
+    error: function() {ldelim}
       $trigger.html('{'Un unknown error occured'|@translate}');
     }
   });

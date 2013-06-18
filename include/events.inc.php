@@ -278,4 +278,32 @@ UPDATE '.BATCH_DOWNLOAD_TSETS.'
   }
 }
 
+/* ajax request to remove an image */
+function batch_downloader_remove_image()
+{
+  if (!isset($_POST['action']) || $_POST['action']!='bd_remove_image') return;
+  
+  check_status(ACCESS_CLASSIC);
+
+  if (isset($_POST['set_id']) and isset($_POST['toggle_id']))
+  {
+    try
+    {
+      $BatchDownloader = new BatchDownloader($_POST['set_id']);
+      $BatchDownloader->removeImages(array($_POST['toggle_id']));
+      echo 'ok';
+    }
+    catch (Exception $e)
+    {
+      echo 'error';
+    }
+  }
+  else
+  {
+    echo 'error';
+  }
+  
+  exit(0);
+}
+
 ?>
