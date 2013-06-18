@@ -68,4 +68,11 @@ $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finis
 $lang['What can be downloaded?'] = 'Mi letölthető?';
 $lang['real number of archives can differ'] = 'Az archívum valós számai különbözőek lehetnek';
 $lang['No result'] = 'Nincs találat';
+$lang['%d MB'] = '%d MB';
+$lang['Archive #%d (already downloaded)'] = ' #%d archívum (letölthető)';
+$lang['Archive #%d (pending)'] = '#%d archívum (folyamatban)';
+$lang['Archive #%d (ready)'] = '#%d archívum (kész)';
+$lang['Please wait, your download is being prepared. This page will refresh automatically refresh when it is ready.'] = 'Kérem várjon, a letöltés készül. Amikor kész, az oldal automatikusan frissül.';
+$lang['Preparation'] = 'Előkészítés';
+$lang['Unknown'] = 'Ismeretlen';
 ?>
