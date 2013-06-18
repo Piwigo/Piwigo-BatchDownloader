@@ -68,4 +68,12 @@ $lang['Estimated number of archives'] = 'Arvestuslik arhiivide arv';
 $lang['Estimated size'] = 'Arvestuslik suurus';
 $lang['No result'] = 'Tulemusteta';
 $lang['What can be downloaded?'] = 'Mida alla laadida?';
+$lang['%d MB'] = '%d MB';
+$lang['Archive #%d (already downloaded)'] = 'Arhiveeritud #%d (juba alla laetud)';
+$lang['Archive #%d (pending)'] = 'Arhiveeritud #%d (ootel)';
+$lang['Archive #%d (ready)'] = 'Arhiveeritud #%d (valmis)';
+$lang['Please wait, your download is being prepared. This page will refresh automatically refresh when it is ready.'] = 'Palun oodake, allalaadimist valmistatakse ette. See leht laeb ennast automaatselt uuesti, kui uuendamine on valmis.';
+$lang['Preparation'] = 'Ettevalmistus';
+$lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Vabandame, ei ole midagi alla laadida. Mõned failid võivad olla välja arvatud järgmisel põhjusel:  <i title="Lubatud tüübid on : %s">failitüüpide kitsendused</i>.';
+$lang['Unknown'] = 'Teadmata';
 ?>
