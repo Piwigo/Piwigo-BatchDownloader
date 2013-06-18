@@ -65,7 +65,7 @@ function batch_download_index_button()
   switch ($page['section'])
   {
   case 'categories':
-    if (!isset($page['category'])) return; // don't download the full gallery in flat mode !
+    if (!isset($page['category']) && !isset($page['chronology_field'])) return; // don't download the full gallery in flat mode !
     
     if (!in_array('categories', $conf['batch_download']['what'])) return;
     break;

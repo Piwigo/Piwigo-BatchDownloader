@@ -447,12 +447,12 @@ SELECT
       if ($this->data['size'] != 'original')
       {
         $query = '
-SELECT image_id, filesize
+SELECT image_id, filesize, width, height
   FROM '.IMAGE_SIZES_TABLE.'
   WHERE image_id IN ('.implode(',', array_keys($images_to_add)).')
     AND type = "'.$this->data['size'].'"
 ;';
-        $filesizes = simple_hash_from_query($query, 'image_id', 'filesize');
+        $filesizes = hash_from_query($query, 'image_id');
       }
       
       // open zip
@@ -471,9 +471,12 @@ SELECT image_id, filesize
           continue;
         }
         
+        $filename =  $row['id'].'_'.stripslashes(get_filename_wo_extension($row['file']));
+        
         if ($this->data['size'] == 'original')
         {
-          $zip->addFile(PHPWG_ROOT_PATH.$row['path'], $row['id'].'_'.stripslashes(get_filename_wo_extension($row['file'])).'.'.get_extension($row['path']));
+          $filename.= '_'.$row['width'].'x'.$row['height'];
+          $zip->addFile(PHPWG_ROOT_PATH.$row['path'], $filename.'.'.get_extension($row['path']));
           $total_size+= $row['filesize'];
         }
         else
@@ -483,7 +486,7 @@ SELECT image_id, filesize
           // no-image files
           if ($src_image->is_mimetype())
           {
-            $zip->addFile(PHPWG_ROOT_PATH.$row['path'], $row['id'].'_'.stripslashes(get_filename_wo_extension($row['file'])).'.'.get_extension($row['path']));
+            $zip->addFile(PHPWG_ROOT_PATH.$row['path'], $filename.'.'.get_extension($row['path']));
             $total_size+= $row['filesize'];
           }
           // images files
@@ -491,9 +494,10 @@ SELECT image_id, filesize
           {
             $derivative = new DerivativeImage($this->data['size'], $src_image);
             $path = $derivative->get_path();
-        
-            $zip->addFile($path, $row['id'].'_'.stripslashes(get_filename_wo_extension(basename($path))).'.'.get_extension($path));
-            $total_size+= $filesizes[ $row['id'] ];
+            
+            $filename.= '_'.$filesizes[ $row['id'] ]['width'].'x'.$filesizes[ $row['id'] ]['height'];
+            $zip->addFile($path, $filename.'.'.get_extension($path));
+            $total_size+= $filesizes[ $row['id'] ]['filesize'];
           }
         }
         
@@ -651,12 +655,9 @@ SELECT SUM(filesize) AS total
     if ($i === null) $i = $this->data['last_zip'];
     $set = $this->getNames();
     
-    include_once(PHPWG_ROOT_PATH . 'admin/include/functions.php');
-    
     $path = BATCH_DOWNLOAD_LOCAL . 'u-'. $this->data['user_id'] . '/';
     $path.= !empty($this->conf['archive_prefix']) ? $this->conf['archive_prefix'] . '_' : null;
-    $path.= get_username($this->data['user_id']) . '_';
-    $path.= $set['BASENAME'] . '_';
+    $path.= $set['BASENAME'] . '_' . $this->data['size'] . '_';
     $path.= $this->data['user_id'] . $this->data['id'];
     $path.= '_part' . $i . '.zip';
     

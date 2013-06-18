@@ -32,8 +32,7 @@ function get_set_info_from_page()
       }
       else if (isset($page['flat'])) // this is for the whole gallery only, flat mode for category is above
       {
-        $batch_type = 'flat';
-        $batch_id = null;
+        return false;
       }
       break;
     case 'tags':
