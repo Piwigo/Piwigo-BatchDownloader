@@ -69,4 +69,11 @@ $lang['Warning: Only registered users can use Batch Downloader.'] = 'Advarsel: K
 $lang['What can be downloaded?'] = 'Hvad kan downloades?';
 $lang['No result'] = 'Ingen fundet';
 $lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Beklager, der er intet af downloade.  Nogle filer kan være blevet fravalgt, på grund af <i title="Autorisationstyperne er: %s">filtypebegrænsninger</i>.';
+$lang['%d MB'] = '%d MB';
+$lang['Archive #%d (already downloaded)'] = 'Arkivet #%d (allerede hentet)';
+$lang['Archive #%d (pending)'] = 'Arkivet #%d (på vej)';
+$lang['Archive #%d (ready)'] = 'Arkivet #%d (parat)';
+$lang['Please wait, your download is being prepared. This page will refresh automatically refresh when it is ready.'] = 'Vent mens din download forberedes. Siden vil automatisk blive genopfrisket, når den er parat.';
+$lang['Preparation'] = 'Forberedelse';
+$lang['Unknown'] = 'Ukendt';
 ?>
