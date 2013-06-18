@@ -68,4 +68,12 @@ $lang['Estimated size'] = 'Tamanho estimado';
 $lang['Warning: Only registered users can use Batch Downloader.'] = 'Aviso: Somente usuários registrados podem usar Batch Downloader.';
 $lang['What can be downloaded?'] = 'O que pode ser baixado?';
 $lang['No result'] = 'Nenhum resultado';
+$lang['%d MB'] = '%d MB';
+$lang['Archive #%d (already downloaded)'] = 'Arquivo #%d(já foi baixado)';
+$lang['Archive #%d (pending)'] = 'Arquivo #%d(pendente)';
+$lang['Archive #%d (ready)'] = 'Arquivo #%d(pronto)';
+$lang['Please wait, your download is being prepared. This page will refresh automatically refresh when it is ready.'] = 'Aguarde, o arquivo a ser baixado está sendo preparado. Esta página será atualizada automaticamente quando ele estiver pronto.';
+$lang['Preparation'] = 'Preparação';
+$lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Desculpe, não há nada para baixar. Alguns arquivos podem ter sido excluídos por causa de <i title="Tipos authorizados são: %s">restrições de tipo de arquivo</i>.';
+$lang['Unknown'] = 'Desconhecido';
 ?>
