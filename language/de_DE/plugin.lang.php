@@ -75,4 +75,7 @@ $lang['Preparation'] = 'Vorbereitung';
 $lang['Unknown'] = 'Unbekannt';
 $lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Entschuldigung, es gibt nichts herunterzuladen. 
 Einige Dateien könnten wegen Typen-Beschränkung(en) ausgeschlossen sein, <i title="Erlaubte Typen sind : %s">Datei-Typen-Beschränkungen</i>';
+$lang['Archive #%d (already downloaded)'] = 'Archiv #%d (bereits vorhanden)';
+$lang['Archive #%d (pending)'] = 'Archiv #%d (ausstehend)';
+$lang['Archive #%d (ready)'] = 'Archiv #%d (verfügbar)';
 ?>
