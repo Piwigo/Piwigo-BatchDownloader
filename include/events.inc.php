@@ -27,6 +27,7 @@ function batch_download_section_init()
       case 'view':
         $page['sub_section'] = 'view';
         $page['section_title'].= l10n('Edit the set');
+        if (isset($conf['GThumb'])) $conf['GThumb']['big_thumb'] = false; // big thumb is buggy with removes
         break;
       default:
         redirect('index.php');
@@ -134,7 +135,6 @@ function batch_download_index_button()
   $url = add_url_params($url, array('action'=>'advdown_set', 'down_size'=>''));
   
   // toolbar button
-  $template->set_filename('batchdwn_button', realpath(BATCH_DOWNLOAD_PATH.'template/download_button.tpl'));
   $template->assign(array(
     'BATCH_DOWNLOAD_PATH' => BATCH_DOWNLOAD_PATH,
     'BATCH_DWN_COUNT' => count($page['items']),
@@ -161,6 +161,7 @@ function batch_download_index_button()
       )
     );
     
+  $template->set_filename('batchdwn_button', realpath(BATCH_DOWNLOAD_PATH.'template/download_button.tpl'));
   $button = $template->parse('batchdwn_button', true);
   $template->add_index_button($button, 50);
   $template->concat('COLLECTION_ACTIONS', $button);

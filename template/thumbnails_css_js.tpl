@@ -19,10 +19,12 @@ jQuery(".removeSet").click(function() {ldelim}
     },
     success: function(msg) {ldelim}
       if (msg == "ok") {ldelim}
-        $trigger.parent("li").hide("fast", function() {ldelim} $trigger.remove() });
-        jQuery(".nbImagesSet").html(parseInt(jQuery(".nbImagesSet").html()) -1);
+        $trigger.parent("li").hide("fast", function() {ldelim}
+          jQuery(this).remove();
+          if (typeof GThumb != "undefined") GThumb.build();
+        });
         
-        if (typeof GThumb == "object") GThumb.build();
+        jQuery(".nbImagesSet").html(parseInt(jQuery(".nbImagesSet").html()) -1);
       } else {ldelim}
         $trigger.html('{'Un unknown error occured'|@translate}');
       }

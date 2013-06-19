@@ -72,7 +72,7 @@ $lang['%d MB'] = '%d MB';
 $lang['Archive #%d (already downloaded)'] = ' #%d archívum (letölthető)';
 $lang['Archive #%d (pending)'] = '#%d archívum (folyamatban)';
 $lang['Archive #%d (ready)'] = '#%d archívum (kész)';
-$lang['Please wait, your download is being prepared. This page will refresh automatically refresh when it is ready.'] = 'Kérem várjon, a letöltés készül. Amikor kész, az oldal automatikusan frissül.';
+$lang['Please wait, your download is being prepared. This page will automatically refresh when it is ready.'] = 'Kérem várjon, a letöltés készül. Amikor kész, az oldal automatikusan frissül.';
 $lang['Preparation'] = 'Előkészítés';
 $lang['Unknown'] = 'Ismeretlen';
 ?>

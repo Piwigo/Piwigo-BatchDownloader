@@ -73,7 +73,7 @@ $lang['%d MB'] = '%d Мб';
 $lang['Archive #%d (already downloaded)'] = 'Архив #%d (ужЕ закачан)';
 $lang['Archive #%d (pending)'] = 'Архив #%d (ожидание)';
 $lang['Archive #%d (ready)'] = 'Архив #%d (готов)';
-$lang['Please wait, your download is being prepared. This page will refresh automatically refresh when it is ready.'] = 'Пожалуйста, подождите. Ваша закачка готовится. Эта страница обновится автоматически по мере готовности.';
+$lang['Please wait, your download is being prepared. This page will automatically refresh when it is ready.'] = 'Пожалуйста, подождите. Ваша закачка готовится. Эта страница обновится автоматически по мере готовности.';
 $lang['Preparation'] = 'Подготовка';
 $lang['Unknown'] = 'Неизвестно :(';
 ?>

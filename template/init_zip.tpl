@@ -25,8 +25,8 @@ function progress() {ldelim}
   jQuery('#progressBar').progressBar(derivatives.done/derivatives.total*100, {ldelim}
     width: 300,
     height: 24,
-    boxImage: '{$ROOT_PATH}{$BATCH_DOWNLOAD_PATH}template/images/progress_box.png',
-    barImage: '{$ROOT_PATH}{$BATCH_DOWNLOAD_PATH}template/images/progress_bar.png'
+    boxImage: '{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/images/progress_box.png',
+    barImage: '{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/images/progress_bar.png'
   });
 }
 
@@ -45,7 +45,7 @@ function next_derivative() {
   
   jQuery.manageAjax.add("queued", {
     type: 'GET', 
-    url: derivatives.elements[ derivatives.done ]+'&ajaxload=true', 
+    url: '{$ROOT_URL}'+derivatives.elements[ derivatives.done ]+'&ajaxload=true', 
     dataType: 'json',
     success: function(data) {
       derivatives.done++;
@@ -103,7 +103,7 @@ setTimeout("next_derivative()", 1000);
 <fieldset>
   <legend>{'Preparation'|@translate}</legend>
   
-  <p>{'Please wait, your download is being prepared. This page will refresh automatically refresh when it is ready.'|@translate}</p>
+  <p>{'Please wait, your download is being prepared. This page will automatically refresh when it is ready.'|@translate}</p>
   
   <div id="progressBar"></div>
   

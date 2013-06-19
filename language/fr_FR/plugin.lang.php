@@ -51,7 +51,7 @@ $lang['No result'] = 'Aucun résultat';
 $lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Désolé, il n\'y a rien à télécharger. Certains fichiers ont peut-être été exclu à cause de <i title="Les types autorisés sont : %s">leur type</i>.';
 $lang['Unknown'] = 'Inconnu';
 $lang['Preparation'] = 'Préparation';
-$lang['Please wait, your download is being prepared. This page will refresh automatically refresh when it is ready.'] = 'Veuillez patienter, votre téléchargement est en cours de préparation. La page se refraîchira automatiquement une fois terminé.';
+$lang['Please wait, your download is being prepared. This page will automatically refresh when it is ready.'] = 'Veuillez patienter, votre téléchargement est en cours de préparation. La page se refraîchira automatiquement une fois terminé.';
 $lang['%d MB'] = '%d Mio';
 $lang['Archive #%d (already downloaded)'] = 'Archive #%d (déjà téléchargée)';
 $lang['Archive #%d (ready)'] = 'Archive #%d (prête)';

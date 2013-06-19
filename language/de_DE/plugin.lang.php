@@ -70,7 +70,7 @@ $lang['Warning: Only registered users can use Batch Downloader.'] = 'Warnung: Nu
 $lang['What can be downloaded?'] = 'Was kann heruntergeladen werden? ';
 $lang['No result'] = 'kein Ergebnis';
 $lang['%d MB'] = '%d MB';
-$lang['Please wait, your download is being prepared. This page will refresh automatically refresh when it is ready.'] = 'Bitte hab etwas Geduld während das Herunterladen vorbereitet wird. Diese Seite aktualisiert sich automatisch sobald der Vorgang abgeschlossen ist.';
+$lang['Please wait, your download is being prepared. This page will automatically refresh when it is ready.'] = 'Bitte hab etwas Geduld während das Herunterladen vorbereitet wird. Diese Seite aktualisiert sich automatisch sobald der Vorgang abgeschlossen ist.';
 $lang['Preparation'] = 'Vorbereitung';
 $lang['Unknown'] = 'Unbekannt';
 $lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Entschuldigung, es gibt nichts herunterzuladen. 

@@ -69,7 +69,7 @@ $lang['Warning: Only registered users can use Batch Downloader.'] = 'UWAGA: Tylk
 $lang['What can be downloaded?'] = 'Co może zostać pobrane?';
 $lang['No result'] = 'Brak wyników';
 $lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Niestety, nie ma nic do pobrania. Niektóre pliki mogły zostać wyłączone z powodu <i title="Dopuszczalne typy to : %s">ograniczeń typów</i>.';
-$lang['Please wait, your download is being prepared. This page will refresh automatically refresh when it is ready.'] = 'Proszę czekać, trwa przygotowywanie do pobrania. Strona zostanie automatycznie przeładowana.';
+$lang['Please wait, your download is being prepared. This page will automatically refresh when it is ready.'] = 'Proszę czekać, trwa przygotowywanie do pobrania. Strona zostanie automatycznie przeładowana.';
 $lang['%d MB'] = '%d MB';
 $lang['Archive #%d (already downloaded)'] = 'Archiwum #%d (już pobrane)';
 $lang['Archive #%d (pending)'] = 'Archiwum #%d (oczekujące)';

@@ -69,7 +69,7 @@ $lang['Warning: Only registered users can use Batch Downloader.'] = 'Uyarı: Bat
 $lang['What can be downloaded?'] = 'Ne indirilebilir ?';
 $lang['No result'] = 'Sonuç yok';
 $lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Üzgünüz, indirilecek bir şey yok. <i title="İzin verilen tipler: %s"> dosya tipi kısıtlaması sebebiyle</i> bazı dosyalar hariç tutulmuş olabilirler.';
-$lang['Please wait, your download is being prepared. This page will refresh automatically refresh when it is ready.'] = 'Lütfen bekleyiniz, indirmeler hazırlanıyor. Hazır olduğunda bu sayfa otomatik olarak tazelenecektir.';
+$lang['Please wait, your download is being prepared. This page will automatically refresh when it is ready.'] = 'Lütfen bekleyiniz, indirmeler hazırlanıyor. Hazır olduğunda bu sayfa otomatik olarak tazelenecektir.';
 $lang['%d MB'] = '%d MB';
 $lang['Archive #%d (already downloaded)'] = 'Arşiv #%d (zaten indirildi)';
 $lang['Archive #%d (pending)'] = 'Arşiv #%d (bekliyor)';

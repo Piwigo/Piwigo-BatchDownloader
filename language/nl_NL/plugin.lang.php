@@ -71,7 +71,7 @@ $lang['What can be downloaded?'] = 'Wat kan er gedownload worden?';
 $lang['Archive #%d (already downloaded)'] = 'Archief #%d (reeds gedownload)';
 $lang['Archive #%d (pending)'] = 'Archief #%d (wachten)';
 $lang['Archive #%d (ready)'] = 'Archief #%d (klaar)';
-$lang['Please wait, your download is being prepared. This page will refresh automatically refresh when it is ready.'] = 'Even geduld, uw download wordt voorbereid. Deze pagina wordt automtisch bijgewerkt op het moment dat de download klaar is.';
+$lang['Please wait, your download is being prepared. This page will automatically refresh when it is ready.'] = 'Even geduld, uw download wordt voorbereid. Deze pagina wordt automtisch bijgewerkt op het moment dat de download klaar is.';
 $lang['Preparation'] = 'Voorbereiding';
 $lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Sorry, er is niets te downloaden. Mogelijk dat sommige bestanden niet gedownload kunnen worden in verband met <i title="Toegestane bestandstypes : %s">bestandstype beperkingen</i>.';
 $lang['Unknown'] = 'Onbekend';
