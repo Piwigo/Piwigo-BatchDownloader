@@ -70,4 +70,10 @@ $lang['Warning: Only registered users can use Batch Downloader.'] = 'Προει�
 $lang['What can be downloaded?'] = 'Τι μπορείτε να κατεβάσετε;';
 $lang['No result'] = 'Κανένα Αποτέλεσμα';
 $lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Δυστυχώς, δεν υπάρχει τίποτα για να κατεβάσετε. Ορισμένα αρχεία ενδέχεται να έχουν αποκλειστεί λόγω της <i title="Επιτρεπόμενοι τυποι αρχείων είναι: %s">περιορισμοί τύπων αρχείων</i>.';
+$lang['Unknown'] = 'Άγνωστο';
+$lang['Preparation'] = 'Προετοιμασία';
+$lang['Archive #%d (ready)'] = 'Το αρχείο #%d (έτοιμο)';
+$lang['Archive #%d (pending)'] = 'Το αρχείο #%d (εκκρεμεί)';
+$lang['Archive #%d (already downloaded)'] = 'Το αρχείο #%d (ήδη κατεβασμένο)';
+$lang['%d MB'] = '%d MB';
 ?>
