@@ -43,16 +43,17 @@ function next_derivative() {
     return;
   }
   
-  jQuery.manageAjax.add("queued", {
+  queuedManager.add({
     type: 'GET', 
-    url: '{$ROOT_URL}'+derivatives.elements[ derivatives.done ]+'&ajaxload=true', 
+    url: derivatives.elements[ derivatives.done ], 
     dataType: 'json',
-    success: function(data) {
+    data: { ajaxload: 'true' },
+    success: function() {
       derivatives.done++;
       progress();
       next_derivative();
     },
-    error: function(data) {
+    error: function() {
       derivatives.done++;
       progress();
       next_derivative();

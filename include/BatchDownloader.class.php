@@ -271,7 +271,6 @@ DELETE FROM '.BATCH_DOWNLOAD_TIMAGES.'
       return array();
     }
     
-    $root_url = get_root_url();
     $uid = '&b='.time();
     
     $params = ImageStdParams::get_by_type($this->data['size']);
@@ -340,7 +339,7 @@ SELECT id, path, width, height, rotation
         
         if ($filemtime===false || $filemtime<$last_mod_time || $filemtime<$src_mtime)
         {
-          $urls[] = $root_url.$derivative->get_url().$uid;
+          $urls[] = $derivative->get_url().$uid;
         }
         else if ($update && in_array($row['id'], $to_update))
         {
