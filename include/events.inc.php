@@ -27,7 +27,10 @@ function batch_download_section_init()
       case 'view':
         $page['sub_section'] = 'view';
         $page['section_title'].= l10n('Edit the set');
-        if (isset($conf['GThumb'])) $conf['GThumb']['big_thumb'] = false; // big thumb is buggy with removes
+        if (isset($conf['GThumb']) && is_array($conf['GThumb']))
+        {
+          $conf['GThumb']['big_thumb'] = false; // big thumb is buggy with removes
+        }
         break;
       default:
         redirect('index.php');
