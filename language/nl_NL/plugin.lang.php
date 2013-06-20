@@ -77,4 +77,9 @@ $lang['Sorry, there is nothing to download. Some files may have been excluded be
 $lang['Unknown'] = 'Onbekend';
 $lang['%d MB'] = '%d MB';
 $lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Wordt <b>PclZip</b> gebruikt in plaats van <b>ZipArchive</b> als ZIP bibliotheek';
+$lang['Delete previous archive when starting to download another one'] = 'Verwijder het vorige archiefbestand voordat u met een volgende begint.';
+$lang['Don\'t download archives through PHP'] = 'Geen archieven downloaden met behulp van PHP';
+$lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Het bespaart ruimte op de server, maar laat niet toe om mislukte downloads te herstarten.';
+$lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Controleer alleen indien u problemen ondervindt met beschadigde archiefbestanden met ZipArchive.';
+$lang['Only check if your host complains about high PHP usage.'] = 'Alleen controleren als uw host klaagt over hoge PHP-gebruik.';
 ?>
