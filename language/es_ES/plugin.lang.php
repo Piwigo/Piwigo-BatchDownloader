@@ -76,4 +76,10 @@ $lang['Please wait, your download is being prepared. This page will automaticall
 $lang['Preparation'] = 'Preparando';
 $lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Lo sentimos, no hay nada que descargar. Algunos archivos pueden haber sido excluidos debido <i titel="Autorizados son: %s">a restricciones de tipo de archivo  </ i>.';
 $lang['Unknown'] = 'Desconocidos';
+$lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Se ahorra espacio en el servidor, pero no permite reanudar descargas fallidas.';
+$lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Sólo comprobar si usted está experimentando archivos dañados con ZipArchive.';
+$lang['Only check if your host complains about high PHP usage.'] = 'Sólo comprobar si su host se queja de alto uso de PHP.';
+$lang['Delete previous archive when starting to download another one'] = 'Eliminar archivo anterior cuando se empieza a descargar otro';
+$lang['Don\'t download archives through PHP'] = 'No descargar archivos a través de PHP';
+$lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Forzar el uso de PclZip lugar de ZipArchive como librería ZIP';
 ?>
