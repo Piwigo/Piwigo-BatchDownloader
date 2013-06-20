@@ -77,4 +77,9 @@ $lang['Archive #%d (ready)'] = 'Archiwum #%d (gotowe)';
 $lang['Preparation'] = 'Przygotowanie';
 $lang['Unknown'] = 'Nieznane';
 $lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Wymusza użycie PclZip w przeciwnym razie używa ZipArchive jako biblioteki ZIP';
+$lang['Delete previous archive when starting to download another one'] = 'Usuń poprzednie archiwum przy pobieraniu kolejnego';
+$lang['Don\'t download archives through PHP'] = 'Nie pobieraj archiwów przez PHP';
+$lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Oszczędza miejsce na serwerze, ale uniemożliwia wznowienie nieudanych transferów.';
+$lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Zaznacz tylko jeżeli trafiają się uszkodzone archiwa ZipArchive.';
+$lang['Only check if your host complains about high PHP usage.'] = 'Zaznacz tylko jeżeli Twój dostawca narzeka na wysokie obciążenie PHP.';
 ?>
