@@ -77,4 +77,9 @@ $lang['Please wait, your download is being prepared. This page will automaticall
 $lang['Preparation'] = 'Подготовка';
 $lang['Unknown'] = 'Неизвестно';
 $lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'то применяется PclZip вместо ZipArchive в качестве Zip-архиватора';
+$lang['Delete previous archive when starting to download another one'] = 'Удаление предыдущего архива после начала закачки нового';
+$lang['Don\'t download archives through PHP'] = 'Не загружайте архивы через PHP';
+$lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Это сохранит место на сервере, но не позволит перезапускать неудавшиеся закачки.';
+$lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Ставьте галочку, если у Вас проблемы с Zip-архивами.';
+$lang['Only check if your host complains about high PHP usage.'] = 'Ставьте галочку, если Ваш хостинг сообщает о высокой загрузке PHP.';
 ?>
