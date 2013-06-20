@@ -77,4 +77,9 @@ $lang['Archive #%d (pending)'] = 'Archív #%d (čaká)';
 $lang['Archive #%d (already downloaded)'] = 'Archív #%d (bol stiahnutý)';
 $lang['%d MB'] = '%d MB';
 $lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Použije sa PclZip namiesto ZipArchive ako ZIP knižnica';
+$lang['Only check if your host complains about high PHP usage.'] = 'Iba skontrolujte, či váš host sťažuje za použitia vysokého PHP.';
+$lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Iba skontrolujte, či sa vyskytli poškodené archívy v ZipArchive.';
+$lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Šetrí miesto na serveri, ale neumožňuje reštartovať neúspešné stiahnutia.';
+$lang['Don\'t download archives through PHP'] = 'Nesťahovať archívy cez PHP';
+$lang['Delete previous archive when starting to download another one'] = 'Vymazať predchádzajúci archív pri spustení stiahnutia ďalšieho';
 ?>
