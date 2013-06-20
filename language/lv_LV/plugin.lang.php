@@ -78,4 +78,9 @@ $lang['Archive #%d (pending)'] = 'Arhīvs #%d (kavējas)';
 $lang['Archive #%d (already downloaded)'] = 'Arhīvs #%d (jau lejupielādēts)';
 $lang['%d MB'] = '%d MB';
 $lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Lieto piespiedu PclZip, ZipArchive vietā kā ZIP bibliotēku';
+$lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Pārbauda tikai tad, ja jums ir bijuši bojāti arhīvi, izmantojot ZipArchive ';
+$lang['Only check if your host complains about high PHP usage.'] = 'Pārbauda tikai tad, kad jūsu vietne ziņo par augstu PHP noslodzi';
+$lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Tas ekonomē vietu uz severa, bet neļauj atsākt pārtrauktās lejupielādes';
+$lang['Don\'t download archives through PHP'] = 'Nelejupielādējiet arhīvus izmantojot PHP';
+$lang['Delete previous archive when starting to download another one'] = 'Sākot lejupielādēt jaunu arhīvu, izdzēst iepriekšējo ';
 ?>
