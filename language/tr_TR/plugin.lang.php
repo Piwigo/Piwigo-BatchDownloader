@@ -77,4 +77,9 @@ $lang['Archive #%d (ready)'] = 'Arşiv #%d (hazır)';
 $lang['Preparation'] = 'Hazırlık';
 $lang['Unknown'] = 'Bilinmiyor';
 $lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'ZIP kütüphanesi olarak ZipArchive yerine PclZip kullanılmasını zorlar';
+$lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Sunucuda alan tasarrufu sağlar ancak başarısız indirmeleri tekrar başlatmanıza olanak tanımaz.';
+$lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Sadece ZipArchive kullanımında bozulmuş arşivlere rastlıyorsanız seçin.';
+$lang['Only check if your host complains about high PHP usage.'] = 'Sadece barındırma sağlayıcınızdan PHP kullanımı ile ilgili şikayet aldığınız durumlarda seçin.';
+$lang['Delete previous archive when starting to download another one'] = 'Diğer indirmeye geçildiğinde önceki arşivi sil';
+$lang['Don\'t download archives through PHP'] = 'Arşivi PHP üzerinden indirme';
 ?>
