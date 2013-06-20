@@ -75,4 +75,9 @@ $lang['Archive #%d (ready)'] = '#%d archívum (kész)';
 $lang['Please wait, your download is being prepared. This page will automatically refresh when it is ready.'] = 'Kérem várjon, a letöltés készül. Amikor kész, az oldal automatikusan frissül.';
 $lang['Preparation'] = 'Előkészítés';
 $lang['Unknown'] = 'Ismeretlen';
+$lang['Delete previous archive when starting to download another one'] = 'Újabb archívum letöltés indításakor törölje az előzőt';
+$lang['Don\'t download archives through PHP'] = 'Ne töltsön le archívumokat PHP-n keresztül';
+$lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Helyet takarít meg a szerveren, de nem teszi lehetővé a sikertelen letöltések újraindítását.';
+$lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Csak akkor használja, ha azt tapasztalja, hogy sérült a ZipArchive archívum.';
+$lang['Only check if your host complains about high PHP usage.'] = 'Csak akkor válassza, ha a szolgáltató reklamál a magas PHP hatnálat miatt.';
 ?>
