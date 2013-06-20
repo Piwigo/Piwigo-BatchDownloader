@@ -77,4 +77,9 @@ $lang['Preparation'] = 'Ettevalmistus';
 $lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Vabandame, ei ole midagi alla laadida. Mõned failid võivad olla välja arvatud järgmisel põhjusel:  <i title="Lubatud tüübid on : %s">failitüüpide kitsendused</i>.';
 $lang['Unknown'] = 'Teadmata';
 $lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Kasuta PclZip ja mitte ZipArchive ZIP arhiivina';
+$lang['Delete previous archive when starting to download another one'] = 'Kustuta olemasolevad arhiivid enne uue allalaadimist';
+$lang['Don\'t download archives through PHP'] = 'Ära lae arhiive alla kasutades PHP-d';
+$lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Hoiab serveriruumi kokku, aga ei luba jätkata poolikuid allalaadimisi.';
+$lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Kasuta ainlt siis, kui ZipArchive tekitab vigaseid arhiive';
+$lang['Only check if your host complains about high PHP usage.'] = 'Kasuta ainult kui teenusepakkuja kurdab suure PHP kasutuse üle';
 ?>
