@@ -77,4 +77,9 @@ $lang['Please wait, your download is being prepared. This page will automaticall
 $lang['Preparation'] = 'Forberedelse';
 $lang['Unknown'] = 'Ukendt';
 $lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Gennemtvinges anvendelse af PclZip i stedet for ZipArchive som ZIP-bibliotek';
+$lang['Delete previous archive when starting to download another one'] = 'Slet tidligere arkiv, når download af et nyt begynder';
+$lang['Don\'t download archives through PHP'] = 'Download ikke arkiver gennem PHP';
+$lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Det sparer plads på serveren, men det er ikke muligt at genstarte en mislykket download.';
+$lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Aktiver kun hvis du oplever problemer med defekte arkiver med ZipArchive.';
+$lang['Only check if your host complains about high PHP usage.'] = 'Aktiver kun hvis din vært klager over forhøjet PHP-brug.';
 ?>
