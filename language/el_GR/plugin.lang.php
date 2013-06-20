@@ -77,4 +77,10 @@ $lang['Archive #%d (pending)'] = 'Το αρχείο #%d (εκκρεμεί)';
 $lang['Archive #%d (already downloaded)'] = 'Το αρχείο #%d (ήδη κατεβασμένο)';
 $lang['%d MB'] = '%d MB';
 $lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'εξαναγκάζει τη χρήση του PclZip αντι του ZipArchive ως βιβλιοθήκη ZIP';
+$lang['Please wait, your download is being prepared. This page will automatically refresh when it is ready.'] = 'Παρακαλώ περιμένετε, η λήψη σας είναι στο στάδιο της προετοιμασίας. Αυτή η σελίδα θα ανανεωθεί αυτόματα όταν θα είναι έτοιμη.';
+$lang['Only check if your host complains about high PHP usage.'] = 'Ελέγχει μόνο αν ο πάροχός σας παραπονιέται για υψηλή χρήση PHP.';
+$lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Ελέγχει μόνο αν αντιμετωπίζετε κατεστραμμένα αρχεία με ZipArchive.';
+$lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Εξοικονομεί χώρο στον server, αλλά δεν επιτρέπει την επανεκκίνηση αποτυχημένων λήψεων.';
+$lang['Don\'t download archives through PHP'] = 'Μην κάνετε λήψη αρχείων μέσω PHP';
+$lang['Delete previous archive when starting to download another one'] = 'Διαγραφή προηγούμενου αρχείου, όταν αρχίζει να κατεβαίνει ένα άλλο';
 ?>
