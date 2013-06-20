@@ -77,4 +77,5 @@ $lang['Archive #%d (ready)'] = 'Arhīvs #%d (kārtībā)';
 $lang['Archive #%d (pending)'] = 'Arhīvs #%d (kavējas)';
 $lang['Archive #%d (already downloaded)'] = 'Arhīvs #%d (jau lejupielādēts)';
 $lang['%d MB'] = '%d MB';
+$lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Lieto piespiedu PclZip, ZipArchive vietā kā ZIP bibliotēku';
 ?>

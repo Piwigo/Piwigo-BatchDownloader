@@ -154,15 +154,19 @@ function batch_download_index_button()
         'SIZE' => $params->sizing->ideal_size[0].' x '.$params->sizing->ideal_size[1],
         )
       );
+      if ($params->type == $conf['batch_download']['photo_size']) break;
   }
-  $template->append(
-    'BATCH_DOWNLOAD_SIZES',
-    array(
-      'TYPE' => 'original',
-      'DISPLAY' => l10n('Original'),
-      'SIZE' => null,
-      )
-    );
+  if ($conf['batch_download']['photo_size'] == 'original')
+  {
+    $template->append(
+      'BATCH_DOWNLOAD_SIZES',
+      array(
+        'TYPE' => 'original',
+        'DISPLAY' => l10n('Original'),
+        'SIZE' => null,
+        )
+      );
+  }
     
   $template->set_filename('batchdwn_button', realpath(BATCH_DOWNLOAD_PATH.'template/download_button.tpl'));
   $button = $template->parse('batchdwn_button', true);
@@ -240,10 +244,12 @@ function batch_download_clean()
 {
   global $conf;
   
-  // we only search for old downloads every hour, nevermind which user is connected
-  if ($conf['batch_download']['last_clean'] > time() - 3600) return;
+  $time = time();
   
-  $conf['batch_download']['last_clean'] = time();
+  // we only search for old downloads every hour, nevermind which user is connected
+  if ($conf['batch_download']['last_clean'] > $time - 3600) return;
+  
+  $conf['batch_download']['last_clean'] = $time;
   conf_update_param('batch_download', serialize($conf['batch_download']));
   
   // set old sets as done and clean images table
@@ -274,7 +280,7 @@ UPDATE '.BATCH_DOWNLOAD_TSETS.'
   {
     foreach ($zips as $zip)
     {
-      if (filemtime($zip) < time()-$conf['batch_download']['archive_timeout']*3600)
+      if (filemtime($zip) < $time-$conf['batch_download']['archive_timeout']*3600)
       {
         unlink($zip);
       }

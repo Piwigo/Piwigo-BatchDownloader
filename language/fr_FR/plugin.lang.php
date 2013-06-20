@@ -21,8 +21,8 @@ $lang['Downloads'] = 'Téléchargements';
 $lang['Download permissions'] = 'Permissions de téléchargement';
 $lang['User groups'] = 'Groupes d\'utilisateurs';
 $lang['Archives'] = 'Archives';
-$lang['Maximum photo size'] = 'Taille maximale des photo';
-$lang['Delete downloads after'] = 'Supprimer les téléchargements après';
+$lang['Maximum photo size'] = 'Taille maximale des photos';
+$lang['Delete downloads after'] = 'Supprimer les archives après';
 $lang['Maximum number of photos per download set'] = 'Nombre maximal de photos par lot';
 $lang['Maximum size of each archive (in Megabytes)'] = 'Taille maximale de chaque archive (en Megaoctets)';
 $lang['Archive prefix'] = 'Préfixe de l\'archive';
@@ -56,5 +56,11 @@ $lang['%d MB'] = '%d Mio';
 $lang['Archive #%d (already downloaded)'] = 'Archive #%d (déjà téléchargée)';
 $lang['Archive #%d (ready)'] = 'Archive #%d (prête)';
 $lang['Archive #%d (pending)'] = 'Archive #%d (en attente)';
+$lang['Delete previous archive when starting to download another one'] = 'Supprimer l\'archive précédente avant de commencer le téléchargement de l\'archive suivante';
+$lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Cela permet d\'économiser l\'espace disque mais interdit de recommencer un téléchargement échoué.';
+$lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Forcer l\'utilisation de PclZip à la place de ZipArchive comme librairie ZIP';
+$lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Ne cochez uniquement que si vous avez des archives corrompues avec ZipArchive.';
+$lang['Don\'t download archives through PHP'] = 'Ne pas télécharger les archives via PHP';
+$lang['Only check if your host complains about high PHP usage.'] = 'Ne cochez uniquement que si votre hébergeur se plaint d\'une activité abusive de PHP.';
 
 ?>

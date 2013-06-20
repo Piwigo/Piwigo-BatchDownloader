@@ -76,4 +76,5 @@ $lang['Please wait, your download is being prepared. This page will automaticall
 $lang['Preparation'] = 'Ettevalmistus';
 $lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Vabandame, ei ole midagi alla laadida. Mõned failid võivad olla välja arvatud järgmisel põhjusel:  <i title="Lubatud tüübid on : %s">failitüüpide kitsendused</i>.';
 $lang['Unknown'] = 'Teadmata';
+$lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Kasuta PclZip ja mitte ZipArchive ZIP arhiivina';
 ?>

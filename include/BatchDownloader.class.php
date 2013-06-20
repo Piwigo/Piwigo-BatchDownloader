@@ -380,14 +380,18 @@ DELETE FROM '.IMAGE_SIZES_TABLE.'
   }
   
   /**
-   * deleteLastArchive
+   * deleteArchives
    */
-  function deleteLastArchive()
+  function deleteArchives()
   {
-    $zip_path = $this->getArchivePath();
-    if (file_exists($zip_path))
+    $zip_path = glob($this->getArchivePath('*'));
+    
+    if (is_array($zip_path))
     {
-      unlink($zip_path);
+      foreach ($zip_path as $file)
+      {
+        unlink($file);
+      }
     }
   }
   
@@ -457,7 +461,7 @@ SELECT image_id, filesize, width, height
       // open zip
       $this->updateParam('last_zip', $this->data['last_zip']+1);
       $zip_path = $this->getArchivePath();
-      $zip = new myZip($zip_path, isset($conf['batch_download_force_pclzip']));
+      $zip = new myZip($zip_path, $this->conf['force_pclzip']);
       
       // add images until size limit is reach, or all images are added
       $images_added = array();
@@ -532,16 +536,15 @@ UPDATE '.BATCH_DOWNLOAD_TIMAGES.'
       // all images added ?
       if (count($images_to_add) == count($images_added))
       {
-        $this->updateParam('status', 'done');
-      }
-      
-      // over estimed
-      if ($this->data['status'] == 'done')
-      {
+        if ($this->conf['one_archive']) $this->updateParam('status', 'done');
+        $done = true;
+        
+        // over estimed
         $this->updateParam('nb_zip', $this->data['last_zip']);
       }
+      
       // under estimed
-      else if ($this->data['last_zip'] == $this->data['nb_zip'])
+      if (!isset($done) && $this->data['status'] != 'done' && $this->data['last_zip'] == $this->data['nb_zip'])
       {
         $this->updateParam('nb_zip', $this->data['last_zip']+1);
       }
@@ -618,19 +621,19 @@ SELECT SUM(filesize) AS total
     {
       $out.= '<li id="zip-'.$i.'">';
       
-      if ($this->data['status'] == 'done' or $i < $this->data['last_zip']+1)
+      if ($this->data['status']=='done' or ($this->conf['one_archive'] and $i<$this->data['last_zip']+1))
       {
         $out.= '<img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/images/drive_error.png"> '.sprintf(l10n('Archive #%d (already downloaded)'), $i);
       }
-      else if ($i == $this->data['last_zip']+1)
+      else if ($i==$this->data['last_zip']+1 or (!$this->conf['one_archive'] and $i<$this->data['last_zip']+1))
       {
           $out.= '<a href="'.add_url_params($url, array('set_id'=>$this->data['id'],'zip'=>$i)).'" rel="nofollow" style="font-weight:bold;"' 
-            .($i!=1 ? ' onClick="return confirm(\''.addslashes(sprintf(l10n('Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'), $i, $i-1)).'\');"' : null).
-            '><img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/images/drive_go.png">  '.sprintf(l10n('Archive #%d (ready)'), $i).'</a>';
+            .(($i!=1 and $this->conf['one_archive']) ? ' onClick="return confirm(\''.addslashes(sprintf(l10n('Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'), $i, $i-1)).'\');"' : null).
+            '><img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/images/drive_go.png"> '.sprintf(l10n('Archive #%d (ready)'), $i).'</a>';
       }
       else
       {
-        $out.= '<img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/images/drive.png">  '.sprintf(l10n('Archive #%d (pending)'), $i);
+        $out.= '<img src="'.$root_url.BATCH_DOWNLOAD_PATH.'template/images/drive.png"> '.sprintf(l10n('Archive #%d (pending)'), $i);
       }
       
       $out.= '</li>';
@@ -881,7 +884,7 @@ SELECT SUM(filesize) AS total
    */
   function delete()
   {
-    $this->deleteLastArchive();
+    $this->deleteArchives();
     $this->clearImages();
     pwg_query('DELETE FROM '.BATCH_DOWNLOAD_TSETS.' WHERE id = '.$this->data['id'].';');
   }

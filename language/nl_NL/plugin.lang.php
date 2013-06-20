@@ -76,4 +76,5 @@ $lang['Preparation'] = 'Voorbereiding';
 $lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Sorry, er is niets te downloaden. Mogelijk dat sommige bestanden niet gedownload kunnen worden in verband met <i title="Toegestane bestandstypes : %s">bestandstype beperkingen</i>.';
 $lang['Unknown'] = 'Onbekend';
 $lang['%d MB'] = '%d MB';
+$lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Wordt <b>PclZip</b> gebruikt in plaats van <b>ZipArchive</b> als ZIP bibliotheek';
 ?>

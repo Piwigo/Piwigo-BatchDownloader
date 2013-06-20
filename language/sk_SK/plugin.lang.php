@@ -76,4 +76,5 @@ $lang['Archive #%d (ready)'] = 'Archív #%d (pripravený)';
 $lang['Archive #%d (pending)'] = 'Archív #%d (čaká)';
 $lang['Archive #%d (already downloaded)'] = 'Archív #%d (bol stiahnutý)';
 $lang['%d MB'] = '%d MB';
+$lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Použije sa PclZip namiesto ZipArchive ako ZIP knižnica';
 ?>

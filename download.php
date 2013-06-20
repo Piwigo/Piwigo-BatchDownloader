@@ -6,14 +6,22 @@ check_status(ACCESS_GUEST);
 
 try {
   $BatchDownloader = new BatchDownloader($_GET['set_id']);
-  $file = $BatchDownloader->getArchivePath();
   
-  if (!file_exists($file))
+  if ($conf['batch_download']['one_archive'] and $_GET['zip'] == $BatchDownloader->getParam('last_zip'))
+  {
+    $file = $BatchDownloader->getArchivePath();
+  }
+  else if (!$conf['batch_download']['one_archive'])
+  {
+    $file = $BatchDownloader->getArchivePath($_GET['zip']);
+  }
+  
+  if (empty($file) || !file_exists($file))
   {
     throw new Exception('Unable to locate file.');
   }
   
-  if (isset($conf['batch_download_direct']) and $conf['batch_download_direct'])
+  if ($conf['batch_download']['direct'])
   {
     header('Location: '.$file);
   }

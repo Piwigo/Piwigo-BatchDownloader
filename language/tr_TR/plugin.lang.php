@@ -76,4 +76,5 @@ $lang['Archive #%d (pending)'] = 'Arşiv #%d (bekliyor)';
 $lang['Archive #%d (ready)'] = 'Arşiv #%d (hazır)';
 $lang['Preparation'] = 'Hazırlık';
 $lang['Unknown'] = 'Bilinmiyor';
+$lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'ZIP kütüphanesi olarak ZipArchive yerine PclZip kullanılmasını zorlar';
 ?>

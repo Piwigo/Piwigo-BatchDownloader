@@ -19,7 +19,7 @@ switch ($page['sub_section'])
       // delete set
       if ( isset($_GET['cancel']) )
       {
-        $BatchDownloader->deleteLastArchive();
+        $BatchDownloader->deleteArchives();
         $BatchDownloader->clearImages();
         pwg_query('DELETE FROM '.BATCH_DOWNLOAD_TSETS.' WHERE id = '.$_GET['set_id'].';');
         $_SESSION['page_infos'][] = l10n('Download set deleted');
@@ -27,10 +27,22 @@ switch ($page['sub_section'])
       }
       
       // prepare next zip
-      if ( isset($_GET['zip']) and $BatchDownloader->getParam('status') != 'new' and $BatchDownloader->getParam('status') != 'done' and $_GET['zip'] > $BatchDownloader->getParam('last_zip') )
+      if ( isset($_GET['zip']) and $BatchDownloader->getParam('status') != 'new' and $BatchDownloader->getParam('status') != 'done' )
       {
-        $BatchDownloader->deleteLastArchive();
-        $next_file = $BatchDownloader->createNextArchive();
+        if ($_GET['zip'] > $BatchDownloader->getParam('last_zip'))
+        {
+          if ($conf['batch_download']['one_archive']) $BatchDownloader->deleteArchives();
+          $BatchDownloader->createNextArchive();
+        }
+        
+        if ($conf['batch_download']['one_archive'])
+        {
+          $next_file = $BatchDownloader->getParam('last_zip')+1;
+        }
+        else
+        {
+          $next_file = $_GET['zip'];
+        }
       }
       
       // alert limit overflow
@@ -73,7 +85,7 @@ switch ($page['sub_section'])
       // link to the zip
       if (isset($next_file))
       {
-        $set['U_DOWNLOAD'] = get_root_url().BATCH_DOWNLOAD_PATH . 'download.php?set_id='.$_GET['set_id'].'&amp;zip='.$_GET['zip'];
+        $set['U_DOWNLOAD'] = get_root_url().BATCH_DOWNLOAD_PATH . 'download.php?set_id='.$_GET['set_id'].'&zip='.$_GET['zip'];
         $page['infos'][] = sprintf(l10n('The archive is downloading, if the download doesn\'t start automatically please <a href="%s">click here</a>'), $set['U_DOWNLOAD']);
       }
       
@@ -84,7 +96,7 @@ switch ($page['sub_section'])
       }
       
       // cancel link
-      if ($BatchDownloader->getParam('status') != 'done')
+      if ($BatchDownloader->getParam('last_zip') != $BatchDownloader->getParam('nb_zip'))
       {
         $set['U_CANCEL'] = add_url_params(BATCH_DOWNLOAD_PUBLIC . 'init_zip', array('set_id'=>$_GET['set_id'], 'cancel'=>'true'));
       }

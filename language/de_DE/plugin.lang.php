@@ -78,4 +78,5 @@ Einige Dateien könnten wegen Typen-Beschränkung(en) ausgeschlossen sein, <i ti
 $lang['Archive #%d (already downloaded)'] = 'Archiv #%d (bereits vorhanden)';
 $lang['Archive #%d (pending)'] = 'Archiv #%d (ausstehend)';
 $lang['Archive #%d (ready)'] = 'Archiv #%d (verfügbar)';
+$lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Wird PclZip anstelle von ZipArchive als ZIP Bibliothek verwendet';
 ?>

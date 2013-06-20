@@ -76,4 +76,5 @@ $lang['Archive #%d (ready)'] = 'Arkivet #%d (parat)';
 $lang['Please wait, your download is being prepared. This page will automatically refresh when it is ready.'] = 'Vent mens din download forberedes. Siden vil automatisk blive genopfrisket, når den er parat.';
 $lang['Preparation'] = 'Forberedelse';
 $lang['Unknown'] = 'Ukendt';
+$lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Gennemtvinges anvendelse af PclZip i stedet for ZipArchive som ZIP-bibliotek';
 ?>

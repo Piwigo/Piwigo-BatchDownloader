@@ -76,4 +76,5 @@ $lang['Archive #%d (ready)'] = 'Το αρχείο #%d (έτοιμο)';
 $lang['Archive #%d (pending)'] = 'Το αρχείο #%d (εκκρεμεί)';
 $lang['Archive #%d (already downloaded)'] = 'Το αρχείο #%d (ήδη κατεβασμένο)';
 $lang['%d MB'] = '%d MB';
+$lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'εξαναγκάζει τη χρήση του PclZip αντι του ZipArchive ως βιβλιοθήκη ZIP';
 ?>

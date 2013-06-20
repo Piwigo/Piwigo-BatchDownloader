@@ -14,7 +14,7 @@ if (isset($_GET['cancel']))
   $set->updateParam('total_size', $set->getEstimatedTotalSize());
   $set->updateParam('nb_zip', $set->getEstimatedArchiveNumber());
   $set->updateParam('status', 'done');
-  $set->deleteLastArchive();
+  $set->deleteArchives();
   $set->clearImages();
   unset($set);
 }

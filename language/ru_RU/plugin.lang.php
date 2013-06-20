@@ -75,5 +75,6 @@ $lang['Archive #%d (pending)'] = 'Архив #%d (ожидание)';
 $lang['Archive #%d (ready)'] = 'Архив #%d (готов)';
 $lang['Please wait, your download is being prepared. This page will automatically refresh when it is ready.'] = 'Пожалуйста, подождите. Ваша закачка готовится. Эта страница обновится автоматически по мере готовности.';
 $lang['Preparation'] = 'Подготовка';
-$lang['Unknown'] = 'Неизвестно :(';
+$lang['Unknown'] = 'Неизвестно';
+$lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'то применяется PclZip вместо ZipArchive в качестве Zip-архиватора';
 ?>

@@ -67,7 +67,6 @@ $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip
 $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Iniciando o download do Arquivo #% irá destruir o Arquivo #%, certifique-se que termina o download. Continuar?';
 $lang['Warning: Only registered users can use Batch Downloader.'] = 'Aviso: Apenas utilizadores registados podem usar o Batch Downloader';
 $lang['What can be downloaded?'] = 'O que pode ser descarregado?';
-$lang['No result'] = 'Κανένα αποτέλεσμα';
 $lang['%d MB'] = '%d MB';
 $lang['Archive #%d (already downloaded)'] = 'Arquivo #%d (já descarregado)';
 $lang['Archive #%d (pending)'] = 'Arquivo #%d pendente';
@@ -76,4 +75,5 @@ $lang['Please wait, your download is being prepared. This page will automaticall
 $lang['Preparation'] = 'Preparação';
 $lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Desculpe, não existe algo para descarga. Alguns arquivos foram excluídos devido ao <i title="Tipos autorizados são: %s">filetype restrictions</i>.';
 $lang['Unknown'] = 'Desconhecido';
+$lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'O uso de PclZip é forçado em vez de ZipArchive da livraria ZIP';
 ?>

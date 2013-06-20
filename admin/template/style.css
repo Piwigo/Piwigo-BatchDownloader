@@ -2,10 +2,6 @@
   clear:none !important;
 }
 
-.property {
-  width:auto !important;
-}
-
 input[name='max_size'], input[name='max_elements'] {
   border:none;
   background:none;

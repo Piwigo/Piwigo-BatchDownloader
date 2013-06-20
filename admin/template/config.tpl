@@ -61,7 +61,7 @@ $(".show_advanced").click(function() {
     <li>
       <label>
       {if $group_options}
-        <span class="property">{'User groups'|@translate}</span>
+        <b>{'User groups'|@translate}</b>
         <select name="groups[]" data-placeholder="{'Everybody'|@translate}" class="chzn-select" multiple="multiple" style="width:370px;">
           {html_options options=$group_options selected=$batch_download.groups}
         </select>
@@ -72,21 +72,29 @@ $(".show_advanced").click(function() {
     </li>
     <li>
       <label>
-        <span class="property">{'Privacy level'|@translate}</span>
+        <b>{'Privacy level'|@translate}</b>
         <select name="level">
           {html_options options=$level_options selected=$batch_download.level}
         </select>
       </label>
     </li>
     <li>
-      <span class="property">{'What can be downloaded?'|@translate}</span>
+      <i>{'Warning: Only registered users can use Batch Downloader.'|@translate}</i>
+    </li>
+    <li>
+      <b>{'What can be downloaded?'|@translate}</b>
       <label><input type="checkbox" name="what[categories]" {if in_array('categories',$batch_download.what)}checked="checked"{/if}/> {'Albums'|@translate}</label>
       {if $USER_COLLEC_LOADED}<label><input type="checkbox" name="what[collections]" {if in_array('collections',$batch_download.what)}checked="checked"{/if}/> {'Collections'|@translate}</label>{/if}
       <label><input type="checkbox" name="what[specials]" {if in_array('specials',$batch_download.what)}checked="checked"{/if}/> {'Specials'|@translate}</label>
-          <a class="showInfo" title="{'Most visited'|@translate}, {'Random photos'|@translate}, {'Best rated'|@translate}...">i</a>
+      <a class="showInfo" title="{'Most visited'|@translate}, {'Random photos'|@translate}, {'Best rated'|@translate}...">i</a>
     </li>
     <li>
-      <i>{'Warning: Only registered users can use Batch Downloader.'|@translate}</i>
+      <label>
+        <b>{'Maximum photo size'|@translate}</b>
+        <select name="photo_size">
+          {html_options options=$sizes_options selected=$batch_download.photo_size}
+        </select>
+      </label>
     </li>
   </ul>
 </fieldset>
@@ -95,45 +103,57 @@ $(".show_advanced").click(function() {
   <legend>{'Archives'|@translate}</legend>
   
   <ul>
-    <li style="display:none;">
-      <label>
-        <span class="property">{'Maximum photo size'|@translate}</span>
-        <select name="photo_size">
-          {html_options options=$sizes_options selected=$batch_download.photo_size}
-        </select>
-        NOT IMPLEMENTED
-      </label>
-    </li>
     <li>
       <label>
-        <span class="property">{'Delete downloads after'|@translate}</span>
+        <b>{'Delete downloads after'|@translate}</b>
         <input type="text" name="archive_timeout" value="{$batch_download.archive_timeout}" size="3"> {'hours'|@translate}
       </label>
     </li>
     <li>
       <label>
-        <span class="property">{'Maximum number of photos per download set'|@translate}</span>
+        <b>{'Maximum number of photos per download set'|@translate}</b>
         <div id="max_elements"></div>
         <input type="text" name="max_elements" value="{$batch_download.max_elements}" size="5">
       </label>
     </li>
     <li>
       <label>
-        <span class="property">{'Maximum size of each archive (in Megabytes)'|@translate}</span>
+        <b>{'Maximum size of each archive (in Megabytes)'|@translate}</b>
         <div id="max_size"></div>
         <input type="text" name="max_size" value="{$batch_download.max_size}" size="5">
       </label>
     </li>
     <li>
       <label>
-        <span class="property">{'Archive prefix'|@translate}</span>
+        <b>{'Archive prefix'|@translate}</b>
         <input type="text" name="archive_prefix" value="{$batch_download.archive_prefix}">
       </label>
+    </li>
+    <li>
+      <label>
+        <input type="checkbox" name="one_archive" {if $batch_download.one_archive}checked{/if}>
+        <b>{'Delete previous archive when starting to download another one'|@translate}</b>
+      </label>
+      <a class="showInfo" title="{'It saves space on the server but doesn\'t allow to restart failed downloads.'|@translate}">i</a>
+    </li>
+    <li>
+      <label>
+        <input type="checkbox" name="force_pclzip" {if $batch_download.force_pclzip}checked{/if}>
+        <b>{'Force the usage of PclZip instead of ZipArchive as ZIP library'|@translate}</b>
+      </label>
+      <a class="showInfo" title="{'Only check if you are experiencing corrupted archives with ZipArchive.'|@translate}">i</a>
+    </li>
+    <li>
+      <label>
+        <input type="checkbox" name="direct" {if $batch_download.direct}checked{/if}>
+        <b>{'Don\'t download archives through PHP'|@translate}</b>
+      </label>
+      <a class="showInfo" title="{'Only check if your host complains about high PHP usage.'|@translate}">i</a>
     </li>
   {if $use_ziparchive}
     <li>
       <label>
-        <span class="property">{'Archive comment'|@translate} :</span><br>
+        <b>{'Archive comment'|@translate} :</b><br>
         <textarea name="archive_comment" rows="5" style="width:450px;">{$batch_download_comment}</textarea>
       </label>
       <br>

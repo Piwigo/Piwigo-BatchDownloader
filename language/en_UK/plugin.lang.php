@@ -22,7 +22,7 @@ $lang['Download permissions'] = 'Download permissions';
 $lang['User groups'] = 'User groups';
 $lang['Archives'] = 'Archives';
 $lang['Maximum photo size'] = 'Maximum photo size';
-$lang['Delete downloads after'] = 'Delete downloads after';
+$lang['Delete downloads after'] = 'Delete archives after';
 $lang['Maximum number of photos per download set'] = 'Maximum number of photos per download set';
 $lang['Maximum size of each archive (in Megabytes)'] = 'Maximum size of each archive (in Megabytes)';
 $lang['Archive prefix'] = 'Archive prefix';
@@ -56,5 +56,11 @@ $lang['%d MB'] = '%d MB';
 $lang['Archive #%d (already downloaded)'] = 'Archive #%d (already downloaded)';
 $lang['Archive #%d (ready)'] = 'Archive #%d (ready)';
 $lang['Archive #%d (pending)'] = 'Archive #%d (pending)';
+$lang['Delete previous archive when starting to download another one'] = 'Delete previous archive when starting to download another one';
+$lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'It saves space on the server but doesn\'t allow to restart failed downloads.';
+$lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Force the usage of PclZip instead of ZipArchive as ZIP library';
+$lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Only check if you are experiencing corrupted archives with ZipArchive.';
+$lang['Don\'t download archives through PHP'] = 'Don\'t download archives through PHP';
+$lang['Only check if your host complains about high PHP usage.'] = 'Only check if your host complains about high PHP usage.';
 
 ?>

@@ -12,12 +12,15 @@ function batch_download_install()
       'groups'          => array(),
       'level'           => 0,
       'what'            => array('categories','specials','collections'),
-      'photo_size'      => 'original', // not used
+      'photo_size'      => 'original',
       'archive_prefix'  => 'piwigo',
       'archive_timeout' => 48, /* hours */
       'max_elements'    => 500,
       'max_size'        => 100, /* MB */
       'last_clean'      => time(),
+      'one_archive'     => false,
+      'force_pclzip'    => false,
+      'direct'          => false,
       );
       
     $conf['batch_download'] = serialize($batch_download_default_config);
@@ -30,13 +33,19 @@ function batch_download_install()
   {
     $new_conf = is_string($conf['batch_download']) ? unserialize($conf['batch_download']) : $conf['batch_download'];
     
-    if (empty($new_conf['what']))
+    if (!isset($new_conf['what']))
     {
       $new_conf['what'] = array('categories','specials','collections');
-      
-      $conf['batch_download'] = serialize($new_conf);
-      conf_update_param('batch_download', $conf['batch_download']);
     }
+    if (!isset($new_conf['one_archive']))
+    {
+      $new_conf['one_archive'] = false;
+      $new_conf['force_pclzip'] = isset($conf['batch_download_force_pclzip']) && $conf['batch_download_force_pclzip'];
+      $new_conf['direct'] = isset($conf['batch_download_direct']) && $conf['batch_download_direct'];
+    }
+    
+    $conf['batch_download'] = serialize($new_conf);
+    conf_update_param('batch_download', $conf['batch_download']);
   }
 
   // archives directory

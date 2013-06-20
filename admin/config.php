@@ -14,12 +14,17 @@ if (isset($_POST['save_config']))
     'archive_timeout' => intval($_POST['archive_timeout']),
     'max_elements'    => intval($_POST['max_elements']),
     'max_size'        => intval($_POST['max_size']),
+    'one_archive'     => isset($_POST['one_archive']),
+    'force_pclzip'    => isset($_POST['force_pclzip']),
+    'direct'          => isset($_POST['direct']),
     'last_clean'      => $conf['batch_download']['last_clean'],
     );
   $conf['batch_download_comment'] = trim($_POST['archive_comment']);
   
   conf_update_param('batch_download', serialize($conf['batch_download']));
   conf_update_param('batch_download_comment', $conf['batch_download_comment']);
+  
+  array_push($page['infos'], l10n('Information data registered in database'));
 }
 
 
@@ -35,11 +40,8 @@ $group_options = simple_hash_from_query($query, 'id', 'name');
 $level_options = get_privacy_level_options();
 
 // sizes
-$enabled = ImageStdParams::get_defined_type_map();
-$disabled = @unserialize(@$conf['disabled_derivatives']);
-if ($disabled === false) $disabled = array();
-
-$sizes_keys = array_diff(array_keys($enabled), array_keys($disabled));
+$type_map = ImageStdParams::get_defined_type_map();
+$sizes_keys = array_keys($type_map);
 $sizes_names = array_map(create_function('$s', 'return l10n($s);'), $sizes_keys);
 
 $sizes_options = array_combine($sizes_keys, $sizes_names);
@@ -57,7 +59,7 @@ $template->assign(array(
   'USER_COLLEC_LOADED' => defined('USER_COLLEC_ID'),
   'batch_download' => $conf['batch_download'],
   'batch_download_comment' => stripslashes($conf['batch_download_comment']),
-  'use_ziparchive' => class_exists('ZipArchive') && !isset($conf['batch_downloader_force_pclzip']),
+  'use_ziparchive' => class_exists('ZipArchive') && !$conf['batch_download']['force_pclzip'],
   'PHP_VERSION' => PHP_VERSION,
   'ADVANCED_CONF' => load_language('advanced.html', BATCH_DOWNLOAD_PATH, array('return'=>true))
   ));

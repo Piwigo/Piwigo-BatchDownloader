@@ -76,4 +76,5 @@ $lang['Archive #%d (ready)'] = 'Archivio #%d (pronto)';
 $lang['Archive #%d (pending)'] = 'Archivio #%d (in attesa)';
 $lang['Archive #%d (already downloaded)'] = 'Archivio #%d (già scaricato)';
 $lang['%d MB'] = '%d MB';
+$lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Impone l\'utilizzo di PclZip anziché ZipArchive come libreria ZIP';
 ?>
