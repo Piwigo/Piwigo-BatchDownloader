@@ -77,4 +77,9 @@ $lang['Archive #%d (pending)'] = 'Archivio #%d (in attesa)';
 $lang['Archive #%d (already downloaded)'] = 'Archivio #%d (già scaricato)';
 $lang['%d MB'] = '%d MB';
 $lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Impone l\'utilizzo di PclZip anziché ZipArchive come libreria ZIP';
+$lang['Only check if your host complains about high PHP usage.'] = 'Controllare solamente se il vostro host lamenta un elevato utilizzo di PHP.';
+$lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Verificare solo se si verificano archivi corrotti con ZipArchive.';
+$lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Consente di risparmiare spazio sul server, ma non consente di riavviare download falliti.';
+$lang['Don\'t download archives through PHP'] = 'Non scaricare gli archivi tramite PHP';
+$lang['Delete previous archive when starting to download another one'] = 'Elimina archivio precedente quando si inizia a scaricarne un altro';
 ?>
