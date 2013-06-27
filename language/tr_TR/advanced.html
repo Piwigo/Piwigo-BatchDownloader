@@ -1,8 +1,15 @@
 <dt><span>$conf['batch_download_max_elements']</span></dt>
-<dd><b>İndirme seti başına azami fotoğraf sayısı</b> slider'ındaki azami değer. <i>Varsayılan <span>1000</span>.</i></dd>
+<dd><b>İndirme seti başına azami fotoğraf sayısı</b> slider'ındaki azami değer.<br>
+<i>Varsayılan <span>1000</span>.</i></dd>
 
 <dt><span>$conf['batch_download_max_size']</span></dt>
-<dd><b>Her arşivin azami büyüklüğü</b> slider'ındaki azami değer. <i>Varsayılan <span>500</span>.</i></dd>
+<dd><b>Her arşivin azami büyüklüğü</b> slider'ındaki azami değer.<br>
+<i>Varsayılan <span>500</span>.</i></dd>
 
 <dt><span>$conf['batch_download_additional_ext']</span></dt>
-<dd>İndirilebilir dosya uzantısına sahip dizi (büyük-küçük harfe duyarlı). <i>Varsayılan <span>$conf['picture_ext']</span>.</i></dd>
+<dd>İndirilebilir dosya uzantısına sahip dizi (büyük-küçük harfe duyarlı).<br>
+<i>Varsayılan <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Pattern for filenames in the archive. Available fields are <code>'%id%', '%filename%', '%author%', '%dimensions%'</code>.<br>
+<i>Default value id <span>%id%_%filename%_%dimensions%</span>.</i></dd>

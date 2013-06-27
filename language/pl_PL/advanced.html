@@ -1,8 +1,15 @@
 <dt><span>$conf['batch_download_max_elements']</span></dt>
-<dd>Maksymalna wartość suwaka: <b>Maksymalna liczba zdjęć w jednym zestawie pobierania</b>. <i>Domyślnie <span>1000</span>.</i></dd>
+<dd>Maksymalna wartość suwaka: <b>Maksymalna liczba zdjęć w jednym zestawie pobierania</b>.<br>
+<i>Domyślnie <span>1000</span>.</i></dd>
 
 <dt><span>$conf['batch_download_max_size']</span></dt>
-<dd>Maksymalna wartość suwaka: <b>Maksymalny rozmiar każdego archiwum</b>. <i>Domyślnie <span>500</span>.</i></dd>
+<dd>Maksymalna wartość suwaka: <b>Maksymalny rozmiar każdego archiwum</b>.<br>
+<i>Domyślnie <span>500</span>.</i></dd>
 
 <dt><span>$conf['batch_download_additional_ext']</span></dt>
-<dd>Tablica zawierająca dopuszczone do pobrania rozszerzenia plików (ważna wielkość znaków). <i>Domyślnie <span>$conf['picture_ext']</span>.</i></dd>
+<dd>Tablica zawierająca dopuszczone do pobrania rozszerzenia plików (ważna wielkość znaków).<br>
+<i>Domyślnie <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Pattern for filenames in the archive. Available fields are <code>'%id%', '%filename%', '%author%', '%dimensions%'</code>.<br>
+<i>Default value id <span>%id%_%filename%_%dimensions%</span>.</i></dd>

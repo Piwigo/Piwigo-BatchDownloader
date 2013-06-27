@@ -1,8 +1,15 @@
 <dt><span>$conf['batch_download_max_elements']</span></dt>
-<dd>Definir o valor máximo de fotos por descarga. <i>Por defeito é <span>1000</span>.</i></dd>
+<dd>Definir o valor máximo de fotos por descarga.<br>
+<i>Por defeito é <span>1000</span>.</i></dd>
 
 <dt><span>$conf['batch_download_max_size']</span></dt>
-<dd>Valor máximo do tamanho de cada arquivo. <i>Por defeito é <span>500</span>.</i></dd>
+<dd>Valor máximo do tamanho de cada arquivo.<br>
+<i>Por defeito é <span>500</span>.</i></dd>
 
 <dt><span>$conf['batch_download_additional_ext']</span></dt>
-<dd>Matriz contendo extensões de arquivos descarregáveis (maiúsculas e minúsculas). <i>Por defeito é <span>$conf['picture_ext']</span>.</i></dd>
+<dd>Matriz contendo extensões de arquivos descarregáveis (maiúsculas e minúsculas).<br>
+<i>Por defeito é <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Pattern for filenames in the archive. Available fields are <code>'%id%', '%filename%', '%author%', '%dimensions%'</code>.<br>
+<i>Default value id <span>%id%_%filename%_%dimensions%</span>.</i></dd>

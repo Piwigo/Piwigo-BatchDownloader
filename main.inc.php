@@ -85,6 +85,7 @@ WHERE id = "'. BATCH_DOWNLOAD_ID .'"';
   }
   
   $conf['batch_download'] = unserialize($conf['batch_download']);
+  $conf['batch_download']['file_pattern'] = isset($conf['batch_download_file_pattern']) ? $conf['batch_download_file_pattern'] : '%id%_%filename%_%dimensions%';
   $conf['batch_download']['allowed_ext'] = $conf['picture_ext'];
   if (!empty($conf['batch_download_additional_ext']))
   {

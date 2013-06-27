@@ -1,8 +1,15 @@
 <dt><span>$conf['batch_download_max_elements']</span></dt>
-<dd>Максимальный уровень <b>Максимальное количество изображений в наборе для закачки</b> slider. <i>По умолчанию <span>1000</span>.</i></dd>
+<dd>Максимальный уровень <b>Максимальное количество изображений в наборе для закачки</b> slider.<br>
+<i>По умолчанию <span>1000</span>.</i></dd>
 
 <dt><span>$conf['batch_download_max_size']</span></dt>
-<dd>Максимальный уровень <b>Максимальный размер каждого архива</b> slider. <i>По умолчанию <span>500</span>.</i></dd>
+<dd>Максимальный уровень <b>Максимальный размер каждого архива</b> slider.<br>
+<i>По умолчанию <span>500</span>.</i></dd>
 
 <dt><span>$conf['batch_download_additional_ext']</span></dt>
-<dd>Массив-перечень расширений файлов, доступных для закачивания (с учетом регистра). <i>По умолчанию <span>$conf['picture_ext']</span>.</i></dd>
+<dd>Массив-перечень расширений файлов, доступных для закачивания (с учетом регистра).<br>
+<i>По умолчанию <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Pattern for filenames in the archive. Available fields are <code>'%id%', '%filename%', '%author%', '%dimensions%'</code>.<br>
+<i>Default value id <span>%id%_%filename%_%dimensions%</span>.</i></dd>

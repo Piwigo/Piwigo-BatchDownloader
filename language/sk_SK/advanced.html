@@ -1,8 +1,15 @@
 <dt><span>$conf['batch_download_max_elements']</span></dt>
-<dd>Maximálna hodnota <b>Maximálny počet fotiek pre nahratie v súbore</b>. <i>Prednastavené je <span>1000</span>.</i></dd>
+<dd>Maximálna hodnota <b>Maximálny počet fotiek pre nahratie v súbore</b>.<br>
+<i>Prednastavené je <span>1000</span>.</i></dd>
 
 <dt><span>$conf['batch_download_max_size']</span></dt>
-<dd>Maximálna hodnota <b>Maximálna veľkosť každého archívu</b>. <i>Prednastavené je <span>500</span>.</i></dd>
+<dd>Maximálna hodnota <b>Maximálna veľkosť každého archívu</b>.<br>
+<i>Prednastavené je <span>500</span>.</i></dd>
 
 <dt><span>$conf['batch_download_additional_ext']</span></dt>
-<dd>Polia obsahujúce prípony súborov na prevzatie (malé a veľké písmená). <i>Prednastavené je <span>$conf['picture_ext']</span>.</i></dd>
+<dd>Polia obsahujúce prípony súborov na prevzatie (malé a veľké písmená).<br>
+<i>Prednastavené je <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Pattern for filenames in the archive. Available fields are <code>'%id%', '%filename%', '%author%', '%dimensions%'</code>.<br>
+<i>Default value id <span>%id%_%filename%_%dimensions%</span>.</i></dd>

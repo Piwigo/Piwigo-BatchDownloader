@@ -1,8 +1,15 @@
 <dt><span>$conf['batch_download_max_elements']</span></dt>
-<dd>Valeur maximale du paramètre <b>Nombre maximal de photos par lot </b>. <i><span>1000</span> par défaut.</i></dd>
+<dd>Valeur maximale du paramètre <b>Nombre maximal de photos par lot </b>.<br>
+<i><span>1000</span> par défaut.</i></dd>
 
 <dt><span>$conf['batch_download_max_size']</span></dt>
-<dd>Valeur maximale du paramètre <b>Taille maximale de chaque archive</b>. <i><span>500</span> par défaut.</i></dd>
+<dd>Valeur maximale du paramètre <b>Taille maximale de chaque archive</b>.<br>
+<i><span>500</span> par défaut.</i></dd>
 
 <dt><span>$conf['batch_download_additional_ext']</span></dt>
-<dd>Tableau contenant les extensions de fichier qui peuvent être téléchargés (sensible à la casse). <i><span>$conf['picture_ext']</span> par défaut.</i></dd>
+<dd>Tableau contenant les extensions de fichier qui peuvent être téléchargés (sensible à la casse).<br>
+<i><span>$conf['picture_ext']</span> par défaut.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Format des noms de fichier dans l'archive. Les champs disponibles sont <span>%id%, %filename%, %author%, %dimensions%</span>.<br>
+<i><span>%id%_%filename%_%dimensions%</span> par défaut.</i></dd>

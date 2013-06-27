@@ -1,8 +1,15 @@
 <dt><span>$conf['batch_download_max_elements']</span></dt>
-<dd>Valore massimo del parametro <b>Numero massimo di foto per ogni download di set</b> slider. <i>Predefinito è <span>1000</span>.</i></dd>
+<dd>Valore massimo del parametro <b>Numero massimo di foto per ogni download di set</b> slider.<br>
+<i>Predefinito è <span>1000</span>.</i></dd>
 
 <dt><span>$conf['batch_download_max_size']</span></dt>
-<dd>Valore massimo del parametro <b>Dimensione massima di ciascun archivo</b> di slider. <i>Predefinito è <span>500</span>.</i></dd>
+<dd>Valore massimo del parametro <b>Dimensione massima di ciascun archivo</b> di slider.<br>
+<i>Predefinito è <span>500</span>.</i></dd>
 
 <dt><span>$conf['batch_download_additional_ext']</span></dt>
-<dd>Array contenente le estensioni dei file scaricabili (differenzia maiuscole e minuscole). <i>Predefinito è <span>$conf['picture_ext']</span>.</i></dd>
+<dd>Array contenente le estensioni dei file scaricabili (differenzia maiuscole e minuscole).<br>
+<i>Predefinito è <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Pattern for filenames in the archive. Available fields are <code>'%id%', '%filename%', '%author%', '%dimensions%'</code>.<br>
+<i>Default value id <span>%id%_%filename%_%dimensions%</span>.</i></dd>

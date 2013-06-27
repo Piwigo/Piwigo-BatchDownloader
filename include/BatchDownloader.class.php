@@ -396,6 +396,35 @@ DELETE FROM '.IMAGE_SIZES_TABLE.'
   }
   
   /**
+   * getFilename
+   */
+  function getFilename($row, $filesize=array())
+  {
+    $row['filename'] = stripslashes(get_filename_wo_extension($row['file']));
+    
+    $search = array('%id%', '%filename%', '%author%', '%dimensions%');
+    $replace = array($row['id'], $row['filename']);
+    
+    if (!empty($row['author'])) $replace[] = $row['author'];
+                           else $replace[] = null;
+                           
+    if (!empty($filesize)) $replace[] = $filesize['width'].'x'.$filesize['height'];
+                      else $replace[] = null;
+                      
+    $filename = str_replace($search, $replace, $this->conf['file_pattern']);
+    $filename = preg_replace(array('#_+#', '#^_#', '#_$#'), array('_', null, null), $filename);
+    
+    if (empty($filename) || $filename == $this->conf['file_pattern'])
+    {
+      $filename = $row['id'].'_'.$row['filename'];
+    }
+    
+    $filename.= '.'.get_extension($row['path']);
+    
+    return $filename;
+  }
+  
+  /**
    * createNextArchive
    * @param: bool force all elements in one archive
    * @return: string zip path or false
@@ -441,7 +470,8 @@ DELETE FROM '.IMAGE_SIZES_TABLE.'
       $query = '
 SELECT
     id, name, file, path,
-    rotation, filesize, width, height
+    rotation, filesize, width, height,
+    author
   FROM '.IMAGES_TABLE.'
   WHERE id IN ('.implode(',', $images_to_add).')
 ;';
@@ -474,12 +504,9 @@ SELECT image_id, filesize, width, height
           continue;
         }
         
-        $filename =  $row['id'].'_'.stripslashes(get_filename_wo_extension($row['file']));
-        
         if ($this->data['size'] == 'original')
         {
-          $filename.= '_'.$row['width'].'x'.$row['height'];
-          $zip->addFile(PHPWG_ROOT_PATH.$row['path'], $filename.'.'.get_extension($row['path']));
+          $zip->addFile(PHPWG_ROOT_PATH.$row['path'], $this->getFilename($row, $row));
           $total_size+= $row['filesize'];
         }
         else
@@ -489,17 +516,15 @@ SELECT image_id, filesize, width, height
           // no-image files
           if ($src_image->is_mimetype())
           {
-            $zip->addFile(PHPWG_ROOT_PATH.$row['path'], $filename.'.'.get_extension($row['path']));
+            $zip->addFile(PHPWG_ROOT_PATH.$row['path'], $this->getFilename($row, array()));
             $total_size+= $row['filesize'];
           }
           // images files
           else
           {
             $derivative = new DerivativeImage($this->data['size'], $src_image);
-            $path = $derivative->get_path();
             
-            $filename.= '_'.$filesizes[ $row['id'] ]['width'].'x'.$filesizes[ $row['id'] ]['height'];
-            $zip->addFile($path, $filename.'.'.get_extension($path));
+            $zip->addFile($derivative->get_path(), $this->getFilename($row, $filesizes[ $row['id'] ]));
             $total_size+= $filesizes[ $row['id'] ]['filesize'];
           }
         }

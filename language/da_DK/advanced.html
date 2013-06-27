@@ -1,8 +1,15 @@
 <dt><span>$conf['batch_download_max_elements']</span></dt>
-<dd>Maksimal værdi på <b>Maksimalt antal fotografier pr. downloadsæt</b>-skyderen. <i>Standardværdien er <span>1000</span>.</i></dd>
+<dd>Maksimal værdi på <b>Maksimalt antal fotografier pr. downloadsæt</b>-skyderen.<br>
+<i>Standardværdien er <span>1000</span>.</i></dd>
 
 <dt><span>$conf['batch_download_max_size']</span></dt>
-<dd>Maksimal værdi på <b>Maksimal størrelse på hvert arkiv</b>-skyderen. <i>Standardværdien er <span>500</span>.</i></dd>
+<dd>Maksimal værdi på <b>Maksimal størrelse på hvert arkiv</b>-skyderen.<br>
+<i>Standardværdien er <span>500</span>.</i></dd>
 
 <dt><span>$conf['batch_download_additional_ext']</span></dt>
-<dd>Array indeholdende downloadbare filendelser (forskel på små og store bogstaver). <i>Standardværdien er <span>$conf['picture_ext']</span>.</i></dd>
+<dd>Array indeholdende downloadbare filendelser (forskel på små og store bogstaver).<br>
+<i>Standardværdien er <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Pattern for filenames in the archive. Available fields are <code>'%id%', '%filename%', '%author%', '%dimensions%'</code>.<br>
+<i>Default value id <span>%id%_%filename%_%dimensions%</span>.</i></dd>

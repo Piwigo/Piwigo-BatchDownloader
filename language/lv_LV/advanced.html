@@ -1,8 +1,15 @@
 <dt><span>$conf['batch_download_max_elements']</span></dt>
-<dd>Maksimālā <b>Maksimālais lejupielādējamo foto skaits vienā lejupielādē</b> slaidera vērtība. <i>Noklusējuma vērtība ir <span>1000</span>.</i></dd>
+<dd>Maksimālā <b>Maksimālais lejupielādējamo foto skaits vienā lejupielādē</b> slaidera vērtība.<br>
+<i>Noklusējuma vērtība ir <span>1000</span>.</i></dd>
 
 <dt><span>$conf['batch_download_max_size']</span></dt>
-<dd>Maksimālā <b>Katra arhīva maksimālais lielums </b> slaidera vērtība.<i>Noklusējuma vērtība ir <span>500</span>.</i></dd>
+<dd>Maksimālā <b>Katra arhīva maksimālais lielums </b> slaidera vērtība.<br>
+<i>Noklusējuma vērtība ir <span>500</span>.</i></dd>
 
 <dt><span>$conf['batch_download_additional_ext']</span></dt>
-<dd>Lejuplādējamu failu paplašinājumu masīvs (reģistrjutīgs). <i>Noklusējuma vērtība ir <span>$conf['picture_ext']</span>.</i></dd>
+<dd>Lejuplādējamu failu paplašinājumu masīvs (reģistrjutīgs).<br>
+<i>Noklusējuma vērtība ir <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Pattern for filenames in the archive. Available fields are <code>'%id%', '%filename%', '%author%', '%dimensions%'</code>.<br>
+<i>Default value id <span>%id%_%filename%_%dimensions%</span>.</i></dd>
