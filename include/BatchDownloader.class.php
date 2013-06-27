@@ -405,14 +405,15 @@ DELETE FROM '.IMAGE_SIZES_TABLE.'
     $search = array('%id%', '%filename%', '%author%', '%dimensions%');
     $replace = array($row['id'], $row['filename']);
     
-    if (!empty($row['author'])) $replace[] = $row['author'];
-                           else $replace[] = null;
-                           
-    if (!empty($filesize)) $replace[] = $filesize['width'].'x'.$filesize['height'];
-                      else $replace[] = null;
-                      
+    $replace[2] = empty($row['author']) ? null : $row['author'];
+    $replace[3] = empty($filesize) ? null : $filesize['width'].'x'.$filesize['height'];
+    
     $filename = str_replace($search, $replace, $this->conf['file_pattern']);
-    $filename = preg_replace(array('#_+#', '#^_#', '#_$#'), array('_', null, null), $filename);
+    $filename = preg_replace(
+      array('#_+#', '#-+#', '# +#', '#^([_\- ]+)#', '#([_\- ]+)$#'),
+      array('_', '-', ' ', null, null),
+      $filename
+      );
     
     if (empty($filename) || $filename == $this->conf['file_pattern'])
     {
