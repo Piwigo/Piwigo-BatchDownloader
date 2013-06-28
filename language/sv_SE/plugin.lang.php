@@ -69,4 +69,18 @@ $lang['Downloads'] = 'Nedladdningar';
 $lang['Edit the set'] = 'Redigera paket';
 $lang['Estimated number of archives'] = 'Beräknat antal arkiv';
 $lang['Estimated size'] = 'Beräknad storlek';
+$lang['%d MB'] = '%d MB';
+$lang['Archive #%d (already downloaded)'] = 'Arkiv #%d (redan nedladdat)';
+$lang['Archive #%d (pending)'] = 'Arkiv #%d (kvar)';
+$lang['Archive #%d (ready)'] = 'Arkiv #%d (klart)';
+$lang['Delete previous archive when starting to download another one'] = 'Ta bort det förra arkivet när nedladdningen av ett annat arkiv startas';
+$lang['Don\'t download archives through PHP'] = 'Ladda inte ned arkiv via PHP';
+$lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Tvinga användande av PclZip istället för ZipArchive som ZIP-bibliotek';
+$lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Det sparar plats på servern men tillåter inte omstart av misslyckade nedladdningar';
+$lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Markera endast om du upplever felaktiga arkiv med ZipArchive';
+$lang['Only check if your host complains about high PHP usage.'] = 'Markera endast om din värddator klagar på högt PHP-användande';
+$lang['Please wait, your download is being prepared. This page will automatically refresh when it is ready.'] = 'Vänligen vänta, din nedladdning förbereds. Denna sida kommer att uppdateras automatiskt när den är klar.';
+$lang['Preparation'] = 'Förberedelse';
+$lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Ursäkta, det finns inget att ladda ned. Några filer kan ha undantagits på grund av <i title="Tillåtna typer är : %s">filtypsbegränsningar</i>';
+$lang['Unknown'] = 'Okänd';
 ?>
