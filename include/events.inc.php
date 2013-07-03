@@ -103,7 +103,7 @@ function batch_download_index_button()
         {
           $BatchDownloader->createNextArchive(true); // make sure we have only one zip, even if 'max_size' is exceeded
           
-          $u_download = get_root_url().BATCH_DOWNLOAD_PATH . 'download.php?set_id='.$BatchDownloader->getParam('id').'&amp;zip=1';
+          $u_download = get_root_url().BATCH_DOWNLOAD_PATH . 'download.php?set_id='.$BatchDownloader->getParam('id').'&zip=1';
           
           $null = null;
           $template->block_footer_script(null, 'setTimeout("document.location.href = \''.$u_download.'\';", 1000);', $null, $null);
