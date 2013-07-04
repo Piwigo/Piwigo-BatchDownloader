@@ -457,7 +457,7 @@ DELETE FROM '.IMAGE_SIZES_TABLE.'
       
       $this->updateParam('date_creation', date('Y-m-d H:i:s'));
       
-      trigger_action('batchdownload_init_zip', $this->data, array_keys($this->images));
+      trigger_action('batchdownload_init_zip', $this->data, array_keys($this->images)); // triggered once for all
     }
     
     // get next images of the set
@@ -560,6 +560,8 @@ UPDATE '.BATCH_DOWNLOAD_TIMAGES.'
     AND image_id IN('.implode(',', $images_added).')
 ;';
       pwg_query($query);
+      
+      trigger_action('batchdownload_end_zip', $this->data, $images_added); // triggered for each zip
       
       // all images added ?
       if (count($images_to_add) == count($images_added))
