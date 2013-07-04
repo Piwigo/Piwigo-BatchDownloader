@@ -457,7 +457,7 @@ DELETE FROM '.IMAGE_SIZES_TABLE.'
       
       $this->updateParam('date_creation', date('Y-m-d H:i:s'));
       
-      trigger_action('batchdownload_init_zip', $this->data, $this->images);
+      trigger_action('batchdownload_init_zip', $this->data, array_keys($this->images));
     }
     
     // get next images of the set
