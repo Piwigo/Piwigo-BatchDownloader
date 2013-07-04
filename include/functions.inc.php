@@ -62,11 +62,14 @@ function get_set_info_from_page()
       return false;
   }
   
-  return array(
+  $set = array(
     'type' => $batch_type,
     'id' => $batch_id,
     'size' => !empty($_GET['down_size']) ? $_GET['down_size'] : 'original',
+    'items' => $page['items'],
     );
+    
+  return trigger_event('batchdownload_get_set_info', $set);
 }
 
 /**

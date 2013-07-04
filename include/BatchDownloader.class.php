@@ -456,6 +456,8 @@ DELETE FROM '.IMAGE_SIZES_TABLE.'
       $this->getEstimatedArchiveNumber(true);
       
       $this->updateParam('date_creation', date('Y-m-d H:i:s'));
+      
+      trigger_action('batchdownload_init_zip', $this->data, $this->images);
     }
     
     // get next images of the set

@@ -88,9 +88,9 @@ function batch_download_index_button()
   {
     $set = get_set_info_from_page();
     
-    if ($set !== false)
+    if ($set !== false && count($set['items']))
     {
-      $BatchDownloader = new BatchDownloader('new', $page['items'], $set['type'], $set['id'], $set['size']);
+      $BatchDownloader = new BatchDownloader('new', $set['items'], $set['type'], $set['id'], $set['size']);
       
       if ($BatchDownloader->getParam('nb_images') != 0)
       {
