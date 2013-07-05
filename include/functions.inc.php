@@ -117,4 +117,30 @@ function readlargefile($fullfile)
   }
 }
 
+if (!function_exists('str2lower'))
+{
+  if (function_exists('mb_strtolower') && defined('PWG_CHARSET'))
+  {
+    function str2lower($term)
+    {
+      return mb_strtolower($term, PWG_CHARSET);
+    }
+    function str2upper($term)
+    {
+      return mb_strtoupper($term, PWG_CHARSET);
+    }
+  }
+  else
+  {
+    function str2lower($term)
+    {
+      return strtolower($term);
+    }
+    function str2upper($term)
+    {
+      return strtoupper($term);
+    }
+  }
+}
+
 ?>

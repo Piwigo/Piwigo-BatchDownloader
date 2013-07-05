@@ -402,6 +402,7 @@ DELETE FROM '.IMAGE_SIZES_TABLE.'
   {
     $row['filename'] = stripslashes(get_filename_wo_extension($row['file']));
     
+    // datas
     $search = array('%id%', '%filename%', '%author%', '%dimensions%');
     $replace = array($row['id'], $row['filename']);
     
@@ -409,6 +410,14 @@ DELETE FROM '.IMAGE_SIZES_TABLE.'
     $replace[3] = empty($filesize) ? null : $filesize['width'].'x'.$filesize['height'];
     
     $filename = str_replace($search, $replace, $this->conf['file_pattern']);
+    
+    // functions
+    $filename = preg_replace_callback('#\$escape\((.*?)\)#', create_function('$m', 'return str2url($m[1]);'),   $filename);
+    $filename = preg_replace_callback('#\$upper\((.*?)\)#',  create_function('$m', 'return str2upper($m[1]);'), $filename);
+    $filename = preg_replace_callback('#\$lower\((.*?)\)#',  create_function('$m', 'return str2lower($m[1]);'), $filename);
+    $filename = preg_replace_callback('#\$strpad\((.*?),(.*?),(.*?)\)#', create_function('$m', 'return str_pad($m[1],$m[2],$m[3],STR_PAD_LEFT);'), $filename);
+    
+    // cleanup
     $filename = preg_replace(
       array('#_+#', '#-+#', '# +#', '#^([_\- ]+)#', '#([_\- ]+)$#'),
       array('_', '-', ' ', null, null),

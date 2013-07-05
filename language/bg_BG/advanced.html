@@ -11,5 +11,8 @@
 <i>По подразбиране е <span>$conf['picture_ext']</span>.</i></dd>
 
 <dt><span>$conf['batch_download_file_pattern']</span></dt>
-<dd>Модел за имената на файловете в архива. Налични полета са <code>'%id%', '%filename%', '%author%', '%dimensions%'</code>.<br>
-<i>По подразбиране ID <span>%id%_%filename%_%dimensions%</span>.</i></dd>
+<dd>Модел за имената на файловете в архива.<br>
+Налични полета са <code>'%id%', '%filename%', '%author%', '%dimensions%'</code>.<br>
+Available functions are <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
+<i>По подразбиране ID <span>%id%_%filename%_%dimensions%</span>.</i><br>
+<i>Example: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
