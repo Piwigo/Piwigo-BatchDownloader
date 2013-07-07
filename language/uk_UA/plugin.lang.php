@@ -68,4 +68,18 @@ $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finis
 $lang['Warning: Only registered users can use Batch Downloader.'] = 'Увага : Тільки зареєстровані користувачі можуть використовувати Пакетний Завантажувач.';
 $lang['No result'] = 'Немає результату';
 $lang['What can be downloaded?'] = 'Що можна завантажити?';
+$lang['%d MB'] = '%d Мбайт';
+$lang['Archive #%d (already downloaded)'] = 'Архів #%d (вже завантажено)';
+$lang['Archive #%d (pending)'] = 'Архів #%d (очікує)';
+$lang['Archive #%d (ready)'] = 'Архів #%d (готовий)';
+$lang['Delete previous archive when starting to download another one'] = 'Видалити попередній архів при звантаженні наступного';
+$lang['Don\'t download archives through PHP'] = 'Не завантажувати архіви з допомогою PHP';
+$lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Примусово використовувати PclZip замість ZipArchive у якості бібліотеки ZIP.';
+$lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Економить місце на сервері, але не дозволяє відновлення невдалих завантажень.';
+$lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Клацніть лишень у разі поламаних архівів з ZipArchive.';
+$lang['Only check if your host complains about high PHP usage.'] = 'Клацніть лишень у разі надмірного споживання ресурсів PHP.';
+$lang['Please wait, your download is being prepared. This page will automatically refresh when it is ready.'] = 'Зачекайте, будь ласка. Ваші завантаження готуються. Ця сторінка оновиться автоматично у разі готовності.';
+$lang['Preparation'] = 'Підготовка';
+$lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Вибачте, але перелік до завантажень порожній. Деякі файли могли бути виключені через <i title="Авторизовні типи файлів : %s">обмеження типів файлів</i>.';
+$lang['Unknown'] = 'Невідомо';
 ?>
