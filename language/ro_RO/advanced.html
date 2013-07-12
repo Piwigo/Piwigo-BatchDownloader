@@ -1,0 +1,18 @@
+<dt><span>$conf['batch_download_max_elements']</span></dt>
+<dd>Valoarea maximă a cursorului <b>Numărul maxim de fotografii pe set</b>.<br>
+<i>Valoarea implicită este <span>1000</span>.</i></dd>
+
+<dt><span>$conf['batch_download_max_size']</span></dt>
+<dd>Valoarea maximă a cursorului <b>Mărimea maximă a fiecărei arhive/b>.<br>
+<i>Valoarea implicită este <span>500</span>.</i></dd>
+
+<dt><span>$conf['batch_download_additional_ext']</span></dt>
+<dd>Matricea care conține extensiile fișierelor care pot fi descărcate (cu diferențiere între litere mari și mici).<br>
+<i>Valoarea implicită este <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Tipar pentru numele de fișiere din arhivă.<br>
+Cămpurile disponibile sunt <span>%id%, %filename%, %author%, %dimensions%</span>.<br>
+Funcțiile disponibile sunt <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
+<i>Valoare implicită este <span>%id%_%filename%_%dimensions%</span>.</i><br>
+<i>Exemplu: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
