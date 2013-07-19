@@ -1,0 +1,18 @@
+<dt><span>$conf['batch_download_max_elements']</span></dt>
+<dd>Maxvärde för <b>Max antal bilder/nedladdningspaket</b> reglaget.<br>
+<i>Standardvärdet är <span>1000</span>.</i></dd>
+
+<dt><span>$conf['batch_download_max_size']</span></dt>
+<dd>Maxvärde för <b>Max storlek/arkiv</b> reglaget.<br>
+<i>Standardvärdet är <span>500</span>.</i></dd>
+
+<dt><span>$conf['batch_download_additional_ext']</span></dt>
+<dd>Lista över nedladdningsbara filändelser (skiftlägeskänslig).<br>
+<i>Standardvärdet är <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Form för filnamn i arkivet.<br>
+Tillgängliga fält: <span>%id%, %filename%, %author%, %dimensions%</span>.<br>
+Tillgängliga funktioner: <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
+<i>Standardvärdet är <span>%id%_%filename%_%dimensions%</span>.</i><br>
+<i>Exempel: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
