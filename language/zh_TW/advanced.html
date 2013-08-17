@@ -1,0 +1,18 @@
+<dt><span>$conf['batch_download_max_elements']</span></dt>
+<dd>最大的值 <b>每次下載照片的最大數量 </b> slider.<br>
+<i>預設值是 <span>1000</span>.</i></dd>
+
+<dt><span>$conf['batch_download_max_size']</span></dt>
+<dd>最大的值 <b>每個壓縮檔的最大大小 </b> slider.<br>
+<i>預設值是 <span>500</span>.</i></dd>
+
+<dt><span>$conf['batch_download_additional_ext']</span></dt>
+<dd>Array containing downloadable file extensions (case sensitive).<br>
+<i>預設值是 <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>在壓縮檔中的文件名模式。<br>
+可用字段 <span>%id%, %filename%, %author%, %dimensions%</span>.<br>
+可用功能<span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
+<i>預設值是 <span>%id%_%filename%_%dimensions%</span>.</i><br>
+<i>例如： <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
