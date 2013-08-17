@@ -68,4 +68,13 @@ $lang['Warning: Only registered users can use Batch Downloader.'] = 'هشدار:
 $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'با آغاز دانلود آرشیو #%d، آرشیو #%d از بین می‌رود. ادامه می‌دهید؟';
 $lang['No result'] = 'بدون نتیجه';
 $lang['What can be downloaded?'] = 'چه چیزی می‌تواند دانلود شود؟';
+$lang['%d MB'] = '%d مگابایت';
+$lang['Archive #%d (already downloaded)'] = 'آرشیو شماره‌ی %d (پیش از این دانلود شده)';
+$lang['Archive #%d (pending)'] = 'آرشیو شماره‌ی %d (در انتظارِ دانلود)';
+$lang['Archive #%d (ready)'] = 'آرشیو شماره‌ی %d (آماده‌ی دانلود)';
+$lang['Delete previous archive when starting to download another one'] = 'وقتی آرشیو تازه‌ای دانلود می‌شود، آرشیوهای پیشین پاک شوند';
+$lang['Don\'t download archives through PHP'] = 'آرشیوها را به کمکِ PHP دانلود نشوند';
+$lang['Please wait, your download is being prepared. This page will automatically refresh when it is ready.'] = 'دانلود شما در حال آماده سازی می‌باشد، کمی شکیبا باشید. با آماده شدنِ دانلودتان این صفحه ریفرش خواهد شد.';
+$lang['Preparation'] = 'در حال آماده سازی';
+$lang['Unknown'] = 'ناشناس';
 ?>
