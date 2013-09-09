@@ -68,4 +68,10 @@ $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finis
 $lang['Warning: Only registered users can use Batch Downloader.'] = 'Varování: Pouze registrovaní uživatelé mohou používat Dávkové stahování';
 $lang['What can be downloaded?'] = 'Co může být staženo?';
 $lang['No result'] = 'Žádný výsledek';
+$lang['%d MB'] = '%d MB';
+$lang['Archive #%d (already downloaded)'] = 'Archív #%d (staženo)';
+$lang['Archive #%d (pending)'] = 'Archív #%d (čekání)';
+$lang['Archive #%d (ready)'] = 'Archív #%d (připraven)';
+$lang['Preparation'] = 'Příprava';
+$lang['Unknown'] = 'Neznámý';
 ?>
