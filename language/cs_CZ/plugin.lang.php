@@ -74,4 +74,12 @@ $lang['Archive #%d (pending)'] = 'Archív #%d (čekání)';
 $lang['Archive #%d (ready)'] = 'Archív #%d (připraven)';
 $lang['Preparation'] = 'Příprava';
 $lang['Unknown'] = 'Neznámý';
+$lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Omlouvám se, ale není co stahovat. Některé soubory mohly být vyloučeny díky <i title="Povolené typy jsou : %s">omezení druhu souboru</i>.';
+$lang['Only check if your host complains about high PHP usage.'] = 'Zaškrtněte pouze v případě, že si váš host stěžuje na vysokou zátěž PHP.';
+$lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Toto ušetří místo na serveru, ale neumožní zrestartovat chybná stahovaní.';
+$lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Zaškrtněte pouze v případě, že máte problémy s archivními soubory vytvořené pomocí ZipArchive.';
+$lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Donutí použití PclZip místo ZipArchive jako knihovna ZIP.';
+$lang['Please wait, your download is being prepared. This page will automatically refresh when it is ready.'] = 'Vyčkejte prosím, připravuje se pro vás stahovaní. Tato stránka se automaticky obnoví jakmile bude stahování připraveno.';
+$lang['Delete previous archive when starting to download another one'] = 'Předešlý archivní soubor se smaže na začátku stahování nového. ';
+$lang['Don\'t download archives through PHP'] = 'Nestahuej archivní soubory skrz PHP';
 ?>
