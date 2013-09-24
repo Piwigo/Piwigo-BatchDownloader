@@ -1,0 +1,18 @@
+<dt><span>$conf['batch_download_max_elements']</span></dt>
+<dd>Maksimuma valoro de la <b>Maximuma nombro da fotoj en ĉiu elŝutaro</b> ŝovilo.<br>
+<i>Apriora valoro estas <span>1000</span>.</i></dd>
+
+<dt><span>$conf['batch_download_max_size']</span></dt>
+<dd>Maksimuma valoro de la <b>Maksimuma grandeco de ĉiu arĥivo</b> ŝovilo.<br>
+<i>Apriora valoro estas <span>500</span>.</i></dd>
+
+<dt><span>$conf['batch_download_additional_ext']</span></dt>
+<dd>Tabelo enhavanta la elŝuteblajn dosiersufiksoj (usklecodistinga).<br>
+<i>Apriora valoro estas <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Modelo por la dosiernomoj en la arĥivo.<br>
+Disponeblaj kampoj estas <span>%identigilo%, %dosiernomo%, %aŭtoro%, %dimensioj%</span>.<br>
+Disponeblaj funkcioj estas <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
+<i>Apriora valoro estas <span>%identigilo%_%dosiernomo%_%dimensioj%</span>.</i><br>
+<i>Ekzemple: <span>$strpad(%identigilo%,4,0)_$escape(%dosiernomo%)_$lower(%aŭtoro%)_%dimensioj%</span>.</i></dd>
