@@ -12,7 +12,7 @@
 
 <dt><span>$conf['batch_download_file_pattern']</span></dt>
 <dd>Modelo por la dosiernomoj en la arĥivo.<br>
-Disponeblaj kampoj estas <span>%identigilo%, %dosiernomo%, %aŭtoro%, %dimensioj%</span>.<br>
+Disponeblaj kampoj estas <span>%id%, %filename%, %author%, %dimensions%</span>.<br>
 Disponeblaj funkcioj estas <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
-<i>Apriora valoro estas <span>%identigilo%_%dosiernomo%_%dimensioj%</span>.</i><br>
-<i>Ekzemple: <span>$strpad(%identigilo%,4,0)_$escape(%dosiernomo%)_$lower(%aŭtoro%)_%dimensioj%</span>.</i></dd>
+<i>Apriora valoro estas <span>%id%_%filename%_%dimensions%</span>.</i><br>
+<i>Ekzemple: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
