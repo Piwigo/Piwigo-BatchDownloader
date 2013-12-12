@@ -13,6 +13,7 @@ function batch_download_install()
       'level'           => 0,
       'what'            => array('categories','specials','collections'),
       'photo_size'      => 'original',
+      'multisize'       => true,
       'archive_prefix'  => 'piwigo',
       'archive_timeout' => 48, /* hours */
       'max_elements'    => 500,
@@ -42,6 +43,10 @@ function batch_download_install()
       $new_conf['one_archive'] = false;
       $new_conf['force_pclzip'] = isset($conf['batch_download_force_pclzip']) && $conf['batch_download_force_pclzip'];
       $new_conf['direct'] = isset($conf['batch_download_direct']) && $conf['batch_download_direct'];
+    }
+    if (!isset($new_conf['multisize']))
+    {
+      $new_conf['multisize'] = true;
     }
     
     $conf['batch_download'] = serialize($new_conf);

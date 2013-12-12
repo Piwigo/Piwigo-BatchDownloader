@@ -62,5 +62,9 @@ $lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Force
 $lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Only check if you are experiencing corrupted archives with ZipArchive.';
 $lang['Don\'t download archives through PHP'] = 'Don\'t download archives through PHP';
 $lang['Only check if your host complains about high PHP usage.'] = 'Only check if your host complains about high PHP usage.';
+$lang['Any size'] = 'Any size';
+$lang['One size'] = 'One size';
+$lang['Photo size choices'] = 'Photo size choices';
+$lang['Photo size'] = 'Photo size';
 
 ?>

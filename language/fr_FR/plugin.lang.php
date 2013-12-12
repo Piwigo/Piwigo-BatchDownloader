@@ -41,7 +41,7 @@ $lang['Return to download page'] = 'Retourner à la page de téléchargement';
 $lang['Warning: ZipArchive doesn\'t accept special characters like accentuated ones, angle quotes (») and non-latin alphabets.'] = 'Attention: ZipArchive n\'accepte pas les caractères spéciaux comme les caractères accentués, les guillemets (») et les alphabets non-latin.';
 $lang['Unable to find ZipArchive PHP extension, Batch Downloader will use PclZip instead, but with degraded performance.'] = 'Impossible de trouver l\'extension PHP ZipArchive, Batch Downloader va utiliser PclZip à la place, mais avec des performances dégradées.';
 $lang['Remove from download set'] = 'Supprimer du lot';
-$lang['Confirm the download of %d pictures?'] = 'Confirmer le téléchargementde %d photos ?';
+$lang['Confirm the download of %d pictures?'] = 'Confirmer le téléchargement de %d photos ?';
 $lang['Remove all finished downloads'] = 'Supprimer tous les téléchargements terminés';
 $lang['hours'] = 'heures';
 $lang['Starting download Archive #%d will destroy Archive #%d, be sure you finish the download. Continue ?'] = 'Le démarrage du téléchargement de l\'archive #%d détruira l\'archive #%d, soyez sûr de terminer le téléchargement avant de continuer.';
@@ -62,5 +62,9 @@ $lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Force
 $lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Ne cochez uniquement que si vous avez des archives corrompues avec ZipArchive.';
 $lang['Don\'t download archives through PHP'] = 'Ne pas télécharger les archives via PHP';
 $lang['Only check if your host complains about high PHP usage.'] = 'Ne cochez uniquement que si votre hébergeur se plaint d\'une activité abusive de PHP.';
+$lang['Any size'] = 'N\'importe quelle taille';
+$lang['One size'] = 'Une seule taille';
+$lang['Photo size choices'] = 'Choix de la taille des photos';
+$lang['Photo size'] = 'Taille des photos';
 
 ?>

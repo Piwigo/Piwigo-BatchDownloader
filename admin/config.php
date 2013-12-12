@@ -10,6 +10,7 @@ if (isset($_POST['save_config']))
     'level'           => $_POST['level'],
     'what'            => isset($_POST['what']) ? array_keys($_POST['what']) : array(),
     'photo_size'      => $_POST['photo_size'],
+    'multisize'       => $_POST['multisize'] == 'true',
     'archive_prefix'  => trim($_POST['archive_prefix']),
     'archive_timeout' => intval($_POST['archive_timeout']),
     'max_elements'    => intval($_POST['max_elements']),

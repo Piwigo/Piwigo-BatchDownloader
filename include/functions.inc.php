@@ -7,7 +7,7 @@ defined('BATCH_DOWNLOAD_PATH') or die('Hacking attempt!');
  */
 function get_set_info_from_page()
 {
-  global $page;
+  global $page, $conf;
   
   switch ($page['section'])
   {
@@ -69,7 +69,31 @@ function get_set_info_from_page()
     'items' => $page['items'],
     );
     
-  return trigger_event('batchdownload_get_set_info', $set);
+  // check size
+  if (!$conf['batch_download']['multisize'])
+  {
+    $set['size'] = $conf['batch_download']['photo_size'];
+  }
+  else
+  {
+    $avail_sizes = array();
+    foreach (ImageStdParams::get_defined_type_map() as $params)
+    {
+      $avail_sizes[] = $params->type;
+      if ($params->type == $conf['batch_download']['photo_size']) break;
+    }
+    if ($conf['batch_download']['photo_size'] == 'original')
+    {
+      $avail_sizes[] = 'original';
+    }
+    
+    if (!in_array($set['size'], $avail_sizes))
+    {
+      $set['size'] = $conf['batch_download']['photo_size'];
+    }
+  }
+
+  return trigger_change('batchdownload_get_set_info', $set);
 }
 
 /**

@@ -30,7 +30,7 @@ $("#max_elements").slider({ldelim}
     $("input[name='max_elements']").val(ui.value);
   }
 });
-{literal}
+
 $("input[name='max_elements']").change(function() {
   $("#max_elements").slider("value", $(this).val());
 });
@@ -47,7 +47,18 @@ $(".show_advanced").click(function() {
   $(this).slideUp();
   $(".advanced").slideDown();
 });
-{/literal}{/footer_script}
+
+$('input[name="multisize"]').on('change', function() {
+  if ($(this).val() == 'true') {
+    $('#multisize_title').text('{'Maximum photo size'|@translate|escape:javascript}');
+  }
+  else {
+    $('#multisize_title').text('{'Photo size'|@translate|escape:javascript}');
+  }
+})
+.filter(':checked').trigger('change');
+{/footer_script}
+
 
 <div class="titrePage">
 	<h2>Batch Downloader</h2>
@@ -58,6 +69,9 @@ $(".show_advanced").click(function() {
   <legend>{'Download permissions'|@translate}</legend>
   
   <ul>
+    <li>
+      <i>{'Warning: Only registered users can use Batch Downloader.'|@translate}</i>
+    </li>
     <li>
       <label>
       {if $group_options}
@@ -79,18 +93,19 @@ $(".show_advanced").click(function() {
       </label>
     </li>
     <li>
-      <i>{'Warning: Only registered users can use Batch Downloader.'|@translate}</i>
-    </li>
-    <li>
       <b>{'What can be downloaded?'|@translate}</b>
       <label><input type="checkbox" name="what[categories]" {if in_array('categories',$batch_download.what)}checked="checked"{/if}/> {'Albums'|@translate}</label>
       {if $USER_COLLEC_LOADED}<label><input type="checkbox" name="what[collections]" {if in_array('collections',$batch_download.what)}checked="checked"{/if}/> {'Collections'|@translate}</label>{/if}
       <label><input type="checkbox" name="what[specials]" {if in_array('specials',$batch_download.what)}checked="checked"{/if}/> {'Specials'|@translate}</label>
-      <a class="showInfo" title="{'Most visited'|@translate}, {'Random photos'|@translate}, {'Best rated'|@translate}...">i</a>
+      <a class="icon-info-circled-1 showInfo" title="{'Most visited'|@translate}, {'Random photos'|@translate}, {'Best rated'|@translate}..."></a>
     </li>
     <li>
+      <b>{'Photo size choices'|translate}</b>
+      <label><input type="radio" name="multisize" value="true" {if $batch_download.multisize}checked{/if}> {'Any size'|translate}</label>
+      <label><input type="radio" name="multisize" value="false" {if !$batch_download.multisize}checked{/if}> {'One size'|translate}</label>
+
       <label>
-        <b>{'Maximum photo size'|@translate}</b>
+        <b id="multisize_title">{'Maximum photo size'|@translate}</b>
         <select name="photo_size">
           {html_options options=$sizes_options selected=$batch_download.photo_size}
         </select>
@@ -134,21 +149,21 @@ $(".show_advanced").click(function() {
         <input type="checkbox" name="one_archive" {if $batch_download.one_archive}checked{/if}>
         <b>{'Delete previous archive when starting to download another one'|@translate}</b>
       </label>
-      <a class="showInfo" title="{'It saves space on the server but doesn\'t allow to restart failed downloads.'|@translate}">i</a>
+      <a class="icon-info-circled-1 showInfo" title="{'It saves space on the server but doesn\'t allow to restart failed downloads.'|@translate}"></a>
     </li>
     <li>
       <label>
         <input type="checkbox" name="force_pclzip" {if $batch_download.force_pclzip}checked{/if}>
         <b>{'Force the usage of PclZip instead of ZipArchive as ZIP library'|@translate}</b>
       </label>
-      <a class="showInfo" title="{'Only check if you are experiencing corrupted archives with ZipArchive.'|@translate}">i</a>
+      <a class="icon-info-circled-1 showInfo" title="{'Only check if you are experiencing corrupted archives with ZipArchive.'|@translate}"></a>
     </li>
     <li>
       <label>
         <input type="checkbox" name="direct" {if $batch_download.direct}checked{/if}>
         <b>{'Don\'t download archives through PHP'|@translate}</b>
       </label>
-      <a class="showInfo" title="{'Only check if your host complains about high PHP usage.'|@translate}">i</a>
+      <a class="icon-info-circled-1 showInfo" title="{'Only check if your host complains about high PHP usage.'|@translate}"></a>
     </li>
   {if $use_ziparchive}
     <li>

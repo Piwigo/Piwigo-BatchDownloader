@@ -144,28 +144,35 @@ function batch_download_index_button()
     'BATCH_DWN_URL' => $url,
     ));
   
-  foreach (ImageStdParams::get_defined_type_map() as $params)
+  if ($conf['batch_download']['multisize'])
   {
-    $template->append(
-      'BATCH_DOWNLOAD_SIZES',
-      array(
-        'TYPE' => $params->type,
-        'DISPLAY' => l10n($params->type),
-        'SIZE' => $params->sizing->ideal_size[0].' x '.$params->sizing->ideal_size[1],
-        )
-      );
-      if ($params->type == $conf['batch_download']['photo_size']) break;
+    foreach (ImageStdParams::get_defined_type_map() as $params)
+    {
+      $template->append(
+        'BATCH_DWN_SIZES',
+        array(
+          'TYPE' => $params->type,
+          'DISPLAY' => l10n($params->type),
+          'SIZE' => $params->sizing->ideal_size[0].' x '.$params->sizing->ideal_size[1],
+          )
+        );
+        if ($params->type == $conf['batch_download']['photo_size']) break;
+    }
+    if ($conf['batch_download']['photo_size'] == 'original')
+    {
+      $template->append(
+        'BATCH_DWN_SIZES',
+        array(
+          'TYPE' => 'original',
+          'DISPLAY' => l10n('Original'),
+          'SIZE' => null,
+          )
+        );
+    }
   }
-  if ($conf['batch_download']['photo_size'] == 'original')
+  else
   {
-    $template->append(
-      'BATCH_DOWNLOAD_SIZES',
-      array(
-        'TYPE' => 'original',
-        'DISPLAY' => l10n('Original'),
-        'SIZE' => null,
-        )
-      );
+    $template->assign('BATCH_DWN_SIZE', $conf['batch_download']['photo_size']);
   }
     
   $template->set_filename('batchdwn_button', realpath(BATCH_DOWNLOAD_PATH.'template/download_button.tpl'));
