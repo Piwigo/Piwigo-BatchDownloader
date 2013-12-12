@@ -1,10 +1,10 @@
 <?php
-if (!defined('BATCH_DOWNLOAD_PATH')) die('Hacking attempt!');
+defined('BATCH_DOWNLOAD_PATH') or die('Hacking attempt!');
 
 if (isset($_POST['save_config']))
 {
   if (!defined('USER_COLLEC_ID')) $_POST['what']['collections'] = 'on';
-  
+
   $conf['batch_download'] = array(
     'groups'          => isset($_POST['groups']) ? $_POST['groups'] : array(),
     'level'           => $_POST['level'],
@@ -21,11 +21,11 @@ if (isset($_POST['save_config']))
     'last_clean'      => $conf['batch_download']['last_clean'],
     );
   $conf['batch_download_comment'] = trim($_POST['archive_comment']);
-  
+
   conf_update_param('batch_download', serialize($conf['batch_download']));
   conf_update_param('batch_download_comment', $conf['batch_download_comment']);
-  
-  array_push($page['infos'], l10n('Information data registered in database'));
+
+  $page['infos'][] = l10n('Information data registered in database');
 }
 
 
@@ -66,6 +66,4 @@ $template->assign(array(
   ));
 
 
-$template->set_filename('batch_download', dirname(__FILE__) . '/template/config.tpl');
-
-?>
+$template->set_filename('batch_download', realpath(BATCH_DOWNLOAD_PATH . 'admin/template/config.tpl'));

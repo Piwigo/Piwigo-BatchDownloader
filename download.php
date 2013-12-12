@@ -6,7 +6,7 @@ check_status(ACCESS_GUEST);
 
 try {
   $BatchDownloader = new BatchDownloader($_GET['set_id']);
-  
+
   if ($conf['batch_download']['one_archive'] and $_GET['zip'] == $BatchDownloader->getParam('last_zip'))
   {
     $file = $BatchDownloader->getArchivePath();
@@ -15,12 +15,12 @@ try {
   {
     $file = $BatchDownloader->getArchivePath($_GET['zip']);
   }
-  
+
   if (empty($file) || !file_exists($file))
   {
     throw new Exception('Unable to locate file.');
   }
-  
+
   if ($conf['batch_download']['direct'])
   {
     header('Location: '.$file);
@@ -46,5 +46,3 @@ catch (Exception $e)
 }
 
 exit(0);
-
-?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
 Plugin Name: Batch Downloader
 Version: auto
@@ -32,17 +32,17 @@ if (defined('IN_ADMIN'))
 else
 {
   add_event_handler('init', 'batch_downloader_remove_image');
-  
+
   add_event_handler('loc_end_section_init', 'batch_download_section_init');
   add_event_handler('loc_end_index', 'batch_download_page');
 
   add_event_handler('loc_end_index', 'batch_download_clean');
 
   add_event_handler('loc_end_index', 'batch_download_index_button', EVENT_HANDLER_PRIORITY_NEUTRAL+10);
-
-  add_event_handler('blockmanager_register_blocks', 'batch_download_add_menublock');
-  add_event_handler('blockmanager_apply', 'batch_download_applymenu');
 }
+
+add_event_handler('blockmanager_register_blocks', 'batch_download_add_menublock');
+add_event_handler('blockmanager_apply', 'batch_download_applymenu');
 
 
 include_once(BATCH_DOWNLOAD_PATH . 'include/BatchDownloader.class.php');
@@ -56,34 +56,12 @@ include_once(BATCH_DOWNLOAD_PATH . 'include/events.inc.php');
  */
 function batch_download_init()
 {
-  global $conf, $pwg_loaded_plugins;
-  
-  if (
-    BATCH_DOWNLOAD_VERSION == 'auto' or
-    $pwg_loaded_plugins[BATCH_DOWNLOAD_ID]['version'] == 'auto' or
-    version_compare($pwg_loaded_plugins[BATCH_DOWNLOAD_ID]['version'], BATCH_DOWNLOAD_VERSION, '<')
-  )
-  {
-    include_once(BATCH_DOWNLOAD_PATH . 'include/install.inc.php');
-    batch_download_install();
-    
-    if ( $pwg_loaded_plugins[BATCH_DOWNLOAD_ID]['version'] != 'auto' and BATCH_DOWNLOAD_VERSION != 'auto' )
-    {
-      $query = '
-UPDATE '. PLUGINS_TABLE .'
-SET version = "'. BATCH_DOWNLOAD_VERSION .'"
-WHERE id = "'. BATCH_DOWNLOAD_ID .'"';
-      pwg_query($query);
-      
-      $pwg_loaded_plugins[BATCH_DOWNLOAD_ID]['version'] = BATCH_DOWNLOAD_VERSION;
-      
-      if (defined('IN_ADMIN'))
-      {
-        $_SESSION['page_infos'][] = 'BatchDownloader updated to version '. BATCH_DOWNLOAD_VERSION;
-      }
-    }
-  }
-  
+  global $conf;
+
+  include_once(BATCH_DOWNLOAD_PATH . 'maintain.inc.php');
+  $maintain = new BatchDownloader_maintain(BATCH_DOWNLOAD_ID);
+  $maintain->autoUpdate(BATCH_DOWNLOAD_VERSION, 'install');
+
   $conf['batch_download'] = unserialize($conf['batch_download']);
   $conf['batch_download']['file_pattern'] = isset($conf['batch_download_file_pattern']) ? $conf['batch_download_file_pattern'] : '%id%_%filename%_%dimensions%';
   $conf['batch_download']['allowed_ext'] = $conf['picture_ext'];
@@ -91,20 +69,18 @@ WHERE id = "'. BATCH_DOWNLOAD_ID .'"';
   {
     $conf['batch_download']['allowed_ext'] = array_merge($conf['batch_download']['allowed_ext'], $conf['batch_download_additional_ext']);
   }
-  
+
   load_language('plugin.lang', BATCH_DOWNLOAD_PATH);
 }
 
 /**
  * admin plugins menu
  */
-function batch_download_admin_menu($menu) 
+function batch_download_admin_menu($menu)
 {
-  array_push($menu, array(
+  $menu[] = array(
     'NAME' => 'Batch Downloader',
     'URL' => BATCH_DOWNLOAD_ADMIN,
-  ));
+  );
   return $menu;
 }
-
-?>

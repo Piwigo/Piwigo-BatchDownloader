@@ -8,15 +8,15 @@ defined('BATCH_DOWNLOAD_PATH') or die('Hacking attempt!');
 function get_set_info_from_page()
 {
   global $page, $conf;
-  
+
   switch ($page['section'])
   {
     case 'categories':
       if (isset($page['chronology_field']))
       {
         $batch_type = 'calendar';
-        $batch_id = add_well_known_params_in_url('', 
-          array_intersect_key($page, 
+        $batch_id = add_well_known_params_in_url('',
+          array_intersect_key($page,
             array(
               'chronology_field'=>0,
               'chronology_style'=>0,
@@ -61,14 +61,14 @@ function get_set_info_from_page()
     default:
       return false;
   }
-  
+
   $set = array(
     'type' => $batch_type,
     'id' => $batch_id,
     'size' => !empty($_GET['down_size']) ? $_GET['down_size'] : 'original',
     'items' => $page['items'],
     );
-    
+
   // check size
   if (!$conf['batch_download']['multisize'])
   {
@@ -86,7 +86,7 @@ function get_set_info_from_page()
     {
       $avail_sizes[] = 'original';
     }
-    
+
     if (!in_array($set['size'], $avail_sizes))
     {
       $set['size'] = $conf['batch_download']['photo_size'];
@@ -103,12 +103,12 @@ function get_set_info_from_page()
 function check_download_access()
 {
   global $user, $conf;
-  
+
   if (is_a_guest()) return false;
   if (is_admin()) return true;
-  
+
   if ($user['level'] < $conf['batch_download']['level']) return false;
-  
+
   if (!empty($conf['batch_download']['groups']))
   {
     $query = '
@@ -118,10 +118,10 @@ SELECT 1 FROM '.USER_GROUP_TABLE.'
     AND group_id IN('.implode(',', $conf['batch_download']['groups']).')
 ;';
     $result = pwg_query($query);
-    
+
     if (!pwg_db_num_rows($result)) return false;
   }
-  
+
   return true;
 }
 
@@ -166,5 +166,3 @@ if (!function_exists('str2lower'))
     }
   }
 }
-
-?>

@@ -1,5 +1,5 @@
 <?php
-if (!defined('BATCH_DOWNLOAD_PATH')) die('Hacking attempt!');
+defined('BATCH_DOWNLOAD_PATH') or die('Hacking attempt!');
 
 // actions
 if (isset($_GET['delete']))
@@ -10,7 +10,7 @@ if (isset($_GET['delete']))
 }
 if (isset($_GET['cancel']))
 {
-  $set = new BatchDownloader($_GET['cancel']);  
+  $set = new BatchDownloader($_GET['cancel']);
   $set->updateParam('total_size', $set->getEstimatedTotalSize());
   $set->updateParam('nb_zip', $set->getEstimatedArchiveNumber());
   $set->updateParam('status', 'done');
@@ -27,9 +27,9 @@ SELECT id
     status = "done" AND
     date_creation < DATE_SUB(NOW(), INTERVAL 1 HOUR)
 ;';
-  
+
   $sets = array_from_query($query, 'id');
-  
+
   foreach ($sets as $set_id)
   {
     $set = new BatchDownloader($set_id);
@@ -47,27 +47,27 @@ if (isset($_POST['filter']))
 {
   if (!empty($_POST['username']))
   {
-    array_push($where_clauses, 'username LIKE "%'.$_POST['username'].'%"');
+    $where_clauses[] = 'username LIKE "%'.$_POST['username'].'%"';
   }
-  
+
   if ($_POST['type'] != -1)
   {
-    array_push($where_clauses, 'type = "'.$_POST['type'].'"');
+    $where_clauses[] = 'type = "'.$_POST['type'].'"';
   }
-  
+
   if ($_POST['status'] != -1)
   {
     if ($_POST['status'] == 'new')
-      array_push($where_clauses, '(status = "new" OR status = "ready")');
+      $where_clauses[] = '(status = "new" OR status = "ready")';
     else
-      array_push($where_clauses, 'status = "'.$_POST['status'].'"');
+      $where_clauses[] = 'status = "'.$_POST['status'].'"';
   }
-  
+
   if ($_POST['size'] != -1)
   {
-    array_push($where_clauses, 'size = "'.$_POST['size'].'"');
+    $where_clauses[] = 'size = "'.$_POST['size'].'"';
   }
-  
+
   if ($_POST['order_by'] == 'size')
   {
     $order_by = 'FIND_IN_SET(size, "square,thumb,2small,xsmall,small,medium,large,xlarge,xxlarge,original") '.$_POST['direction'];
@@ -81,7 +81,7 @@ if (isset($_POST['filter']))
 
 // get sets
 $query = '
-SELECT 
+SELECT
     s.id,
     u.'.$conf['user_fields']['username'].' AS username
   FROM '.BATCH_DOWNLOAD_TSETS.' AS s
@@ -96,7 +96,7 @@ $sets = simple_hash_from_query($query, 'id', 'username');
 foreach ($sets as $set_id => $username)
 {
   $set = new BatchDownloader($set_id);
-  
+
   $template->append('sets', array_merge(
     $set->getSetInfo(),
     array(
@@ -105,7 +105,7 @@ foreach ($sets as $set_id => $username)
       'U_CANCEL' => BATCH_DOWNLOAD_ADMIN . '-sets&amp;cancel='.$set->getParam('id'),
     )
     ));
-  
+
   unset($set);
 }
 
@@ -172,6 +172,4 @@ $template->assign(array(
   ));
 
 
-$template->set_filename('batch_download', dirname(__FILE__) . '/template/sets.tpl');
-
-?>
+$template->set_filename('batch_download', realpath(BATCH_DOWNLOAD_PATH . 'admin/template/sets.tpl'));
