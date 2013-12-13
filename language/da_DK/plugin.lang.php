@@ -82,4 +82,8 @@ $lang['Don\'t download archives through PHP'] = 'Download ikke arkiver gennem PH
 $lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Det sparer plads på serveren, men det er ikke muligt at genstarte en mislykket download.';
 $lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Aktiver kun hvis du oplever problemer med defekte arkiver med ZipArchive.';
 $lang['Only check if your host complains about high PHP usage.'] = 'Aktiver kun hvis din vært klager over forhøjet PHP-brug.';
+$lang['Any size'] = 'Enhver størrelse';
+$lang['One size'] = 'En størrelse';
+$lang['Photo size'] = 'Fotostørrelse';
+$lang['Photo size choices'] = 'Vælg fotostørrelse';
 ?>
