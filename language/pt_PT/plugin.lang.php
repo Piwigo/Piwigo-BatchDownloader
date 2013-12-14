@@ -82,4 +82,8 @@ $lang['It saves space on the server but doesn\'t allow to restart failed downloa
 $lang['No result'] = 'Sem resultado';
 $lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Sinalize apenas se ocorrem arquivos corruptos com ZipArchive.';
 $lang['Only check if your host complains about high PHP usage.'] = 'Sinalize apenas se o seu hospedador reclama o uso elevado de PHP.';
+$lang['Any size'] = 'Qualquer tamanho';
+$lang['One size'] = 'Um Tamanho';
+$lang['Photo size'] = 'Tamanho da foto';
+$lang['Photo size choices'] = 'As escolhas de tamanhos da foto';
 ?>
