@@ -82,4 +82,8 @@ $lang['Only check if you are experiencing corrupted archives with ZipArchive.'] 
 $lang['Only check if your host complains about high PHP usage.'] = 'Sadece barındırma sağlayıcınızdan PHP kullanımı ile ilgili şikayet aldığınız durumlarda seçin.';
 $lang['Delete previous archive when starting to download another one'] = 'Diğer indirmeye geçildiğinde önceki arşivi sil';
 $lang['Don\'t download archives through PHP'] = 'Arşivi PHP üzerinden indirme';
+$lang['Any size'] = 'Herhangi bir boyut';
+$lang['One size'] = 'Tek boyut';
+$lang['Photo size'] = 'Fotoğraf boyutu';
+$lang['Photo size choices'] = 'Fotoğraf boyutu seçimi';
 ?>
