@@ -82,4 +82,8 @@ $lang['done'] = 'gata';
 $lang['download'] = 'descărcare';
 $lang['hours'] = 'ore';
 $lang['real number of archives can differ'] = 'numărul real de arhive poate diferi';
+$lang['Any size'] = 'Orice dimensiune';
+$lang['One size'] = 'O dimensiune';
+$lang['Photo size'] = 'Dimensiune fotografie';
+$lang['Photo size choices'] = 'Opțiuni dimensiuni fotografie';
 ?>
