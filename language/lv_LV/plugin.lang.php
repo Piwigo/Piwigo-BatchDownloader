@@ -83,4 +83,8 @@ $lang['Only check if your host complains about high PHP usage.'] = 'Pārbauda ti
 $lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Tas ekonomē vietu uz severa, bet neļauj atsākt pārtrauktās lejupielādes';
 $lang['Don\'t download archives through PHP'] = 'Nelejupielādējiet arhīvus izmantojot PHP';
 $lang['Delete previous archive when starting to download another one'] = 'Sākot lejupielādēt jaunu arhīvu, izdzēst iepriekšējo ';
+$lang['Photo size choices'] = 'Foto izmēra izvēles';
+$lang['One size'] = 'Viena izmēra';
+$lang['Photo size'] = 'Foto izmērs';
+$lang['Any size'] = 'Jebkura izmēra';
 ?>
