@@ -82,4 +82,8 @@ $lang['Only check if you are experiencing corrupted archives with ZipArchive.'] 
 $lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Šetrí miesto na serveri, ale neumožňuje reštartovať neúspešné stiahnutia.';
 $lang['Don\'t download archives through PHP'] = 'Nesťahovať archívy cez PHP';
 $lang['Delete previous archive when starting to download another one'] = 'Vymazať predchádzajúci archív pri spustení stiahnutia ďalšieho';
+$lang['Photo size choices'] = 'Voľba veľkosti fotky';
+$lang['Photo size'] = 'Veľkosť fotky';
+$lang['Any size'] = 'Ľubovoľná veľkosť';
+$lang['One size'] = 'Jedna veľkosť';
 ?>
