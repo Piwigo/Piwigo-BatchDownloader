@@ -82,4 +82,8 @@ $lang['Don\'t download archives through PHP'] = 'Não faça o download de arquiv
 $lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Isso economiza espaço no servidor, mas não permite reiniciar baixas de arquivo quando houver falha.';
 $lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Apenas verifique se você está lidando com arquivos corrompidos com o ZipArchive.';
 $lang['Only check if your host complains about high PHP usage.'] = 'Apenas verifique se o seu host reclama com o alto uso de PHP.';
+$lang['Any size'] = 'Quaquer tamanho';
+$lang['One size'] = 'Um tamanho';
+$lang['Photo size'] = 'Tamanho da foto';
+$lang['Photo size choices'] = 'Tamanhos de fota para escolher';
 ?>
