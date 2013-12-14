@@ -83,4 +83,8 @@ $lang['Only check if you are experiencing corrupted archives with ZipArchive.'] 
 $lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Εξοικονομεί χώρο στον server, αλλά δεν επιτρέπει την επανεκκίνηση αποτυχημένων λήψεων.';
 $lang['Don\'t download archives through PHP'] = 'Μην κάνετε λήψη αρχείων μέσω PHP';
 $lang['Delete previous archive when starting to download another one'] = 'Διαγραφή προηγούμενου αρχείου, όταν αρχίζει να κατεβαίνει ένα άλλο';
+$lang['Photo size'] = 'Μέγεθος φωτογραφίας';
+$lang['Photo size choices'] = 'Επιλογές Μεγέθους φωτογραφίας';
+$lang['One size'] = 'Ένα μέγεθος';
+$lang['Any size'] = 'Οποιοδήποτε μέγεθος';
 ?>
