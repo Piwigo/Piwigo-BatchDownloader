@@ -82,4 +82,8 @@ $lang['Only check if your host complains about high PHP usage.'] = 'Sólo compro
 $lang['Delete previous archive when starting to download another one'] = 'Eliminar archivo anterior cuando se empieza a descargar otro';
 $lang['Don\'t download archives through PHP'] = 'No descargar archivos a través de PHP';
 $lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Forzar el uso de PclZip lugar de ZipArchive como librería ZIP';
+$lang['Any size'] = 'Todos los formatos';
+$lang['One size'] = 'Un formato';
+$lang['Photo size'] = 'Formato de la foto';
+$lang['Photo size choices'] = 'Eligir el formato de la foto';
 ?>
