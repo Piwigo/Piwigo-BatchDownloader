@@ -82,4 +82,8 @@ $lang['Download all pictures of this selection'] = 'Tải xuống tất cả ả
 $lang['Download history'] = 'Lịch sử tải xuống';
 $lang['Download info'] = 'Thông tin tải xuống';
 $lang['Download links'] = 'Liên kết tải xuống';
+$lang['Any size'] = 'Bất kỳ kích thước nào';
+$lang['One size'] = 'Một kích thước';
+$lang['Photo size'] = 'Kích thước ảnh';
+$lang['Photo size choices'] = 'Các chọn lựa kích thước ảnh';
 ?>
