@@ -82,4 +82,8 @@ $lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Donut
 $lang['Please wait, your download is being prepared. This page will automatically refresh when it is ready.'] = 'Vyčkejte prosím, připravuje se pro vás stahovaní. Tato stránka se automaticky obnoví jakmile bude stahování připraveno.';
 $lang['Delete previous archive when starting to download another one'] = 'Předešlý archivní soubor se smaže na začátku stahování nového. ';
 $lang['Don\'t download archives through PHP'] = 'Nestahuej archivní soubory skrz PHP';
+$lang['Any size'] = 'jakákoliv velikost';
+$lang['One size'] = 'jedna velikost';
+$lang['Photo size'] = 'velikost fotky';
+$lang['Photo size choices'] = 'možnosti velikostí fotek';
 ?>
