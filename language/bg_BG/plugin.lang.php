@@ -82,4 +82,8 @@ $lang['Archive #%d (already downloaded)'] = 'Архивиране #%d (вече 
 $lang['Archive #%d (pending)'] = 'Архивиране #%d (в очакване)';
 $lang['Archive #%d (ready)'] = 'Архивиране #%d (готови)';
 $lang['%d MB'] = '%d MB';
+$lang['Photo size choices'] = 'Избор на размер снимка';
+$lang['Photo size'] = 'Размер на снимка';
+$lang['Any size'] = 'Всеки размер';
+$lang['One size'] = 'Един размер';
 ?>
