@@ -82,4 +82,8 @@ $lang['Download all pictures of this selection'] = '下載所有選擇了的照�
 $lang['Download history'] = '下載記錄';
 $lang['Download info'] = '下載資訊';
 $lang['Download links'] = '下載連結';
+$lang['Any size'] = '任何尺寸';
+$lang['One size'] = '一個尺寸';
+$lang['Photo size'] = '照片尺寸';
+$lang['Photo size choices'] = '照片尺寸選擇';
 ?>
