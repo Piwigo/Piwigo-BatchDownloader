@@ -114,6 +114,8 @@ CREATE TABLE IF NOT EXISTS `' . $prefixeTable . 'image_sizes` (
 
     // add "ready" status
     pwg_query('ALTER TABLE `' . $prefixeTable . 'download_sets` CHANGE `status` `status` enum("new","ready","download","done") NOT NULL DEFAULT "new";');
+    
+    $this->installed = true;
   }
 
   function activate($plugin_version, &$errors=array())
