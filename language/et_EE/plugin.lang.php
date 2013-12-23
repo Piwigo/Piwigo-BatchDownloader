@@ -82,4 +82,8 @@ $lang['Don\'t download archives through PHP'] = 'Ära lae arhiive alla kasutades
 $lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Hoiab serveriruumi kokku, aga ei luba jätkata poolikuid allalaadimisi.';
 $lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'Kasuta ainlt siis, kui ZipArchive tekitab vigaseid arhiive';
 $lang['Only check if your host complains about high PHP usage.'] = 'Kasuta ainult kui teenusepakkuja kurdab suure PHP kasutuse üle';
+$lang['Any size'] = 'Iga suurus';
+$lang['One size'] = 'Üks suurus';
+$lang['Photo size'] = 'Foto suurus';
+$lang['Photo size choices'] = 'Foto suuruse valikud';
 ?>
