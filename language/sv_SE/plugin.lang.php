@@ -83,4 +83,8 @@ $lang['Please wait, your download is being prepared. This page will automaticall
 $lang['Preparation'] = 'Förberedelse';
 $lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Ursäkta, det finns inget att ladda ned. Några filer kan ha undantagits på grund av <i title="Tillåtna typer är : %s">filtypsbegränsningar</i>';
 $lang['Unknown'] = 'Okänd';
+$lang['Any size'] = 'Vilken storlek som helst';
+$lang['One size'] = 'En storlek';
+$lang['Photo size'] = 'Foto storlek';
+$lang['Photo size choices'] = 'Foto storleks val';
 ?>
