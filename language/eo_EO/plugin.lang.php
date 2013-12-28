@@ -82,4 +82,8 @@ $lang['Download all pictures of this selection'] = 'Elŝuti ĉiujn bildojn en ti
 $lang['Download history'] = 'Historio de la elŝutoj';
 $lang['Download info'] = 'Informoj pri la elŝuto';
 $lang['Download links'] = 'Elŝutaj ligiloj';
+$lang['Any size'] = 'Ajna grandeco';
+$lang['One size'] = 'Unu grandeco';
+$lang['Photo size'] = 'Fotograndeco';
+$lang['Photo size choices'] = 'Elektoj de fotograndecoj';
 ?>
