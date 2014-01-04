@@ -82,4 +82,8 @@ $lang['Only check if your host complains about high PHP usage.'] = '只使用於
 $lang['Please wait, your download is being prepared. This page will automatically refresh when it is ready.'] = '請稍候，正在準備您的下載工作。完成後將會自動更新頁面。';
 $lang['Preparation'] = '準備';
 $lang['Unknown'] = '未知';
+$lang['Any size'] = '任何尺寸';
+$lang['One size'] = '一個尺寸';
+$lang['Photo size'] = '照片尺寸';
+$lang['Photo size choices'] = '照片尺寸的選擇';
 ?>
