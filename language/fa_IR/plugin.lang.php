@@ -77,4 +77,13 @@ $lang['Don\'t download archives through PHP'] = 'آرشیوها را به کمک
 $lang['Please wait, your download is being prepared. This page will automatically refresh when it is ready.'] = 'دانلود شما در حال آماده سازی می‌باشد، کمی شکیبا باشید. با آماده شدنِ دانلودتان این صفحه ریفرش خواهد شد.';
 $lang['Preparation'] = 'در حال آماده سازی';
 $lang['Unknown'] = 'ناشناس';
+$lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = ' ZipArchive as ZIP library به جایPclZip اجبار برای استفاده از ';
+$lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'فضا ذخیره در سرور موجودنیست تا مجددا دانلود کنید';
+$lang['Only check if you are experiencing corrupted archives with ZipArchive.'] = 'فقط،چک کن اگرتحمیل کن zip ارشیو  ';
+$lang['Only check if your host complains about high PHP usage.'] = 'فقط چک کن هاست خودرا برای کمپانت های پی اچ پی  ';
+$lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'متصفایم:( , چیزی دانلود نشد,شاید فایل موجودنیست برای <i title="Authorized types are : %s"> این نوع فایل محدود است</i>.';
+$lang['Any size'] = 'هر سایزی';
+$lang['One size'] = 'در سایز';
+$lang['Photo size'] = 'سایز تصویر';
+$lang['Photo size choices'] = 'سایز تصویر انتخاب شدهه';
 ?>
