@@ -5,22 +5,6 @@ class BatchDownloader_maintain extends PluginMaintain
 {
   private $installed = false;
 
-  private $default_conf = array(
-    'groups'          => array(),
-    'level'           => 0,
-    'what'            => array('categories','specials','collections'),
-    'photo_size'      => 'original',
-    'multisize'       => true,
-    'archive_prefix'  => 'piwigo',
-    'archive_timeout' => 48, /* hours */
-    'max_elements'    => 500,
-    'max_size'        => 100, /* MB */
-    'last_clean'      => time(),
-    'one_archive'     => false,
-    'force_pclzip'    => false,
-    'direct'          => false,
-    );
-
   function install($plugin_version, &$errors=array())
   {
     global $conf, $prefixeTable;
@@ -28,7 +12,23 @@ class BatchDownloader_maintain extends PluginMaintain
     // configuration
     if (empty($conf['batch_download']))
     {
-      $conf['batch_download'] = serialize($this->default_config);
+      $batch_download_default_config = array(
+        'groups'          => array(),
+        'level'           => 0,
+        'what'            => array('categories','specials','collections'),
+        'photo_size'      => 'original',
+        'multisize'       => true,
+        'archive_prefix'  => 'piwigo',
+        'archive_timeout' => 48, /* hours */
+        'max_elements'    => 500,
+        'max_size'        => 100, /* MB */
+        'last_clean'      => time(),
+        'one_archive'     => false,
+        'force_pclzip'    => false,
+        'direct'          => false,
+        );
+
+      $conf['batch_download'] = serialize($batch_download_default_config);
       $conf['batch_download_comment'] = null;
 
       conf_update_param('batch_download', $conf['batch_download']);
