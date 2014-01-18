@@ -32,6 +32,6 @@ var batchdown_string = "{'Confirm the download of %d pictures?'|translate}";
 {/if}
 {/footer_script}
 
-{html_style}{literal}
-.downloadSizeDetails {font-style:italic; font-size:80%;}
-{/literal}{/html_style}
+{html_style}
+.downloadSizeDetails { font-style:italic; font-size:80%; }
+{/html_style}

@@ -93,7 +93,7 @@ function get_set_info_from_page()
     }
   }
 
-  return trigger_change('batchdownload_get_set_info', $set);
+  return trigger_event('batchdownload_get_set_info', $set);
 }
 
 /**
