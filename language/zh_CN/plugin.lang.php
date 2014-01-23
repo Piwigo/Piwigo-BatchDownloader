@@ -82,4 +82,8 @@ $lang['Delete previous archive when starting to download another one'] = '在开
 $lang['Don\'t download archives through PHP'] = '不要通过PHP下载压缩文件';
 $lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'Force the usage of PclZip instead of ZipArchive as ZIP library';
 $lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = '这将节省服务器空间，但将不能重启已失败的下载。';
+$lang['Any size'] = '任何尺寸';
+$lang['One size'] = '一个尺寸';
+$lang['Photo size'] = '相片尺寸';
+$lang['Photo size choices'] = '选择的尺寸';
 ?>
