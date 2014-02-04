@@ -82,4 +82,8 @@ $lang['Please wait, your download is being prepared. This page will automaticall
 $lang['Preparation'] = 'Підготовка';
 $lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Вибачте, але перелік до завантажень порожній. Деякі файли могли бути виключені через <i title="Авторизовні типи файлів : %s">обмеження типів файлів</i>.';
 $lang['Unknown'] = 'Невідомо';
+$lang['Any size'] = 'Будь-який розмір';
+$lang['One size'] = 'Один розмір';
+$lang['Photo size'] = 'Розмір зображення';
+$lang['Photo size choices'] = 'Вибір розмірів зображення';
 ?>
