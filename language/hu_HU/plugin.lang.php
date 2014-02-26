@@ -82,4 +82,8 @@ $lang['Only check if you are experiencing corrupted archives with ZipArchive.'] 
 $lang['Only check if your host complains about high PHP usage.'] = 'Csak akkor válassza, ha a szolgáltató reklamál a magas PHP hatnálat miatt.';
 $lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = 'Sajnálom, nincs mit letölteni. Egyes fájlok kizárásra kerültek. <i title="Authorized types are : %s">nem támogatott fájltípus</i>.';
 $lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'PclZip használatának kényszerítése a ZipArchive helyett, mint ZIP könyvtár';
+$lang['Any size'] = 'Minden méret';
+$lang['One size'] = 'Egy méret';
+$lang['Photo size'] = 'Kép méret';
+$lang['Photo size choices'] = 'Kép méret választás';
 ?>
