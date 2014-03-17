@@ -1,0 +1,18 @@
+<dt><span>$conf['batch_download_max_elements']</span></dt>
+<dd>Maximum value of the <b>Maximum number of photos per download set</b> slider.<br>
+<i>Default is <span>1000</span>.</i></dd>
+
+<dt><span>$conf['batch_download_max_size']</span></dt>
+<dd>Maximum value of the <b>Maximum size of each archive</b> slider.<br>
+<i>Default is <span>500</span>.</i></dd>
+
+<dt><span>$conf['batch_download_additional_ext']</span></dt>
+<dd>Array containing downloadable file extensions (case sensitive).<br>
+<i>Default is <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Pattern for filenames in the archive.<br>
+Available fields are <span>%id%, %filename%, %author%, %dimensions%</span>.<br>
+Available functions are <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
+<i>Default value is <span>%id%_%filename%_%dimensions%</span>.</i><br>
+<i>Example: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
