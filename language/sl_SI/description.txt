@@ -1,0 +1,2 @@
+Omogoči uporabnikom prenos slikovnih naborov v ZIP formatu.
+Kompatibilno z Zbirkami uporabnikov (User Collections)

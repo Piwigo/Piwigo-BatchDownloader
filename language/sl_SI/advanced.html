@@ -1,0 +1,18 @@
+<dt><span>$conf['batch_download_max_elements']</span></dt>
+<dd>Maksimalna vrednost <b>Maksimalno število slik na posamezno zbirko prenosa</b> drsnika.<br>
+<i>Privzeta vrednost je <span>1000</span>.</i></dd>
+
+<dt><span>$conf['batch_download_max_size']</span></dt>
+<dd>Maksimalna vrednost <b>Maksimalna velikost vsake zbirke</b> drsnika.<br>
+<i>Privzeta vrednost je <span>500</span>.</i></dd>
+
+<dt><span>$conf['batch_download_additional_ext']</span></dt>
+<dd>Niz, ki vsebuje prenosljive končnice datotek (občutljivo na male oz. velike črke).<br>
+<i>Privzete vrednosti so: <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Vzorec imen datotek v zbirki.<br>
+Možna polja so <span>%id%, %filename%, %author%, %dimensions%</span>.<br>
+Možne funkcije so <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
+<i>Privzeta vrednost je <span>%id%_%filename%_%dimensions%</span>.</i><br>
+<i>Primer: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
