@@ -466,7 +466,7 @@ DELETE FROM '.IMAGE_SIZES_TABLE.'
 
       $this->updateParam('date_creation', date('Y-m-d H:i:s'));
 
-      trigger_action('batchdownload_init_zip', $this->data, array_keys($this->images)); // triggered once for all
+      trigger_notify('batchdownload_init_zip', $this->data, array_keys($this->images)); // triggered once for all
     }
 
     // get next images of the set
@@ -570,7 +570,7 @@ UPDATE '.BATCH_DOWNLOAD_TIMAGES.'
 ;';
       pwg_query($query);
 
-      trigger_action('batchdownload_end_zip', $this->data, $images_added); // triggered for each zip
+      trigger_notify('batchdownload_end_zip', $this->data, $images_added); // triggered for each zip
 
       // all images added ?
       if (count($images_to_add) == count($images_added))
@@ -762,8 +762,8 @@ SELECT SUM(filesize) AS total
         else
         {
           $set['NAME'] = l10n('Album').': '.get_cat_display_name($category['upper_names']);
-          $set['sNAME'] = l10n('Album').': '.trigger_event('render_category_name', $category['name']);
-          $set['COMMENT'] = trigger_event('render_category_description', $category['comment']);
+          $set['sNAME'] = l10n('Album').': '.trigger_change('render_category_name', $category['name']);
+          $set['COMMENT'] = trigger_change('render_category_description', $category['comment']);
 
           if (!empty($category['permalink']))
           {
@@ -803,7 +803,7 @@ SELECT SUM(filesize) AS total
           else $set['NAME'].= ', ';
           $set['NAME'].=
             '<a href="' . make_index_url(array('tags'=>array($tag))) . '">'
-            .trigger_event('render_tag_name', $tag['name'])
+            .trigger_change('render_tag_name', $tag['name'])
             .'</a>';
           $set['BASENAME'].= '-'.$tag['url_name'];
         }
