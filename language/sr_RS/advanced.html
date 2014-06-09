@@ -1,0 +1,18 @@
+<dt><span>$conf['batch_download_max_elements']</span></dt>
+<dd>Највећа вредност за <b>Највећи број фотографија по сету за преузимање</b> подешавање.<br>
+<i>Подразумевано је <span>1000</span>.</i></dd>
+
+<dt><span>$conf['batch_download_max_size']</span></dt>
+<dd> Највећа вредност за <b>Највећа величина појединачне архиве</b> подешавање.<br>
+<i>Подразумевано је <span>500</span>.</i></dd>
+
+<dt><span>$conf['batch_download_additional_ext']</span></dt>
+<dd>Опсег који садржи екстензије које можете преузети (разликују се велика и мала слова).<br>
+<i>Подразумевано је <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Шаблон за име датотека унутар архиве.<br>
+Доступна поља су <span>%id%, %filename%, %author%, %dimensions%</span>.<br>
+Доступне функције су <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
+<i>Подразумевано је <span>%id%_%filename%_%dimensions%</span>.</i><br>
+<i>Пример: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
