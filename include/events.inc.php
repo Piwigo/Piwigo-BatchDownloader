@@ -251,7 +251,7 @@ function batch_download_clean()
   if ($conf['batch_download']['last_clean'] > $time - 3600) return;
 
   $conf['batch_download']['last_clean'] = $time;
-  conf_update_param('batch_download', serialize($conf['batch_download']));
+  conf_update_param('batch_download', $conf['batch_download']);
 
   // set old sets as done and clean images table
   $query = '

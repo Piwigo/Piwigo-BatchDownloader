@@ -20,10 +20,9 @@ if (isset($_POST['save_config']))
     'direct'          => isset($_POST['direct']),
     'last_clean'      => $conf['batch_download']['last_clean'],
     );
-  $conf['batch_download_comment'] = trim($_POST['archive_comment']);
 
-  conf_update_param('batch_download', serialize($conf['batch_download']));
-  conf_update_param('batch_download_comment', $conf['batch_download_comment']);
+  conf_update_param('batch_download', $conf['batch_download']);
+  conf_update_param('batch_download_comment', trim($_POST['archive_comment']), true);
 
   $page['infos'][] = l10n('Information data registered in database');
 }

@@ -12,7 +12,7 @@ defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
 global $conf, $prefixeTable;
 
-defined('BATCH_DOWNLOAD_ID') or define('BATCH_DOWNLOAD_ID', basename(dirname(__FILE__)));
+define('BATCH_DOWNLOAD_ID',      basename(dirname(__FILE__)));
 define('BATCH_DOWNLOAD_PATH',    PHPWG_PLUGINS_PATH . BATCH_DOWNLOAD_ID . '/');
 define('BATCH_DOWNLOAD_TSETS',   $prefixeTable . 'download_sets');
 define('BATCH_DOWNLOAD_TIMAGES', $prefixeTable . 'download_sets_images');
@@ -20,7 +20,6 @@ define('IMAGE_SIZES_TABLE',      $prefixeTable . 'image_sizes');
 define('BATCH_DOWNLOAD_LOCAL',   PHPWG_ROOT_PATH . $conf['data_location'] . 'download_archives/');
 define('BATCH_DOWNLOAD_ADMIN',   get_root_url() . 'admin.php?page=plugin-' . BATCH_DOWNLOAD_ID);
 define('BATCH_DOWNLOAD_PUBLIC',  get_absolute_root_url() . make_index_url(array('section' => 'download')) . '/');
-define('BATCH_DOWNLOAD_VERSION', 'auto');
 
 
 add_event_handler('init', 'batch_download_init');
@@ -58,11 +57,7 @@ function batch_download_init()
 {
   global $conf;
 
-  include_once(BATCH_DOWNLOAD_PATH . 'maintain.inc.php');
-  $maintain = new BatchDownloader_maintain(BATCH_DOWNLOAD_ID);
-  $maintain->autoUpdate(BATCH_DOWNLOAD_VERSION, 'install');
-
-  $conf['batch_download'] = unserialize($conf['batch_download']);
+  $conf['batch_download'] = safe_unserialize($conf['batch_download']);
   $conf['batch_download']['file_pattern'] = isset($conf['batch_download_file_pattern']) ? $conf['batch_download_file_pattern'] : '%id%_%filename%_%dimensions%';
   $conf['batch_download']['allowed_ext'] = $conf['picture_ext'];
   if (!empty($conf['batch_download_additional_ext']))

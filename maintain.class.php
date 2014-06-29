@@ -1,9 +1,37 @@
 <?php
-if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
+defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
 class BatchDownloader_maintain extends PluginMaintain
 {
-  private $installed = false;
+  private $table_download_sets;
+  private $table_download_sets_images;
+  private $table_image_sizes;
+  
+  private $default_conf = array(
+    'groups'          => array(),
+    'level'           => 0,
+    'what'            => array('categories','specials','collections'),
+    'photo_size'      => 'original',
+    'multisize'       => true,
+    'archive_prefix'  => 'piwigo',
+    'archive_timeout' => 48, /* hours */
+    'max_elements'    => 500,
+    'max_size'        => 100, /* MB */
+    'last_clean'      => 0,
+    'one_archive'     => false,
+    'force_pclzip'    => false,
+    'direct'          => false,
+    );
+  
+  function __construct($id)
+  {
+    global $prefixeTable;
+    
+    parent::__construct($id);
+    $this->table_download_sets = $prefixeTable . 'download_sets';
+    $this->table_download_sets_images = $prefixeTable . 'download_sets_images';
+    $this->table_image_sizes = $prefixeTable . 'image_sizes';
+  }
 
   function install($plugin_version, &$errors=array())
   {
@@ -12,31 +40,14 @@ class BatchDownloader_maintain extends PluginMaintain
     // configuration
     if (empty($conf['batch_download']))
     {
-      $batch_download_default_config = array(
-        'groups'          => array(),
-        'level'           => 0,
-        'what'            => array('categories','specials','collections'),
-        'photo_size'      => 'original',
-        'multisize'       => true,
-        'archive_prefix'  => 'piwigo',
-        'archive_timeout' => 48, /* hours */
-        'max_elements'    => 500,
-        'max_size'        => 100, /* MB */
-        'last_clean'      => time(),
-        'one_archive'     => false,
-        'force_pclzip'    => false,
-        'direct'          => false,
-        );
+      $this->default_conf['last_clean'] = time();
 
-      $conf['batch_download'] = serialize($batch_download_default_config);
-      $conf['batch_download_comment'] = null;
-
-      conf_update_param('batch_download', $conf['batch_download']);
-      conf_update_param('batch_download_comment', $conf['batch_download_comment']);
+      conf_update_param('batch_download', $this->default_conf, true);
+      conf_update_param('batch_download_comment', null, true);
     }
     else
     {
-      $new_conf = is_string($conf['batch_download']) ? unserialize($conf['batch_download']) : $conf['batch_download'];
+      $new_conf = safe_unserialize($conf['batch_download']);
 
       if (!isset($new_conf['what']))
       {
@@ -53,8 +64,7 @@ class BatchDownloader_maintain extends PluginMaintain
         $new_conf['multisize'] = true;
       }
 
-      $conf['batch_download'] = serialize($new_conf);
-      conf_update_param('batch_download', $conf['batch_download']);
+      conf_update_param('batch_download', $new_conf, true);
     }
 
     // archives directory
@@ -65,7 +75,7 @@ class BatchDownloader_maintain extends PluginMaintain
 
     // create tables
     $query = '
-CREATE TABLE IF NOT EXISTS `' . $prefixeTable . 'download_sets` (
+CREATE TABLE IF NOT EXISTS `' . $this->table_download_sets . '` (
   `id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `user_id` smallint(5) NOT NULL,
   `date_creation` datetime NOT NULL,
@@ -83,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `' . $prefixeTable . 'download_sets` (
     pwg_query($query);
 
     $query = '
-CREATE TABLE IF NOT EXISTS `' . $prefixeTable . 'download_sets_images` (
+CREATE TABLE IF NOT EXISTS `' . $this->table_download_sets_images . '` (
   `set_id` mediumint(8) NOT NULL,
   `image_id` mediumint(8) NOT NULL,
   `zip` smallint(5) NOT NULL DEFAULT 0,
@@ -93,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `' . $prefixeTable . 'download_sets_images` (
     pwg_query($query);
 
     $query = '
-CREATE TABLE IF NOT EXISTS `' . $prefixeTable . 'image_sizes` (
+CREATE TABLE IF NOT EXISTS `' . $this->table_image_sizes . '` (
   `image_id` mediumint(8) NOT NULL,
   `type` varchar(16) NOT NULL,
   `width` smallint(9) NOT NULL,
@@ -106,38 +116,29 @@ CREATE TABLE IF NOT EXISTS `' . $prefixeTable . 'image_sizes` (
     pwg_query($query);
 
     // add a "size" column to download_sets
-    $result = pwg_query('SHOW COLUMNS FROM `' . $prefixeTable . 'download_sets` LIKE "size";');
+    $result = pwg_query('SHOW COLUMNS FROM `' . $this->table_download_sets . '` LIKE "size";');
     if (!pwg_db_num_rows($result))
     {
-      pwg_query('ALTER TABLE `' . $prefixeTable . 'download_sets` ADD `size` varchar(16) NOT NULL DEFAULT "original";');
+      pwg_query('ALTER TABLE `' . $this->table_download_sets . '` ADD `size` varchar(16) NOT NULL DEFAULT "original";');
     }
 
     // add "ready" status
-    pwg_query('ALTER TABLE `' . $prefixeTable . 'download_sets` CHANGE `status` `status` enum("new","ready","download","done") NOT NULL DEFAULT "new";');
-    
-    $this->installed = true;
+    pwg_query('ALTER TABLE `' . $this->table_download_sets . '` CHANGE `status` `status` enum("new","ready","download","done") NOT NULL DEFAULT "new";');
   }
 
-  function activate($plugin_version, &$errors=array())
+  function update($old_version, $new_version, &$errors=array())
   {
-    if (!$this->installed)
-    {
-      $this->install($plugin_version, $errors);
-    }
-  }
-
-  function deactivate()
-  {
+    $this->install($new_version, $errors);
   }
 
   function uninstall()
   {
-    global $prefixeTable, $conf;
+    global $conf;
 
     conf_delete_param('batch_download');
 
-    pwg_query('DROP TABLE IF EXISTS `' . $prefixeTable . 'download_sets`;');
-    pwg_query('DROP TABLE IF EXISTS `' . $prefixeTable . 'download_sets_images`;');
+    pwg_query('DROP TABLE `' . $this->table_download_sets . '`;');
+    pwg_query('DROP TABLE `' . $this->table_download_sets_images . '`;');
 
     self::rrmdir(PHPWG_ROOT_PATH . $conf['data_location'] . 'download_archives/');
   }

@@ -523,7 +523,7 @@ SELECT image_id, filesize, width, height
         }
         else
         {
-          $src_image = new SrcImage($row); // don't give representive_ext
+          $src_image = new SrcImage($row); // don't give representative_ext
 
           // no-image files
           if ($src_image->is_mimetype())
@@ -535,6 +535,12 @@ SELECT image_id, filesize, width, height
           else
           {
             $derivative = new DerivativeImage($this->data['size'], $src_image);
+            
+            if (!file_exists($derivative->get_path()))
+            {
+              // we shouldn't be here
+              // TODO : generate missing derivative (if generation where not performed) or remove
+            }
 
             $zip->addFile($derivative->get_path(), $this->getFilename($row, $filesizes[ $row['id'] ]));
             $total_size+= $filesizes[ $row['id'] ]['filesize'];
@@ -576,14 +582,12 @@ UPDATE '.BATCH_DOWNLOAD_TIMAGES.'
       if (count($images_to_add) == count($images_added))
       {
         if ($this->conf['one_archive']) $this->updateParam('status', 'done');
-        $done = true;
 
         // over estimed
         $this->updateParam('nb_zip', $this->data['last_zip']);
       }
-
       // under estimed
-      if (!isset($done) && $this->data['status'] != 'done' && $this->data['last_zip'] == $this->data['nb_zip'])
+      else if ($this->data['status'] != 'done' && $this->data['last_zip'] == $this->data['nb_zip'])
       {
         $this->updateParam('nb_zip', $this->data['last_zip']+1);
       }
