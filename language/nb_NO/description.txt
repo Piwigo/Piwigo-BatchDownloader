@@ -1,0 +1,1 @@
+Tillater brukere å laste ned bilde sett i ZIP. Kompatibel med Bruker samlinger.

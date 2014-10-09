@@ -1,0 +1,19 @@
+<dt><span>$conf['batch_nedlasting_maks_elementer']</span></dt>
+<dd>Masimale verdier av <b>Maimalt antall bilder per nedlastings sett</b> slider.<br>
+<i>Standard er <span>1000</span>.</i></dd>
+
+<dt><span>$conf['batch_nedlasting_maks_størrelse']</span></dt>
+<dd>Maksimale verdier av <b>Maksimal størrelse på hvert arkiv</b> slider.<br>
+<i>Standard er <span>500</span>.</i></dd>
+
+<dt><span>$conf['batch_nedlasting_ekstra_ext']</span></dt>
+<dd>Array som inneholder nedlastbare filtyper (case sensitive).<br>
+<i>Standard er <span>$conf['bilde_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_nedlasting_fil_mønster']</span></dt>
+<dd>Mønster for filnavn i arkivet.<br>
+
+Tilgjengelige felter er <span>%id%, %filnavn%, %forfatter%, %dimensjoner%</span>.<br>
+Tilgjengelige funksjoner er <span>$flukt(xxx), $øvre(xxx), $nedre(xxx), $strpad(xxx, z, c)</span>.<br>
+<i>Standard verdier er <span>%id%_%filnavn%_%dimensjoner%</span>.</i><br>
+<i>Eksempel: <span>$strpad(%id%,4,0)_$flukt(%filnavn%)_$nedre(%forfatter%)_%dimensjoner%</span>.</i></dd>
