@@ -76,3 +76,4 @@ $lang['Maximum size of each archive (in Megabytes)'] = 'Архив тус бүр
 $lang['download'] = 'татах';
 $lang['Downloads'] = 'Татац';
 $lang['Archives'] = 'Архив';
+$lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'ZipArchive-н оронд PclZip-г ашиглах';
