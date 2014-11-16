@@ -10,15 +10,25 @@ Author URI: http://www.strangeplanet.fr
 
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
+if (basename(dirname(__FILE__)) != 'BatchDownloader')
+{
+  add_event_handler('init', 'batch_download_error');
+  function batch_download_error()
+  {
+    global $page;
+    $page['errors'][] = 'Batch Downloader folder name is incorrect, uninstall the plugin and rename it to "BatchDownloader"';
+  }
+  return;
+}
+
 global $conf, $prefixeTable;
 
-define('BATCH_DOWNLOAD_ID',      basename(dirname(__FILE__)));
-define('BATCH_DOWNLOAD_PATH',    PHPWG_PLUGINS_PATH . BATCH_DOWNLOAD_ID . '/');
+define('BATCH_DOWNLOAD_PATH',    PHPWG_PLUGINS_PATH . 'BatchDownloader/');
 define('BATCH_DOWNLOAD_TSETS',   $prefixeTable . 'download_sets');
 define('BATCH_DOWNLOAD_TIMAGES', $prefixeTable . 'download_sets_images');
 define('IMAGE_SIZES_TABLE',      $prefixeTable . 'image_sizes');
 define('BATCH_DOWNLOAD_LOCAL',   PHPWG_ROOT_PATH . $conf['data_location'] . 'download_archives/');
-define('BATCH_DOWNLOAD_ADMIN',   get_root_url() . 'admin.php?page=plugin-' . BATCH_DOWNLOAD_ID);
+define('BATCH_DOWNLOAD_ADMIN',   get_root_url() . 'admin.php?page=plugin-BatchDownloader');
 define('BATCH_DOWNLOAD_PUBLIC',  get_absolute_root_url() . make_index_url(array('section' => 'download')) . '/');
 
 
