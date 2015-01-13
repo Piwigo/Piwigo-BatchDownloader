@@ -738,11 +738,27 @@ SELECT SUM(filesize) AS total
         $page['chronology_view'] = $chronology[2];
         $page['chronology_date'] = array_splice($chronology, 3);
 
-        if (!class_exists('Calendar'))
+        $styles = array(
+          // Monthly style
+          'monthly' => array(
+            'include'        => 'calendar_monthly.class.php',
+            'classname'      => 'CalendarMonthly',
+            ),
+          // Weekly style
+          'weekly' => array(
+            'include'        => 'calendar_weekly.class.php',
+            'classname'      => 'CalendarWeekly',
+            ),
+          );
+
+        $classname = $styles[$page['chronology_style']]['classname'];
+
+        if (!class_exists($classname))
         {
-          include_once(PHPWG_ROOT_PATH.'include/calendar_'. $page['chronology_style'] .'.class.php');
+          include_once(PHPWG_ROOT_PATH.'include/'. $styles[$page['chronology_style']]['include']);
         }
-        $calendar = new Calendar();
+
+        $calendar = new $classname();
         $calendar->initialize('');
         $display_name = strip_tags($calendar->get_display_name());
 
