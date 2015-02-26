@@ -86,4 +86,4 @@ $lang['Any size'] = 'Enhver størrelse';
 $lang['One size'] = 'En størrelse';
 $lang['Photo size'] = 'Fotostørrelse';
 $lang['Photo size choices'] = 'Vælg fotostørrelse';
-?>
+$lang['%s plugin detected, albums will be downloadable according to permissions.'] = 'Plugin\'en %s fundet, albummer kan downloades alt efter rettighederne.';
