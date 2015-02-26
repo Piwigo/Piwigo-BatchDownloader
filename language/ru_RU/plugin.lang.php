@@ -86,4 +86,4 @@ $lang['Any size'] = 'Любой размер';
 $lang['One size'] = 'Один размер';
 $lang['Photo size'] = 'Размер изображения';
 $lang['Photo size choices'] = 'Выбор размера изображения';
-?>
+$lang['%s plugin detected, albums will be downloadable according to permissions.'] = 'Плагин %s обнаружен, альбомы можно будет скачать в соответствии с правами доступа.';
