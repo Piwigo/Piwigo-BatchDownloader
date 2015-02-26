@@ -3,7 +3,7 @@ defined('BATCH_DOWNLOAD_PATH') or die('Hacking attempt!');
 
 if (isset($_POST['save_config']))
 {
-  if (!defined('USER_COLLEC_ID')) $_POST['what']['collections'] = 'on';
+  if (!defined('USER_COLLEC_PATH')) $_POST['what']['collections'] = 'on';
 
   $conf['batch_download'] = array(
     'groups'          => isset($_POST['groups']) ? $_POST['groups'] : array(),
@@ -56,7 +56,8 @@ $template->assign(array(
   'group_options' => $group_options,
   'level_options' => $level_options,
   'sizes_options' => $sizes_options,
-  'USER_COLLEC_LOADED' => defined('USER_COLLEC_ID'),
+  'USER_COLLEC_LOADED' => defined('USER_COLLEC_PATH'),
+  'DOWNLOAD_PERM_LOADED' => defined('DLPERMS_PATH'),
   'batch_download' => $conf['batch_download'],
   'batch_download_comment' => stripslashes($conf['batch_download_comment']),
   'use_ziparchive' => class_exists('ZipArchive') && !$conf['batch_download']['force_pclzip'],

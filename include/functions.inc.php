@@ -125,6 +125,12 @@ SELECT 1 FROM '.USER_GROUP_TABLE.'
   return true;
 }
 
+function check_album_download_access($catid)
+{
+  $query = 'SELECT 1 FROM '.CATEGORIES_TABLE.' WHERE id = '.$catid.' AND downloadable = \'true\';';
+  return pwg_db_num_rows(pwg_query($query)) > 0;
+}
+
 // https://bugs.php.net/bug.php?id=61636
 function readlargefile($fullfile)
 {
