@@ -85,4 +85,4 @@ $lang['Only check if your host complains about high PHP usage.'] = 'Zaznacz tylk
 $lang['Any size'] = 'Dowolny rozmiar';
 $lang['One size'] = 'Jeden rozmiar';
 $lang['Photo size'] = 'Rozmiar zdjęcia';
-?>
+$lang['Photo size choices'] = 'Wybór rozmiaru zdjęcia';
