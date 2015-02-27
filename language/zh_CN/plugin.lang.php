@@ -86,4 +86,4 @@ $lang['Any size'] = '任何尺寸';
 $lang['One size'] = '一个尺寸';
 $lang['Photo size'] = '相片尺寸';
 $lang['Photo size choices'] = '选择的尺寸';
-?>
+$lang['%s plugin detected, albums will be downloadable according to permissions.'] = '检测到 %s 插件，将下载有相应权限的相册。';
