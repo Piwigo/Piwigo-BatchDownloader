@@ -86,4 +86,4 @@ $lang['Any size'] = 'Elk formaat';
 $lang['One size'] = 'Een formaat';
 $lang['Photo size'] = 'Fotogrootte';
 $lang['Photo size choices'] = 'Fotogrootte-keuze';
-?>
+$lang['%s plugin detected, albums will be downloadable according to permissions.'] = '%s plugin is geïnstalleerd, albums kunnen alleen volgens de verleende toestemmingen gedownload worden.';
