@@ -86,4 +86,4 @@ $lang['Any size'] = 'Ajna grandeco';
 $lang['One size'] = 'Unu grandeco';
 $lang['Photo size'] = 'Fotograndeco';
 $lang['Photo size choices'] = 'Elektoj de fotograndecoj';
-?>
+$lang['%s plugin detected, albums will be downloadable according to permissions.'] = '%s kromprogramo detektita, fotaroj elŝuteblos laŭ permesoj.';
