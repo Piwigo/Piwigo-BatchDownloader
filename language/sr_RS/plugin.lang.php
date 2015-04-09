@@ -86,3 +86,5 @@ $lang['Don\'t download archives through PHP'] = 'Не преузимај арх�
 $lang['Download all pictures of this selection'] = 'Преузми све изабране слике';
 $lang['Download history'] = 'Историјат преузимања';
 $lang['Download info'] = 'Подаци о преузимању';
+$lang['%s plugin detected, albums will be downloadable according to permissions.'] = 'Пошто је пронађен додатак %s, албуми ћете моћи да преузмете у складу са издатим овлађћењима.
+';
