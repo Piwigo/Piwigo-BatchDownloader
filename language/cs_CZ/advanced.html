@@ -1,0 +1,18 @@
+<dt><span>$conf['batch_download_max_elements']</span></dt>
+<dd>Maximální hodnota <b>Maximální počet fotek pro stažení v setu</b> posuvník.<br>
+<i>Výchozí je <span>1000</span>.</i></dd>
+
+<dt><span>$conf['batch_download_max_size']</span></dt>
+<dd>Maximální hodnota <b>Maximální velikost každého archívu</b> posuvník.<br>
+<i>Výchozí je <span>500</span>.</i></dd>
+
+<dt><span>$conf['batch_download_additional_ext']</span></dt>
+<dd>Pole obsahující stahovatelné koncovky souborů (citlivé na velikost písmen).<br>
+<i>Výchozí je <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Vzor pro názvy souborů v archívu.<br>
+Dostupná pole jsou <span>%id%, %filename%, %author%, %dimensions%</span>.<br>
+Dostupné funkce jsou <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
+<i>Výchozí hodnota je <span>%id%_%filename%_%dimensions%</span>.</i><br>
+<i>Příklad: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
