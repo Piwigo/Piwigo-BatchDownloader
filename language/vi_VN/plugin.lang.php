@@ -86,4 +86,4 @@ $lang['Any size'] = 'Bất kỳ kích thước nào';
 $lang['One size'] = 'Một kích thước';
 $lang['Photo size'] = 'Kích thước ảnh';
 $lang['Photo size choices'] = 'Các chọn lựa kích thước ảnh';
-?>
+$lang['%s plugin detected, albums will be downloadable according to permissions.'] = 'Phát hiện plugin %s, album có thể được tải xuống tùy theo quyền hạn.';
