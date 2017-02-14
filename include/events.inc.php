@@ -173,7 +173,8 @@ function batch_download_index_button()
     $template->assign('BATCH_DWN_SIZE', $conf['batch_download']['photo_size']);
   }
 
-  $template->set_filename('batchdwn_button', realpath(BATCH_DOWNLOAD_PATH.'template/download_button.tpl'));
+  $template->set_template_dir(realpath(BATCH_DOWNLOAD_PATH.'template/'));
+  $template->set_filename('batchdwn_button', 'download_button.tpl');
   $button = $template->parse('batchdwn_button', true);
   $template->add_index_button($button, 50);
   $template->concat('COLLECTION_ACTIONS', $button);
