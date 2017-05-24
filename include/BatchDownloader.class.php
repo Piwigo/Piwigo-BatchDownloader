@@ -223,7 +223,7 @@ SELECT id, file
     foreach ($images as $image_id => $file)
     {
       if ($this->isInSet($image_id)) continue;
-      if (!in_array(get_extension($file), $this->conf['allowed_ext'])) continue;
+      if (!in_array(strtolower(get_extension($file)), $this->conf['allowed_ext'])) continue;
 
       $this->images[ $image_id ] = 0;
       $inserts[] = array(
