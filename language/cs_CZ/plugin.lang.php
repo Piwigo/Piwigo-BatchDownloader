@@ -86,4 +86,4 @@ $lang['Any size'] = 'jakákoliv velikost';
 $lang['One size'] = 'jedna velikost';
 $lang['Photo size'] = 'velikost fotky';
 $lang['Photo size choices'] = 'možnosti velikostí fotek';
-?>
+$lang['%s plugin detected, albums will be downloadable according to permissions.'] = '%s doplněk detekoval, alba budou stahovatelná podle nastavení práv.';

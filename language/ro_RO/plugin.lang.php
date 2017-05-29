@@ -86,4 +86,4 @@ $lang['Any size'] = 'Orice dimensiune';
 $lang['One size'] = 'O dimensiune';
 $lang['Photo size'] = 'Dimensiune fotografie';
 $lang['Photo size choices'] = 'Opțiuni dimensiuni fotografie';
-?>
+$lang['%s plugin detected, albums will be downloadable according to permissions.'] = '%s plugin detectat, albumele pot fi descarcarte conform permisiunilor.';

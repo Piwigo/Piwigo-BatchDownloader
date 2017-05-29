@@ -87,3 +87,4 @@ $lang['Don\'t download archives through PHP'] = 'Ikke last ned arkiver gjennom P
 $lang['Download all pictures of this selection'] = 'Last ned alle bilder fra dette valget';
 $lang['Download history'] = 'Last ned historie';
 $lang['Download info'] = 'Last ned info';
+$lang['%s plugin detected, albums will be downloadable according to permissions.'] = '%s plugin oppdaget, album blir lastet ned i henhold til gitte tilganger.';

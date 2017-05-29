@@ -87,4 +87,4 @@ $lang['Photo size choices'] = 'Foto izmēra izvēles';
 $lang['One size'] = 'Viena izmēra';
 $lang['Photo size'] = 'Foto izmērs';
 $lang['Any size'] = 'Jebkura izmēra';
-?>
+$lang['%s plugin detected, albums will be downloadable according to permissions.'] = '%s spraudņa detektētie albūmi būs lejuplādējami saskaņā ar paredzētajām atļaujām';
