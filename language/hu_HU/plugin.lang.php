@@ -86,4 +86,4 @@ $lang['Any size'] = 'Minden méret';
 $lang['One size'] = 'Egy méret';
 $lang['Photo size'] = 'Kép méret';
 $lang['Photo size choices'] = 'Kép méret választás';
-?>
+$lang['%s plugin detected, albums will be downloadable according to permissions.'] = '%s bővítmény aktiválva, az albumok az engedélyek szerint tölthetők le. ';
