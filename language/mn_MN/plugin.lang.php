@@ -77,3 +77,5 @@ $lang['download'] = 'татах';
 $lang['Downloads'] = 'Татац';
 $lang['Archives'] = 'Архив';
 $lang['Force the usage of PclZip instead of ZipArchive as ZIP library'] = 'ZipArchive-н оронд PclZip-г ашиглах';
+$lang['The archive is downloading, if the download doesn\'t start automatically please <a href="%s">click here</a>'] = 'Архивыг татаж эхэллээ. Хэрвээ татагдахгүй байвал <a href="%s">энд дарна уу</a>';
+$lang['Don\'t download archives through PHP'] = 'Архивыг PHP-р татах хэрэггүй';
