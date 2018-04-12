@@ -1,0 +1,1 @@
+Cho phép người dùng tải các bộ ảnh ở định dạng nén ZIP. Thích hợp với các bộ sưu tập của người dùng.

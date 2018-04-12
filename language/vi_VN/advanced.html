@@ -1,0 +1,18 @@
+<dt><span>$conf['batch_download_max_elements']</span></dt>
+<dd>Số lượng ảnh tối đa cho từng <b>bộ ảnh tải về</b>.<br>
+<i>Mặc định là <span>1000</span>.</i></dd>
+
+<dt><span>$conf['batch_download_max_size']</span></dt>
+<dd>Kích thước tối đa cho <b>bộ ảnh nén</b>.<br>
+<i>Mặc định là<span>500</span>.</i></dd>
+
+<dt><span>$conf['batch_download_additional_ext']</span></dt>
+<dd>Dãy các định dạng file có thể tải về (có phân biệt HOA thường).<br>
+<i>Mặc đinh là <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Mẫu tên file cho file nén.<br>
+Các trường sẵn có <span>%id%, %filename%, %author%, %dimensions%</span>.<br>
+Chức năng sẵn có <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
+<i>Giá trị mặc định <span>%id%_%filename%_%dimensions%</span>.</i><br>
+<i>Ví dụ: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
