@@ -1,9 +1,9 @@
 <dt><span>$conf['batch_download_max_elements']</span></dt>
-<dd>Maksimal værdi på <b>Maksimalt antal fotografier pr. downloadsæt</b>-skyderen.<br>
+<dd>Maksimal værdi for <b>Maksimalt antal fotografier pr. downloadsæt</b>-skyderen.<br>
 <i>Standardværdien er <span>1000</span>.</i></dd>
 
 <dt><span>$conf['batch_download_max_size']</span></dt>
-<dd>Maksimal værdi på <b>Maksimal størrelse på hvert arkiv</b>-skyderen.<br>
+<dd>Maksimal værdi for <b>Maksimal størrelse på hvert arkiv</b>-skyderen.<br>
 <i>Standardværdien er <span>500</span>.</i></dd>
 
 <dt><span>$conf['batch_download_additional_ext']</span></dt>
@@ -11,8 +11,8 @@
 <i>Standardværdien er <span>$conf['picture_ext']</span>.</i></dd>
 
 <dt><span>$conf['batch_download_file_pattern']</span></dt>
-<dd>Pattern for filenames in the archive.<br>
-Available fields are <span>%id%, %filename%, %author%, %dimensions%</span>.<br>
-Available functions are <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
-<i>Default value is <span>%id%_%filename%_%dimensions%</span>.</i><br>
-<i>Example: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
+<dd>Mønster for filnavne i arkivet.<br>
+Tilgængelige felter er <span>%id%, %filename%, %author%, %dimensions%</span>.<br>
+Tilfængelige funktioner er <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
+<i>Standardværdien er <span>%id%_%filename%_%dimensions%</span>.</i><br>
+<i>Eksempel: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
