@@ -302,7 +302,7 @@ SELECT image_id, filemtime
     }
 
     $query = '
-SELECT id, path, width, height, rotation
+SELECT id, path, width, height, rotation, representative_ext
   FROM '.IMAGES_TABLE.'
   WHERE id IN('.implode(',', $image_ids).')
   ORDER BY id DESC
@@ -311,10 +311,13 @@ SELECT id, path, width, height, rotation
     $result = pwg_query($query);
     while ($row = pwg_db_fetch_assoc($result))
     {
-      $src_image = new SrcImage($row); // don't give representive_ext
+      $src_image = new SrcImage($row);
 
       // no-image files
-      if ($src_image->is_mimetype())
+      if (
+        !$src_image->is_original()
+        and (empty($row['representative_ext']) or !in_array(get_extension($row['path']), $conf['batch_download']['use_representative_for_ext']))
+      )
       {
         if ($update && in_array($row['id'], $to_update))
         {
@@ -429,7 +432,14 @@ DELETE FROM '.IMAGE_SIZES_TABLE.'
       $filename = $row['id'].'_'.$row['filename'];
     }
 
-    $filename.= '.'.get_extension($row['path']);
+    if (isset($row['representative_ext']))
+    {
+      $filename.= '.'.$row['representative_ext'];
+    }
+    else
+    {
+      $filename.= '.'.get_extension($row['path']);
+    }
 
     return $filename;
   }
@@ -483,7 +493,7 @@ DELETE FROM '.IMAGE_SIZES_TABLE.'
 SELECT
     id, name, file, path,
     rotation, filesize, width, height,
-    author
+    author, representative_ext
   FROM '.IMAGES_TABLE.'
   WHERE id IN ('.implode(',', $images_to_add).')
 ;';
@@ -518,6 +528,7 @@ SELECT image_id, filesize, width, height
 
         if ($this->data['size'] == 'original')
         {
+          unset($row['representative_ext']); // to avoid using it in getFilename
           $zip->addFile(PHPWG_ROOT_PATH.$row['path'], $this->getFilename($row, $row));
           $total_size+= $row['filesize'];
         }
@@ -526,8 +537,12 @@ SELECT image_id, filesize, width, height
           $src_image = new SrcImage($row); // don't give representative_ext
 
           // no-image files
-          if ($src_image->is_mimetype())
+          if (
+            !$src_image->is_original()
+            and (empty($row['representative_ext']) or !in_array(get_extension($row['path']), $conf['batch_download']['use_representative_for_ext']))
+          )
           {
+            unset($row['representative_ext']); // to avoid using it in getFilename
             $zip->addFile(PHPWG_ROOT_PATH.$row['path'], $this->getFilename($row, array()));
             $total_size+= $row['filesize'];
           }

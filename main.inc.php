@@ -74,6 +74,10 @@ function batch_download_init()
   {
     $conf['batch_download']['allowed_ext'] = array_merge($conf['batch_download']['allowed_ext'], $conf['batch_download_additional_ext']);
   }
+  $conf['batch_download']['use_representative_for_ext'] = isset($conf['batch_download_use_representative_for_ext'])
+    ? $conf['batch_download_use_representative_for_ext']
+    : array('tif', 'TIF', 'tiff', 'TIFF')
+    ;
 
   load_language('plugin.lang', BATCH_DOWNLOAD_PATH);
 }
