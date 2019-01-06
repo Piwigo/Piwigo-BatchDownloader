@@ -42,7 +42,7 @@ $level_options = get_privacy_level_options();
 // sizes
 $type_map = ImageStdParams::get_defined_type_map();
 $sizes_keys = array_keys($type_map);
-$sizes_names = array_map(create_function('$s', 'return l10n($s);'), $sizes_keys);
+$sizes_names = array_map(function ($s) {return l10n($s);}, $sizes_keys);
 
 $sizes_options = array_combine($sizes_keys, $sizes_names);
 $sizes_options['original'] = l10n('Original');
