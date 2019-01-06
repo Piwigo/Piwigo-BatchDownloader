@@ -37,7 +37,7 @@ function get_set_info_from_page()
       break;
     case 'tags':
       $batch_type = 'tags';
-      $batch_id = implode(',', array_map(create_function('$t', 'return $t["id"];'), $page['tags']));
+      $batch_id = implode(',', array_map(function ($t) {return $t["id"];}, $page['tags']));
       break;
     case 'search':
       $batch_type = 'search';
