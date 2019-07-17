@@ -1,0 +1,18 @@
+<dt><span>$conf['batch_download_max_elements']</span></dt>
+<dd><b>ダウンロード集合毎の写真の最大枚数</b> のスライドバー。<br>
+<i>デフォルトは <span>1000</span>。</i></dd>
+
+<dt><span>$conf['batch_download_max_size']</span></dt>
+<dd><b>各アーカイブの最大サイズ</b> のスライドバー。<br>
+<i>デフォルトは <span>500</span>。</i></dd>
+
+<dt><span>$conf['batch_download_additional_ext']</span></dt>
+<dd>ダウンロード可能なファイル拡張子を含む配列（大文字小文字を区別する）。<br>
+<i>デフォルトは <span>$conf['picture_ext']</span>。</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>アーカイブ中のファイル名パターン。<br>
+可能なフィールドは <span>%id%, %filename%, %author%, %dimensions%</span>。<br>
+可能な関数は <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>。<br>
+<i>デフォルト値は <span>%id%_%filename%_%dimensions%</span>.</i><br>
+<i>例： <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>。</i></dd>
