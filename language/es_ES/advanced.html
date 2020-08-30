@@ -3,16 +3,16 @@
 <i>Por defecto es <span>1000</span>.</i></dd>
 
 <dt><span>$conf['batch_download_max_size']</span></dt>
-<dd>Valor máximo <b>del tamaño de cada archivo</b>.<br>
+<dd>Valor máximo <b>del tamaño de cada archivo</b>.<br/>
 <i>Por defecto es <span>500</span>.</i></dd>
 
 <dt><span>$conf['batch_download_additional_ext']</span></dt>
-<dd>Array que contiene las extensiones de archivos descargables (mayúsculas y minúsculas).<br>
+<dd>Array que contiene las extensiones de archivos descargables (mayúsculas y minúsculas).<br/>
 <i>Por defecto es <span>$conf['picture_ext']</span>.</i></dd>
 
 <dt><span>$conf['batch_download_file_pattern']</span></dt>
-<dd>Pattern for filenames in the archive.<br>
-Available fields are <span>%id%, %filename%, %author%, %dimensions%</span>.<br>
-Available functions are <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
-<i>Default value is <span>%id%_%filename%_%dimensions%</span>.</i><br>
-<i>Example: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
+<dd>Patrón para los nombres de fichero en el archivo.<br/>
+Los campos disponibles son <span>%id%, %filename%, %author%, %dimensions%</span>.<br/>
+Las funciones disponibles son <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br/>
+<i>El valor por defecto es <span>%id%_%filename%_%dimensions%</span>.</i><br/>
+<i>Ejemplo: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
