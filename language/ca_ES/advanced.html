@@ -1,0 +1,18 @@
+<dt><span>$conf['batch_download_max_elements']</span></dt>
+<dd>Valor màxim del control lliscant <b>Nombre màxim de fotos per conjunt de descàrrega<b>.<br/>
+<i>El valor per defecte és <span>1000</span>.</i></dd>
+
+<dt><span>$conf['batch_download_max_size']</span></dt>
+<dd>Valor màxim del control lliscant <b>Mida màxima de cada arxiu</b>.<br/>
+<i>El valor per defecte és <span>500</span>.</i></dd>
+
+<dt><span>$conf['batch_download_additional_ext']</span></dt>
+<dd>Taula que conté les extensions de fitxers que es poden descarregar (sensible a majúscules i minúscules).<br/>
+<i>El valor per defecte és <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Patró per als noms de fitxer de l'arxiu.<br/>
+Els camps disponibles són: <span>%id%, %filename%, %author%, %dimensions%</span>.<br/>
+Les funcions disponibles són: <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br/>
+<i>El valor per defecte és <span>%id%_%filename%_%dimensions%</span>.</i><br/>
+<i>Exemple: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>

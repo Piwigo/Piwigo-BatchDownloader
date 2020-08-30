@@ -1,0 +1,1 @@
+Permet als usuaris descarregar conjunts de fotos en ZIP. Compatible amb les Col·leccions d'Usuari.
