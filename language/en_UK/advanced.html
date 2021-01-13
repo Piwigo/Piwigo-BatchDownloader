@@ -16,3 +16,8 @@ Available fields are <span>%id%, %filename%, %author%, %dimensions%</span>.<br>
 Available functions are <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
 <i>Default value is <span>%id%_%filename%_%dimensions%</span>.</i><br>
 <i>Example: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
+
+<dt><span>$conf['batch_download_use_representative_for_ext']</span></dt>
+<dd>For a non image file, like a TIFF or a PDF, and for a multiple size (anything but the original) will the user download the original anyway or the according size of the preview (representative picture). The webmaster can configure Piwigo to decide for each file type.<br>
+<i>Default is <span>array('tif', 'TIF', 'tiff', 'TIFF')</span></i><br>
+<i>Example: <span>array('pdf', 'PDF', 'tif', 'TIF')</span></i></dd>
