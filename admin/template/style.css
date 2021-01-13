@@ -46,6 +46,10 @@ TABLE.table2 THEAD TD {
   width:120px;
 }
 
+.showInfo {
+  display:inline;
+}
+
 .advanced span {
   font-family: 'Courrier New',monospace;
   font-size: 11pt;

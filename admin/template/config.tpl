@@ -46,6 +46,7 @@ jQuery(".showInfo").tipTip({
 $(".show_advanced").click(function() {
   $(this).slideUp();
   $(".advanced").slideDown();
+  return false;
 });
 
 $('input[name="multisize"]').on('change', function() {
@@ -66,7 +67,7 @@ $('input[name="multisize"]').on('change', function() {
 
 <form method="post" action="" class="properties">
 <fieldset>
-  <legend>{'Download permissions'|translate}</legend>
+  <legend><span class="icon-lock icon-red"></span>{'Download permissions'|translate}</legend>
 
   <ul>
     <li>
@@ -121,7 +122,7 @@ $('input[name="multisize"]').on('change', function() {
 </fieldset>
 
 <fieldset>
-  <legend>{'Archives'|translate}</legend>
+  <legend><span class="icon-download icon-yellow"></span>{'Archives'|translate}</legend>
 
   <ul>
     <li>
@@ -189,7 +190,7 @@ $('input[name="multisize"]').on('change', function() {
 <p class="formButtons"><input type="submit" name="save_config" value="{'Save Settings'|translate}"></p>
 
 <fieldset>
-  <legend>{'Environment'|translate}</legend>
+  <legend><span class="icon-info-circled-1 icon-green"></span>{'Environment'|translate}</legend>
 
   <b>PHP</b> {$PHP_VERSION}<br>
 {if $use_ziparchive}
@@ -200,13 +201,13 @@ $('input[name="multisize"]').on('change', function() {
 </fieldset>
 
 <fieldset>
-  <legend>{'Advanced features'|translate}</legend>
+  <legend><span class="icon-cog icon-blue"></span>{'Advanced features'|translate}</legend>
+
+  <a href="#" class="show_advanced icon-eye">{'show details'|translate}</a>
 
   <dl class="advanced" style="display:none;">
     {$ADVANCED_CONF}
   </dl>
-
-  <span class="show_advanced buttonLike">{'Display'|translate}</span>
 </fieldset>
 
 </form>
