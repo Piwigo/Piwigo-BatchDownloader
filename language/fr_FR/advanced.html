@@ -16,3 +16,8 @@ Les champs disponibles sont <span>%id%, %filename%, %author%, %dimensions%</span
 Les functions disponibles sont <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
 <i><span>%id%_%filename%_%dimensions%</span> par défaut.</i><br>
 <i>Exemple: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
+
+<dt><span>$conf['batch_download_use_representative_for_ext']</span></dt>
+<dd>Pour un fichier non image, comme un TIFF ou un PDF, et dans le cas d'une taille multiple (autre chose que la taille originale) l'utilisateur va-t-il télécharger l'original quand même ou bien la taille multiple correspondante de la prévisualisation (l'image représentante). Ce paramètre permet de choisir selon l'extension du fichier original.<br>
+<i><span>array('tif', 'TIF', 'tiff', 'TIFF')</span> par défaut.</i><br>
+<i>Exemple: <span>array('pdf', 'PDF', 'tif', 'TIF')</span></i></dd>
