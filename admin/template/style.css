@@ -58,3 +58,26 @@ TABLE.table2 THEAD TD {
 .advanced dd:not(:last-child) {
   margin-bottom:1em;
 }
+
+/* sliders */
+body#theAdminPage .ui-slider-horizontal .ui-slider-handle {top: -.7em !important; width: 1.4em; height: 1.4em;}
+body#theAdminPage .ui-slider-handle.ui-state-default.ui-corner-all {border-radius: 10px;}
+body#theAdminPage .ui-slider-horizontal .ui-slider-range {height: 2px;}
+body#theAdminPage .ui-slider-horizontal {height: 4px;}
+body#theAdminPage .ui-slider .ui-slider-range {background: rgba(255,166,70, 0.9); border: 1px solid #ffaf58;}
+body#theAdminPage .ui-widget-content {border: none; background: #DDD;}
+body#theAdminPage .ui-slider-range.ui-widget-header.ui-corner-all {border: 1px solid #ffaf58;}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+  border: 1px solid #ffaf58; background: #ffaf58;
+}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover {
+  background: #ffaf58;
+}
+.ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+  border: 1px solid #ffaf58; background: #ffaf58;
+}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+  background: #ffaf58;
+}
+.ui-slider-range.ui-widget-header.ui-corner-all {border: 1px solid #ffaf58;}
