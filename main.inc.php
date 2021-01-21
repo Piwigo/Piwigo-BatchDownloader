@@ -67,6 +67,13 @@ function batch_download_init()
 {
   global $conf;
 
+  if (is_string($conf['batch_download']))
+  {
+    // Piwigo 11 has added an automatic espace of the word "groups" (new MySQL reserved keyword).
+    // Unserialize doesn't like the escaped `groups` at all, so we need to remove it
+    $conf['batch_download'] = str_replace('`groups`', 'groups', $conf['batch_download']);
+  }
+
   $conf['batch_download'] = safe_unserialize($conf['batch_download']);
   $conf['batch_download']['file_pattern'] = isset($conf['batch_download_file_pattern']) ? $conf['batch_download_file_pattern'] : '%id%_%filename%_%dimensions%';
   $conf['batch_download']['allowed_ext'] = $conf['picture_ext'];
