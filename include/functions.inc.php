@@ -104,7 +104,7 @@ function check_download_access()
 {
   global $user, $conf;
 
-  if (is_a_guest()) return false;
+  if (is_a_guest() and !conf_get_param('batch_download_guest_allowed', false)) return false;
   if (is_admin()) return true;
 
   if ($user['level'] < $conf['batch_download']['level']) return false;

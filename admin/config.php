@@ -58,6 +58,7 @@ $template->assign(array(
   'sizes_options' => $sizes_options,
   'USER_COLLEC_LOADED' => defined('USER_COLLEC_PATH'),
   'DOWNLOAD_PERM_LOADED' => defined('DLPERMS_PATH'),
+  'GUEST_ALLOWED' => conf_get_param('batch_download_guest_allowed', false),
   'batch_download' => $conf['batch_download'],
   'batch_download_comment' => stripslashes($conf['batch_download_comment']),
   'use_ziparchive' => class_exists('ZipArchive') && !$conf['batch_download']['force_pclzip'],

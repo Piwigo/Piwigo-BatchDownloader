@@ -71,8 +71,10 @@ $('input[name="multisize"]').on('change', function() {
 
   <ul>
     <li>
+    {if !$GUEST_ALLOWED}
       <i>{'Warning: Only registered users can use Batch Downloader.'|translate}</i>
       <br>
+    {/if}
     {if $DOWNLOAD_PERM_LOADED}
       <i>{'%s plugin detected, albums will be downloadable according to permissions.'|translate:'<b>Download Permissions</b>'}</i>
       <br>
