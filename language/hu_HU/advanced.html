@@ -1,0 +1,27 @@
+<dt><span>$conf['batch_download_max_elements']</span></dt>
+<dd>A <b>Maximum egyszerre letölthető fotók száma</b> csúszka legmagasabb értéke.<br>
+<I>Az alapértelmezett <span>1000</span>.</i></dd>
+
+<dt><span>$conf['batch_download_max_size']</span></dt>
+<dd>Az <b>Arhívum maximum mérete</b> csúszka legmagasabb értéke.<br>
+<I>Az alapértelmezett <span>500</span>.</i></dd>
+
+<dt><span>$conf['batch_download_additional_ext']</span></dt>
+<dd>Letölhető kiterjesztések tömbje (kis-/nagybetű érzékeny).<br>
+<I>Az alapértelmezett <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Arhívumon belüli fájlnevek sablonja.<br>
+Elérhető mezők <span>%id%, %filename%, %author%, %dimensions%</span>.<br>
+Elérhető funkciók <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
+<I>Az alapértelmezett érték <span>%id%_%filename%_%dimensions%</span>.</i><br>
+<I>Példa: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
+
+<dt><span>$conf['batch_download_use_representative_for_ext']</span></dt>
+<dd>Nem kép (PDF), speciális képformátum (TIFF), illetve több képméret esetén a felhasználó az eredetit is letöltse-e mindig, vagy csak az előnézeti képet (reprezentatív kép). A webmaster egyenként be tudja ezeket állítani.
+<I>Az alapértelmezett beállítás <span>array('tif', 'TIF', 'tiff', 'TIFF')</span></i><br>
+<I>Példa: <span>array('pdf', 'PDF', 'tif', 'TIF')</span></i></dd>
+
+<dt><span>$conf['batch_download_guest_allowed']</span></dt>
+<dd>Vendégek (nem regisztrált felhasználók) is tudjanak csoportosan letölteni.<br>
+<I>Az alapértelmezett érték <span>false</span>.</i></dd>
