@@ -180,7 +180,7 @@ $template->assign(array(
 $template->assign_var_from_handle('CONTENT', 'batchdwn');
 
 
-function batch_download_thumbnails_list_prefilter($content, &$smarty)
+function batch_download_thumbnails_list_prefilter($content)
 {
   // add links
   $search = '#(<li>|<li class="gthumb">)#';

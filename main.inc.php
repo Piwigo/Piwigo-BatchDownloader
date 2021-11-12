@@ -6,6 +6,7 @@ Description: Allows users to download pictures sets in ZIP. Compatible with User
 Plugin URI: auto
 Author: Mistic
 Author URI: http://www.strangeplanet.fr
+Has Settings: true
 */
 
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
@@ -34,11 +35,7 @@ define('BATCH_DOWNLOAD_PUBLIC',  get_absolute_root_url() . make_index_url(array(
 
 add_event_handler('init', 'batch_download_init');
 
-if (defined('IN_ADMIN'))
-{
-  add_event_handler('get_admin_plugin_menu_links', 'batch_download_admin_menu');
-}
-else
+if (!defined('IN_ADMIN'))
 {
   add_event_handler('init', 'batch_downloader_remove_image');
 
@@ -87,16 +84,4 @@ function batch_download_init()
     ;
 
   load_language('plugin.lang', BATCH_DOWNLOAD_PATH);
-}
-
-/**
- * admin plugins menu
- */
-function batch_download_admin_menu($menu)
-{
-  $menu[] = array(
-    'NAME' => 'Batch Downloader',
-    'URL' => BATCH_DOWNLOAD_ADMIN,
-  );
-  return $menu;
 }
