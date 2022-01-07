@@ -120,6 +120,13 @@ $('input[name="multisize"]').on('change', function() {
         </select>
       </label>
     </li>
+    <li>
+      <label>
+        <input type="checkbox" name="request_permission" {if $batch_download.request_permission}checked{/if}>
+        <b>{'User must request permission to download photos'|translate}</b>
+      </label>
+    </li>
+
   </ul>
 </fieldset>
 

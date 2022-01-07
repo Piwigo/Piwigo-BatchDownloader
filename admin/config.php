@@ -19,6 +19,7 @@ if (isset($_POST['save_config']))
     'force_pclzip'    => isset($_POST['force_pclzip']),
     'direct'          => isset($_POST['direct']),
     'last_clean'      => $conf['batch_download']['last_clean'],
+    'request_permission' => isset($_POST['request_permission']),
     );
 
   conf_update_param('batch_download', $conf['batch_download']);
