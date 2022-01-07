@@ -21,6 +21,7 @@ class BatchDownloader_maintain extends PluginMaintain
     'one_archive'     => false,
     'force_pclzip'    => false,
     'direct'          => false,
+    'request_permission' => false,
     );
   
   function __construct($id)
@@ -31,6 +32,7 @@ class BatchDownloader_maintain extends PluginMaintain
     $this->table_download_sets = $prefixeTable . 'download_sets';
     $this->table_download_sets_images = $prefixeTable . 'download_sets_images';
     $this->table_image_sizes = $prefixeTable . 'image_sizes';
+    $this->table_download_requests = $prefixeTable . 'download_requests';
   }
 
   function install($plugin_version, &$errors=array())
@@ -71,6 +73,10 @@ class BatchDownloader_maintain extends PluginMaintain
       if (!isset($new_conf['multisize']))
       {
         $new_conf['multisize'] = true;
+      }
+      if (!isset($new_conf['request_permission']))
+      {
+        $new_conf['request_permission'] = false;
       }
 
       conf_update_param('batch_download', $new_conf, true);
@@ -133,6 +139,30 @@ CREATE TABLE IF NOT EXISTS `' . $this->table_image_sizes . '` (
 
     // add "ready" status
     pwg_query('ALTER TABLE `' . $this->table_download_sets . '` CHANGE `status` `status` enum("new","ready","download","done") NOT NULL DEFAULT "new";');
+  
+    $query = '
+    CREATE TABLE IF NOT EXISTS `' . $this->table_download_requests . '` (
+      `id` mediumint(8) NOT NULL AUTO_INCREMENT,
+      `type` varchar(16) NOT NULL,
+      `type_id` varchar(64) NOT NULL,
+      `user_id` int(11) NOT NULL,
+      `first_name` varchar(16) NOT NULL,
+      `last_name` varchar(16) NOT NULL,
+      `organisation` varchar(16),
+      `email` varchar(16) NOT NULL,
+      `telephone` varchar(10),
+      `profession` varchar(64),
+      `reason` varchar(255) NOT NULL,
+      `nb_images` mediumint(8) NOT NULL DEFAULT 0,
+      `request_date` datetime NOT NULL,
+      `request_status` enum("pending","reject","accept") NOT NULL DEFAULT "pending",
+      `status_change_date` datetime NOT NULL,
+      `size` enum("square","thumbnail","xxs","xs","s","m","l","xl","xxl","original") NOT NULL DEFAULT "original",
+      FOREIGN KEY(user_id) REFERENCES '.USERS_TABLE.'(id),
+      PRIMARY KEY (`id`)
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8
+    ;';
+    pwg_query($query);
   }
 
   function update($old_version, $new_version, &$errors=array())
