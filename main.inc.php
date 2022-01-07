@@ -31,7 +31,7 @@ define('IMAGE_SIZES_TABLE',      $prefixeTable . 'image_sizes');
 define('BATCH_DOWNLOAD_LOCAL',   PHPWG_ROOT_PATH . $conf['data_location'] . 'download_archives/');
 define('BATCH_DOWNLOAD_ADMIN',   get_root_url() . 'admin.php?page=plugin-BatchDownloader');
 define('BATCH_DOWNLOAD_PUBLIC',  get_absolute_root_url() . make_index_url(array('section' => 'download')) . '/');
-
+define('BATCH_DOWNLOAD_TREQUESTS', $prefixeTable . 'download_requests');
 
 add_event_handler('init', 'batch_download_init');
 
