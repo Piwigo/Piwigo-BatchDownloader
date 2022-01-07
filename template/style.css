@@ -61,3 +61,60 @@ a.cancel-down {
   margin-top:-9px;
   text-shadow:0 0 3px #000;
 }
+
+.jconfirm-type-uc, .jconfirm-type-uc-dark {
+  border-top: solid 7px rgb(240, 150, 00);
+}
+
+.jconfirm.jconfirm-modern .jconfirm-box .jconfirm-buttons button {
+  font-weight: bold;
+  text-transform: uppercase;
+  -webkit-transition: background .1s;
+  transition: background .1s;
+  padding: 10px 20px;
+}
+
+.jconfirm-type-uc button.btn-bd, .jconfirm-type-uc-dark button.btn-bd {
+  background-color: rgb(240, 150, 00);
+  color: white;
+}
+
+.jconfirm-type-uc button.btn-bd:hover, .jconfirm-type-uc-dark button.btn-bd:hover {
+  background-color: rgb(209, 140, 0);
+}
+
+.batch_dwn_form > .batch_dwn_input_group {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: baseline;
+  margin-right:10px;
+}
+
+.batch_dwn_form span{
+  color:red;
+}
+
+.batch_dwn_form p{
+  font-size:12px;
+  margin-bottom:0;
+  font-weight:700;
+  color:black;
+}
+
+.batch_dwn_input_group{
+  margin-bottom:1rem;
+}
+
+.batch_dwn_form input, 
+.batch_dwn_form textarea, 
+#batch_dwn_select_size SELECT{
+  border: rgb(240, 150, 00) 1px solid;
+  background: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: #111;
+  width:100%;
+  width: calc(100% - 15px);
+}
