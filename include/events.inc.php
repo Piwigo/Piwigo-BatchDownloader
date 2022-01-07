@@ -53,7 +53,7 @@ function batch_download_page()
 /* add buttons on thumbnails list */
 function batch_download_index_button()
 {
-  global $page, $template, $user, $conf;
+  global $page, $template, $user, $conf, $prefixeTable;
 
   // check accesses
   if ( !count($page['items']) or !isset($page['section']) ) return;
@@ -173,7 +173,130 @@ function batch_download_index_button()
     $template->assign('BATCH_DWN_SIZE', $conf['batch_download']['photo_size']);
   }
 
+  $template->assign(
+    'BATCH_DWN_REQUEST_CONF',
+    $conf['batch_download']['request_permission'],
+  );
+
+  if (isset($_POST['submit_request']))
+  {
+    //check first name
+    if (empty($_POST['firstname']))
+    {
+      $page['errors'][] = l10n('Please provide a first name');
+    }
+
+    //check last name
+    if (empty($_POST['lastname']))
+    {
+      $page['errors'][] = l10n('Please provide a last name');
+    }
+
+    //check email
+    if (empty($_POST['email']))
+    {
+      $page['errors'][] = l10n('Please provide an email address');
+    }
+
+    //check reason
+    if (empty($_POST['reason']))
+    {
+      $page['errors'][] = l10n('Please provide a reason for using these photos');
+    }
+
+    //Check if email address is valid
+    if (!email_check_format($_POST['email']))
+    {
+      $page['errors'][] = l10n('This isn\'t a valid email, please try again');
+    }
+    else if (null != $_POST['firstname'] and null != $_POST['lastname'] and email_check_format($_POST['email']) and null != $_POST['reason']) 
+    {
+      //if all fields are field like they should be insert into request table
+      list($dbnow) = pwg_db_fetch_row(pwg_query('SELECT NOW();'));
+      
+      $request_info = $_POST;
+      $set = get_set_info_from_page();
+
+      single_insert(
+        BATCH_DOWNLOAD_TREQUESTS,
+        array(
+          'type' =>  $set['type'],
+          'type_id' => $set['id'],
+          'user_id' =>$user['id'],
+          'first_name' => $_POST['firstname'],
+          'last_name' => $_POST['lastname'],
+          'organisation' => $_POST['organisation'],
+          'email' => $_POST['email'],
+          'telephone'=> $_POST['telephone'],
+          'profession'=> $_POST['profession'],
+          'reason' => $_POST['reason'],
+          'nb_images' => count($set['items']),
+          'request_date' => $dbnow,
+          'size' => $_POST['batch_dwn_request_size'],
+        )
+      );
+
+      array_push($page['infos'], l10n('Your request has been sent'));
+
+      // //notify admin of new request
+      $request_info_email = "\n\n";
+      $request_info_email .= "Ther is a new request to download a batch of photos.";
+      // $request_info_email .= l10n('Here are the details of the request:');
+      foreach ($request_info as $detail => $info){
+        if ('submit_request' == $detail)
+        {
+          continue;
+        }
+        $request_info_email .= l10n($detail)." = ".$info ."\n";
+      }
+
+      $request_info_email .= l10n("set")." = ".$set['type']." #".$set['id']."\n";
+      $request_info_email .= l10n("number of photos")." = ".count($set['items'])."\n";
+      
+      $url_admin =get_absolute_root_url().BATCH_DOWNLOAD_ADMIN.'-requests';
+      $request_info_email .= $url_admin;
+
+      $subject =l10n('Batch downloader, new download request');
+
+      pwg_mail_admins(
+        array(
+          'subject' => $subject,
+          'content' => $request_info_email,
+          'content_format' => 'text/plain',
+          ),
+        array(
+          'filename' => 'notification_admin',
+          ),
+        false, // do not exclude current user
+        false // only webmasters
+        );
+    }
+    else
+    {
+      $page['errors'][] = l10n('All required forms need to be filled');
+    }
+  }
+
   $template->set_template_dir(realpath(BATCH_DOWNLOAD_PATH.'template/'));
+  $template->assign(
+    'batch_dwn_request_size',
+    array(
+      'square' => l10n('Square (120 x 120)'),
+      'thumbnail' => l10n('Thumbnail (144 x 144)'),
+      'xxs' => l10n('XXS - tiny (240 x 240)'),
+      'xs' => l10n('XS - extra small (432 x 324)'),
+      's' => l10n('S - small (576 x 432)'),
+      'm' => l10n('M - medium (792 x 594)'),
+      'l' => l10n('L - large (1008 x 756)'),
+      'xl' => l10n('XL - extra large (1224 x 918)'),
+      'xxl' => l10n('XXL - huge (1656 x 1242)'),
+      'original' => l10n('Original'),
+    )
+  );
+  
+  $template->set_filename('batch_dwn_request_form', 'download_request_form.tpl');
+  $template->assign_var_from_handle('BATCH_DWN_REQUEST', 'batch_dwn_request_form');
+
   $template->set_filename('batchdwn_button', 'download_button.tpl');
   $button = $template->parse('batchdwn_button', true);
   $template->add_index_button($button, 50);
