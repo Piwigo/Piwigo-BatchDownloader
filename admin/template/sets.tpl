@@ -46,7 +46,11 @@
 </fieldset>
 
 </form>
-
+{if $PRINTED_LINES[0] == $LINE_LIMIT[0] + 1}
+<div>
+  {'%s lines printed, %s in total.'|translate:$PRINTED_LINES[0]:$NB_LINES[0]}
+</div>
+{/if}
 <table class="table2" width="97%">
   <thead>
     <tr class="throw">
