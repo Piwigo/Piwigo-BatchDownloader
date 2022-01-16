@@ -89,3 +89,4 @@ $lang['One size'] = 'Einheitsgröße';
 $lang['Photo size'] = 'Bildgröße';
 $lang['Photo size choices'] = 'Auswahl Bildgrößen';
 $lang['%s plugin detected, albums will be downloadable according to permissions.'] = '%s Plugin gefunden, die Alben werden entsprechend der gesetzten Berechtigungen herunterladbar sein.';
+$lang['%s lines printed, %s in total.'] = '%s Zeilen gedruckt, %s insgesamt.';
