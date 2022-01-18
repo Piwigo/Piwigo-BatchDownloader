@@ -953,6 +953,31 @@ SELECT SUM(filesize) AS total
   }
 
   /**
+   * getCsvInfos
+   * @return: array
+   */
+  function getCsvInfos()
+  {
+    $set = array(
+      'NB_IMAGES' =>     $this->data['nb_images'],
+      'NB_ARCHIVES' =>   $this->data['status']=='new' ? l10n('Unknown') : $this->getEstimatedArchiveNumber(),
+      'STATUS' =>        $this->data['status']=='ready' ? 'new' : $this->data['status'],
+      'LAST_ZIP' =>      $this->data['last_zip'],
+      'TOTAL_SIZE' =>    $this->data['status']=='new' ? l10n('Unknown') : l10n('%d MB', ceil($this->getEstimatedTotalSize()/1024)),
+      'DATE_CREATION' => explode(' ', $this->data['date_creation'])[0],
+      'SIZE' =>          $this->data['size'],
+      );
+
+    if ($this->data['size'] != 'original')
+    {
+      $params = ImageStdParams::get_by_type($this->data['size']);
+      $set['SIZE_INFO'] = $params->sizing->ideal_size[0].' x '.$params->sizing->ideal_size[1];
+    }
+
+    return $set;
+  }
+
+  /**
    * delete
    */
   function delete()

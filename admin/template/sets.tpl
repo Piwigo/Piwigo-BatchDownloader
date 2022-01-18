@@ -1,4 +1,15 @@
 {combine_css path=$BATCH_DOWNLOAD_PATH|cat:"admin/template/style.css"}
+{combine_script id='jquery.confirm' load='footer' require='jquery' path='themes/default/js/plugins/jquery-confirm.min.js'}
+{combine_css path="themes/default/js/plugins/jquery-confirm.min.css"}
+{combine_script id='sets' load='footer' path=$BATCH_DOWNLOAD_PATH|cat:'admin/js/sets.js'}
+{combine_script id='common' load='footer' path='admin/themes/default/js/common.js'}
+
+{footer_script}
+var str_purge ="{'Remove all finished downloads'|translate}";
+var str_yes_purge_confirmation = "{'Yes, delete'|@translate}";
+var str_no_purge_confirmation = "{"No, I have changed my mind"|@translate}";
+var purge_url = "{$F_FILTER_ACTION}";
+{/footer_script}
 
 <div class="titrePage">
 	<h2>Batch Downloader</h2>
@@ -42,11 +53,18 @@
     &nbsp;
     <span><input class="submit" type="submit" name="filter" value="{'Submit'|translate}"> <a href="{$F_FILTER_ACTION}">{'Reset'|translate}</a></span>
   </label>
+  <a class="download_csv tiptip" title="{'Download history'|translate}" href="ws.php?format=json&method=pwg.batch_downloader_csv"> 
+    <i class="icon-download"> </i>
+  </a>
 
 </fieldset>
-
 </form>
-{if $PRINTED_LINES[0] == $LINE_LIMIT[0] + 1}
+
+<button id="applyAction" name="submit" type="submit" class="buttonLike">
+{'Remove all finished downloads'|translate}
+</button>
+</form>
+{if $PRINTED_LINES[0] == $LINE_LIMIT[0]}
 <div>
   {'%s lines printed, %s in total.'|translate:$PRINTED_LINES[0]:$NB_LINES[0]}
 </div>

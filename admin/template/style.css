@@ -81,3 +81,7 @@ body#theAdminPage .ui-slider-range.ui-widget-header.ui-corner-all {border: 1px s
   background: #ffaf58;
 }
 .ui-slider-range.ui-widget-header.ui-corner-all {border: 1px solid #ffaf58;}
+
+.download_csv{
+  margin-top: 25px;
+}
