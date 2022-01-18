@@ -62,27 +62,6 @@ a.cancel-down {
   text-shadow:0 0 3px #000;
 }
 
-.jconfirm-type-uc, .jconfirm-type-uc-dark {
-  border-top: solid 7px rgb(240, 150, 00);
-}
-
-.jconfirm.jconfirm-modern .jconfirm-box .jconfirm-buttons button {
-  font-weight: bold;
-  text-transform: uppercase;
-  -webkit-transition: background .1s;
-  transition: background .1s;
-  padding: 10px 20px;
-}
-
-.jconfirm-type-uc button.btn-bd, .jconfirm-type-uc-dark button.btn-bd {
-  background-color: rgb(240, 150, 00);
-  color: white;
-}
-
-.jconfirm-type-uc button.btn-bd:hover, .jconfirm-type-uc-dark button.btn-bd:hover {
-  background-color: rgb(209, 140, 0);
-}
-
 .batch_dwn_form > .batch_dwn_input_group {
   margin-top: 10px;
   display: flex;
@@ -117,4 +96,58 @@ a.cancel-down {
   color: #111;
   width:100%;
   width: calc(100% - 15px);
+}
+
+
+/* Jconfirm styling */
+
+.jconfirm-type-uc, .jconfirm-type-uc-dark {
+  border-top: solid 7px rgb(240, 150, 00);
+}
+
+.jconfirm-type-uc .jconfirm-icon-c, .jconfirm-type-uc-dark .jconfirm-icon-c {
+  color: rgb(240, 150, 00) !important;
+}
+
+.jconfirm-type-uc button.btn-uc, .jconfirm-type-uc-dark button.btn-uc {
+  background-color: rgb(240, 150, 00);
+  color: white;
+}
+
+.jconfirm-type-uc button.btn-uc:hover, .jconfirm-type-uc-dark button.btn-uc:hover {
+  background-color: rgb(209, 140, 0);
+}
+
+.jconfirm-type-uc-dark {
+  background-color: #111 !important;
+}
+
+.jconfirm-type-uc-dark .jconfirm-title,
+.jconfirm-type-uc-dark p {
+  color: white !important;
+}
+
+.jconfirm-type-uc-dark .btn-default {
+  color: white !important;
+  background: #222 !important;
+}
+
+.jconfirm-type-uc-dark .btn-default:hover {
+  background: #181818 !important;
+}
+
+.jconfirm-type-uc-dark input, .jconfirm-type-uc-dark textarea {
+  color: white !important;
+}
+
+.jconfirm-type-uc-dark label {
+  color: white;
+}
+
+.jconfirm-type-uc-dark .shares_list {
+  color: white;
+}
+
+.jconfirm-type-uc-dark .uc_form a {
+  color: white;
 }
