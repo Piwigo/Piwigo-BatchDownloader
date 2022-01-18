@@ -50,12 +50,12 @@ if (!defined('IN_ADMIN'))
 add_event_handler('blockmanager_register_blocks', 'batch_download_add_menublock');
 add_event_handler('blockmanager_apply', 'batch_download_applymenu');
 
-
 include_once(BATCH_DOWNLOAD_PATH . 'include/BatchDownloader.class.php');
 include_once(BATCH_DOWNLOAD_PATH . 'include/functions.inc.php');
 include_once(BATCH_DOWNLOAD_PATH . 'include/events.inc.php');
 
-
+add_event_handler('ws_add_methods', 'batch_download_ws_add_methods');
+include_once(BATCH_DOWNLOAD_PATH . 'include/ws_functions.inc.php');
 
 /**
  * update plugin & unserialize conf & load language
