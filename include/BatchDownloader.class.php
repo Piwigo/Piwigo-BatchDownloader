@@ -964,7 +964,7 @@ SELECT SUM(filesize) AS total
       'STATUS' =>        $this->data['status']=='ready' ? 'new' : $this->data['status'],
       'LAST_ZIP' =>      $this->data['last_zip'],
       'TOTAL_SIZE' =>    $this->data['status']=='new' ? l10n('Unknown') : l10n('%d MB', ceil($this->getEstimatedTotalSize()/1024)),
-      'DATE_CREATION' => explode(' ', $this->data['date_creation'])[0],
+      'DATE_CREATION' => $this->data['date_creation'],
       'SIZE' =>          $this->data['size'],
       );
 
