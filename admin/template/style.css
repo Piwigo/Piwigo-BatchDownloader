@@ -82,6 +82,20 @@ body#theAdminPage .ui-slider-range.ui-widget-header.ui-corner-all {border: 1px s
 }
 .ui-slider-range.ui-widget-header.ui-corner-all {border: 1px solid #ffaf58;}
 
+.top-btns {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: flex-end;
+  width: 97%;
+  margin: 0 auto;
+  margin-top: -8px;
+}
+
 .download_csv{
-  margin-top: 25px;
+  margin-left: 25px;
+}
+
+#applyAction {
+  max-width: fit-content;
 }

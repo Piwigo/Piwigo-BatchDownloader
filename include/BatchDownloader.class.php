@@ -972,9 +972,15 @@ SELECT SUM(filesize) AS total
     {
       $params = ImageStdParams::get_by_type($this->data['size']);
       $set['SIZE_INFO'] = $params->sizing->ideal_size[0].' x '.$params->sizing->ideal_size[1];
+    } else {
+      $set['SIZE_INFO'] = 'original size';
     }
 
-    return $set;
+    $res = array_merge($set, $this->getNames());
+    unset($res['NAME']);
+    unset($res['BASENAME']);
+    unset($res['COMMENT']);
+    return $res;
   }
 
   /**

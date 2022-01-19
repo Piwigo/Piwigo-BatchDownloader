@@ -55,10 +55,6 @@ include_once(BATCH_DOWNLOAD_PATH . 'include/BatchDownloader.class.php');
 include_once(BATCH_DOWNLOAD_PATH . 'include/functions.inc.php');
 include_once(BATCH_DOWNLOAD_PATH . 'include/events.inc.php');
 
-$ws_file = BATCH_DOWNLOAD_PATH . 'include/ws_functions.inc.php';
-add_event_handler('ws_add_methods', 'ws_add_methods',
-    EVENT_HANDLER_PRIORITY_NEUTRAL, $ws_file);
-
 /**
  * update plugin & unserialize conf & load language
  */

@@ -15,6 +15,15 @@ var purge_url = "{$F_FILTER_ACTION}";
 	<h2>Batch Downloader</h2>
 </div>
 
+<div class="top-btns">
+  <a id="applyAction" name="submit" type="submit" class="orCreateAlbum icon-trash-1 cboxElement">
+  {'Remove all finished downloads'|translate}
+  </a>
+  <a class="download_csv tiptip" title="{'Download history'|translate}" href="{$U_DOWNLOAD}"> 
+    <i class="icon-download"> </i>
+  </a>
+</div>
+
 <form class="filter" method="post" name="filter" action="{$F_FILTER_ACTION}">
 <fieldset>
   <legend>{'Filter'|translate}</legend>
@@ -53,16 +62,9 @@ var purge_url = "{$F_FILTER_ACTION}";
     &nbsp;
     <span><input class="submit" type="submit" name="filter" value="{'Submit'|translate}"> <a href="{$F_FILTER_ACTION}">{'Reset'|translate}</a></span>
   </label>
-  <a class="download_csv tiptip" title="{'Download history'|translate}" href="ws.php?format=json&method=pwg.batch_downloader_csv"> 
-    <i class="icon-download"> </i>
-  </a>
-
 </fieldset>
 </form>
 
-<button id="applyAction" name="submit" type="submit" class="buttonLike">
-{'Remove all finished downloads'|translate}
-</button>
 </form>
 {if $PRINTED_LINES[0] == $LINE_LIMIT[0]}
 <div>
@@ -110,8 +112,3 @@ var purge_url = "{$F_FILTER_ACTION}";
   </tr>
   {/if}
 </table>
-
-<form action="{$F_FILTER_ACTION}" method="post">
-  <p><label><input type="checkbox" name="delete_done" value="1"> {'Remove all finished downloads'|translate}</label>
-  <input type="submit" value="{'Submit'|translate}"></p>
-</form>

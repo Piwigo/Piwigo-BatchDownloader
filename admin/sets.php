@@ -38,6 +38,49 @@ SELECT id
   }
 }
 
+// download
+if (isset($_GET['download'])) {
+  $query = '
+  SELECT
+      s.id,
+      u.'.$conf['user_fields']['username'].' AS username
+    FROM '.BATCH_DOWNLOAD_TSETS.' AS s
+      INNER JOIN '.USERS_TABLE.' AS u
+      ON s.user_id = u.'.$conf['user_fields']['id'].'
+    ORDER BY date_creation DESC, status DESC
+  ;';
+  $sets = simple_hash_from_query($query, 'id', 'username');
+  $printed_lines = count($sets);
+
+  $res = array();
+  array_push($res, ['Image_count', 'Archive_count', 'Status', 'Archive_count', 'Total_size', 'Date', 'Size', 'Size Infos','Archive_name', 'Username', 'Archive_id']);
+  
+  foreach ($sets as $set_id => $username)
+  {
+    $set = new BatchDownloader($set_id);
+  
+
+    $res[] = array_merge(
+      $set->getCsvInfos(),
+      array(
+        'USERNAME' => $username,
+        'ARCHIVE_ID' => $set->getParam('id'),
+      )
+      );
+  
+    unset($set);
+  }
+
+  header('Content-type: application/csv');
+  header('Content-Disposition: attachment; filename='.date('YmdGis').'piwigo_batch_downloader_log.csv');
+  header("Content-Transfer-Encoding: UTF-8");
+
+  $f = fopen('php://output', 'w');  
+      foreach ($res as $line) { 
+          fputcsv($f, $line, ";"); 
+      }
+  exit();
+}
 
 // filter
 $where_clauses = array('1=1');
@@ -187,6 +230,7 @@ $template->assign(array(
 
   'F_USERNAME' => @htmlentities($_POST['username'], ENT_COMPAT, 'UTF-8'),
   'F_FILTER_ACTION' => BATCH_DOWNLOAD_ADMIN . '-sets',
+  'U_DOWNLOAD' => BATCH_DOWNLOAD_ADMIN . '-sets&amp;download',
   ));
 
 
