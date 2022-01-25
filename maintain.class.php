@@ -143,21 +143,23 @@ CREATE TABLE IF NOT EXISTS `' . $this->table_image_sizes . '` (
     $query = '
     CREATE TABLE IF NOT EXISTS `' . $this->table_download_requests . '` (
       `id` mediumint(8) NOT NULL AUTO_INCREMENT,
-      `type` varchar(16) NOT NULL,
+      `type` varchar(25) NOT NULL,
       `type_id` varchar(64) NOT NULL,
-      `user_id` int(11) NOT NULL,
-      `first_name` varchar(16) NOT NULL,
-      `last_name` varchar(16) NOT NULL,
-      `organisation` varchar(16),
-      `email` varchar(16) NOT NULL,
-      `telephone` varchar(10),
-      `profession` varchar(64),
+      `user_id` int(64) NOT NULL,
+      `first_name` varchar(50) NOT NULL,
+      `last_name` varchar(50) NOT NULL,
+      `organisation` varchar(50),
+      `email` varchar(100) NOT NULL,
+      `telephone` varchar(50),
+      `profession` varchar(50),
       `reason` varchar(255) NOT NULL,
       `nb_images` mediumint(8) NOT NULL DEFAULT 0,
       `request_date` datetime NOT NULL,
       `request_status` enum("pending","reject","accept") NOT NULL DEFAULT "pending",
-      `status_change_date` datetime NOT NULL,
-      `image_size` enum("square","thumbnail","xxs","xs","s","m","l","xl","xxl","original") NOT NULL DEFAULT "original",
+      `status_change_date` datetime ,
+      `image_size` enum(
+        "square","thumb","2small","xsmall","small","medium","large","xlarge","xxlarge","original"
+        ) NOT NULL DEFAULT "Original",
       FOREIGN KEY(user_id) REFERENCES '.USERS_TABLE.'(id),
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8
