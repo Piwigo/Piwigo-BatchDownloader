@@ -1,5 +1,6 @@
 <?php
 defined('BATCH_DOWNLOAD_PATH') or die('Hacking attempt!');
+include_once(PHPWG_ROOT_PATH.'include/functions_mail.inc.php');
 
 function batch_download_ws_add_methods($arr)
 {
@@ -84,16 +85,89 @@ function ws_downloadRequest_create($params, &$service)
     return new PwgError(WS_ERR_MISSING_PARAM, 'Empty reason name');
   }
 
-  //Check if email address is valid
-  // if (!email_check_format($_POST['email']))
-  // {
-  //   return new PwgError(WS_ERR_MISSING_PARAM, 'Email isn\'t the right format');
-  // }
+  // Check if email address is valid
+  if (!email_check_format($params['email']))
+  {
+    return new PwgError(WS_ERR_MISSING_PARAM, 'Email isn\'t the right format');
+  }
+
+  //check iùage_size
+  if (empty($params['image_size']))
+  {
+    return new PwgError(WS_ERR_MISSING_PARAM, 'Empty image size');
+  }
 
   single_insert(
     BATCH_DOWNLOAD_TREQUESTS,
     $params
   );
+
+  $request_info_email = "There is a new request to download a batch of photos.";
+  $request_info_email .= "\n";
+  $request_info_email .= l10n('Here are the details of the request:');
+  $request_info_email .= "\n";
+
+  foreach ($params as $detail => $info){
+    switch($detail){
+      case "type":
+        $request_info_email .= l10n("Set")." = ".$info;
+        break;
+      case "type_id":
+        $request_info_email .= " ".$info ."\n";
+        break;
+      case "user_id":
+        break;
+      case "first_name":
+      $request_info_email .= l10n("First name")." = ".$info."\n";
+        break;
+      case "last_name":
+      $request_info_email .= l10n("Last name")." = ".$info."\n";
+        break;
+      case "Email":
+      $request_info_email .= l10n("Email")." = ".$info."\n";
+        break;
+      case "Telephone":
+      $request_info_email .= l10n("Telephone Number")." = ".$info."\n";
+        break;
+      case "Organisation":
+        $request_info_email .= l10n("Organisation")." = ".$info."\n";
+        break;
+      case "Profession":
+        $request_info_email .= l10n("Profession")." = ".$info."\n";
+        break;
+      case "Reason":
+        $request_info_email .= l10n("Reason")." = ".$info."\n";
+        break;
+      case "image_size":
+        break;
+      case "nb_images":
+        $request_info_email .= l10n("Number of photos")." = ".l10n($info)."\n";
+        break;
+    }
+
+  }
+
+  $request_info_email .= "\n";
+  $request_info_email .= l10n("See the request here");
+  $request_info_email .= "\n";
+  $url_admin =get_absolute_root_url().BATCH_DOWNLOAD_ADMIN.'-requests';
+  $request_info_email .= $url_admin;
+
+  $subject =l10n('Batch downloader, new download request');
+
+  pwg_mail_admins(
+    array(
+      'subject' => $subject,
+      'content' => $request_info_email,
+      'content_format' => 'text/plain',
+    ),
+    array(
+      'filename' => 'notification_admin',
+    ),
+    false, // do not exclude current user
+    false // only webmasters
+  );
+
 }
 
 /**
@@ -106,6 +180,88 @@ function ws_downloadRequest_create($params, &$service)
     $params,
     array(
       'id' => $params['id'],
+    )
+  );
+
+  $query = '
+SELECT 
+  id,
+  type,
+  type_id,
+  user_id,
+  email,
+  nb_images,
+  request_status,
+  image_size
+  FROM '.BATCH_DOWNLOAD_TREQUESTS.'
+  WHERE id ='.$params['id'].'
+;';
+
+  $request = query2array($query);
+  $request = $request[0];
+  echo('<pre>');print_r($request);echo('</pre>');
+
+  $subject = 'Batch downloader, your request has been processed';
+  
+  //Notify user once request staus changed
+  $set_info = $request['type'].' '.$request['type_id'];
+  
+  $content = l10n("Your download request for the set %s has been", $set_info)." ";
+
+  if ("accept" == $request['request_status'])
+  {
+    $url = get_absolute_root_url().'index.php?/'.$request['type'].'/'.$request['type_id'];
+    switch($request['image_size']){
+        case 'Original':
+          $request['image_size'] = 'original';
+          break;
+        case 'Square (120 x 120)':
+          $request['image_size'] = 'square';
+          break;
+        case 'Thumbnail (144 x 144)':
+          $request['image_size'] = 'thumbnail';
+          break;
+        case'XXS - tiny (240 x 240)':
+          $request['image_size'] = 'xxs';
+          break;
+        case 'XS - extra small (432 x 324)':
+          $request['image_size'] = 'xs';
+          break;
+        case 'S - small (576 x 432)':
+          $request['image_size'] = 's';
+          break;
+        case 'M - medium (792 x 594)':
+          $request['image_size'] = 'm';
+          break;
+        case 'L - large (1008 x 756)':
+          $request['image_size'] = 'l';
+          break;
+        case 'XL - extra large (1224 x 918)':
+          $request['image_size'] = 'xl';
+          break;
+        case'XXL - huge (1656 x 1242)':
+          $request['image_size'] = 'xxl';
+          break;
+    }
+    $url = add_url_params($url,array('action'=>'advdown_set', 'down_size'=>$request['image_size'])); 
+
+    //set accept message and add link to set
+    $content .= l10n("accepted");
+    $content .= l10n("\n");
+    $content .= l10n("You can now download this set here :\n");
+    $content .= $url;
+  }
+  else if ("reject" == $request['request_status'])
+  {
+    $content .= l10n("rejected");
+  }
+
+  pwg_mail(
+    $request['email'],
+    array(
+      'subject' => $subject,
+      'content' => $content,
+      'content_format' => 'html',
     )
   );
  }
@@ -132,9 +288,10 @@ SELECT
   request_date,
   request_status, 
   status_change_date,
-  size
+  image_size
   FROM '.BATCH_DOWNLOAD_TREQUESTS.'
-  ORDER BY request_date DESC
+  ORDER BY id DESC,
+    request_date DESC
 ;';
 
   $result = pwg_query($query);
