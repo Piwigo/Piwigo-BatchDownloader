@@ -1,8 +1,14 @@
 {combine_css path=$BATCH_DOWNLOAD_PATH|cat:"template/style.css"}
-{if $BATCH_DWN_REQUEST_CONF == true}
-<a id="batchDownloadRequest" title="{'Request permission to download all pictures of this selection'|translate}" class="pwg-state-default pwg-button nav-link" rel="nofollow">
-  <span class="pwg-icon batch-downloader-icon fas fa-cloud-download-alt fa-fw" style="background:url('{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/images/zip.png') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">{'Download'|translate}</span>
+{if !$HAS_PERMISSION_TO_DOWNLOAD && $BATCH_DWN_REQUEST_CONF}
+<a id="batchDownloadRequest" title="{'Request permission to download all pictures of this selection'|translate}" class="pwg-state-default pwg-button nav-link " rel="nofollow">
+  <span class="pwg-icon batch-downloader-icon fas fa-cloud-download-alt fa-fw" style="background:url('{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/images/zip.png') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">{'Request download'|translate}</span>
+  {foreach from=$BATCH_DWN_SIZES_ACCEPETED item=size name=loop}{if !$smarty.foreach.loop.first}<br>{/if}
+  <a href="{$BATCH_DWN_URL}{$size.TYPE}" rel="nofollow">
+    {$size.DISPLAY} {if $size.SIZE}<span class="downloadSizeDetails">({$size.SIZE})</span>{/if}
+  </a>
+  {/foreach}
 </a>
+
 {else}
 <a href="{$BATCH_DWN_URL}{$BATCH_DWN_SIZE}" id="batchDownloadLink" title="{'Download all pictures of this selection'|translate}" class="pwg-state-default pwg-button" rel="nofollow">
   <span class="pwg-icon batch-downloader-icon fas fa-cloud-download-alt fa-fw" style="background:url('{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/images/zip.png') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">{'Download'|translate}</span>
@@ -16,13 +22,15 @@
   <div class="switchBoxTitle">{'Download'|translate} - {'Photo sizes'|translate}</div>
   {foreach from=$BATCH_DWN_SIZES item=size name=loop}{if !$smarty.foreach.loop.first}<br>{/if}
   <a href="{$BATCH_DWN_URL}{$size.TYPE}" rel="nofollow">
-    {$size.DISPLAY} {if $size.SIZE}<span class="downloadSizeDetails">({$size.SIZE})</span>{/if}
+    {$size.DISPLAY} {if isset($size.SIZE)}<span class="downloadSizeDetails">({$size.SIZE})</span>{/if}
   </a>
   {/foreach}
 </div>
 {/if}
 
+
 {footer_script require='jquery'}
+
 var batchdown_count = {$BATCH_DWN_COUNT};
 var batchdown_string = "{'Confirm the download of %d pictures?'|translate}";
 
@@ -31,9 +39,15 @@ var str_request_form = '{'Request permission to download'|translate|escape:javas
 var str_save = '{'Save'|translate|escape:javascript}';
 var str_request = '{'Request'|translate|escape:javascript}';
 var str_cancel = '{'Cancel'|translate}';
+var str_download_request = '{'Batch download Request'|translate}';
+var str_download_request_sent = '{'Your download request has been sent'|translate}';
+var str_download_request_error = '{'There was an error sending your request, please try again'|translate}';
 
 {* Pass HTML form *}
 var bd_request_form = `{$BATCH_DWN_REQUEST}`;
+
+{*Get page infos*}
+var page_infos_for_request = {$PAGE_INFOS_FOR_REQUEST};
 
 {if isset($BATCH_DWN_SIZES)}
   (SwitchBox=window.SwitchBox||[]).push("#batchDownloadLink", "#batchDownloadBox");
@@ -53,6 +67,7 @@ if (window.jconfirmConfig !== true) {
 
 {combine_script id='jquery.confirm' load='footer' require='jquery' path='themes/default/js/plugins/jquery-confirm.min.js'}
 {combine_css path="themes/default/js/plugins/jquery-confirm.min.css"}
+{combine_script id='thumbnails.loader' path='themes/default/js/thumbnails.loader.js' require='jquery.ajaxmanager' load='footer'}
 
 {literal}   
 }
@@ -60,11 +75,8 @@ if (window.jconfirmConfig !== true) {
 
 {/footer_script}
 
-
-{combine_script id='bd_download_common' require='jquery' load='footer' path='plugins/UserCollections/template/js/collectionCommon.js'}
+{combine_script id='bd_download_common' require='jquery' load='footer' path='plugins/batchDownloader/template/js/downloadCommon.js'}
 {combine_script id='bd_download_form' require='jquery' load='footer' path='plugins/batchDownloader/template/js/downloadForm.js'}
-
-
 
 {html_style}
 .downloadSizeDetails { font-style:italic; font-size:80%; }
