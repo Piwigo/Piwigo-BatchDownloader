@@ -88,3 +88,4 @@ $lang['Photo size choices'] = 'Επιλογές Μεγέθους φωτογρα�
 $lang['One size'] = 'Ένα μέγεθος';
 $lang['Any size'] = 'Οποιοδήποτε μέγεθος';
 $lang['%s plugin detected, albums will be downloadable according to permissions.'] = 'εντοπίστηκε %s πρόσθετα, τα λευκώματα θα μπορούν να κατεβαίνουν σύμφωνα με τα δικαιώματα.';
+$lang['%s lines printed, %s in total.'] = '%s γραμμές εκτυπώθηκαν, %s σύνολο.';

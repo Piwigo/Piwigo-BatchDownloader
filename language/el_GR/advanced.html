@@ -1,5 +1,3 @@
-<dt><span>$conf['batch_download_max_elements']</span></dt>
-<dd>Μέγιστη τιμή του <b>Μέγιστος αριθμός φωτογραφιών ανά σετ λήψης</b> slider.<br>
 <i>Η προεπιλογή είναι <span>1000</span>.</i></dd>
 
 <dt><span>$conf['batch_download_max_size']</span></dt>
@@ -7,12 +5,12 @@
 <i>Η προεπιλογή είναι <span>500</span>.</i></dd>
 
 <dt><span>$conf['batch_download_additional_ext']</span></dt>
-<dd>Πίνακα περιέχει επεκτάσεις αρχείων κατάληλων για κατέβασμα (case sensitive).<br>
+<dd>Ο Πίνακας περιέχει επεκτάσεις αρχείων κατάληλων για κατέβασμα(case sensitive).<br>
 <i>Η προεπιλογή είναι <span>$conf['picture_ext']</span>.</i></dd>
 
 <dt><span>$conf['batch_download_file_pattern']</span></dt>
-<dd>Pattern for filenames in the archive.<br>
-Available fields are <span>%id%, %filename%, %author%, %dimensions%</span>.<br>
-Available functions are <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
-<i>Default value is <span>%id%_%filename%_%dimensions%</span>.</i><br>
-<i>Example: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
+<dd>Π'οτυπο για ονόματα αρχείων.<br>
+Υπάρχοντα πεδία είναι <span>%id%, %filename%, %author%, %dimensions%</span>.<br>
+Υπάρχουσες ενέργειες είναι <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
+<i>Προεπιλεγμένη τιμή είναι <span>%id%_%filename%_%dimensions%</span>.</i><br>
+<i>Παράδειγμα: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
