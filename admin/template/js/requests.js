@@ -1,16 +1,9 @@
 jQuery(document).ready(function () {
+
   var requests = getRequests();
+  // console.log(requests);
 
   jQuery(requests).each(function(){
-    var colorClass = '';
-    if(this.request_status === "accept"){
-      colorClass = 'greenText';
-      this.request_status = "Accepted"
-    }else if(this.request_status === "reject"){
-      colorClass = 'redText';
-      this.request_status = "Rejected"
-    }
-
     var today = new Date();
     var createdOn = new Date(this.request_date);
     var msInDay = 24 * 60 * 60 * 1000;
@@ -24,85 +17,118 @@ jQuery(document).ready(function () {
     }else{
       days_ago = (+today - +createdOn)/msInDay + (days_ago == 1?' day ago': ' days ago');
     }
-  
-    jQuery('#bd-request-table-content .table-body').append('<div class="user-container" id="request'+this.id+'">\
-      <span class="user-col number-col">'+this.id+'</span>\
-      <span class="user-col first-name-col">'+this.first_name+'</span>\
-      <span class="user-col last-name-col">'+this.last_name+'</span>\
-      <span class="user-col email-col">'+this.email+'</span>\
-      <span class="user-col set-col">'+this.type+' '+this.type_id+' </span>\
-      <span class="user-col request-date-col">'+this.request_date+', ' + days_ago+'</span>\
-      <span class="user-col status-col '+colorClass+'">'+this.request_status +(this.request_status == "pending"?'\
-        <a id="accept_request_icon" class="button-accept" onclick="updateRequest('+this.id+', `accept`)">\
-          <i class="icon-ok "></i>\
-        </a>\
-        <a id="reject_request_icon" class="button-reject" onclick="updateRequest('+this.id+', `reject`)">\
-          <i class="icon-cancel-circled"></i>\
-        </a>': '')+'</span>\
-      <span class="user-col details-col"><button id="bdrequest-details-'+this.id+'" ><i class="icon-info-circled-1"></i></button></span>\
-      </div>'
-    );
 
-    jQuery('#bdrequest-details-'+this.id).click(() => showDetails(this))
+    jQuery("#jango-fett").clone().removeAttr("id").attr("id","request"+this.id).appendTo(".table-body")
+    console.log(this);
+    jQuery('#request'+this.id)
+      .data("id", this.id)
+      .data("first_name", this.first_name)
+      .data("last_name", this.last_name)
+      .data("email", this.email)
+      .data("type", this.type)
+      .data("type_id", this.type_id)
+      .data("request_date", this.request_date)
+      .data("image_size", this.image_size)
+      .data("nb_images", this.nb_images)
+      .data("organisation", this.organisation)
+      .data("profession", this.profession)
+      .data("reason", this.reason)
+      .data("request_status", this.request_status)
+      .data("telephone", this.telephone)
+      .data("user_id", this.user_id)
+      .data("status_change_date", this.status_change_date)
+    ;
+
+    jQuery('#request'+this.id+' span.number-col').text(this.id);
+    jQuery('#request'+this.id+' span.first-name-col').text(this.first_name);
+    jQuery('#request'+this.id+' span.last-name-col').text(this.last_name);
+    jQuery('#request'+this.id+' span.email-col').text(this.email);
+    jQuery("#request"+this.id+' span.set-col').text(this.type+' '+this.type_id);
+    jQuery("#request"+this.id+' .request-date-col').text(this.request_date+', ' + days_ago);
+    jQuery('#request'+this.id+' span.details-col button').attr('id','#bdrequest-details-'+this.id);
+    (this.request_status == "pending"? jQuery('#request'+this.id+' #pending_options').css('display', 'block') : jQuery('#request'+this.id+' #pending_options').css('display', 'none'));
+    (this.request_status == "pending"? jQuery('#request'+this.id+' #status-col-pending').css('display', 'block') : jQuery('#request'+this.id+' #status-col-pending').css('display', 'none'));
+    (this.request_status == "accept"? jQuery('#request'+this.id+' #status-col-accepted').css('display', 'block') : jQuery('#request'+this.id+' #status-col-accepted').css('display', 'none'));
+    (this.request_status == "reject"? jQuery('#request'+this.id+' #status-col-rejected').css('display', 'block') : jQuery('#request'+this.id+' #status-col-rejected').css('display', 'none'));
+
+    jQuery('#request'+this.id+' #accept_request_icon').click(() => updateRequest(this.id, 'accept', false));
+    jQuery('#request'+this.id+' #reject_request_icon').click(() => updateRequest(this.id, 'reject', false));
+
+    // jQuery('#bdrequest-details-1').click(() => showDetails(this));
+    // console.log("salut");
+    // jQuery('#bdrequest-details-1').click(function(e){
+    //   e.preventDefault();
+    //   console.log("bonjour");
+    // });
   })
+
+  $(".details-col button").on('click', function () {
+    var requestId = jQuery(this).closest('.user-container').data('id');
+    showDetails(requestId);
+  });
   
 });
 
+function showDetails(requestId) {
+  
+  jQuery('#request_popin #popin_details_firstname p').text(jQuery('#request'+requestId).data('first_name'));
+  jQuery('#request_popin #popin_details_lastname p').text(jQuery('#request'+requestId).data('last_name'));
+  jQuery('#request_popin #popin_details_email p').text(jQuery('#request'+requestId).data('email'));
+  jQuery('#request_popin #popin_details_organisation p').text(jQuery('#request'+requestId).data('organisation') ?? '');
+  jQuery('#request_popin #popin_details_telephone p').text(jQuery('#request'+requestId).data('telephone') ?? '');
+  jQuery('#request_popin #popin_details_reason p').text(jQuery('#request'+requestId).data('reason'));
+  jQuery('#request_popin #popin_details_set p').text(jQuery('#request'+requestId).data('type') + ' ' + jQuery('#request'+requestId).data('type_id'));
+  jQuery('#request_popin #popin_details_nbr_photos p').text(jQuery('#request'+requestId).data('nb_images'));
+  jQuery('#request_popin #popin_details_request_date p').text(jQuery('#request'+requestId).data('request_date'));
+  jQuery('#request_popin #popin_details_set_size p').text(jQuery('#request'+requestId).data('image_size'));
+
+  jQuery('#request_popin #popin_details_rejected_status').hide();
+  jQuery('#request_popin #popin_details_accepted_status').hide();
+  jQuery('#request_popin #popin_details_request_pending_status').hide();
+  jQuery('#request_popin #change_request_status').hide()
+  
+  if(jQuery('#request'+requestId).data('request_status') == 'pending'){
+    jQuery('#request_popin #popin_details_request_pending_status, #change_request_status').show()
+  }
+
+  if(jQuery('#request'+requestId).data('request_status') == 'reject'){
+    jQuery('#request_popin #popin_details_rejected_status').show();
+    jQuery('#request_popin #popin_details_rejected_status p').text(jQuery('#request'+requestId).data('status_change_date'));
+    
+  }
+
+  if(jQuery('#request'+requestId).data('request_status') == 'accept'){
+    jQuery('#request_popin #popin_details_accepted_status').show();
+    jQuery('#request_popin #popin_details_accepted_status p').text(jQuery('#request'+requestId).data('status_change_date'));
+  }
 
 
-function showDetails(request) {
-  // console.log(request);
-  jQuery('#request-popin-content').append('\
-  <div class="bd-request-details-popin" id="bd-request-details-popin-'+request.id+'">\
-        <div class="details-popin-content">\
-          <a class="icon-cancel CloseUserList" onclick="hideDetails()"></a>\
-          <div class="bd-detail-row">\
-            <div class="bd-details-table">\
-                <ul>\
-                  <li><label class="">First name</label>\
-                  <p class="">'+request.first_name+'</p></li>\
-                  <li><label class="">Last name</label>\
-                  <p class="">'+request.last_name+'</p></li>'+
-                  (request.organisation?'<li><label class="">Organisation</label><p class="">'+request.organisation+'</p></li>': '') +'\
-                  <li><label class="">Email</label>\
-                  <p class="">'+request.email+'</p></li>'+
-                  (request.telephone?'<li><label class="">Telephone</label><p class="">'+request.telephone+'</p></li>': '') +
-                  (request.profession?'<li><label class="">Profession</label><p class="">'+request.profession+'</p></li>': '') +'\
-                  <li><label class="">Reason</label>\
-                  <p class="">'+request.reason+'</p></li>\
-                  <li><label class="">Set</label>\
-                  <p class="">'+request.type + ' ' + request.type_id+' </p></li>\
-                  <li><label class="">Number of photos</label>\
-                  <p class="">'+request.nb_images+'</p></li>\
-                  <li><label class="">Request Date</label>\
-                  <p class="">'+request.request_date+'</p></li>\
-                  <li><label class="">Set size</label>\
-                  <p class="">'+request.image_size+'</p></li>'+
-                  (request.request_status == "Rejected"?'<li><label class="redText">Rejected date</label><p class="redText">'+request.status_change_date+'</p></li>': '') +
-                  (request.request_status == "Accepted"?'<li><label class="greenText">Accepted date</label><p class="greenText">'+request.status_change_date+'</p></li>': '') +
-                  (request.request_status == "pending"?'\
-                  <li id="request_pending_status"><label class="">Request status</label><p>Pending</p></li>\
-                  ': '') +'\
-                </ul>\
-            </div>'+
-            (request.request_status == "pending"?'\
-            <div id="change_request_status">\
-              <button id="accept_request" class="button-accept" type="submit" value="accept"><i class="icon-ok "></i>Accept</button>\
-              <button id="reject_request" type="submit" class="button-reject" value="reject"><i class="icon-cancel "></i>Reject</button>\
-            </div>\
-            ': '') +'\
-          </div>\
-        </div>\
-      </div>'
-  );
-  jQuery('#accept_request').click(() => updateRequest(request.id, "accept"));
-  jQuery('#accept_request').click(() => hideDetails());
-  jQuery('#reject_request').click(() => updateRequest(request.id, "reject"));
-  jQuery('#reject_request').click(() => hideDetails());
+  // (request.request_status == "pending"?
+  // jQuery('#request_popin #change_request_status').css("display", "block"):
+  // jQuery('#request_popin #change_request_status').css("display", "none")
+  // )
+  // (request.request_status == "reject"?
+  //   jQuery('#request_popin #popin_details_rejected_status p').text(request.status_change_date):
+  //   jQuery('#request_popin #popin_details_rejected_status p').css("display", "none")
+  // )
+  // (request.request_status == "accept"?
+  //   jQuery('#request_popin #popin_details_accepted_status p').text(request.status_change_date):
+  //   jQuery('#request_popin #popin_details_accepted_status p').css("display", "none")
+  // )
+
+  jQuery('#request_popin').show();
+
+
+  jQuery('#request_popin #accept_request').click(() => updateRequest(jQuery('#request'+requestId).data('id'), 'accept', true));
+  jQuery('#request_popin #reject_request').click(() => updateRequest(jQuery('#request'+requestId).data('id'), 'reject', true));
+
+  // jQuery('#accept_request').click(() => hideDetails());
+
+  // jQuery('#reject_request').click(() => hideDetails());
 }
 
 function hideDetails() {
-  jQuery('#request-popin-content').empty();
+  jQuery('#request_popin').css("display", "none");
 }
 
 function getRequests() {
@@ -120,48 +146,59 @@ function getRequests() {
           // console.log(data)
         }
         else {
-          console.log(data)
+          // console.log(data)
         }
     },
     error: function (e) {
-        console.log(e);
+        // console.log(e);
     }
   });
 
   return requests
 }
 
-function updateRequest(requestId, status) {
+function updateRequest(requestId, status, popin) {
+  if(!popin ){
+    jQuery('#request'+requestId+' .wait-for-server , #request'+requestId+' #pending_options').toggle()
+  } 
+  else if(popin)
+  {
+    jQuery('#request_popin .wait-for-server , #request_popin #change_request_status').toggle()
+  }
+
   jQuery.ajax({
     type: 'POST',
-    dataType: 'json',
     url: 'ws.php?format=json&method=pwg.downloadRequest.update',
     data: {
         id: requestId,
         status_change_date : page_infos_for_update.status_change_date,
         request_status: status,
     },
+
     success: function (data) {
-        if (data.stat == 'ok') {
-            console.log(data)
-        }
-        else {
-            console.log(data)
-        }
+      jQuery('#request'+requestId+' .wait-for-server, #request'+requestId+' #status-col-pending, #request'+requestId+' #pending_options ').hide();
+      jQuery('#request_popin .wait-for-server').hide();
+      jQuery(' #request_popin #popin_details_request_pending_status').hide();
+      jQuery('#request_popin #change_request_status').hide();
+
+      if(status == 'accept'){
+        jQuery('#request'+requestId+' #status-col-accepted').show();
+        jQuery('#request_popin #popin_details_accepted_status').show();
+        jQuery('#request_popin #popin_details_accepted_status p').text(jQuery('#request'+requestId).data('status_change_date'));
+      }
+      else if(status == 'reject')
+      {
+        jQuery('#request'+requestId+' #status-col-rejected').show()
+        jQuery('#request_popin #popin_details_rejected_status').show(); 
+        jQuery('#request_popin #popin_details_rejected_status p').text(jQuery('#request'+requestId).data('status_change_date'));
+      }
+      console.log(data);
+
     },
     error: function (e) {
-        console.log(e);
+        console.log('error');
     }
   });
 
-  if(status == "accept")
-  {
-    jQuery("#request"+requestId+" .status-col ").replaceWith('<span class="user-col status-col greenText">Accepted</span>');
-  }
-  else
-  {
-    jQuery("#request"+requestId+" .status-col ").replaceWith('<span class="user-col status-col redText">Rejected</span>');
-  }
 
-  console.log(jQuery("#request"+requestId+" .status-col "));
 }

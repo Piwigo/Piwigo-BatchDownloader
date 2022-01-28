@@ -223,6 +223,10 @@ Download request
   color: #3C3C3C;
 }
 
+.bd-details-table ul li label:hover{
+  cursor:unset;
+}
+
 .redText{
   color:#ff5252;
 }
@@ -243,12 +247,17 @@ Download request
   font-weight:700;
 }
 
+
+#change_request_status button:hover{
+  cursor:pointer;
+}
+
 .button-accept:hover,
-#change_request_status button.button-accept:hover{
+#change_request_status button:hover{
 background-color: #f70;
 color: #000;
-cursor: pointer;
 border:none;
+text-decoration: none;
 }
 
 .button-accept {
@@ -269,11 +278,15 @@ border:none;
 }
 
 #bd-request-table .details-col button:hover i,
-#bd-request-table .status-col button:hover i{
-  color: #ffa646;
+#bd-request-table .status-col a.button-reject:hover i{
+  color:#ff7700;
   cursor: pointer;
 }
 
+
+[class^="icon-"]:before, [class*=" icon-"]:before{
+  margin-right:0!important;
+}
 .button-reject{
   color:#777;
   font-size:21px;
@@ -288,4 +301,14 @@ border:none;
   cursor:pointer;
   background-color: #ffa744;
   color: #3c3c3c;
+}
+
+#request_popin,
+#bd-request-table .table-body .user-container#jango-fett,
+.wait-for-server{
+  display:none;
+}
+
+.unclickable {
+  pointer-events: none;
 }
