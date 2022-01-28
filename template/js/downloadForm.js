@@ -7,7 +7,7 @@ jQuery(document).ready(function () {
 
   function requestPopin(animation = true) {
     $.confirm({
-        ...jconfirmConfig,
+        ...jconfirmConfigBdwn,
         boxWidth: '760px',
         title: str_request_form,
         content: bd_request_form,

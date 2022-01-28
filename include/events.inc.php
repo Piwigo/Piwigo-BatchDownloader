@@ -221,9 +221,8 @@ function batch_download_index_button()
     image_size
     FROM '.BATCH_DOWNLOAD_TREQUESTS.'
     WHERE user_id ='.$user['id'].'
-      and type_id = '.$set['id'].'
+      and type_id = "'.$set['id'].'"
       and type = "'.$set['type'].'"
-      and nb_images = '.count($set['items']).'
     ORDER BY id DESC
   ;';
 

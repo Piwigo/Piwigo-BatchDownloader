@@ -34,6 +34,9 @@ function get_set_info_from_page()
       {
         return false;
       }
+      else{
+        return false;
+      }
       break;
     case 'tags':
       $batch_type = 'tags';
