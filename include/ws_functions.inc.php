@@ -199,7 +199,6 @@ SELECT
 
   $request = query2array($query);
   $request = $request[0];
-  echo('<pre>');print_r($request);echo('</pre>');
 
   $subject = 'Batch downloader, your request has been processed';
   
@@ -248,7 +247,8 @@ SELECT
     //set accept message and add link to set
     $content .= l10n("accepted");
     $content .= l10n("\n");
-    $content .= l10n("You can now download this set here :\n");
+    $content .= l10n("You can now download this set here :");
+    $content .= l10n("\n");
     $content .= $url;
   }
   else if ("reject" == $request['request_status'])
