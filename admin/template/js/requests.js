@@ -50,27 +50,37 @@ jQuery(document).ready(function () {
     (this.request_status == "pending"? jQuery('#request'+this.id+' #status-col-pending').css('display', 'block') : jQuery('#request'+this.id+' #status-col-pending').css('display', 'none'));
     (this.request_status == "accept"? jQuery('#request'+this.id+' #status-col-accepted').css('display', 'block') : jQuery('#request'+this.id+' #status-col-accepted').css('display', 'none'));
     (this.request_status == "reject"? jQuery('#request'+this.id+' #status-col-rejected').css('display', 'block') : jQuery('#request'+this.id+' #status-col-rejected').css('display', 'none'));
-
-    jQuery('#request'+this.id+' #accept_request_icon').click(() => updateRequest(this.id, 'accept', false));
-    jQuery('#request'+this.id+' #reject_request_icon').click(() => updateRequest(this.id, 'reject', false));
-
-    // jQuery('#bdrequest-details-1').click(() => showDetails(this));
-    // console.log("salut");
-    // jQuery('#bdrequest-details-1').click(function(e){
-    //   e.preventDefault();
-    //   console.log("bonjour");
-    // });
   })
 
   $(".details-col button").on('click', function () {
     var requestId = jQuery(this).closest('.user-container').data('id');
     showDetails(requestId);
   });
-  
+
+  jQuery(document).on('click', '#accept_request_icon',  function(){
+    var requestId = jQuery(this).closest('.user-container').data('id');
+    updateRequest(requestId, 'accept', false)
+  });
+
+  jQuery(document).on('click', '#reject_request_icon',  function(){
+    var requestId = jQuery(this).closest('.user-container').data('id');
+    updateRequest(requestId, 'reject', false)
+  });
+
+  $('#request_popin #accept_request').on('click', function () {
+    var requestId = jQuery('#request_popin').data('id');
+    updateRequest(requestId, 'accept', false)
+  });
+
+  $('#request_popin #reject_request').on('click', function () {
+    var requestId = jQuery('#request_popin').data('id');
+    updateRequest(requestId, 'reject', false)
+  });
+
 });
 
 function showDetails(requestId) {
-  
+  jQuery('#request_popin').data('id', requestId);
   jQuery('#request_popin #popin_details_firstname p').text(jQuery('#request'+requestId).data('first_name'));
   jQuery('#request_popin #popin_details_lastname p').text(jQuery('#request'+requestId).data('last_name'));
   jQuery('#request_popin #popin_details_email p').text(jQuery('#request'+requestId).data('email'));
@@ -102,29 +112,7 @@ function showDetails(requestId) {
     jQuery('#request_popin #popin_details_accepted_status p').text(jQuery('#request'+requestId).data('status_change_date'));
   }
 
-
-  // (request.request_status == "pending"?
-  // jQuery('#request_popin #change_request_status').css("display", "block"):
-  // jQuery('#request_popin #change_request_status').css("display", "none")
-  // )
-  // (request.request_status == "reject"?
-  //   jQuery('#request_popin #popin_details_rejected_status p').text(request.status_change_date):
-  //   jQuery('#request_popin #popin_details_rejected_status p').css("display", "none")
-  // )
-  // (request.request_status == "accept"?
-  //   jQuery('#request_popin #popin_details_accepted_status p').text(request.status_change_date):
-  //   jQuery('#request_popin #popin_details_accepted_status p').css("display", "none")
-  // )
-
   jQuery('#request_popin').show();
-
-
-  jQuery('#request_popin #accept_request').click(() => updateRequest(jQuery('#request'+requestId).data('id'), 'accept', true));
-  jQuery('#request_popin #reject_request').click(() => updateRequest(jQuery('#request'+requestId).data('id'), 'reject', true));
-
-  // jQuery('#accept_request').click(() => hideDetails());
-
-  // jQuery('#reject_request').click(() => hideDetails());
 }
 
 function hideDetails() {
@@ -180,6 +168,9 @@ function updateRequest(requestId, status, popin) {
       jQuery('#request_popin .wait-for-server').hide();
       jQuery(' #request_popin #popin_details_request_pending_status').hide();
       jQuery('#request_popin #change_request_status').hide();
+      jQuery('#request'+requestId)
+        .data("request_status", status)
+        .data("status_change_date", page_infos_for_update.status_change_date);
 
       if(status == 'accept'){
         jQuery('#request'+requestId+' #status-col-accepted').show();
@@ -192,13 +183,11 @@ function updateRequest(requestId, status, popin) {
         jQuery('#request_popin #popin_details_rejected_status').show(); 
         jQuery('#request_popin #popin_details_rejected_status p').text(jQuery('#request'+requestId).data('status_change_date'));
       }
-      console.log(data);
-
+      // console.log(data);
     },
     error: function (e) {
         console.log('error');
     }
   });
-
 
 }
