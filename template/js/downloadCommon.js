@@ -1,13 +1,15 @@
-const jconfirmConfig = {
+const jconfirmConfigBdwn = {
   useBootstrap: false,
   theme: 'modern',
   backgroundDismiss: true,
   smoothContent: true,
-  type: getDarkOrLigthTheme(),
+  type: getDarkOrLigthThemeBdwn(),
 }
 
-// credit to https://awik.io/determine-color-bright-dark-using-javascript/
-function getDarkOrLigthTheme() {
+
+
+ // credit to https://awik.io/determine-color-bright-dark-using-javascript/
+function getDarkOrLigthThemeBdwn() {
   color = jQuery('body').css('background-color');
 
   var r, g, b, hsp;
