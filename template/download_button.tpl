@@ -65,6 +65,7 @@ var page_infos_for_request = {$PAGE_INFOS_FOR_REQUEST};
 
 {combine_script id='jquery.confirm' load='footer' require='jquery' path='themes/default/js/plugins/jquery-confirm.min.js'}
 {combine_css path="themes/default/js/plugins/jquery-confirm.min.css"}
+{combine_script id='jquery.ajaxmanager' path='themes/default/js/plugins/jquery.ajaxmanager.js' load='footer'}
 {combine_script id='thumbnails.loader' path='themes/default/js/thumbnails.loader.js' require='jquery.ajaxmanager' load='footer'}
 {combine_script id='bd_download_common' require='jquery' load='footer' path='plugins/batchDownloader/template/js/downloadCommon.js'}
 {combine_script id='bd_download_form' require='jquery' load='footer' path='plugins/batchDownloader/template/js/downloadForm.js'}
