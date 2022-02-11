@@ -38,10 +38,10 @@ var batchdown_string = "{'Confirm the download of %d pictures?'|translate}";
 var str_request_form = '{'Request permission to download'|translate|escape:javascript}';
 var str_save = '{'Save'|translate|escape:javascript}';
 var str_request = '{'Request'|translate|escape:javascript}';
-var str_cancel = '{'Cancel'|translate}';
-var str_download_request = '{'Batch download Request'|translate}';
-var str_download_request_sent = '{'Your download request has been sent'|translate}';
-var str_download_request_error = '{'There was an error sending your request, please try again'|translate}';
+var str_cancel = '{'Cancel'|translate|escape:javascript}';
+var str_download_request = '{'Download request'|translate|escape:javascript}';
+var str_download_request_sent = '{'Your download request has been sent'|translate|escape:javascript}';
+var str_download_request_error = '{'There was an error sending your request, please try again'|translate|escape:javascript}';
 
 {* Pass HTML form *}
 var bd_request_form = `{$BATCH_DWN_REQUEST}`;
@@ -67,8 +67,8 @@ var page_infos_for_request = {$PAGE_INFOS_FOR_REQUEST};
 {combine_css path="themes/default/js/plugins/jquery-confirm.min.css"}
 {combine_script id='jquery.ajaxmanager' path='themes/default/js/plugins/jquery.ajaxmanager.js' load='footer'}
 {combine_script id='thumbnails.loader' path='themes/default/js/thumbnails.loader.js' require='jquery.ajaxmanager' load='footer'}
-{combine_script id='bd_download_common' require='jquery' load='footer' path='plugins/batchDownloader/template/js/downloadCommon.js'}
-{combine_script id='bd_download_form' require='jquery' load='footer' path='plugins/batchDownloader/template/js/downloadForm.js'}
+{combine_script id='bd_download_common' require='jquery' load='footer' path='plugins/BatchDownloader/template/js/downloadCommon.js'}
+{combine_script id='bd_download_form' require='jquery' load='footer' path='plugins/BatchDownloader/template/js/downloadForm.js'}
 
 {html_style}
 .downloadSizeDetails { font-style:italic; font-size:80%; }

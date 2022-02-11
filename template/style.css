@@ -151,3 +151,22 @@ a.cancel-down {
 .jconfirm-type-uc-dark .uc_form a {
   color: white;
 }
+
+.jconfirm.jconfirm-white .jconfirm-box, .jconfirm.jconfirm-light .jconfirm-box{
+  max-width:500px;
+}
+
+#bdwn_accepted_request_block,
+#bdwn_set_changed_block{
+  padding:15px;
+}
+
+#bdwn_accepted_request_block{
+  background-color:green;
+  color:white;
+}
+
+#bdwn_set_changed_block{
+  background-color:yellow;
+  color:black;
+}

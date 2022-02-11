@@ -11,15 +11,16 @@ jQuery(document).ready(function () {
     createdOn.setHours(0,0,0,0);
     today.setHours(0,0,0,0)
 
-    var days_ago = (+today - +createdOn)/msInDay ;
-    if (days_ago == 0){
-      days_ago = "Today";
-    }else{
-      days_ago = (+today - +createdOn)/msInDay + (days_ago == 1?' day ago': ' days ago');
-    }
+    // var days_ago = (+today - +createdOn)/msInDay ;
+    // if (days_ago == 0){
+    //   days_ago = "Today";
+    // }else{
+    //   days_ago = (+today - +createdOn)/msInDay + (days_ago == 1?' day ago': ' days ago');
+    // }
 
     jQuery("#jango-fett").clone().removeAttr("id").attr("id","request"+this.id).appendTo(".table-body")
     console.log(this);
+    //Set request details in data element
     jQuery('#request'+this.id)
       .data("id", this.id)
       .data("first_name", this.first_name)
@@ -39,12 +40,13 @@ jQuery(document).ready(function () {
       .data("status_change_date", this.status_change_date)
     ;
 
+    //Fill request line with info
     jQuery('#request'+this.id+' span.number-col').text(this.id);
     jQuery('#request'+this.id+' span.first-name-col').text(this.first_name);
     jQuery('#request'+this.id+' span.last-name-col').text(this.last_name);
     jQuery('#request'+this.id+' span.email-col').text(this.email);
     jQuery("#request"+this.id+' span.set-col').text(this.type+' '+this.type_id);
-    jQuery("#request"+this.id+' .request-date-col').text(this.request_date+', ' + days_ago);
+    jQuery("#request"+this.id+' span.request-date-col').text(this.request_date);
     jQuery('#request'+this.id+' span.details-col button').attr('id','#bdrequest-details-'+this.id);
     (this.request_status == "pending"? jQuery('#request'+this.id+' #pending_options').css('display', 'block') : jQuery('#request'+this.id+' #pending_options').css('display', 'none'));
     (this.request_status == "pending"? jQuery('#request'+this.id+' #status-col-pending').css('display', 'block') : jQuery('#request'+this.id+' #status-col-pending').css('display', 'none'));
@@ -52,26 +54,31 @@ jQuery(document).ready(function () {
     (this.request_status == "reject"? jQuery('#request'+this.id+' #status-col-rejected').css('display', 'block') : jQuery('#request'+this.id+' #status-col-rejected').css('display', 'none'));
   })
 
+  //on click display popin
   $(".details-col button").on('click', function () {
     var requestId = jQuery(this).closest('.user-container').data('id');
     showDetails(requestId);
   });
 
+  //on click accept request on request line
   jQuery(document).on('click', '#accept_request_icon',  function(){
     var requestId = jQuery(this).closest('.user-container').data('id');
     updateRequest(requestId, 'accept', false)
   });
 
+  //on click reject request on request line
   jQuery(document).on('click', '#reject_request_icon',  function(){
     var requestId = jQuery(this).closest('.user-container').data('id');
     updateRequest(requestId, 'reject', false)
   });
 
+  //on click accept request in popin
   $('#request_popin #accept_request').on('click', function () {
     var requestId = jQuery('#request_popin').data('id');
     updateRequest(requestId, 'accept', false)
   });
 
+    //on click reject request in popin
   $('#request_popin #reject_request').on('click', function () {
     var requestId = jQuery('#request_popin').data('id');
     updateRequest(requestId, 'reject', false)
@@ -79,6 +86,7 @@ jQuery(document).ready(function () {
 
 });
 
+//display popin and fill with request detail
 function showDetails(requestId) {
   jQuery('#request_popin').data('id', requestId);
   jQuery('#request_popin #popin_details_firstname p').text(jQuery('#request'+requestId).data('first_name'));
@@ -86,6 +94,7 @@ function showDetails(requestId) {
   jQuery('#request_popin #popin_details_email p').text(jQuery('#request'+requestId).data('email'));
   jQuery('#request_popin #popin_details_organisation p').text(jQuery('#request'+requestId).data('organisation') ?? '');
   jQuery('#request_popin #popin_details_telephone p').text(jQuery('#request'+requestId).data('telephone') ?? '');
+  jQuery('#request_popin #popin_details_profession p').text(jQuery('#request'+requestId).data('profession') ?? '');
   jQuery('#request_popin #popin_details_reason p').text(jQuery('#request'+requestId).data('reason'));
   jQuery('#request_popin #popin_details_set p').text(jQuery('#request'+requestId).data('type') + ' ' + jQuery('#request'+requestId).data('type_id'));
   jQuery('#request_popin #popin_details_nbr_photos p').text(jQuery('#request'+requestId).data('nb_images'));

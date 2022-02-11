@@ -288,7 +288,7 @@ text-decoration: none;
 }
 
 
-[class^="icon-"]:before, [class*=" icon-"]:before{
+#bd-request-table-content [class^="icon-"]:before, #bd-request-table-content [class*=" icon-"]:before{
   margin-right:0!important;
 }
 .button-reject{
@@ -315,4 +315,10 @@ text-decoration: none;
 
 .unclickable {
   pointer-events: none;
+}
+
+#status-col-pending,
+#status-col-accepted,
+#status-col-rejected{
+  text-transform:capitalize;
 }

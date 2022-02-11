@@ -35,7 +35,7 @@ function batch_download_ws_add_methods($arr)
       'id' => array('type'=>WS_TYPE_ID),
       'status_change_date' => array(),
       'request_status' => array('default'=>'pending',
-                            'info'=>'pending,rejected,accepted'),
+                            'info'=>'pending,reject,accept'),
     ),
     'Create a new Download request.'
   );
@@ -91,7 +91,7 @@ function ws_downloadRequest_create($params, &$service)
     return new PwgError(WS_ERR_MISSING_PARAM, 'Email isn\'t the right format');
   }
 
-  //check iùage_size
+  //check image_size
   if (empty($params['image_size']))
   {
     return new PwgError(WS_ERR_MISSING_PARAM, 'Empty image size');
@@ -242,7 +242,7 @@ SELECT
           $request['image_size'] = 'xxl';
           break;
     }
-    $url = str_replace('&amp;', '&', add_url_params($url, array('action'=>'advdown_set', 'down_size'=>$request['image_size'])));
+    $url = str_replace('&amp;', '&', add_url_params($url, array('action'=>'advdown_set', 'down_size'=>$request['image_size'],'request'=>1)));
 
     //set accept message and add link to set
     $content .= l10n("accepted");

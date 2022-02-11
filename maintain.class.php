@@ -159,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `' . $this->table_image_sizes . '` (
       `status_change_date` datetime ,
       `image_size` enum(
         "square","thumb","2small","xsmall","small","medium","large","xlarge","xxlarge","original"
-        ) NOT NULL DEFAULT "Original",
+        ) NOT NULL DEFAULT "original",
       FOREIGN KEY(user_id) REFERENCES '.USERS_TABLE.'(id),
       PRIMARY KEY (`id`)
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8

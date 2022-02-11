@@ -208,8 +208,6 @@ function batch_download_index_button()
     )
   );
 
-  
-  //If user request has been accepted
   $query = '
   SELECT 
     id,
@@ -266,14 +264,47 @@ function batch_download_index_button()
   $template->add_index_button($button, 50);
   $template->concat('COLLECTION_ACTIONS', $button);
 
+  // $template->set_filename('request_message', 'request_message.tpl');
+  // if(isset( $_GET['request']) ){
+  //   $query = '
+  //   SELECT 
+  //     id,
+  //     type,
+  //     type_id,
+  //     user_id,
+  //     nb_images,
+  //     request_status,
+  //     image_size
+  //     FROM '.BATCH_DOWNLOAD_TREQUESTS.'
+  //     WHERE user_id ='.$user['id'].'
+  //       and type_id = "'.$set['id'].'"
+  //       and type = "'.$set['type'].'"
+  //       and image_size = "'. $_GET['down_size'].'"
+  //   ;';
+  //   $request = query2array($query);
+  //   $request = $request[0];
 
-  // echo('<pre>');print_r($template);echo('</pre>');
+  //   echo('<pre>');print_r($requests);echo('</pre>');
+  //   if('accept' == $request['request_status']){
+  //     $template->assign(
+  //       'LINK_TO_REQUEST', $_GET['request']
+  //     );
+  //   }
+  //   else{
+  //     $template->assign(
+  //       'LINK_TO_REQUEST', 0
+  //     );
+  //   }
 
-  // echo('<pre>');print_r($accepted_sizes);echo('</pre>');
+  // }
+  // $template->assign_var_from_handle('PLUGIN_INDEX_CONTENT_BEGIN', 'request_message');
+
+  // if(null != $template['PAGE_INFOS_FOR_REQUEST']){
+    
+    
   
-
+  // }
 }
-
 
 /* menu block */
 function batch_download_add_menublock($menu_ref_arr)

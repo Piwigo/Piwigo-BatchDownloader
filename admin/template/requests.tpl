@@ -21,12 +21,12 @@
         <span class="user-col set-col"></span>
         <span class="user-col request-date-col"></span>
         <span class="user-col status-col">
-          <span id="status-col-pending">{'Pending'|translate}</span>
+          <span id="status-col-pending">{'pending'|translate}</span>
           <span id="status-col-accepted" class="greenText">
-            <span id="">{'Accepted'|translate}</span>
+            <span id="">{'accepted'|translate}</span>
           </span>
           <span id="status-col-rejected" class="redText">
-            <span id="">{'Rejected'|translate}</span></span>
+            <span id="">{'rejected'|translate}</span></span>
           <div id="pending_options">
             <a id="accept_request_icon" class="button-accept">
               <i class="icon-ok"></i>
@@ -109,13 +109,13 @@
             </li>
             <li id="popin_details_request_pending_status">
               <label>{'Request status'|translate}</label>
-              <p>{'Pending'|translate}</p>
+              <p>{'pending'|translate}</p>
             </li>
           </ul>
         </div>
         <div id="change_request_status">
-          <button id="accept_request" class="button-accept" type="submit" value="accept"><i class="icon-ok "></i>Accept</button>
-          <button id="reject_request" type="submit" class="button-reject" value="reject"><i class="icon-cancel "></i>Reject</button>
+          <button id="accept_request" class="button-accept" type="submit" value="accept"><i class="icon-ok "></i>{'Accept'|translate}</button>
+          <button id="reject_request" type="submit" class="button-reject" value="reject"><i class="icon-cancel "></i>{'Reject'|translate}</button>
         </div>
         <div class="wait-for-server"><i class="icon-spin6 animate-spin"></i></div>
       </div>
@@ -129,6 +129,6 @@
 var page_infos_for_update = {$PAGE_INFOS_FOR_UPDATE};
 
 {combine_css path="admin/themes/default/fontello/css/animation.css" order=10} {* order 10 is required, see issue 1080 *}
-{combine_script id='bd_download_form' require='jquery' load='footer' path='plugins/batchDownloader/admin/template/js/requests.js'}
+{combine_script id='bd_download_form' require='jquery' load='footer' path='plugins/BatchDownloader/admin/template/js/requests.js'}
 
 {/footer_script}
