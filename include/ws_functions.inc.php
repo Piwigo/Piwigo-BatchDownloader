@@ -242,7 +242,7 @@ SELECT
           $request['image_size'] = 'xxl';
           break;
     }
-    $url = str_replace('&amp;', '&', add_url_params($url, array('action'=>'advdown_set', 'down_size'=>$request['image_size'],'request'=>1)));
+    $url = str_replace('&amp;', '&', add_url_params($url, array('action'=>'advdown_set', 'down_size'=>$request['image_size'])));
 
     //set accept message and add link to set
     $content .= l10n("accepted");
