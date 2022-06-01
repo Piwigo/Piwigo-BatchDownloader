@@ -19,13 +19,20 @@
 {combine_script id='core.switchbox' load='async' require='jquery' path='themes/default/js/switchbox.js'}
 
 <div id="batchDownloadBox" class="switchBox" style="display:none">
-  <div class="switchBoxTitle">{'Download'|translate} - {'Photo sizes'|translate}</div>
-  {foreach from=$BATCH_DWN_SIZES item=size name=loop}{if !$smarty.foreach.loop.first}<br>{/if}
-  <a href="{$BATCH_DWN_URL}{$size.TYPE}" rel="nofollow">
-    {$size.DISPLAY} {if isset($size.SIZE)}<span class="downloadSizeDetails">({$size.SIZE})</span>{/if}
-  </a>
-  {/foreach}
+{if !$BATCH_DWN_REQUEST && $HAS_PERMISSION_TO_DOWNLOAD && $BATCH_DWN_REQUEST_CONF}
+  <div id="batchDownloadAnotherRequest"><a href="#">Request to download another size </a></div>
+{/if}
+  <div class="batchDownloadSizeList">
+    <div class="switchBoxTitle">{'Download'|translate} - {'Photo sizes'|translate}</div>
+{foreach from=$BATCH_DWN_SIZES item=size name=loop}{if !$smarty.foreach.loop.first}<br>{/if}
+    <a href="{$BATCH_DWN_URL}{$size.TYPE}" rel="nofollow">
+      {$size.DISPLAY} {if isset($size.SIZE)}<span class="downloadSizeDetails">({$size.SIZE})</span>{/if}
+    </a>
+{/foreach}
+  </div>
+  
 </div>
+
 {/if}
 
 
@@ -52,7 +59,7 @@ var page_infos_for_request = {$PAGE_INFOS_FOR_REQUEST};
 {if isset($BATCH_DWN_SIZES)}
   (SwitchBox=window.SwitchBox||[]).push("#batchDownloadLink", "#batchDownloadBox");
 
-  jQuery("#batchDownloadBox a").click(function() {
+  jQuery("#batchDownloadBox .batchDownloadSizeList a").click(function() {
     return confirm(batchdown_string.replace('%d', batchdown_count));
   });
 {else}

@@ -143,38 +143,43 @@ function batch_download_index_button()
     'BATCH_DWN_URL' => $url,
   ));
 
-  if ($conf['batch_download']['multisize'] AND false == $conf['batch_download']['request_permission'])
+  if ($conf['batch_download']['multisize'])
   {
-    foreach (ImageStdParams::get_defined_type_map() as $params)
+
+    if ( false == $conf['batch_download']['request_permission'] or false == $conf['batch_download_configure_request_permission'])
     {
-      $template->append(
-        'BATCH_DWN_SIZES',
-        array(
-          'TYPE' => $params->type,
-          'DISPLAY' => l10n($params->type),
-          'SIZE' => $params->sizing->ideal_size[0].' x '.$params->sizing->ideal_size[1],
-          )
-        );
-        if ($params->type == $conf['batch_download']['photo_size']) break;
+      foreach (ImageStdParams::get_defined_type_map() as $params)
+      {
+        $template->append(
+          'BATCH_DWN_SIZES',
+          array(
+            'TYPE' => $params->type,
+            'DISPLAY' => l10n($params->type),
+            'SIZE' => $params->sizing->ideal_size[0].' x '.$params->sizing->ideal_size[1],
+            )
+          );
+          if ($params->type == $conf['batch_download']['photo_size']) break;
+      }
+      // if ($conf['batch_download']['photo_size'] == 'original')
+      // {
+      //   $template->append(
+      //     'BATCH_DWN_SIZES',
+      //     array(
+      //       'TYPE' => 'original',
+      //       'DISPLAY' => l10n('Original'),
+      //       'SIZE' => null,
+      //       )
+      //     );
+      // }
     }
-    if ($conf['batch_download']['photo_size'] == 'original')
+    else
     {
-      $template->append(
-        'BATCH_DWN_SIZES',
-        array(
-          'TYPE' => 'original',
-          'DISPLAY' => l10n('Original'),
-          'SIZE' => null,
-          )
-        );
+      $template->assign('BATCH_DWN_SIZE', $conf['batch_download']['photo_size']);
     }
-  }
-  else
-  {
-    $template->assign('BATCH_DWN_SIZE', $conf['batch_download']['photo_size']);
   }
 
-  $template->assign('BATCH_DWN_REQUEST_CONF', $conf['batch_download']['request_permission']);
+  $template->assign('BATCH_DWN_REQUEST', $conf['batch_download']['request_permission']);
+  $template->assign('BATCH_DWN_REQUEST_CONF', $conf['batch_download_configure_request_permission']);
 
   list($dbnow) = pwg_db_fetch_row(pwg_query('SELECT NOW();'));
 

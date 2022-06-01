@@ -4,6 +4,7 @@ jQuery(document).ready(function () {
   jQuery('#batch_dwn_request_size').append('');
 
   jQuery('#batchDownloadRequest').click(() => requestPopin())
+  jQuery('#batchDownloadAnotherRequest').click(() => requestPopin())
 
   function requestPopin(animation = true) {
     $.confirm({

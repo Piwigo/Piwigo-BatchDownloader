@@ -62,9 +62,9 @@ TABLE.table2 THEAD TD {
   margin-bottom:1em;
 }
 
-#request_permission_setting {
+/* #request_permission_setting {
   display: none;
-}
+} */
 
 /* sliders */
 body#theAdminPage .ui-slider-horizontal .ui-slider-handle {top: -.7em !important; width: 1.4em; height: 1.4em;}
