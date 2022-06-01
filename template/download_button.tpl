@@ -19,7 +19,7 @@
 {combine_script id='core.switchbox' load='async' require='jquery' path='themes/default/js/switchbox.js'}
 
 <div id="batchDownloadBox" class="switchBox" style="display:none">
-{if !$BATCH_DWN_REQUEST && $HAS_PERMISSION_TO_DOWNLOAD && $BATCH_DWN_REQUEST_CONF}
+{if !$BATCH_DWN_REQUEST || $HAS_PERMISSION_TO_DOWNLOAD && $BATCH_DWN_REQUEST_CONF}
   <div id="batchDownloadAnotherRequest"><a href="#">Request to download another size </a></div>
 {/if}
   <div class="batchDownloadSizeList">
