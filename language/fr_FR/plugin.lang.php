@@ -108,3 +108,4 @@ $lang['Download request'] = 'Demande de téléchargement';
 $lang['Set size'] = 'Taille du lot';
 $lang['Request status'] = 'Statut de la demande';
 $lang['Accept'] = 'Accepter';
+$lang['Request to download another size'] = 'Demander de télécharger un autre format';

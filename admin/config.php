@@ -5,6 +5,11 @@ if (isset($_POST['save_config']))
 {
   if (!defined('USER_COLLEC_PATH')) $_POST['what']['collections'] = 'on';
 
+  if (!conf_get_param('batch_download_configure_request_permission', false) and isset($_POST['request_permission']))
+  {
+    die('You are not allowed to do this.');
+  }
+
   $conf['batch_download'] = array(
     'groups'          => isset($_POST['groups']) ? $_POST['groups'] : array(),
     'level'           => $_POST['level'],

@@ -178,8 +178,8 @@ function batch_download_index_button()
     }
   }
 
-  $template->assign('BATCH_DWN_REQUEST', $conf['batch_download']['request_permission']);
-  $template->assign('BATCH_DWN_REQUEST_CONF', $conf['batch_download_configure_request_permission']);
+  $template->assign('BATCH_DWN_REQUEST_PARAM_CONFIG', $conf['batch_download_configure_request_permission']);
+  $template->assign('BATCH_DWN_REQUEST_PARAM', $conf['batch_download']['request_permission']);
 
   list($dbnow) = pwg_db_fetch_row(pwg_query('SELECT NOW();'));
 

@@ -1,5 +1,5 @@
 {combine_css path=$BATCH_DOWNLOAD_PATH|cat:"template/style.css"}
-{if !$HAS_PERMISSION_TO_DOWNLOAD && $BATCH_DWN_REQUEST_CONF}
+{if !$HAS_PERMISSION_TO_DOWNLOAD && $BATCH_DWN_REQUEST_PARAM && $BATCH_DWN_REQUEST_PARAM_CONFIG}
 <a id="batchDownloadRequest" title="{'Request permission to download all pictures of this selection'|translate}" class="pwg-state-default pwg-button nav-link " rel="nofollow">
   <span class="pwg-icon batch-downloader-icon fas fa-cloud-download-alt fa-fw" style="background:url('{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/images/zip.png') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">{'Request download'|translate}</span>
   {foreach from=$BATCH_DWN_SIZES_ACCEPETED item=size name=loop}{if !$smarty.foreach.loop.first}<br>{/if}
@@ -19,8 +19,8 @@
 {combine_script id='core.switchbox' load='async' require='jquery' path='themes/default/js/switchbox.js'}
 
 <div id="batchDownloadBox" class="switchBox" style="display:none">
-{if !$BATCH_DWN_REQUEST || $HAS_PERMISSION_TO_DOWNLOAD && $BATCH_DWN_REQUEST_CONF}
-  <div id="batchDownloadAnotherRequest"><a href="#">Request to download another size </a></div>
+{if $BATCH_DWN_REQUEST_PARAM }
+  <div id="batchDownloadAnotherRequest"><a href="#">{'Request to download another size'|translate}</a></div>
 {/if}
   <div class="batchDownloadSizeList">
     <div class="switchBoxTitle">{'Download'|translate} - {'Photo sizes'|translate}</div>

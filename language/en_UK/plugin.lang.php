@@ -107,3 +107,4 @@ $lang['There was an error sending your request, please try again'] = 'There was 
 $lang['Download request'] = 'Download request';
 $lang['Set size'] = 'Set size';
 $lang['Request status'] = 'Request status';
+$lang['Request to download another size'] = 'Request to download another size';
