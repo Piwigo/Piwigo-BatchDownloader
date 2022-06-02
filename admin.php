@@ -10,7 +10,7 @@ $page['tab'] = (isset($_GET['tab'])) ? $_GET['tab'] : 'sets';
 
 $tabsheet = new tabsheet();
 $tabsheet->add('sets', l10n('Download history'), BATCH_DOWNLOAD_ADMIN . '-sets');
-if (conf_get_param('batch_download_configure_request_permission', false))
+if ($conf['batch_download']['request_permission'])
 {
   $tabsheet->add('requests', l10n('Download requests'), BATCH_DOWNLOAD_ADMIN . '-requests');
 }
