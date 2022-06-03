@@ -1,5 +1,5 @@
 {combine_css path=$BATCH_DOWNLOAD_PATH|cat:"template/style.css"}
-{if !$HAS_PERMISSION_TO_DOWNLOAD && $BATCH_DWN_REQUEST_PARAM && $BATCH_DWN_REQUEST_PARAM_CONFIG}
+{if !$HAS_PERMISSION_TO_DOWNLOAD && $BATCH_DWN_REQUEST_PARAM }
 <a id="batchDownloadRequest" title="{'Request permission to download all pictures of this selection'|translate}" class="pwg-state-default pwg-button nav-link " rel="nofollow">
   <span class="pwg-icon batch-downloader-icon fas fa-cloud-download-alt fa-fw" style="background:url('{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/images/zip.png') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">{'Request download'|translate}</span>
   {foreach from=$BATCH_DWN_SIZES_ACCEPETED item=size name=loop}{if !$smarty.foreach.loop.first}<br>{/if}
