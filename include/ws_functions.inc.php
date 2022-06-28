@@ -120,7 +120,7 @@ function ws_downloadRequest_create($params, &$service)
     $params
   );
 
-  $request_info_email = "There is a new request to download a batch of photos.";
+  $request_info_email = l10n("There is a new request to download a batch of photos.");
   $request_info_email .= "\n";
   $request_info_email .= l10n('Here are the details of the request:');
   $request_info_email .= "\n";
@@ -217,13 +217,12 @@ SELECT
 
   $request = query2array($query);
   $request = $request[0];
-
-  $subject = 'Batch downloader, your request has been processed';
-  
+ 
   //Notify user once request staus changed
   $set_info = $request['type'].' '.$request['type_id'];
   
-  $content = l10n("Your download request for the set %s has been", $set_info)." ";
+  $subject = l10n("Your download request has been accepted");
+  $content =  l10n("Your download request for the set %s has been", $set_info)." ";
 
   if ("accept" == $request['request_status'])
   {
@@ -268,10 +267,15 @@ SELECT
     $content .= l10n("You can now download this set here :");
     $content .= l10n("\n");
     $content .= $url;
+    $content .= l10n("\n\n");
+    $content .= l10n("As a reminder, you agree to accept the general conditions of use and to respect the rights relating to intellectual property.");
   }
   else if ("reject" == $request['request_status'])
   {
-    $content .= l10n("rejected");
+    $subject = l10n("Your download request has been rejected");
+    $content .= l10n("rejected").'.';
+    $content .= l10n("\n");
+    $content .= l10n("Pour plus de détails ou d’informations, veuillez contacter l’administrateur.");
   }
 
   pwg_mail(
