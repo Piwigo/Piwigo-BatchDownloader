@@ -15,27 +15,6 @@
 </a>
 {/if}
 
-{if isset($BATCH_DWN_SIZES)}
-{combine_script id='core.switchbox' load='async' require='jquery' path='themes/default/js/switchbox.js'}
-
-<div id="batchDownloadBox" class="switchBox" style="display:none">
-{if $BATCH_DWN_REQUEST_PARAM }
-  <div id="batchDownloadAnotherRequest"><a href="#">{'Request to download another size'|translate}</a></div>
-{/if}
-  <div class="batchDownloadSizeList">
-    <div class="switchBoxTitle">{'Download'|translate} - {'Photo sizes'|translate}</div>
-{foreach from=$BATCH_DWN_SIZES item=size name=loop}{if !$smarty.foreach.loop.first}<br>{/if}
-    <a href="{$BATCH_DWN_URL}{$size.TYPE}" rel="nofollow">
-      {$size.DISPLAY} {if isset($size.SIZE)}<span class="downloadSizeDetails">({$size.SIZE})</span>{/if}
-    </a>
-{/foreach}
-  </div>
-  
-</div>
-
-{/if}
-
-
 {footer_script require='jquery'}
 
 var batchdown_count = {$BATCH_DWN_COUNT};
@@ -55,7 +34,9 @@ var str_download_request_error_details = '{'You did not fill in the required fie
 var bd_request_form = `{$BATCH_DWN_REQUEST}`;
 
 {*Get page infos*}
+{if isset($PAGE_INFOS_FOR_REQUEST)}
 var page_infos_for_request = {$PAGE_INFOS_FOR_REQUEST};
+{/if}
 
 {if isset($BATCH_DWN_SIZES)}
   (SwitchBox=window.SwitchBox||[]).push("#batchDownloadLink", "#batchDownloadBox");
