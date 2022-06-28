@@ -104,6 +104,7 @@ $lang['pending'] = 'en attente';
 $lang['You can now download this set here :'] = 'Vous pouvez maintenant télécharger cet ensemble ici:';
 $lang['Your download request has been sent'] = 'Votre demande de téléchargement a été envoyée. Un administrateur va traiter votre demande. Vous recevrez prochainement un e-mail afin de télécharger les photos.';
 $lang['There was an error sending your request, please try again'] = 'Une erreur s\'est produite lors de l\'envoi de votre demande, veuillez réessayer';
+$lang['You did not fill in the required fields correctly, please try again'] = 'Vous n\'avez pas bien remplis tout les champs obligatoires, veuillez réessayer';
 $lang['Download request'] = 'Demande de téléchargement';
 $lang['Set size'] = 'Taille du lot';
 $lang['Request status'] = 'Statut de la demande';

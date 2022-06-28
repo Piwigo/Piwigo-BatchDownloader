@@ -49,6 +49,7 @@ var str_cancel = '{'Cancel'|translate|escape:javascript}';
 var str_download_request = '{'Download request'|translate|escape:javascript}';
 var str_download_request_sent = '{'Your download request has been sent'|translate|escape:javascript}';
 var str_download_request_error = '{'There was an error sending your request, please try again'|translate|escape:javascript}';
+var str_download_request_error_details = '{'You did not fill in the required fields correctly, please try again'|translate|escape:javascript}';
 
 {* Pass HTML form *}
 var bd_request_form = `{$BATCH_DWN_REQUEST}`;

@@ -104,6 +104,7 @@ $lang['pending'] = 'pending';
 $lang['You can now download this set here :'] = 'You can now download this set here :';
 $lang['Your download request has been sent'] = 'Your download request has been sent. An administrator will process your request. You will soon receive an e-mail to download the photos.';
 $lang['There was an error sending your request, please try again'] = 'There was an error sending your request, please try again';
+$lang['You did not fill in the required fields correctly, please try again'] = 'You did not fill in the required fields correctly, please try again';
 $lang['Download request'] = 'Download request';
 $lang['Set size'] = 'Set size';
 $lang['Request status'] = 'Request status';

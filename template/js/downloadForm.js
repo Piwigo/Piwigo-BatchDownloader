@@ -63,13 +63,11 @@ jQuery(document).ready(function () {
                 
             }
             else {
-                console.log("this error")
-                console.log(data);
-                jQuery.alert(str_download_request_error);
+                console.log(data.message);
+                jQuery.alert(str_download_request_error_details);
             }
         },
         error: function (e) {
-            console.log("Another error");
             console.log(e);
             jQuery.alert(str_download_request_error);
         }
