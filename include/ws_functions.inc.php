@@ -275,14 +275,21 @@ SELECT
       WHERE ui.user_id = '.$request['user_id'].'
     ;';
 
-    $user = query2array($query);
-    $user = $user[0];
+    $requesting_user = query2array($query);
+    $requesting_user = $requesting_user[0];
 
-    $authkey = create_user_auth_key($user['user_id'], 'normal');
+    $url_parameters = array(
+      'action'=>'advdown_set',
+      'down_size'=>$request['image_size'],
+    );
+
+    $authkey = create_user_auth_key($requesting_user['user_id'], $requesting_user['status']);
+
+    isset($authkey)? $url_parameters['auth'] = $authkey['auth_key'] : '';
+    echo('<pre>'); print_r($url_parameters);echo('</pre>');
 
     $url = get_absolute_root_url().'index.php?/'.$request['type'].'/'.$request['type_id'];
-    $url = str_replace('&amp;', '&', add_url_params($url, array('action'=>'advdown_set', 'down_size'=>$request['image_size'],'auth' => $authkey['auth_key'] )));
-
+    $url = str_replace('&amp;', '&', add_url_params($url, $url_parameters));
 
     //set accept message and add link to set
     $content .= l10n("accepted");
@@ -298,7 +305,7 @@ SELECT
     $subject = l10n("Your download request has been rejected");
     $content .= l10n("rejected").'.';
     $content .= l10n("\n");
-    $content .= l10n("Pour plus de détails ou d’informations, veuillez contacter l’administrateur.");
+    $content .= l10n("For more details or information, please contact the administrator.");
   }
 
   pwg_mail(
