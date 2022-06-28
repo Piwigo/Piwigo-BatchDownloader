@@ -193,6 +193,10 @@ function ws_downloadRequest_create($params, &$service)
  */
 
  function ws_downloadRequest_update($params, &$service){
+  global $conf; 
+
+  include_once(PHPWG_ROOT_PATH.'include/functions_user.inc.php');
+
   single_update(
     BATCH_DOWNLOAD_TREQUESTS,
     $params,
@@ -226,7 +230,6 @@ SELECT
 
   if ("accept" == $request['request_status'])
   {
-    $url = get_absolute_root_url().'index.php?/'.$request['type'].'/'.$request['type_id'];
     switch($request['image_size']){
         case 'Original':
           $request['image_size'] = 'original';
@@ -259,7 +262,27 @@ SELECT
           $request['image_size'] = 'xxl';
           break;
     }
-    $url = str_replace('&amp;', '&', add_url_params($url, array('action'=>'advdown_set', 'down_size'=>$request['image_size'])));
+
+    $query = '
+    SELECT
+        ui.user_id,
+        ui.status,
+        ui.language,
+        u.'.$conf['user_fields']['email'].' AS email,
+        u.'.$conf['user_fields']['username'].' AS username
+      FROM '.USER_INFOS_TABLE.' AS ui
+        JOIN '.USERS_TABLE.' AS u ON u.'.$conf['user_fields']['id'].' = ui.user_id
+      WHERE ui.user_id = '.$request['user_id'].'
+    ;';
+
+    $user = query2array($query);
+    $user = $user[0];
+
+    $authkey = create_user_auth_key($user['user_id'], 'normal');
+
+    $url = get_absolute_root_url().'index.php?/'.$request['type'].'/'.$request['type_id'];
+    $url = str_replace('&amp;', '&', add_url_params($url, array('action'=>'advdown_set', 'down_size'=>$request['image_size'],'auth' => $authkey['auth_key'] )));
+
 
     //set accept message and add link to set
     $content .= l10n("accepted");
