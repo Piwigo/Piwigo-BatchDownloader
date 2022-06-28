@@ -160,17 +160,6 @@ function batch_download_index_button()
           );
           if ($params->type == $conf['batch_download']['photo_size']) break;
       }
-      // if ($conf['batch_download']['photo_size'] == 'original')
-      // {
-      //   $template->append(
-      //     'BATCH_DWN_SIZES',
-      //     array(
-      //       'TYPE' => 'original',
-      //       'DISPLAY' => l10n('Original'),
-      //       'SIZE' => null,
-      //       )
-      //     );
-      // }
     }
     else
     {
@@ -182,18 +171,22 @@ function batch_download_index_button()
 
   list($dbnow) = pwg_db_fetch_row(pwg_query('SELECT NOW();'));
 
-  $template->assign(
-    'PAGE_INFOS_FOR_REQUEST',
-    json_encode( 
-      array(
-        'type' =>  $set['type'],
-        'type_id' => $set['id'],
-        'user_id' =>$user['id'],
-        'nb_images' => count($set['items']),
-        'request_date' => $dbnow,
+  if (null != $set)
+  {
+    $template->assign(
+      'PAGE_INFOS_FOR_REQUEST',
+      json_encode( 
+        array(
+          'type' =>  $set['type'],
+          'type_id' => $set['id'],
+          'user_id' =>$user['id'],
+          'nb_images' => count($set['items']),
+          'request_date' => $dbnow,
+        )
       )
-    )
-  );
+    );
+  }
+  
 
   $template->set_template_dir(realpath(BATCH_DOWNLOAD_PATH.'template/'));
   $template->assign(
@@ -212,53 +205,6 @@ function batch_download_index_button()
     )
   );
 
-  $query = '
-  SELECT 
-    id,
-    type,
-    type_id,
-    user_id,
-    nb_images,
-    request_status,
-    image_size
-    FROM '.BATCH_DOWNLOAD_TREQUESTS.'
-    WHERE user_id ='.$user['id'].'
-      and type_id = "'.$set['id'].'"
-      and type = "'.$set['type'].'"
-    ORDER BY id DESC
-  ;';
-
-  $requests = query2array($query);
-
-  $accepted_sizes = [];
-  $has_permission_to_download = false;
-
-  foreach($requests as $request){
-    if("accept" == $request['request_status'])
-    {
-      array_push($accepted_sizes,$request['image_size']);
-      $has_permission_to_download = true;
-    }
-  }
-
-  $template->assign(
-    'HAS_PERMISSION_TO_DOWNLOAD', $has_permission_to_download
-  );
-
-  $accepted_sizes = array_unique($accepted_sizes);
-
-  foreach ($accepted_sizes as $accepted_size)
-  {
-    $template->append(
-      'BATCH_DWN_SIZES',
-        array(
-          'TYPE' => $accepted_size,
-          'DISPLAY' => l10n($accepted_size),
-          'SIZE' => null
-        )
-      
-    );
-  }
   
   $template->set_filename('batch_dwn_request_form', 'download_request_form.tpl');
   $template->assign_var_from_handle('BATCH_DWN_REQUEST', 'batch_dwn_request_form');
@@ -268,46 +214,7 @@ function batch_download_index_button()
   $template->add_index_button($button, 50);
   $template->concat('COLLECTION_ACTIONS', $button);
 
-  // $template->set_filename('request_message', 'request_message.tpl');
-  // if(isset( $_GET['request']) ){
-  //   $query = '
-  //   SELECT 
-  //     id,
-  //     type,
-  //     type_id,
-  //     user_id,
-  //     nb_images,
-  //     request_status,
-  //     image_size
-  //     FROM '.BATCH_DOWNLOAD_TREQUESTS.'
-  //     WHERE user_id ='.$user['id'].'
-  //       and type_id = "'.$set['id'].'"
-  //       and type = "'.$set['type'].'"
-  //       and image_size = "'. $_GET['down_size'].'"
-  //   ;';
-  //   $request = query2array($query);
-  //   $request = $request[0];
 
-  //   echo('<pre>');print_r($requests);echo('</pre>');
-  //   if('accept' == $request['request_status']){
-  //     $template->assign(
-  //       'LINK_TO_REQUEST', $_GET['request']
-  //     );
-  //   }
-  //   else{
-  //     $template->assign(
-  //       'LINK_TO_REQUEST', 0
-  //     );
-  //   }
-
-  // }
-  // $template->assign_var_from_handle('PLUGIN_INDEX_CONTENT_BEGIN', 'request_message');
-
-  // if(null != $template['PAGE_INFOS_FOR_REQUEST']){
-    
-    
-  
-  // }
 }
 
 /* menu block */
