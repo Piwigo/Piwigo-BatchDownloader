@@ -72,17 +72,35 @@ function ws_downloadRequest_create($params, &$service)
   {
     return new PwgError(WS_ERR_MISSING_PARAM, 'Empty last name');
   }
-  
+
+  //check last name
+  if (empty($params['organisation']))
+  {
+    return new PwgError(WS_ERR_MISSING_PARAM, 'Empty organisation');
+  }
+
   //check email
   if (empty($params['email']))
   {
-    return new PwgError(WS_ERR_MISSING_PARAM, 'Empty email name');
+    return new PwgError(WS_ERR_MISSING_PARAM, 'Empty email');
   }
   
+  //check telephone
+  if (empty($params['telephone']))
+  {
+    return new PwgError(WS_ERR_MISSING_PARAM, 'Empty telephone');
+  }
+
+  //check profession
+  if (empty($params['profession']))
+  {
+    return new PwgError(WS_ERR_MISSING_PARAM, 'Empty profession');
+  }
+   
   //check reason
   if (empty($params['reason']))
   {
-    return new PwgError(WS_ERR_MISSING_PARAM, 'Empty reason name');
+    return new PwgError(WS_ERR_MISSING_PARAM, 'Empty reason ');
   }
 
   // Check if email address is valid
