@@ -66,8 +66,8 @@ function get_set_info_from_page()
   }
 
   $set = array(
-    'type' => $batch_type,
-    'id' => $batch_id,
+    'type' => (isset($batch_type)) ? $batch_type : null,
+    'id' => (isset($batch_id)) ? $batch_id : null,
     'size' => !empty($_GET['down_size']) ? $_GET['down_size'] : 'original',
     'items' => $page['items'],
     );
