@@ -288,7 +288,14 @@ SELECT
     isset($authkey)? $url_parameters['auth'] = $authkey['auth_key'] : '';
     echo('<pre>'); print_r($url_parameters);echo('</pre>');
 
-    $url = get_absolute_root_url().'index.php?/'.$request['type'].'/'.$request['type_id'];
+    $url = get_absolute_root_url().'index.php?/'.$request['type'];
+
+    if ('collection' == $request['type'])
+    {
+      $url.='s/edit';
+    }
+
+    $url.='/'.$request['type_id'];
     $url = str_replace('&amp;', '&', add_url_params($url, $url_parameters));
 
     //set accept message and add link to set
