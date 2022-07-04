@@ -15,6 +15,19 @@
 </a>
 {/if}
 
+{if isset($BATCH_DWN_SIZES)}
+{combine_script id='core.switchbox' load='async' require='jquery' path='themes/default/js/switchbox.js'}
+
+<div id="batchDownloadBox" class="switchBox" style="display:none">
+  <div class="switchBoxTitle">{'Download'|translate} - {'Photo sizes'|translate}</div>
+  {foreach from=$BATCH_DWN_SIZES item=size name=loop}{if !$smarty.foreach.loop.first}<br>{/if}
+  <a href="{$BATCH_DWN_URL}{$size.TYPE}" rel="nofollow">
+    {$size.DISPLAY} {if $size.SIZE}<span class="downloadSizeDetails">({$size.SIZE})</span>{/if}
+  </a>
+  {/foreach}
+</div>
+{/if}
+
 {footer_script require='jquery'}
 
 var batchdown_count = {$BATCH_DWN_COUNT};

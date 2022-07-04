@@ -145,7 +145,6 @@ function batch_download_index_button()
 
   if ($conf['batch_download']['multisize'])
   {
-
     if ( false == $conf['batch_download']['request_permission'] or !conf_get_param('batch_download_configure_request_permission', false))
     {
       foreach (ImageStdParams::get_defined_type_map() as $params)
@@ -164,6 +163,17 @@ function batch_download_index_button()
     else
     {
       $template->assign('BATCH_DWN_SIZE', $conf['batch_download']['photo_size']);
+    }
+    if ($conf['batch_download']['photo_size'] == 'original')
+    {
+      $template->append(
+        'BATCH_DWN_SIZES',
+        array(
+          'TYPE' => 'original',
+          'DISPLAY' => l10n('Original'),
+          'SIZE' => null,
+          )
+        );
     }
   }
 
