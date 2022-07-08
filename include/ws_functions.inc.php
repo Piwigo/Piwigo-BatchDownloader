@@ -1,6 +1,7 @@
 <?php
 defined('BATCH_DOWNLOAD_PATH') or die('Hacking attempt!');
 include_once(PHPWG_ROOT_PATH.'include/functions_mail.inc.php');
+include_once(PHPWG_ROOT_PATH.'include/functions_url.inc.php');
 
 function batch_download_ws_add_methods($arr)
 {
@@ -278,26 +279,76 @@ SELECT
     $requesting_user = query2array($query);
     $requesting_user = $requesting_user[0];
 
+    $url = '';
+
+    if ('category' == $request['type'])
+    {
+      $query = '
+SELECT
+    id,
+    name,
+    permalink
+  FROM '.CATEGORIES_TABLE.' 
+  WHERE id = '.$request['type_id'].'
+;';
+
+      $requested_category = pwg_db_fetch_assoc(pwg_query($query));
+
+      $url .= make_index_url(
+        array(
+          'category' => array(
+            'id' => $request['type_id'],
+            'name' => $requested_category['name'],
+            'permalink' => $requested_category['permalink'],
+          )
+        )
+      );
+    }
+    else if ('tags' == $request['type'])
+    {
+      $query = '
+SELECT
+    id,
+    url_name
+  FROM '.TAGS_TABLE.' 
+  WHERE id = '.$request['type_id'].'
+;';
+
+      $requested_tag = pwg_db_fetch_assoc(pwg_query($query));
+
+      $url .= make_index_url(
+        array(
+          'tags' => array(
+            array(
+              'id' => $request['type_id'],
+              'url_name' => $requested_tag['url_name'],
+            )
+          )
+        )
+      );
+    } 
+    else 
+    {
+      $url = make_index_url().'index.php?/'.$request['type'];
+    }
+
+    if ('collection' == $request['type'])
+    {
+      $url .= 's/edit/'.$request['type_id'];
+    }
+
+    //Define url parameters for download link
     $url_parameters = array(
       'action'=>'advdown_set',
       'down_size'=>$request['image_size'],
     );
-
+    
+    //Add auth key for automatic connection execpt for admins
     $authkey = create_user_auth_key($requesting_user['user_id'], $requesting_user['status']);
-
     isset($authkey)? $url_parameters['auth'] = $authkey['auth_key'] : '';
-    echo('<pre>'); print_r($url_parameters);echo('</pre>');
 
-    $url = get_absolute_root_url().'index.php?/'.$request['type'];
-
-    if ('collection' == $request['type'])
-    {
-      $url.='s/edit';
-    }
-
-    $url.='/'.$request['type_id'];
     $url = str_replace('&amp;', '&', add_url_params($url, $url_parameters));
-
+  
     //set accept message and add link to set
     $content .= l10n("accepted");
     $content .= l10n("\n");
