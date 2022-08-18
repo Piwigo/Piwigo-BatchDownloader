@@ -91,7 +91,24 @@ SELECT
     '.implode("\n    AND ", $where_clauses).'
   ORDER BY '.$order_by.'
 ;';
+
 $sets = simple_hash_from_query($query, 'id', 'username');
+
+$query = '
+SELECT
+	 s.id AS set_id,
+	 r.id AS request_id
+  FROM '.BATCH_DOWNLOAD_TSETS.' AS s
+  LEFT JOIN '.BATCH_DOWNLOAD_TREQUESTS.' AS r
+    ON r.user_id = s.user_id
+    AND r.type = s.type
+    AND r.type_id = s.type_id
+    AND r.image_size = s.size
+    AND r.nb_images = s.nb_images
+	ORDER BY set_id ASC;
+;';
+
+$request_ids = query2array($query,'set_id', 'request_id');
 
 foreach ($sets as $set_id => $username)
 {
@@ -103,12 +120,12 @@ foreach ($sets as $set_id => $username)
       'USERNAME' => $username,
       'U_DELETE' => BATCH_DOWNLOAD_ADMIN . '-sets&amp;delete='.$set->getParam('id'),
       'U_CANCEL' => BATCH_DOWNLOAD_ADMIN . '-sets&amp;cancel='.$set->getParam('id'),
+      'REQUEST_ID' => $request_ids[$set_id],
     )
     ));
 
   unset($set);
 }
-
 
 // filter options
 $page['status_items'] = array(

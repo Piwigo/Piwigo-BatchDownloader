@@ -58,7 +58,9 @@
       <td class="archives">{'Number of archives'|translate}</td>
       <td class="size">{'Total size'|translate}</td>
       <td class="status">{'Status'|translate}</td>
+      <td class="request">{'Request number'|translate}</td>
       <td class="action">{'Actions'|translate}</td>
+
     </tr>
   </thead>
 
@@ -74,6 +76,11 @@
     <td>
       {$set.STATUS|translate}
       {if $set.STATUS == 'download'}<i style="font-size:0.8em;">({$set.LAST_ZIP}/{$set.NB_ARCHIVES})</i>{/if}
+    </td>
+    <td>
+    {if $set.REQUEST_ID}
+      <a href="#" class="set_request_info_popin" data-id="{$set.REQUEST_ID}">#{$set.REQUEST_ID}</a>
+    {/if}
     </td>
     <td style="padding-left:25px;">
       <a href="{$set.U_DELETE}" title="{'Delete this set'|translate}" onClick="return confirm('{'Are you sure?'|translate}');"><img src="{$themeconf.admin_icon_dir}/delete.png"></a>
@@ -93,3 +100,69 @@
   <p><label><input type="checkbox" name="delete_done" value="1"> {'Remove all finished downloads'|translate}</label>
   <input type="submit" value="{'Submit'|translate}"></p>
 </form>
+
+<div id="request_info_popin">
+  <div class="bd-request-details-popin">
+    <div class="details-popin-content">
+      <a class="icon-cancel CloseUserList" onclick="hideInfoPopin()"></a>
+      <div class="bd-detail-row">
+        <div class="bd-details-table">
+          <ul>
+            <li id="popin_details_firstname">
+              <label>{'First name'|translate}</label>
+              <p></p>
+            </li>
+            <li id="popin_details_lastname">
+              <label>{'Last name'|translate}</label>
+              <p></p>
+            </li>
+            <li id="popin_details_organisation">
+              <label>{'Organisation'|translate}</label>
+              <p></p>
+            </li>
+            <li id="popin_details_email">
+              <label>{'Email'|translate}</label>
+              <p></p>
+            </li>
+            <li id="popin_details_telephone">
+              <label>{'Telephone'|translate}</label>
+              <p></p>
+            </li>
+            <li id="popin_details_profession">
+              <label>{'Profession'|translate}</label>
+              <p></p>
+            </li>
+            <li id="popin_details_reason">
+              <label>{'Reason'|translate}</label>
+              <p></p>
+            </li>
+            <li id="popin_details_set">
+              <label>{'Set'|translate}</label>
+              <p></p>
+            </li>
+            <li id="popin_details_nbr_photos">
+              <label>{'Number of photos'|translate}</label>
+              <p></p>
+            </li>
+            <li id="popin_details_request_date">
+              <label>{'Request Date'|translate}</label>
+              <p></p>
+            </li>
+            <li id="popin_details_set_size">
+              <label>{'Set size'|translate}</label>
+              <p></p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{footer_script require='jquery'}
+
+
+{combine_script id='bd_download_form' require='jquery' load='footer' path='plugins/BatchDownloader/admin/template/js/sets.js'}
+
+{/footer_script}

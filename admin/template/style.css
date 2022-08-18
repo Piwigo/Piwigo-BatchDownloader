@@ -308,6 +308,7 @@ text-decoration: none;
 }
 
 #request_popin,
+#request_info_popin,
 #bd-request-table .table-body .user-container#jango-fett,
 .wait-for-server{
   display:none;
