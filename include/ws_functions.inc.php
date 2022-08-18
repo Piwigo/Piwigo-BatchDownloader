@@ -47,6 +47,15 @@ function batch_download_ws_add_methods($arr)
     array(),
     'Get a list of all requests'
   );
+
+  $service->addMethod(
+    'pwg.downloadRequest.getOne',
+    'ws_downloadRequest_getOne',
+    array(
+      'id' => array('type'=>WS_TYPE_ID)
+    ),
+    'Get one request'
+  );
 }
 
 /**
@@ -194,7 +203,7 @@ function ws_downloadRequest_create($params, &$service)
  */
 
  function ws_downloadRequest_update($params, &$service){
-  global $conf; 
+  global $conf, $conf_mail; 
 
   include_once(PHPWG_ROOT_PATH.'include/functions_user.inc.php');
 
@@ -224,7 +233,7 @@ SELECT
   $request = $request[0];
  
   //Notify user once request staus changed
-  $set_info = $request['type'].' '.$request['type_id'];
+  $set_info = l10n($request['type']).' '.$request['type_id'];
   
   $subject = l10n("Your download request has been accepted");
   $content =  l10n("Your download request for the set %s has been", $set_info)." ";
@@ -329,7 +338,8 @@ SELECT
     } 
     else 
     {
-      $url = make_index_url().'index.php?/'.$request['type'];
+      // $url = get_absolute_root_url().'index.php?/'.$request['type'];
+      $url = get_root_url().$request['type'];
     }
 
     if ('collection' == $request['type'])
@@ -357,13 +367,22 @@ SELECT
     $content .= $url;
     $content .= l10n("\n\n");
     $content .= l10n("As a reminder, you agree to accept the general conditions of use and to respect the rights relating to intellectual property.");
+    if (isset($conf['batch_download']['general_conditions_link'])){
+      $content .= l10n('Here is is link to our general conditions of use : %s', $conf['batch_download']['general_conditions_link']);
+    }
   }
   else if ("reject" == $request['request_status'])
   {
     $subject = l10n("Your download request has been rejected");
+    $subject = l10n("Your download request for the %s has been rejected" , $set_info);
     $content .= l10n("rejected").'.';
     $content .= l10n("\n");
-    $content .= l10n("For more details or information, please contact the administrator.");
+    if(!isset($conf_mail))
+    {
+      $conf_mail = get_mail_configuration();
+    }
+
+    $content .= l10n("For more details or information, please %scontact the administrator%s.", "<a href='mailto:".$conf_mail['email_webmaster']."'>", "</a>" );
   }
 
   pwg_mail(
@@ -371,6 +390,7 @@ SELECT
     array(
       'subject' => $subject,
       'content' => $content,
+      'content_format' => 'text/html',
     )
   );
  }
@@ -417,4 +437,35 @@ SELECT
   }
 
   return $requests;
+}
+
+ /**
+ * Get a request
+ */
+
+function ws_downloadRequest_getOne($params, &$service){
+  $query = '
+SELECT 
+  id,
+  type,
+  type_id,
+  user_id,
+  first_name,
+  last_name,
+  organisation,
+  email,
+  telephone,
+  profession,
+  reason,
+  nb_images,
+  request_date,
+  image_size
+  FROM '.BATCH_DOWNLOAD_TREQUESTS.'
+  WHERE id = '.$params['id'].'  
+;';
+
+  $request = pwg_db_fetch_row(pwg_query($query));
+  $request[12] = format_date($request[12]);
+
+  return $request;
 }
