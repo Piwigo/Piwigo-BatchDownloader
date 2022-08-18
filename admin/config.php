@@ -25,6 +25,7 @@ if (isset($_POST['save_config']))
     'direct'          => isset($_POST['direct']),
     'last_clean'      => $conf['batch_download']['last_clean'],
     'request_permission' => isset($_POST['request_permission']),
+    'general_conditions_link' => isset($_POST['general_conditions_link']) ? $_POST['general_conditions_link'] : null,
     );
 
   conf_update_param('batch_download', $conf['batch_download']);
@@ -59,6 +60,9 @@ $conf['batch_download']['max_size_value'] =     isset($conf['batch_download_max_
 
 //Request permission
 $template->assign( 'BATCH_DWN_REQUEST_CONF', conf_get_param('batch_download_configure_request_permission', false));
+
+//General conditions of use link
+$template->assign( 'batch_dwn_general_conditions_link', conf_get_param('batch_dwn_general_conditions_link', ''));
 
 $template->assign(array(
   'group_options' => $group_options,

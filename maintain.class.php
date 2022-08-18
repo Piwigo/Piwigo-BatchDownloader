@@ -22,6 +22,7 @@ class BatchDownloader_maintain extends PluginMaintain
     'force_pclzip'    => false,
     'direct'          => false,
     'request_permission' => false,
+    'general_conditions_link' => null,
     );
   
   function __construct($id)
@@ -78,6 +79,11 @@ class BatchDownloader_maintain extends PluginMaintain
       {
         $new_conf['request_permission'] = false;
       }
+      if (!isset($new_conf['general_conditions_link']))
+      {
+        $new_conf['general_conditions_link'] = '';
+      }
+
 
       conf_update_param('batch_download', $new_conf, true);
     }
