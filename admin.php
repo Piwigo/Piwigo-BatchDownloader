@@ -9,10 +9,10 @@ include_once(PHPWG_ROOT_PATH.'admin/include/tabsheet.class.php');
 $page['tab'] = (isset($_GET['tab'])) ? $_GET['tab'] : 'sets';
 
 $tabsheet = new tabsheet();
-$tabsheet->add('sets', l10n('Download history'), BATCH_DOWNLOAD_ADMIN . '-sets');
+$tabsheet->add('sets', l10n('History'), BATCH_DOWNLOAD_ADMIN . '-sets');
 if ($conf['batch_download']['request_permission'])
 {
-  $tabsheet->add('requests', l10n('Download requests'), BATCH_DOWNLOAD_ADMIN . '-requests');
+  $tabsheet->add('requests', l10n('Requests'), BATCH_DOWNLOAD_ADMIN . '-requests');
 }
 $tabsheet->add('config', l10n('Configuration'), BATCH_DOWNLOAD_ADMIN . '-config');
 $tabsheet->select($page['tab']);
