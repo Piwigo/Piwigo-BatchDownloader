@@ -9,7 +9,7 @@ function batch_download_ws_add_methods($arr)
   global $conf;
 
   $service->addMethod(
-    'pwg.downloadRequest.create',
+    'batch_download.downloadRequest.create',
     'ws_downloadRequest_create',
     array(
       'type' => array(),
@@ -30,7 +30,7 @@ function batch_download_ws_add_methods($arr)
   );
 
   $service->addMethod(
-    'pwg.downloadRequest.update',
+    'batch_download.downloadRequest.update',
     'ws_downloadRequest_update',
     array(
       'id' => array('type'=>WS_TYPE_ID),
@@ -42,15 +42,15 @@ function batch_download_ws_add_methods($arr)
   );
 
   $service->addMethod(
-    'pwg.downloadRequest.getList',
+    'batch_download.downloadRequest.getList',
     'ws_downloadRequest_getList',
     array(),
     'Get a list of all requests'
   );
 
   $service->addMethod(
-    'pwg.downloadRequest.getOne',
-    'ws_downloadRequest_getOne',
+    'batch_download.downloadRequest.getInfo',
+    'ws_downloadRequest_getInfo',
     array(
       'id' => array('type'=>WS_TYPE_ID)
     ),
@@ -443,7 +443,7 @@ SELECT
  * Get a request
  */
 
-function ws_downloadRequest_getOne($params, &$service){
+function ws_downloadRequest_getInfo($params, &$service){
   $query = '
 SELECT 
   id,
