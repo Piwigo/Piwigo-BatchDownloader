@@ -19,7 +19,7 @@ jQuery(document).ready(function () {
     // }
 
     jQuery("#jango-fett").clone().removeAttr("id").attr("id","request"+this.id).appendTo(".table-body")
-    console.log(this);
+    // console.log(this);
     //Set request details in data element
     jQuery('#request'+this.id)
       .data("id", this.id)
@@ -48,10 +48,24 @@ jQuery(document).ready(function () {
     jQuery("#request"+this.id+' span.set-col').text(this.type+' '+this.type_id);
     jQuery("#request"+this.id+' span.request-date-col').text(this.request_date);
     jQuery('#request'+this.id+' span.details-col button').attr('id','#bdrequest-details-'+this.id);
-    (this.request_status == "pending"? jQuery('#request'+this.id+' #pending_options').css('display', 'block') : jQuery('#request'+this.id+' #pending_options').css('display', 'none'));
+    if(activated_collection_request == false && this.type == "collection")
+    {
+      jQuery('#request'+this.id+' #pending_options').css('display', 'none');
+      jQuery('#request'+this.id+' #status-col-pending').html('<i class="icon-attention tiptip" title="plugin User Collections is no longer active"></i>')
+    }
+    else{
+      (this.request_status == "pending"? jQuery('#request'+this.id+' #pending_options').css('display', 'block') : jQuery('#request'+this.id+' #pending_options').css('display', 'none'));
+    }
     (this.request_status == "pending"? jQuery('#request'+this.id+' #status-col-pending').css('display', 'block') : jQuery('#request'+this.id+' #status-col-pending').css('display', 'none'));
     (this.request_status == "accept"? jQuery('#request'+this.id+' #status-col-accepted').css('display', 'block') : jQuery('#request'+this.id+' #status-col-accepted').css('display', 'none'));
     (this.request_status == "reject"? jQuery('#request'+this.id+' #status-col-rejected').css('display', 'block') : jQuery('#request'+this.id+' #status-col-rejected').css('display', 'none'));
+  
+    jQuery('.tiptip').tipTip({
+      delay: 0,
+      fadeIn: 200,
+      fadeOut: 200
+    });
+  
   })
 
   //on click display popin
@@ -106,8 +120,16 @@ function showDetails(requestId) {
   jQuery('#request_popin #popin_details_request_pending_status').hide();
   jQuery('#request_popin #change_request_status').hide()
   
-  if(jQuery('#request'+requestId).data('request_status') == 'pending'){
-    jQuery('#request_popin #popin_details_request_pending_status, #change_request_status').show()
+  if(activated_collection_request == false && jQuery('#request'+requestId).data('type') == "collection")
+  {
+    jQuery('#request_popin #popin_details_request_pending_status').show();
+    jQuery('#request_popin #popin_details_request_pending_status p').html('<i class="icon-attention tiptip" title="plugin User Collections is no longer active"></i>')
+    jQuery('#request_popin #change_request_status').hide()
+  }
+  else{
+    if(jQuery('#request'+requestId).data('request_status') == 'pending'){
+      jQuery('#request_popin #popin_details_request_pending_status, #change_request_status').show()
+    }
   }
 
   if(jQuery('#request'+requestId).data('request_status') == 'reject'){
@@ -120,6 +142,12 @@ function showDetails(requestId) {
     jQuery('#request_popin #popin_details_accepted_status').show();
     jQuery('#request_popin #popin_details_accepted_status p').text(jQuery('#request'+requestId).data('status_change_date'));
   }
+
+  jQuery('.tiptip').tipTip({
+    delay: 0,
+    fadeIn: 200,
+    fadeOut: 200
+  });
 
   jQuery('#request_popin').show();
 }
@@ -135,7 +163,7 @@ function getRequests() {
     type: 'GET',
     dataType: 'json',
     async: false,
-    url: 'ws.php?format=json&method=pwg.downloadRequest.getList',
+    url: 'ws.php?format=json&method=batch_download.downloadRequest.getList',
     data: { ajaxload: 'true' },
     success: function (data) {
         if (data.stat == 'ok') {
@@ -165,7 +193,7 @@ function updateRequest(requestId, status, popin) {
 
   jQuery.ajax({
     type: 'POST',
-    url: 'ws.php?format=json&method=pwg.downloadRequest.update',
+    url: 'ws.php?format=json&method=batch_download.downloadRequest.update',
     data: {
         id: requestId,
         status_change_date : page_infos_for_update.status_change_date,
@@ -198,5 +226,5 @@ function updateRequest(requestId, status, popin) {
         console.log('error');
     }
   });
-
+  
 }

@@ -335,16 +335,18 @@ SELECT
           )
         )
       );
-    } 
+    }
+    else if ('collection' == $request['type'])
+    {
+      if (defined('USER_COLLEC_PUBLIC'))
+      {
+        $url = USER_COLLEC_PUBLIC . 'edit/'.$request['type_id'];
+      }
+
+    }
     else 
     {
-      // $url = get_absolute_root_url().'index.php?/'.$request['type'];
       $url = get_root_url().$request['type'];
-    }
-
-    if ('collection' == $request['type'])
-    {
-      $url .= 's/edit/'.$request['type_id'];
     }
 
     //Define url parameters for download link
@@ -361,14 +363,14 @@ SELECT
   
     //set accept message and add link to set
     $content .= l10n("accepted");
-    $content .= l10n("\n");
-    $content .= l10n("You can now download this set here :");
-    $content .= l10n("\n");
-    $content .= $url;
-    $content .= l10n("\n\n");
-    $content .= l10n("As a reminder, you agree to accept the general conditions of use and to respect the rights relating to intellectual property.");
-    if (isset($conf['batch_download']['general_conditions_link'])){
-      $content .= l10n('Here is is link to our general conditions of use : %s', $conf['batch_download']['general_conditions_link']);
+    $content .= "<br><br>";
+    $content .= l10n('You can now <a href="%s">download this set</a>', $url);
+    if (!empty($conf['batch_download']['general_conditions_link']))
+    {
+      $content .= "<br><br>";
+      $content .= l10n("As a reminder, you agree to accept the general conditions of use and to respect the rights relating to intellectual property.");
+      $content .= " ";
+      $content .= l10n('Here is the link to <a href="%s">our general conditions of use</a>.', $conf['batch_download']['general_conditions_link']);
     }
   }
   else if ("reject" == $request['request_status'])

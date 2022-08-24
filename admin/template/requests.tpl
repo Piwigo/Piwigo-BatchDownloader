@@ -128,6 +128,8 @@
 {footer_script require='jquery'}
 var page_infos_for_update = {$PAGE_INFOS_FOR_UPDATE};
 
+var activated_collection_request = {$ACTIVATED_COLLECTION_REQUEST};
+
 {combine_css path="admin/themes/default/fontello/css/animation.css" order=10} {* order 10 is required, see issue 1080 *}
 {combine_script id='bd_download_form' require='jquery' load='footer' path='plugins/BatchDownloader/admin/template/js/requests.js'}
 

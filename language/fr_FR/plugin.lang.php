@@ -104,7 +104,7 @@ $lang['Your download request for the set %s has been'] = 'Votre demande de tél�
 $lang['accepted'] = 'acceptée';
 $lang['rejected'] = 'rejetée';
 $lang['pending'] = 'en attente';
-$lang['You can now download this set here :'] = 'Vous pouvez maintenant télécharger cet ensemble ici:';
+$lang['You can now <a href="%s">download this set</a>'] = 'Vous pouvez maintenant <a href="%s">télécharger cet ensemble ici</a>';
 $lang['Your download request has been sent'] = 'Votre demande de téléchargement a été envoyée. Un administrateur va traiter votre demande. Vous recevrez prochainement un e-mail afin de télécharger les photos.';
 $lang['There was an error sending your request, please try again'] = 'Une erreur s\'est produite lors de l\'envoi de votre demande, veuillez réessayer';
 $lang['You did not fill in the required fields correctly, please try again'] = 'Vous n\'avez pas bien rempli tous les champs obligatoires, veuillez réessayer';
@@ -120,4 +120,4 @@ $lang['For more details or information, please %scontact the administrator%s.'] 
 $lang['There is a new request to download a batch of photos.'] = 'Il y a une nouvelle demande de téléchargement d\'un lot de photos';
 $lang['Link to general conditions of use page'] = 'Lien vers la page des conditions générales d\'utilisation';
 $lang['This is used in the email sent when a users download request is accepted.'] = 'Ceci est utilisé dans l\'e-mail envoyé lorsqu\'une demande de téléchargement d\'un utilisateur est acceptée.';
-$lang['Here is is link to our general conditions of use : %s'] = 'Voici le lien vers nos conditions générales d\'utilisation: %s';
+$lang['Here is the link to <a href="%s">our general conditions of use</a>.'] = 'Voici le lien vers <a href="%s">nos conditions générales d\'utilisation</a>.';

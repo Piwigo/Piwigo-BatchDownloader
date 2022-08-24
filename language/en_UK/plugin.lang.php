@@ -104,7 +104,7 @@ $lang['Your download request for the set %s has been'] = 'Your download request 
 $lang['accepted'] = 'accepted';
 $lang['rejected'] = 'rejected';
 $lang['pending'] = 'pending';
-$lang['You can now download this set here :'] = 'You can now download this set here :';
+$lang['You can now <a href="%s">download this set</a>'] = 'You can now <a href="%s">download this set</a>';
 $lang['Your download request has been sent'] = 'Your download request has been sent. An administrator will process your request. You will soon receive an e-mail to download the photos.';
 $lang['There was an error sending your request, please try again'] = 'There was an error sending your request, please try again';
 $lang['You did not fill in the required fields correctly, please try again'] = 'You did not fill in the required fields correctly, please try again';
@@ -119,4 +119,4 @@ $lang['For more details or information, please %scontact the administrator%s.'] 
 $lang['There is a new request to download a batch of photos.'] = 'There is a new request to download a batch of photos.';
 $lang['Link to general conditions of use page'] = 'Link to general conditions of use page';
 $lang['This is used in the email sent when a users download request is accepted.'] = 'This is used in the email sent when a users download request is accepted.';
-$lang['Here is is link to our general conditions of use : %s'] = 'Here is is link to our general conditions of use : %s';
+$lang['Here is the link to <a href="%s">our general conditions of use</a>.'] = 'Here is the link to <a href="%s">our general conditions of use</a>.';
