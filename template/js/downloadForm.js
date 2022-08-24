@@ -35,7 +35,7 @@ jQuery(document).ready(function () {
       jQuery.ajax({
         type: 'POST',
         dataType: 'json',
-        url: 'ws.php?format=json&method=pwg.downloadRequest.create',
+        url: 'ws.php?format=json&method=batch_download.downloadRequest.create',
         data: {
             type: pageInfos.type,
             type_id :pageInfos.type_id,

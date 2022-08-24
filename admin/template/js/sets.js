@@ -35,7 +35,7 @@ function getOneRequest(requestId) {
     type: 'GET',
     dataType: 'json',
     async: false,
-    url: 'ws.php?format=json&method=pwg.downloadRequest.getOne',
+    url: 'ws.php?format=json&method=batch_download.downloadRequest.getInfo',
     data: {
       id: requestId,
       ajaxload: 'true',
