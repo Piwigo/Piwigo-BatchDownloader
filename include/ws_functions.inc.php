@@ -236,7 +236,6 @@ SELECT
   $set_info = l10n($request['type']).' '.$request['type_id'];
   
   $subject = l10n("Your download request has been accepted");
-  $content =  l10n("Your download request for the set %s has been", $set_info)." ";
 
   if ("accept" == $request['request_status'])
   {
@@ -362,7 +361,7 @@ SELECT
     $url = str_replace('&amp;', '&', add_url_params($url, $url_parameters));
   
     //set accept message and add link to set
-    $content .= l10n("accepted");
+    $content =  l10n("Your download request for the set %s has been accepted.", $set_info);
     $content .= "<br><br>";
     $content .= l10n('You can now <a href="%s">download this set</a>', $url);
     if (!empty($conf['batch_download']['general_conditions_link']))
@@ -376,7 +375,7 @@ SELECT
   else if ("reject" == $request['request_status'])
   {
     $subject = l10n("Your download request has been rejected");
-    $subject = l10n("Your download request for the %s has been rejected" , $set_info);
+    $subject = l10n("Your download request for the %s has been rejected." , $set_info);
     $content .= l10n("rejected").'.';
     $content .= l10n("\n");
     if(!isset($conf_mail))
