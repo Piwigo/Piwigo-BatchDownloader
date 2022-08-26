@@ -104,7 +104,7 @@ $lang['Your download request for the set %s has been accepted.'] = 'Your downloa
 $lang['accepted'] = 'accepted';
 $lang['rejected'] = 'rejected';
 $lang['pending'] = 'pending';
-$lang['You can now <a href="%s">download this set</a>'] = 'You can now <a href="%s">download this set</a>';
+$lang['You can now <a href="%s">download this set</a>.'] = 'You can now <a href="%s">download this set</a>.';
 $lang['Your download request has been sent'] = 'Your download request has been sent. An administrator will process your request. You will soon receive an e-mail to download the photos.';
 $lang['There was an error sending your request, please try again'] = 'There was an error sending your request, please try again';
 $lang['You did not fill in the required fields correctly, please try again'] = 'You did not fill in the required fields correctly, please try again';

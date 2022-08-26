@@ -363,7 +363,7 @@ SELECT
     //set accept message and add link to set
     $content =  l10n("Your download request for the set %s has been accepted.", $set_info);
     $content .= "<br><br>";
-    $content .= l10n('You can now <a href="%s">download this set</a>', $url);
+    $content .= l10n('You can now <a href="%s">download this set</a>.', $url);
     if (!empty($conf['batch_download']['general_conditions_link']))
     {
       $content .= "<br><br>";
