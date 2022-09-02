@@ -14,7 +14,7 @@
   </div>
   <div class="batch_dwn_input_group">
     <label for="telephone">{'Telephone number'|translate}<span>*</span></label>
-    <input type="tel" pattern="[0-9]{10}" name="telephone" id="telephone" size="60" required>
+    <input type="text" name="telephone" id="telephone" size="60" required>
   </div>
   <div class="batch_dwn_input_group">
     <label for="organisation">{'Organisation'|translate}<span>*</span></label>
