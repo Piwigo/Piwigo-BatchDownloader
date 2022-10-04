@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `' . $this->table_image_sizes . '` (
       `email` varchar(100) NOT NULL,
       `telephone` varchar(50),
       `profession` varchar(50),
-      `reason` varchar(255) NOT NULL,
+      `reason` TEXT NOT NULL,
       `nb_images` mediumint(8) NOT NULL DEFAULT 0,
       `request_date` datetime NOT NULL,
       `request_status` enum("pending","reject","accept") NOT NULL DEFAULT "pending",
@@ -172,9 +172,22 @@ CREATE TABLE IF NOT EXISTS `' . $this->table_image_sizes . '` (
     ;';
     pwg_query($query);
 
-    // update organisation, reason and profession column
-    pwg_query('ALTER TABLE `' . $this->table_download_requests . '` modify COLUMN organisation varchar(255), modify COLUMN profession varchar(255), modify COLUMN reason text;');
-  }
+    $query = 'DESC `'.$prefixeTable . 'download_requests' .'`;';
+    $result = pwg_query($query);
+
+    while ($row = pwg_db_fetch_row($result))
+    {
+      if ($row[0] == "reason"){
+        $column_reason_type = $row[1];
+      }
+    }
+
+    if ($column_reason_type != 'text')
+    {
+      // update organisation, reason and profession column
+      pwg_query('ALTER TABLE `' . $this->table_download_requests . '` modify COLUMN organisation varchar(255), modify COLUMN profession varchar(255), modify COLUMN reason text;');
+    }
+ }
 
   function update($old_version, $new_version, &$errors=array())
   {
