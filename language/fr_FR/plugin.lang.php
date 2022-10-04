@@ -121,3 +121,11 @@ $lang['There is a new request to download a batch of photos.'] = 'Il y a une nou
 $lang['Link to general conditions of use page'] = 'Lien vers la page des conditions générales d\'utilisation';
 $lang['This is used in the email sent when a users download request is accepted.'] = 'Ceci est utilisé dans l\'e-mail envoyé lorsqu\'une demande de téléchargement d\'un utilisateur est acceptée.';
 $lang['Here is the link to <a href="%s">our general conditions of use</a>.'] = 'Voici le lien vers <a href="%s">nos conditions générales d\'utilisation</a>.';
+$lang['Please fill out your First name'] = 'Veuillez remplir votre prénom';
+$lang['Please fill out your Last name'] = 'Please fill out your Last name';
+$lang['Please fill out your Organisation'] = 'Veuillez remplir votre nom de famille';
+$lang['Please fill out your email'] = 'Merci de remplir votre email';
+$lang['This isn\'t the correct format for an email'] = 'Ce n\'est pas le bon format pour un e-mail';
+$lang['Please fill out your telephone number'] = 'Please fill out your telephone number';
+$lang['Please fill out your profession'] = 'Merci de renseigner votre numéro de téléphone';
+$lang['Please give us a reason for your request'] = 'Merci de nous donner la raison de votre demande';

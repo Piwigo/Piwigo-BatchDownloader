@@ -120,3 +120,11 @@ $lang['There is a new request to download a batch of photos.'] = 'There is a new
 $lang['Link to general conditions of use page'] = 'Link to general conditions of use page';
 $lang['This is used in the email sent when a users download request is accepted.'] = 'This is used in the email sent when a users download request is accepted.';
 $lang['Here is the link to <a href="%s">our general conditions of use</a>.'] = 'Here is the link to <a href="%s">our general conditions of use</a>.';
+$lang['Please fill out your First name'] = 'Please fill out your First name';
+$lang['Please fill out your Last name'] = 'Please fill out your Last name';
+$lang['Please fill out your Organisation'] = 'Please fill out your Organisation';
+$lang['Please fill out your email'] = 'Please fill out your email';
+$lang['This isn\'t the correct format for an email'] = 'This isn\'t the correct format for an email';
+$lang['Please fill out your telephone number'] = 'Please fill out your telephone number';
+$lang['Please fill out your profession'] = 'Please fill out your profession';
+$lang['Please give us a reason for your request'] = 'Please give us a reason for your request';
