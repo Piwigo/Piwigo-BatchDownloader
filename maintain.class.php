@@ -171,6 +171,9 @@ CREATE TABLE IF NOT EXISTS `' . $this->table_image_sizes . '` (
     ) ENGINE=MyISAM DEFAULT CHARSET=utf8
     ;';
     pwg_query($query);
+
+    // update organisation, reason and profession column
+    pwg_query('ALTER TABLE `' . $this->table_download_requests . '` modify COLUMN organisation varchar(255), modify COLUMN profession varchar(255), modify COLUMN reason text;');
   }
 
   function update($old_version, $new_version, &$errors=array())
