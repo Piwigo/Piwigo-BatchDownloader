@@ -98,6 +98,18 @@ a.cancel-down {
   width: calc(100% - 15px);
 }
 
+.batch_dwn_form .error-block {
+  display:none;
+  padding: 5px 0px;
+}
+
+.batch_dwn_form .error-block p{
+  text-align: left;
+  color: #ff0000;
+  font-weight:700;
+
+}
+
 
 /* Jconfirm styling */
 

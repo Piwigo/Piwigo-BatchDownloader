@@ -1,7 +1,7 @@
 {combine_css path=$BATCH_DOWNLOAD_PATH|cat:"template/style.css"}
 {if !$HAS_PERMISSION_TO_DOWNLOAD && $BATCH_DWN_REQUEST_PARAM }
 <a id="batchDownloadRequest" title="{'Request permission to download all pictures of this selection'|translate}" class="pwg-state-default pwg-button nav-link " rel="nofollow">
-  <span class="pwg-icon batch-downloader-icon fas fa-cloud-download-alt fa-fw" style="background:url('{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/images/zip.png') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">{'Request download'|translate}</span>
+  <span class="pwg-icon batch-downloader-icon fas fa-cloud-download-alt fa-fw" style="background:url('{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/images/zip.png') center center no-repeat;">&nbsp;</span><span class="d-lg-none ml-2 pwg-button-text">{'Request download'|translate}</span>
   {foreach from=$BATCH_DWN_SIZES_ACCEPETED item=size name=loop}{if !$smarty.foreach.loop.first}<br>{/if}
   <a href="{$BATCH_DWN_URL}{$size.TYPE}" rel="nofollow">
     {$size.DISPLAY} {if $size.SIZE}<span class="downloadSizeDetails">({$size.SIZE})</span>{/if}
@@ -11,7 +11,7 @@
 
 {else}
 <a href="{$BATCH_DWN_URL}{$BATCH_DWN_SIZE}" id="batchDownloadLink" title="{'Download all pictures of this selection'|translate}" class="pwg-state-default pwg-button" rel="nofollow">
-  <span class="pwg-icon batch-downloader-icon fas fa-cloud-download-alt fa-fw" style="background:url('{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/images/zip.png') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">{'Download'|translate}</span>
+  <span class="pwg-icon batch-downloader-icon fas fa-cloud-download-alt fa-fw" style="background:url('{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/images/zip.png') center center no-repeat;">&nbsp;</span><span class="d-lg-none ml-2 pwg-button-text">{'Download'|translate}</span>
 </a>
 {/if}
 
@@ -42,6 +42,16 @@ var str_download_request = '{'Download request'|translate|escape:javascript}';
 var str_download_request_sent = '{'Your download request has been sent'|translate|escape:javascript}';
 var str_download_request_error = '{'There was an error sending your request, please try again'|translate|escape:javascript}';
 var str_download_request_error_details = '{'You did not fill in the required fields correctly, please try again'|translate|escape:javascript}';
+
+var str_download_request_error_firstname = '{'Please fill out your First name'|translate|escape:javascript}';
+var str_download_request_error_lastname = '{'Please fill out your Last name'|translate|escape:javascript}';
+var str_download_request_error_organisation = '{'Please fill out your Organisation'|translate|escape:javascript}';
+var str_download_request_error_email= '{'Please fill out your email'|translate|escape:javascript}';
+var str_download_request_error_email_format = '{'This isn\'t the correct format for an email'|translate|escape:javascript}';
+var str_download_request_error_telephone= '{'Please fill out your telephone number'|translate|escape:javascript}';
+var str_download_request_error_profession= '{'Please fill out your profession'|translate|escape:javascript}';
+var str_download_request_error_reason= '{'Please give us a reason for your request'|translate|escape:javascript}';
+
 
 {* Pass HTML form *}
 var bd_request_form = `{$BATCH_DWN_REQUEST}`;
