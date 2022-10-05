@@ -177,17 +177,17 @@ CREATE TABLE IF NOT EXISTS `' . $this->table_image_sizes . '` (
 
     while ($row = pwg_db_fetch_row($result))
     {
-      if ('reason' == $row[0] and 'TEXT' != $row[1])
+      if ('reason' == $row[0] and 'text' != strtolower($row[1]))
       {
         pwg_query('ALTER TABLE `' . $this->table_download_requests . '` modify COLUMN reason text;');
       }
 
-      if ('organisation' == $row[0] and 'VARCHAR(255)' != $row[1])
+      if ('organisation' == $row[0] and 'varchar(255)' != strtolower($row[1]))
       {
         pwg_query('ALTER TABLE `' . $this->table_download_requests . '` modify COLUMN organisation varchar(255);');
       }
 
-      if ('profession' == $row[0] and 'VARCHAR(255)' != $row[1])
+      if ('profession' == $row[0] and 'varchar(255)' != strtolower($row[1]))
       {
         pwg_query('ALTER TABLE `' . $this->table_download_requests . '` modify COLUMN profession varchar(255);');
       }
