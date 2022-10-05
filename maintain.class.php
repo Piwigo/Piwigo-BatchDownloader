@@ -154,10 +154,10 @@ CREATE TABLE IF NOT EXISTS `' . $this->table_image_sizes . '` (
       `user_id` int(64) NOT NULL,
       `first_name` varchar(50) NOT NULL,
       `last_name` varchar(50) NOT NULL,
-      `organisation` varchar(50),
+      `organisation` varchar(255),
       `email` varchar(100) NOT NULL,
       `telephone` varchar(50),
-      `profession` varchar(50),
+      `profession` varchar(255),
       `reason` TEXT NOT NULL,
       `nb_images` mediumint(8) NOT NULL DEFAULT 0,
       `request_date` datetime NOT NULL,
@@ -177,15 +177,20 @@ CREATE TABLE IF NOT EXISTS `' . $this->table_image_sizes . '` (
 
     while ($row = pwg_db_fetch_row($result))
     {
-      if ($row[0] == "reason"){
-        $column_reason_type = $row[1];
+      if ('reason' == $row[0] and 'TEXT' != $row[1])
+      {
+        pwg_query('ALTER TABLE `' . $this->table_download_requests . '` modify COLUMN reason text;');
       }
-    }
 
-    if ($column_reason_type != 'text')
-    {
-      // update organisation, reason and profession column
-      pwg_query('ALTER TABLE `' . $this->table_download_requests . '` modify COLUMN organisation varchar(255), modify COLUMN profession varchar(255), modify COLUMN reason text;');
+      if ('organisation' == $row[0] and 'VARCHAR(255)' != $row[1])
+      {
+        pwg_query('ALTER TABLE `' . $this->table_download_requests . '` modify COLUMN organisation varchar(255);');
+      }
+
+      if ('profession' == $row[0] and 'VARCHAR(255)' != $row[1])
+      {
+        pwg_query('ALTER TABLE `' . $this->table_download_requests . '` modify COLUMN profession varchar(255);');
+      }
     }
  }
 
