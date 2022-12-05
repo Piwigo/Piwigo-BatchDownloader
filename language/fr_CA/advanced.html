@@ -1,0 +1,27 @@
+<dt><span>$conf['batch_download_max_elements']</span></dt>
+<dd>Valeur maximale du paramètre <b>Nombre maximal de photos par lot </b>.<br>
+<i><span>1000</span> par défaut.</i></dd>
+
+<dt><span>$conf['batch_download_max_size']</span></dt>
+<dd>Valeur maximale du paramètre <b>Taille maximale de chaque archive</b>.<br>
+<i><span>500</span> par défaut.</i></dd>
+
+<dt><span>$conf['batch_download_additional_ext']</span></dt>
+<dd>Tableau contenant les extensions de fichier qui peuvent être téléchargés (sensible à la casse).<br>
+<i><span>$conf['picture_ext']</span> par défaut.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Format des noms de fichier dans l'archive.<br>
+Les champs disponibles sont <span>%id%, %filename%, %author%, %dimensions%</span>.<br>
+Les functions disponibles sont <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
+<i><span>%id%_%filename%_%dimensions%</span> par défaut.</i><br>
+<i>Exemple: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
+
+<dt><span>$conf['batch_download_use_representative_for_ext']</span></dt>
+<dd>Pour un fichier non image, comme un TIFF ou un PDF, et dans le cas d'une taille multiple (autre chose que la taille originale) l'utilisateur va-t-il télécharger l'original quand même ou bien la taille multiple correspondante de la prévisualisation (l'image représentante). Ce paramètre permet de choisir selon l'extension du fichier original.<br>
+<i><span>array('tif', 'TIF', 'tiff', 'TIFF')</span> par défaut.</i><br>
+<i>Exemple: <span>array('pdf', 'PDF', 'tif', 'TIF')</span></i></dd>
+
+<dt><span>$conf['batch_download_guest_allowed']</span></dt>
+<dd>Autoriser les visiteurs anonymes (non identifiés) à télécharger par lot.<br>
+<i><span>false</span> (faux) par défaut.</i></dd>
