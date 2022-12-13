@@ -33,32 +33,37 @@
 var batchdown_count = {$BATCH_DWN_COUNT};
 var batchdown_string = "{'Confirm the download of %d pictures?'|translate}";
 
-{* Language variable *}
-var str_request_form = '{'Request permission to download'|translate|escape:javascript}';
-var str_save = '{'Save'|translate|escape:javascript}';
-var str_request = '{'Request'|translate|escape:javascript}';
-var str_cancel = '{'Cancel'|translate|escape:javascript}';
-var str_download_request = '{'Download request'|translate|escape:javascript}';
-var str_download_request_sent = '{'Your download request has been sent'|translate|escape:javascript}';
-var str_download_request_error = '{'There was an error sending your request, please try again'|translate|escape:javascript}';
-var str_download_request_error_details = '{'You did not fill in the required fields correctly, please try again'|translate|escape:javascript}';
 
-var str_download_request_error_firstname = '{'Please fill out your First name'|translate|escape:javascript}';
-var str_download_request_error_lastname = '{'Please fill out your Last name'|translate|escape:javascript}';
-var str_download_request_error_organisation = '{'Please fill out your Organisation'|translate|escape:javascript}';
-var str_download_request_error_email= '{'Please fill out your email'|translate|escape:javascript}';
-var str_download_request_error_email_format = '{'This isn\'t the correct format for an email'|translate|escape:javascript}';
-var str_download_request_error_telephone= '{'Please fill out your telephone number'|translate|escape:javascript}';
-var str_download_request_error_profession= '{'Please fill out your profession'|translate|escape:javascript}';
-var str_download_request_error_reason= '{'Please give us a reason for your request'|translate|escape:javascript}';
+{if $BATCH_DWN_REQUEST_PARAM }
+
+  {* Language variable *}
+  var str_request_form = '{'Request permission to download'|translate|escape:javascript}';
+  var str_save = '{'Save'|translate|escape:javascript}';
+  var str_request = '{'Request'|translate|escape:javascript}';
+  var str_cancel = '{'Cancel'|translate|escape:javascript}';
+  var str_download_request = '{'Download request'|translate|escape:javascript}';
+  var str_download_request_sent = '{'Your download request has been sent'|translate|escape:javascript}';
+  var str_download_request_error = '{'There was an error sending your request, please try again'|translate|escape:javascript}';
+  var str_download_request_error_details = '{'You did not fill in the required fields correctly, please try again'|translate|escape:javascript}';
+
+  var str_download_request_error_firstname = '{'Please fill out your First name'|translate|escape:javascript}';
+  var str_download_request_error_lastname = '{'Please fill out your Last name'|translate|escape:javascript}';
+  var str_download_request_error_organisation = '{'Please fill out your Organisation'|translate|escape:javascript}';
+  var str_download_request_error_email= '{'Please fill out your email'|translate|escape:javascript}';
+  var str_download_request_error_email_format = '{'This isn\'t the correct format for an email'|translate|escape:javascript}';
+  var str_download_request_error_telephone= '{'Please fill out your telephone number'|translate|escape:javascript}';
+  var str_download_request_error_profession= '{'Please fill out your profession'|translate|escape:javascript}';
+  var str_download_request_error_reason= '{'Please give us a reason for your request'|translate|escape:javascript}';
 
 
-{* Pass HTML form *}
-var bd_request_form = `{$BATCH_DWN_REQUEST}`;
+  {* Pass HTML form *}
+  var bd_request_form = `{$BATCH_DWN_REQUEST}`;
 
-{*Get page infos*}
-{if isset($PAGE_INFOS_FOR_REQUEST)}
-var page_infos_for_request = {$PAGE_INFOS_FOR_REQUEST};
+  {*Get page infos*}
+  {if isset($PAGE_INFOS_FOR_REQUEST)}
+  var page_infos_for_request = {$PAGE_INFOS_FOR_REQUEST};
+  {/if}
+
 {/if}
 
 {if isset($BATCH_DWN_SIZES)}
@@ -78,9 +83,11 @@ var page_infos_for_request = {$PAGE_INFOS_FOR_REQUEST};
 {combine_script id='jquery.confirm' load='footer' require='jquery' path='themes/default/js/plugins/jquery-confirm.min.js'}
 {combine_css path="themes/default/js/plugins/jquery-confirm.min.css"}
 {combine_script id='jquery.ajaxmanager' path='themes/default/js/plugins/jquery.ajaxmanager.js' load='footer'}
-{combine_script id='thumbnails.loader' path='themes/default/js/thumbnails.loader.js' require='jquery.ajaxmanager' load='footer'}
+
+{if $BATCH_DWN_REQUEST_PARAM }
 {combine_script id='bd_download_common' require='jquery' load='footer' path='plugins/BatchDownloader/template/js/downloadCommon.js'}
 {combine_script id='bd_download_form' require='jquery' load='footer' path='plugins/BatchDownloader/template/js/downloadForm.js'}
+{/if}
 
 {html_style}
 .downloadSizeDetails { font-style:italic; font-size:80%; }
