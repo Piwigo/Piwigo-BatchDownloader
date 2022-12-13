@@ -87,3 +87,4 @@ $lang['Photo size'] = 'Dimensione foto';
 $lang['One size'] = 'Dimensione unica';
 $lang['Any size'] = 'Qualsiasi dimensione';
 $lang['%s plugin detected, albums will be downloadable according to permissions.'] = '%s plugin rilevato, album sarà scaricabile in base ai permessi.';
+$lang['%s lines printed, %s in total.'] = '%s righe stampate, %s totale';
