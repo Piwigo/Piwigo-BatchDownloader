@@ -192,6 +192,13 @@ CREATE TABLE IF NOT EXISTS `' . $this->table_image_sizes . '` (
         pwg_query('ALTER TABLE `' . $this->table_download_requests . '` modify COLUMN profession varchar(255);');
       }
     }
+
+    // add a "size" column to download_sets
+    $result = pwg_query('SHOW COLUMNS FROM `' . $this->table_download_requests . '` LIKE "image_ids";');
+    if (!pwg_db_num_rows($result))
+    {
+      pwg_query('ALTER TABLE `' . $this->table_download_requests . '` ADD `image_ids` text;');
+    }
  }
 
   function update($old_version, $new_version, &$errors=array())

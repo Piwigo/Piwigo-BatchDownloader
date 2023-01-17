@@ -13,7 +13,7 @@ function batch_download_ws_add_methods($arr)
     'ws_downloadRequest_create',
     array(
       'type' => array(),
-      'type_id' => array('type'=>WS_TYPE_INT|WS_TYPE_POSITIVE),
+      'type_id' => array(),
       'user_id' => array('type'=>WS_TYPE_ID),
       'first_name' => array(),
       'last_name' => array(),
@@ -25,6 +25,7 @@ function batch_download_ws_add_methods($arr)
       'request_date' => array(),
       'image_size' => array('default'=>'original',
                             'info'=>'square, thumbnail, xxs, xs, s, m, l, xl, xxl, original'),
+      'image_ids' => array(),
     ),
     'Create a new Download request.'
   );
@@ -352,6 +353,7 @@ SELECT
     $url_parameters = array(
       'action'=>'advdown_set',
       'down_size'=>$request['image_size'],
+      'request_id'=>$request['id'],
     );
     
     //Add auth key for automatic connection execpt for admins
@@ -396,11 +398,10 @@ SELECT
   );
  }
 
- /**
- * Get a list of requests
- */
-
-function ws_downloadRequest_getList($params, &$service){
+/**
+* Get a list of requests
+*/
+ function ws_downloadRequest_getList($params, &$service){
   $query = '
 SELECT 
   id,
@@ -440,10 +441,9 @@ SELECT
   return $requests;
 }
 
- /**
+/**
  * Get a request
- */
-
+ */ 
 function ws_downloadRequest_getInfo($params, &$service){
   $query = '
 SELECT 

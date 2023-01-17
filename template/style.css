@@ -93,9 +93,9 @@ a.cancel-down {
   background: none;
   padding: 5px;
   border-radius: 5px;
-  color: #111;
   width:100%;
   width: calc(100% - 15px);
+  color:unset;
 }
 
 .batch_dwn_form .error-block {
@@ -107,9 +107,7 @@ a.cancel-down {
   text-align: left;
   color: #ff0000;
   font-weight:700;
-
 }
-
 
 /* Jconfirm styling */
 
