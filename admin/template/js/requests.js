@@ -11,15 +11,7 @@ jQuery(document).ready(function () {
     createdOn.setHours(0,0,0,0);
     today.setHours(0,0,0,0)
 
-    // var days_ago = (+today - +createdOn)/msInDay ;
-    // if (days_ago == 0){
-    //   days_ago = "Today";
-    // }else{
-    //   days_ago = (+today - +createdOn)/msInDay + (days_ago == 1?' day ago': ' days ago');
-    // }
-
     jQuery("#jango-fett").clone().removeAttr("id").attr("id","request"+this.id).appendTo(".table-body")
-    // console.log(this);
     //Set request details in data element
     jQuery('#request'+this.id)
       .data("id", this.id)
