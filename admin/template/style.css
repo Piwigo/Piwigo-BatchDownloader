@@ -16,10 +16,13 @@ input[name='max_size'], input[name='max_elements'] {
 
 TABLE.table2{
   border:0px;
+  border-collapse:separate; 
+  border-spacing: 0 1em;
 }
 .table2 .throw {
   font-size:100%;
   line-height: 1em;
+  background-color:transparent;
 }
 TABLE.table2 THEAD TD {
   padding: 3px 5px !important;
@@ -93,84 +96,59 @@ body#theAdminPage .ui-slider-range.ui-widget-header.ui-corner-all {border: 1px s
 Download request
 *******/
 #bd-request-table {
-  margin-left: 30px;
   margin-top: 30px;
-  display: flex;
+  /* display: flex;
   flex-wrap: nowrap;
-  min-height: calc(100vh - 216px);
+  min-height: calc(100vh - 216px); */
   position: relative;
   font-family: "Open Sans", "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;
 }
 
-#bd-request-table-content {
-  max-width: 100%;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  margin-right: 30px;
+#bd-request-table-content{
+  width:97%;
+  border:0px;
+  border-collapse:separate; 
+  border-spacing: 0 1em;
 }
 
-#bd-request-table .table-head {
-  display: flex;
+#bd-request-table-content th,
+#bd-request-table-content td{
+  text-align:left;
+  padding:5px;
+}
+
+table .throw,
+#bd-request-table-content thead tr{
   text-align: left;
   font-size: 1.1em;
   font-weight: bold;
   margin-top: 20px;
   color: #9e9e9e;
-  padding-left:10px;
+  background-color:transparent!important;
+  box-shadow:none;
+
 }
 
-#bd-request-table .table-body .user-container{
-  display: flex;
-  width: 100%;
-  height: 50px;
-  font-weight: bold;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  transition: background-color 500ms linear;
+TABLE.table2 TD:first-child,
+#bd-request-table-content td:first-child{
+  border-top-left-radius:10px;
+  border-bottom-left-radius: 10px;
+}
+
+TABLE.table2 TD:last-child,
+#bd-request-table-content td:last-child{
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.row1,
+.row2,
+#bd-request-table-content tr{
   box-shadow: 0px 2px 2px #00000024;
   background-color: #F3F3F3;
-  padding-left:10px;
-}
-
-#bd-request-table .user-col {
-  text-align: left;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
-}
-
-#bd-request-table .user-header-col {
-  height: 30px;
-  flex-grow: 1;
-}
-#bd-request-table .number-col,
-#bd-request-table .details-col{
-  width:5%;
-}
-
-#bd-request-table .number-col{
-  margin-left:5px;
-}
-
-#bd-request-table .details-col{
-  position:relative;
-}
-
-#bd-request-table .first-name-col,
-#bd-request-table .last-name-col,
-#bd-request-table .email-col,
-#bd-request-table .set-col{
-  width:10%;
-}
-#bd-request-table .email-col,
-#bd-request-table .status-col{
-  width:15%;
-}
-
-#bd-request-table .request-date-col{
-  width:25%;
+  height: 50px;
+  margin-bottom: 10px;
+  border-radius: 10px;
 }
 
 .bd-request-details-popin{
@@ -233,10 +211,12 @@ Download request
 
 .redText{
   color:#ff5252;
+  font-weight:700;
 }
 
 .greenText{
   color:#6ece5e;
+  font-weight:700;
 }
 
 #change_request_status button{
@@ -277,7 +257,7 @@ text-decoration: none;
   border:none;
   color:#777;
   font-size:20px;
-  position:absolute;
+  /* position:absolute; */
   right:4px
 }
 
@@ -286,7 +266,6 @@ text-decoration: none;
   color:#ff7700;
   cursor: pointer;
 }
-
 
 #bd-request-table-content [class^="icon-"]:before, #bd-request-table-content [class*=" icon-"]:before{
   margin-right:0!important;
@@ -309,7 +288,7 @@ text-decoration: none;
 
 #request_popin,
 #request_info_popin,
-#bd-request-table .table-body .user-container#jango-fett,
+#bd-request-table .table-body #jango-fett,
 .wait-for-server{
   display:none;
 }
@@ -318,9 +297,9 @@ text-decoration: none;
   pointer-events: none;
 }
 
-#status-col-pending,
-#status-col-accepted,
-#status-col-rejected{
+.status-col-pending,
+.status-col-accepted,
+.status-col-rejected{
   text-transform:capitalize;
 }
 

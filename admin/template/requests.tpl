@@ -1,32 +1,34 @@
 {combine_css path=$BATCH_DOWNLOAD_PATH|cat:"admin/template/style.css"}
 <div id="bd-request-table">
-  <div id="bd-request-table-content">
-    <div class="table-head">
-        <span class="user-header-col number-col">#</span>
-        <span class="user-header-col first-name-col" >{'First name'|translate}</span>
-        <span class="user-header-col last-name-col ">{'Last name'|translate}</span>
-        <span class="user-header-col email-col">{'Email'|translate}</span>
-        <span class="user-header-col set-col">{'Set'|translate}</span>
-        <span class="user-header-col request-date-col">{'Request Date'|translate}</span>
-        <span class="user-header-col status-col">{'Status'|translate}</span>
-        <span class="user-header-col details-col"></span>
-    </div>
-    <div class="table-body">
+  <table id="bd-request-table-content">
+    <thead class="table-head">
+      <tr>
+        <th class="number-col">#</th>
+        <th class="first-name-col" >{'First name'|translate}</th>
+        <th class="last-name-col ">{'Last name'|translate}</th>
+        <th class="email-col">{'Email'|translate}</th>
+        <th class="set-col">{'Set'|translate}</th>
+        <th class="request-date-col">{'Request Date'|translate}</th>
+        <th class="status-col">{'Status'|translate}</th>
+        <th class="details-col">details</th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
 
-      <div class="user-container" id="jango-fett">
-        <span class="user-col number-col"></span>
-        <span class="user-col first-name-col"></span>
-        <span class="user-col last-name-col"></span>
-        <span class="user-col email-col"></span>
-        <span class="user-col set-col"></span>
-        <span class="user-col request-date-col"></span>
-        <span class="user-col status-col">
-          <span id="status-col-pending">{'pending'|translate}</span>
-          <span id="status-col-accepted" class="greenText">
-            <span id="">{'accepted'|translate}</span>
+      <tr class="" id="jango-fett">
+        <td class="number-col"></td>
+        <td class="first-name-col"></td>
+        <td class="last-name-col"></td>
+        <td class="email-col"></td>
+        <td class="set-col"></td>
+        <td class="request-date-col"></td>
+        <td class="status-col">
+          <span class="status-col-pending">{'pending'|translate}</span>
+          <span class="status-col-accepted" >
+            <span class="greenText">{'accepted'|translate}</span>
           </span>
-          <span id="status-col-rejected" class="redText">
-            <span id="">{'rejected'|translate}</span></span>
+          <span class="status-col-rejected">
+            <span class="redText">{'rejected'|translate}</span></span>
           <div id="pending_options">
             <a id="accept_request_icon" class="button-accept">
               <i class="icon-ok"></i>
@@ -36,16 +38,16 @@
             </a>
           </div>
           <div class="wait-for-server"><i class="icon-spin6 animate-spin"></i></div>
-        </span>
-        <span class="user-col details-col">
+        </td>
+        <td class="details-col">
           <button id="" >
             <i class="icon-info-circled-1"></i>
           </button>
-        </span>
-      </div>
+        </td>
+      </tr>
 
-    </div>
-  </div>
+    </tbody>
+  </table>
 </div>
 
 <div id="request_popin">
