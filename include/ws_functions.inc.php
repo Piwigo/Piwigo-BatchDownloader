@@ -435,6 +435,146 @@ SELECT
     $row['request_date'] = format_date($row['request_date']);
     $row['status_change_date'] = format_date($row['status_change_date']);
 
+    switch ($row['type'])
+    {
+      // calendar
+      case 'calendar':
+      {
+        $calendarName = str_replace("-", " ", $row['type_id']);
+        $row['NAME'] = l10n('Calendar').': <a href="'.make_index_url(array('section' => 'categories',)).'/'.$row['type_id'].'">'.$calendarName.'</a>';
+        $row['BASENAME'] = 'calendar-'.$row['type_id'];
+        break;
+      }
+      // category
+      case 'category':
+      {
+        $category = get_cat_info($row['type_id']);
+        if ($category == null)
+        {
+          $row['NAME'] = l10n('Album').': #'.$row['type_id'].' (deleted)';
+          $row['BASENAME'] = 'album'.$row['type_id'];
+        }
+        else
+        {
+          $row['NAME'] = l10n('Album').': '.get_cat_display_name($category['upper_names']);
+          $row['sNAME'] = l10n('Album').': '.trigger_change('render_category_name', $category['name']);
+          $row['COMMENT'] = trigger_change('render_category_description', $category['comment']);
+
+          if (!empty($category['permalink']))
+          {
+            $row['BASENAME'] = 'album-'.$category['permalink'];
+          }
+          else if ( ($name = str2url($category['name'])) != null )
+          {
+            $row['BASENAME'] = 'album-'.$name;
+          }
+          else
+          {
+            $row['BASENAME'] = 'album'.$row['type_id'];
+          }
+        }
+        break;
+      }
+      // flat
+      case 'flat':
+      {
+        $row['NAME'] = l10n('Whole gallery');
+        $row['BASENAME'] = 'all-gallery';
+        break;
+      }
+      // tags
+      case 'tags':
+      {
+        $tags = find_tags(explode(',', $row['type_id']));
+        $row['NAME'] = l10n('Tags').': ';
+        $row['BASENAME'] = 'tags';
+
+        $first = true;
+        foreach ($tags as $tag)
+        {
+          if ($first) $first = false;
+          else $row['NAME'].= ', ';
+          $row['NAME'].=
+            '<a href="' . make_index_url(array('tags'=>array($tag))) . '">'
+            .trigger_change('render_tag_name', $tag['name'])
+            .'</a>';
+          $row['BASENAME'].= '-'.$tag['url_name'];
+        }
+        break;
+      }
+      // search
+      case 'search':
+      {
+        
+        $row['NAME'] = '<a href="'.make_index_url(array('section'=>'search', 'search'=>$row['type_id'])).'">'.l10n('Search').'</a>';
+        $row['BASENAME'] = 'search'.$row['type_id'];
+        break;
+      }
+      // favorites
+      case 'favorites':
+      {
+        $row['NAME'] = '<a href="'.make_index_url(array('section'=>'favorites')).'">'.l10n('Your favorites').'</a>';
+        $row['BASENAME'] = 'favorites';
+        break;
+      }
+      // most_visited
+      case 'most_visited':
+      {
+        $row['NAME'] = '<a href="'.make_index_url(array('section'=>'most_visited')).'">'.l10n('Most visited').'</a>';
+        $row['BASENAME'] = 'most-visited';
+        break;
+      }
+      // best_rated
+      case 'best_rated':
+      {
+        $row['NAME'] = '<a href="'.make_index_url(array('section'=>'best_rated')).'">'.l10n('Best rated').'</a>';
+        $row['BASENAME'] = 'best-rated';
+        break;
+      }
+      // list
+      case 'list':
+      {
+        $row['NAME'] = l10n('Random');
+        $row['BASENAME'] = 'random';
+        break;
+      }
+      // recent_pics
+      case 'recent_pics':
+      {
+        $row['NAME'] = '<a href="'.make_index_url(array('section'=>'recent_pics')).'">'.l10n('Recent photos').'</a>';
+        $row['BASENAME'] = 'recent-pics';
+        break;
+      }
+      // collection
+      case 'collection':
+      {
+        try
+        {
+          if (!class_exists('UserCollection')) throw new Exception();
+          $UserCollection = new UserCollection($row['type_id']);
+          $name = str2url($UserCollection->getParam('name'));
+
+          $collectionURL = make_index_url(array('section' => 'collections')) . '/'. 'edit/'.$row['type_id'];
+          $row['NAME'] = l10n('Collection').': '.'<a href= "'.$collectionURL.'">'.$UserCollection->getParam('name').'</a>';
+
+          if ( $name != null)
+          {
+            $row['BASENAME'] = 'collection-'.$name;
+          }
+          else
+          {
+            $row['BASENAME'] = 'collection'.$row['type_id'];
+          }
+        }
+        catch (Exception $e)
+        {
+          $row['NAME'] = l10n('Collection').': #'.$row['type_id'].' (deleted)';
+          $row['BASENAME'] = 'collection'.$row['type_id'];
+        }
+        break;
+      }
+    }
+
     array_push($requests, $row);
   }
 
