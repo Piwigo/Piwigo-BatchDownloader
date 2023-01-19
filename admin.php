@@ -11,9 +11,19 @@ $page['tab'] = (isset($_GET['tab'])) ? $_GET['tab'] : 'sets';
 $tabsheet = new tabsheet();
 $tabsheet->add('sets', l10n('History'), BATCH_DOWNLOAD_ADMIN . '-sets');
 if ($conf['batch_download']['request_permission'])
-{
-  $tabsheet->add('requests', l10n('Requests'), BATCH_DOWNLOAD_ADMIN . '-requests');
+{ 
+  $query = '
+SELECT 
+    COUNT(*) as requests
+  FROM '.BATCH_DOWNLOAD_TREQUESTS.'
+    WHERE request_status = "pending"
+;';
+  
+  $result = query2array($query);
+  
+  $tabsheet->add('requests', l10n('Requests') .'<span class="badge-number">'.$result[0]['requests'].'</span>' , BATCH_DOWNLOAD_ADMIN . '-requests');
 }
+
 $tabsheet->add('config', l10n('Configuration'), BATCH_DOWNLOAD_ADMIN . '-config');
 $tabsheet->select($page['tab']);
 $tabsheet->assign();

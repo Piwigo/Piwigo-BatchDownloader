@@ -6,7 +6,6 @@ jQuery(document).ready(function () {
   jQuery(requests).each(function(){
     var today = new Date();
     var createdOn = new Date(this.request_date);
-    var msInDay = 24 * 60 * 60 * 1000;
 
     createdOn.setHours(0,0,0,0);
     today.setHours(0,0,0,0)

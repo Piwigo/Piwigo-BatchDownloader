@@ -323,3 +323,17 @@ text-decoration: none;
 #status-col-rejected{
   text-transform:capitalize;
 }
+
+.badge-number {
+  border-radius: 20px;
+  background-color: #777;
+  font-size: 16px;
+  margin-left: 0px;
+  font-weight: 700;
+  position: unset;
+  transform: unset;
+  text-align: center;
+  color: #ccc;
+  padding: 0px 7px!important;
+  margin-left:10px;
+}
