@@ -193,11 +193,18 @@ CREATE TABLE IF NOT EXISTS `' . $this->table_image_sizes . '` (
       }
     }
 
-    // add a "size" column to download_sets
+    // add a "image_ids" column to download_requests
     $result = pwg_query('SHOW COLUMNS FROM `' . $this->table_download_requests . '` LIKE "image_ids";');
     if (!pwg_db_num_rows($result))
     {
       pwg_query('ALTER TABLE `' . $this->table_download_requests . '` ADD `image_ids` text;');
+    }
+
+    // add a "updated_by" column to download_requests, know who accepted or rejected request
+    $result = pwg_query('SHOW COLUMNS FROM `' . $this->table_download_requests . '` LIKE "updated_by";');
+    if (!pwg_db_num_rows($result))
+    {
+      pwg_query('ALTER TABLE `' . $this->table_download_requests . '` ADD `updated_by` int(64) ;');
     }
  }
 
