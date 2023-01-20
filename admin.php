@@ -40,6 +40,7 @@ include(BATCH_DOWNLOAD_PATH . 'admin/' . $page['tab'] . '.php');
 $template->assign(array(
   'BATCH_DOWNLOAD_PATH' => BATCH_DOWNLOAD_PATH,
   'BATCH_DOWNLOAD_ADMIN' => BATCH_DOWNLOAD_ADMIN,
+  'ADMIN_PAGE_TITLE' => 'Batch Downloader',
   ));
 
 $template->assign_var_from_handle('ADMIN_CONTENT', 'batch_download');

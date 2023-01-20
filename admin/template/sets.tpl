@@ -1,9 +1,5 @@
 {combine_css path=$BATCH_DOWNLOAD_PATH|cat:"admin/template/style.css"}
 
-<div class="titrePage">
-	<h2>Batch Downloader</h2>
-</div>
-
 <form class="filter" method="post" name="filter" action="{$F_FILTER_ACTION}">
 <fieldset>
   <legend>{'Filter'|translate}</legend>

@@ -61,9 +61,6 @@ $('input[name="multisize"]').on('change', function() {
 {/footer_script}
 
 
-<div class="titrePage">
-	<h2>Batch Downloader</h2>
-</div>
 
 <form method="post" action="" class="properties">
 <fieldset>
