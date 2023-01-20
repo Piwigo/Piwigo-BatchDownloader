@@ -10,7 +10,7 @@
         <th class="set-col">{'Set'|translate}</th>
         <th class="request-date-col">{'Request Date'|translate}</th>
         <th class="status-col">{'Status'|translate}</th>
-        <th class="details-col">details</th>
+        <th class="details-col"></th>
       </tr>
     </thead>
     <tbody class="table-body">
@@ -105,9 +105,17 @@
               <label class="redText">{'Rejected date'|translate}</label>
               <p class="redText"></p>
             </li>
+            <li id="popin_details_rejected_by">
+              <label>{'Rejected by'|translate}</label>
+              <p></p>
+            </li>
             <li id="popin_details_accepted_status">
               <label class="greenText">{'Accepted date'|translate}</label>
               <p class="greenText"></p>
+            </li>
+            <li id="popin_details_accepted_by">
+              <label>{'Accepted by'|translate}</label>
+              <p></p>
             </li>
             <li id="popin_details_request_pending_status">
               <label>{'Request status'|translate}</label>

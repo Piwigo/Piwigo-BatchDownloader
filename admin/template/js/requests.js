@@ -28,6 +28,7 @@ jQuery(document).ready(function () {
       .data("telephone", this.telephone)
       .data("user_id", this.user_id)
       .data("status_change_date", this.status_change_date)
+      .data("updated_by_username", this.updated_by_username)
     ;
 
     //Fill request line with info
@@ -107,6 +108,8 @@ function showDetails(requestId) {
 
   jQuery('#request_popin #popin_details_rejected_status').hide();
   jQuery('#request_popin #popin_details_accepted_status').hide();
+  jQuery('#request_popin #popin_details_rejected_by').hide();
+  jQuery('#request_popin #popin_details_accepted_by').hide();
   jQuery('#request_popin #popin_details_request_pending_status').hide();
   jQuery('#request_popin #change_request_status').hide()
   
@@ -125,12 +128,15 @@ function showDetails(requestId) {
   if(jQuery('#request'+requestId).data('request_status') == 'reject'){
     jQuery('#request_popin #popin_details_rejected_status').show();
     jQuery('#request_popin #popin_details_rejected_status p').text(jQuery('#request'+requestId).data('status_change_date'));
-    
+    jQuery('#request_popin #popin_details_rejected_by').show();
+    jQuery('#request_popin #popin_details_rejected_by p').text(jQuery('#request'+requestId).data('updated_by_username'));
   }
 
   if(jQuery('#request'+requestId).data('request_status') == 'accept'){
     jQuery('#request_popin #popin_details_accepted_status').show();
     jQuery('#request_popin #popin_details_accepted_status p').text(jQuery('#request'+requestId).data('status_change_date'));
+    jQuery('#request_popin #popin_details_accepted_by').show();
+    jQuery('#request_popin #popin_details_accepted_by p').text(jQuery('#request'+requestId).data('updated_by_username'));
   }
 
   jQuery('.tiptip').tipTip({
@@ -189,6 +195,7 @@ function updateRequest(requestId, status, popin) {
         id: requestId,
         status_change_date : page_infos_for_update.status_change_date,
         request_status: status,
+        updated_by : page_infos_for_update.current_admin
     },
 
     success: function (data) {
@@ -204,12 +211,16 @@ function updateRequest(requestId, status, popin) {
         jQuery('#request'+requestId+' .status-col-accepted').show();
         jQuery('#request_popin #popin_details_accepted_status').show();
         jQuery('#request_popin #popin_details_accepted_status p').text(jQuery('#request'+requestId).data('status_change_date'));
+        jQuery('#request_popin #popin_details_accepted_by').show();
+        jQuery('#request_popin #popin_details_accepted_by p').text(page_infos_for_update.current_admin_name);
       }
       else if(status == 'reject')
       {
         jQuery('#request'+requestId+' .status-col-rejected').show()
         jQuery('#request_popin #popin_details_rejected_status').show(); 
         jQuery('#request_popin #popin_details_rejected_status p').text(jQuery('#request'+requestId).data('status_change_date'));
+        jQuery('#request_popin #popin_details_rejected_by').show();
+        jQuery('#request_popin #popin_details_rejected_by p').text(page_infos_for_update.current_admin_name);
       }
       // console.log(data);
     },
