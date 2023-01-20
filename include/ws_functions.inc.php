@@ -38,6 +38,7 @@ function batch_download_ws_add_methods($arr)
       'status_change_date' => array(),
       'request_status' => array('default'=>'pending',
                             'info'=>'pending,reject,accept'),
+      'updated_by' => array('type'=>WS_TYPE_ID),
     ),
     'Create a new Download request.'
   );
@@ -404,7 +405,7 @@ SELECT
  function ws_downloadRequest_getList($params, &$service){
   $query = '
 SELECT 
-  id,
+  r.id,
   type,
   type_id,
   user_id,
@@ -419,8 +420,11 @@ SELECT
   request_date,
   request_status, 
   status_change_date,
-  image_size
-  FROM '.BATCH_DOWNLOAD_TREQUESTS.'
+  image_size,
+  updated_by,
+  u.username as updated_by_username
+  FROM '.BATCH_DOWNLOAD_TREQUESTS.' as r
+  LEFT JOIN '.USERS_TABLE.' as u ON r.updated_by = u.id
   ORDER BY id DESC,
     request_date DESC
 ;';
