@@ -128,3 +128,5 @@ $lang['This isn\'t the correct format for an email'] = 'This isn\'t the correct 
 $lang['Please fill out your telephone number'] = 'Please fill out your telephone number';
 $lang['Please fill out your profession'] = 'Please fill out your profession';
 $lang['Please give us a reason for your request'] = 'Please give us a reason for your request';
+$lang['Accepted by'] = 'Accepted by';
+$lang['Rejected by'] = 'Rejected by';
