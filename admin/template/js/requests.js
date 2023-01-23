@@ -129,14 +129,18 @@ function showDetails(requestId) {
     jQuery('#request_popin #popin_details_rejected_status').show();
     jQuery('#request_popin #popin_details_rejected_status p').text(jQuery('#request'+requestId).data('status_change_date'));
     jQuery('#request_popin #popin_details_rejected_by').show();
-    jQuery('#request_popin #popin_details_rejected_by p').text(jQuery('#request'+requestId).data('updated_by_username'));
+    jQuery('#request_popin #popin_details_rejected_by p').text(
+      (jQuery('#request'+requestId).data('updated_by_username') ? jQuery('#request'+requestId).data('updated_by_username') : na_trad)
+    );
   }
 
   if(jQuery('#request'+requestId).data('request_status') == 'accept'){
     jQuery('#request_popin #popin_details_accepted_status').show();
     jQuery('#request_popin #popin_details_accepted_status p').text(jQuery('#request'+requestId).data('status_change_date'));
     jQuery('#request_popin #popin_details_accepted_by').show();
-    jQuery('#request_popin #popin_details_accepted_by p').text(jQuery('#request'+requestId).data('updated_by_username'));
+    jQuery('#request_popin #popin_details_accepted_by p').text(
+      (jQuery('#request'+requestId).data('updated_by_username') ? jQuery('#request'+requestId).data('updated_by_username') : na_trad)
+    );
   }
 
   jQuery('.tiptip').tipTip({

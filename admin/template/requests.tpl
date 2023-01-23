@@ -137,6 +137,7 @@
 
 {footer_script require='jquery'}
 var page_infos_for_update = {$PAGE_INFOS_FOR_UPDATE};
+var na_trad = '{"N/A"|translate|escape:javascript}';
 
 var activated_collection_request = {$ACTIVATED_COLLECTION_REQUEST};
 
