@@ -26,6 +26,7 @@ TABLE.table2{
 }
 TABLE.table2 THEAD TD {
   padding: 3px 5px !important;
+  text-align:left;
 }
 .table2 .action {
   width:70px;
@@ -115,6 +116,7 @@ Download request
 #bd-request-table-content td{
   text-align:left;
   padding:5px;
+  font-size:12px;
 }
 
 table .throw,
