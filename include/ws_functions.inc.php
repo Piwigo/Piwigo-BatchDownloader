@@ -291,63 +291,109 @@ SELECT
 
     $url = '';
 
-    if ('category' == $request['type'])
+    switch ($request['type'])
     {
-      $query = '
+      // calendar
+      case 'calendar':
+      {
+        break;
+      }
+      // category
+      case 'category':
+      {
+        $query = '
 SELECT
     id,
     name,
     permalink
   FROM '.CATEGORIES_TABLE.' 
-  WHERE id = '.$request['type_id'].'
+    WHERE id = '.$request['type_id'].'
 ;';
-
-      $requested_category = pwg_db_fetch_assoc(pwg_query($query));
-
-      $url .= make_index_url(
-        array(
-          'category' => array(
-            'id' => $request['type_id'],
-            'name' => $requested_category['name'],
-            'permalink' => $requested_category['permalink'],
+      
+        $requested_category = pwg_db_fetch_assoc(pwg_query($query));
+      
+        $url .= make_index_url(
+          array(
+            'category' => array(
+              'id' => $request['type_id'],
+              'name' => $requested_category['name'],
+              'permalink' => $requested_category['permalink'],
+            )
           )
-        )
-      );
-    }
-    else if ('tags' == $request['type'])
-    {
-      $query = '
+        );
+      }
+      // flat
+      case 'flat':
+      {
+        break;
+      }
+      // tags
+      case 'tags':
+      {
+        $query = '
 SELECT
     id,
     url_name
   FROM '.TAGS_TABLE.' 
   WHERE id = '.$request['type_id'].'
 ;';
-
-      $requested_tag = pwg_db_fetch_assoc(pwg_query($query));
-
-      $url .= make_index_url(
-        array(
-          'tags' => array(
-            array(
-              'id' => $request['type_id'],
-              'url_name' => $requested_tag['url_name'],
+  
+        $requested_tag = pwg_db_fetch_assoc(pwg_query($query));
+  
+        $url .= make_index_url(
+          array(
+            'tags' => array(
+              array(
+                'id' => $request['type_id'],
+                'url_name' => $requested_tag['url_name'],
+              )
             )
           )
-        )
-      );
-    }
-    else if ('collection' == $request['type'])
-    {
-      if (defined('USER_COLLEC_PUBLIC'))
-      {
-        $url = USER_COLLEC_PUBLIC . 'edit/'.$request['type_id'];
+        );
       }
-
-    }
-    else 
-    {
-      $url = get_root_url().$request['type'];
+      // search
+      case 'search':
+      {
+        break;
+      }
+      // favorites
+      case 'favorites':
+      {
+        break;
+      }
+      // most_visited
+      case 'most_visited':
+      {
+        break;
+      }
+      // best_rated
+      case 'best_rated':
+      {
+        break;
+      }
+      // list
+      case 'list':
+      {
+        break;
+      }
+      // recent_pics
+      case 'recent_pics':
+      {
+        break;
+      }
+      // collection
+      case 'collection':
+      {
+        if (defined('USER_COLLEC_PUBLIC'))
+        {
+          $url = USER_COLLEC_PUBLIC . 'edit/'.$request['type_id'];
+        }
+        break;
+      }
+      default:
+      {
+        $url = get_root_url().$request['type'];
+      }
     }
 
     //Define url parameters for download link
@@ -509,7 +555,7 @@ SELECT
       // search
       case 'search':
       {
-        
+
         $row['NAME'] = '<a href="'.make_index_url(array('section'=>'search', 'search'=>$row['type_id'])).'">'.l10n('Search').'</a>';
         $row['BASENAME'] = 'search'.$row['type_id'];
         break;
