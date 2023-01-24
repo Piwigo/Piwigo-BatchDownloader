@@ -130,4 +130,4 @@ $lang['Please fill out your telephone number'] = 'Please fill out your telephone
 $lang['Please fill out your profession'] = 'Merci de renseigner votre numéro de téléphone';
 $lang['Please give us a reason for your request'] = 'Merci de nous donner la raison de votre demande';
 $lang['Accepted by'] = 'Accepté par';
-$lang['Rejected by'] = 'Rejeté par;
+$lang['Rejected by'] = 'Rejeté par';
