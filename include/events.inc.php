@@ -192,7 +192,6 @@ function batch_download_index_button()
           'user_id' =>$user['id'],
           'nb_images' => count($set['items']),
           'request_date' => $dbnow,
-          'image_ids' => $page['items']
         )
       )
     );

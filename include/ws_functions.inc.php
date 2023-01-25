@@ -25,7 +25,6 @@ function batch_download_ws_add_methods($arr)
       'request_date' => array(),
       'image_size' => array('default'=>'original',
                             'info'=>'square, thumbnail, xxs, xs, s, m, l, xl, xxl, original'),
-      'image_ids' => array(),
     ),
     'Create a new Download request.'
   );

@@ -38,7 +38,6 @@ jQuery(document).ready(function () {
                         image_size:jQuery('#batch_dwn_request_size').val(),
                         nb_images:page_infos_for_request.nb_images,
                         request_date:page_infos_for_request.request_date,
-                        image_ids : page_infos_for_request.image_ids.join()
                     },
                     success: function (data) {
                       $("#request_form .error-block").css('display','none');
