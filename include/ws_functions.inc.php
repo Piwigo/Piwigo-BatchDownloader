@@ -182,7 +182,8 @@ function ws_downloadRequest_create($params, &$service)
   $url_admin =get_absolute_root_url().BATCH_DOWNLOAD_ADMIN.'-requests';
   $request_info_email .= $url_admin;
 
-  $subject =l10n('Batch downloader, new download request');
+  $subject =l10n('Batch downloader, new download request ');
+  $subject .= '#'.$request_id ;
 
   pwg_mail_admins(
     array(
