@@ -87,3 +87,4 @@ $lang['One size'] = '一個尺寸';
 $lang['Photo size'] = '照片尺寸';
 $lang['Photo size choices'] = '照片尺寸的選擇';
 $lang['%s plugin detected, albums will be downloadable according to permissions.'] = '檢測到 %s 插件，相冊將根據權限下載。';
+$lang['%s lines printed, %s in total.'] = '印出 %s 行訊息，總共有 %s 行。';
