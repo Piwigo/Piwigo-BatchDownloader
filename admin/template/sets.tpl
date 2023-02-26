@@ -66,7 +66,7 @@
     </tr>
   </thead>
 
-  {foreach from=$sets item=set name=sets_loop}
+  {foreach from=$sets|default:null item=set name=sets_loop}
   <tr class="{if $smarty.foreach.sets_loop.index is odd}row1{else}row2{/if}">
     <td>{$set.USERNAME}</td>
     <td>{$set.NAME}</td>
@@ -86,7 +86,7 @@
   </tr>
   {/foreach}
 
-  {if not $sets}
+  {if not $sets|default:null}
   <tr class="row2">
     <td colspan="8" style="text-align:center;font-style:italic;">{'No result'|translate}</td>
   </tr>
