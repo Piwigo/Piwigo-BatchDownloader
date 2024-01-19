@@ -87,3 +87,4 @@ $lang['Delete previous archive when starting to download another one'] = 'Esborr
 $lang['Delete this set'] = 'Esborra aquest conjunt';
 $lang['Don\'t download archives through PHP'] = 'No descarreguis arxius a través de PHP';
 $lang['Download all pictures of this selection'] = 'Descarrega totes les fotos d\'aquesta selecció';
+$lang['%s lines printed, %s in total.'] = '%s línies mostrades, %s en total.';
