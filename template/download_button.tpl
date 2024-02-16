@@ -1,5 +1,5 @@
 {combine_css path=$BATCH_DOWNLOAD_PATH|cat:"template/style.css"}
-{if !isset($HAS_PERMISSION_TO_DOWNLOAD) && $BATCH_DWN_REQUEST_PARAM }
+{if $BATCH_DWN_REQUEST_PARAM }
 <a id="batchDownloadRequest" title="{'Request permission to download all pictures of this selection'|translate}" class="pwg-state-default pwg-button nav-link " rel="nofollow">
   <span class="pwg-icon batch-downloader-icon fas fa-cloud-download-alt fa-fw" style="background:url('{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/images/zip.png') center center no-repeat;">&nbsp;</span><span class="d-lg-none ml-2 pwg-button-text">{'Request download'|translate}</span>
   {if isset($BATCH_DWN_SIZES_ACCEPETED)}
@@ -12,8 +12,10 @@
 </a>
 
 {else}
-<a href="{$BATCH_DWN_URL}{$BATCH_DWN_SIZE}" id="batchDownloadLink" title="{'Download all pictures of this selection'|translate}" class="pwg-state-default pwg-button" rel="nofollow">
+<a href="{$BATCH_DWN_URL}{$BATCH_DWN_SIZE|default:""}" id="batchDownloadLink" title="{'Download all pictures of this selection'|translate}" class="pwg-state-default pwg-button" rel="nofollow">
   <span class="pwg-icon batch-downloader-icon fas fa-cloud-download-alt fa-fw" style="background:url('{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/images/zip.png') center center no-repeat;">&nbsp;</span><span class="d-lg-none ml-2 pwg-button-text">{'Download'|translate}</span>
+<a href="{$BATCH_DWN_URL}{$BATCH_DWN_SIZE|default:""}" id="batchDownloadLink" title="{'Download all pictures of this selection'|translate}" class="pwg-state-default pwg-button" rel="nofollow">
+  <span class="pwg-icon batch-downloader-icon" style="background:url('{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/images/zip.png') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">{'Download'|translate}</span>
 </a>
 {/if}
 

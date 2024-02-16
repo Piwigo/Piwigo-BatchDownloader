@@ -87,3 +87,4 @@ $lang['One size'] = 'Tek boyut';
 $lang['Photo size'] = 'Fotoğraf boyutu';
 $lang['Photo size choices'] = 'Fotoğraf boyutu seçimi';
 $lang['%s plugin detected, albums will be downloadable according to permissions.'] = '%s eklenti bulundu, albümler izinlere göre indirilebilir.';
+$lang['%s lines printed, %s in total.'] = '%s satır yazdırıldı, toplamda %s.';

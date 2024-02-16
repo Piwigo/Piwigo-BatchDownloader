@@ -78,7 +78,7 @@ if (isset($_POST['filter']))
   }
 }
 
-
+$line_limit = 100;
 // get sets
 $query = '
 SELECT
@@ -89,10 +89,11 @@ SELECT
     ON s.user_id = u.'.$conf['user_fields']['id'].'
   WHERE
     '.implode("\n    AND ", $where_clauses).'
-  ORDER BY '.$order_by.'
+  ORDER BY '.$order_by.' limit '.$line_limit.'
 ;';
 
 $sets = simple_hash_from_query($query, 'id', 'username');
+$printed_lines = count($sets);
 
 $query = '
 SELECT
@@ -126,6 +127,24 @@ foreach ($sets as $set_id => $username)
 
   unset($set);
 }
+
+$query = '
+SELECT
+    count(*) AS nb_lines
+  FROM '.BATCH_DOWNLOAD_TSETS.'
+;';
+
+$result = pwg_query($query);
+
+$nb_lines = pwg_db_fetch_assoc($result);
+
+$template->append(
+  array(
+    'NB_LINES' => $nb_lines['nb_lines'],
+    'LINE_LIMIT' => $line_limit,
+    'PRINTED_LINES' => $printed_lines,
+  )
+);
 
 // filter options
 $page['status_items'] = array(

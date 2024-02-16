@@ -1,0 +1,27 @@
+<dt><span>$conf['batch_download_max_elements']</span></dt>
+<dd>Hámarksgildi á <b>Hámarksfjöldi mynda á hvert niðurhalssett</b> sleðinn.<br>
+<i>Sjálfgefið er <span>1000</span>.</i></dd>
+
+<dt><span>$conf['batch_download_max_size']</span></dt>
+<dd>Hámarksgildi á <b>Hámarksstærð á hverju skjalasafni</b> sleðinn.<br>
+<i>Sjálfgefið er <span>500</span>.</i></dd>
+
+<dt><span>$conf['batch_download_additional_ext']</span></dt>
+<dd>Lota sem inniheldur skráarviðbætur sem hægt er að hlaða niður (hástafaviðkvæmum).<br>
+<i>Sjálfgefið er <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>Mynstur fyrir skráarheiti í skjalasafninu.<br>
+Aðgengilegir reitir eru<span>%id%, %filename%, %author%, %dimensions%</span>.<br>
+Lausar aðgerðir eru <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
+<i>Sjálfgefið gildi er <span>%id%_%filename%_%dimensions%</span>.</i><br>
+<i>Dæmi: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
+
+<dt><span>$conf['batch_download_use_representative_for_ext']</span></dt>
+<dd>Fyrir skrá sem ekki er mynd, eins og TIFF eða PDF, og fyrir margfalda stærð (hvað sem er nema upprunalega) mun notandinn samt hlaða niður frumritinu eða í samræmi við stærð forskoðunarinnar (mynd). Vefstjóri getur stillt Piwigo til að ákveða þetta fyrir hverja skráartegund. <br>
+<i>Sjálfgefið er <span>array('tif', 'TIF', 'tiff', 'TIFF')</span></i><br>
+<i>Dæmi: <span>array('pdf', 'PDF', 'tif', 'TIF')</span></i></dd>
+
+<dt><span>$conf['batch_download_guest_allowed']</span></dt>
+<dd>Leyfa gestum, þ.e. ekki innskráðum gestum, að hlaða niður skrám.<br>
+<i>Sjálfgefið er <span>false</span>.</i></dd>

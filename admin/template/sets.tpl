@@ -42,7 +42,11 @@
 </fieldset>
 
 </form>
-
+{if $PRINTED_LINES[0] == $LINE_LIMIT[0] + 1}
+<div>
+  {'%s lines printed, %s in total.'|translate:$PRINTED_LINES[0]:$NB_LINES[0]}
+</div>
+{/if}
 <table class="table2" width="97%">
   <thead>
     <tr class="throw">
@@ -59,8 +63,9 @@
 
     </tr>
   </thead>
+
 {if !empty($sets)}
-  {foreach from=$sets item=set name=sets_loop}
+  {foreach from=$sets|default:null item=set name=sets_loop}
   <tr class="{if $smarty.foreach.sets_loop.index is odd}row1{else}row2{/if}">
     <td>{$set.USERNAME}</td>
     <td>{$set.NAME}</td>
@@ -85,7 +90,6 @@
   </tr>
   {/foreach}
 {else}
-
   <tr class="row2">
     <td colspan="12" style="text-align:center;font-style:italic;">{'No result'|translate}</td>
   </tr>

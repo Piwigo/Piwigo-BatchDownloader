@@ -277,7 +277,7 @@ SELECT id
 
       $data[] = array(
         'URL' => add_url_params(BATCH_DOWNLOAD_PUBLIC . 'init_zip', array('set_id'=>$BatchDownloader->getParam('id'))),
-        'TITLE' => str_replace('"', "'", strip_tags($set['COMMENT'])),
+        'TITLE' => str_replace('"', "'", strip_tags((string) $set['COMMENT'])),
         'NAME' => $set['sNAME'],
         'COUNT' => $set['NB_IMAGES'],
         );

@@ -87,3 +87,4 @@ $lang['Photo size'] = 'Veľkosť fotky';
 $lang['Any size'] = 'Ľubovoľná veľkosť';
 $lang['One size'] = 'Jedna veľkosť';
 $lang['%s plugin detected, albums will be downloadable according to permissions.'] = '%s doplnok zistený, albumy budú stiahnuté v súlade s oprávnením.';
+$lang['%s lines printed, %s in total.'] = 'Vytlačených riadkov: %s, celkovo %s.';

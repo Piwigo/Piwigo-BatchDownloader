@@ -42,14 +42,17 @@ class BatchDownloader_maintain extends PluginMaintain
     global $conf, $prefixeTable;
 
     // configuration
-    if (is_string($conf['batch_download']))
+    if (!empty($conf['batch_download']) and is_string($conf['batch_download']))
     {
       // Piwigo 11 has added an automatic espace of the word "groups" (new MySQL reserved keyword).
       // Unserialize doesn't like the escaped `groups` at all, so we need to remove it
       $conf['batch_download'] = str_replace('`groups`', 'groups', $conf['batch_download']);
     }
 
-    $conf['batch_download'] = safe_unserialize($conf['batch_download']);
+    if (!empty($conf['batch_download']))
+    {
+      $conf['batch_download'] = safe_unserialize($conf['batch_download']);
+    }
 
     if (empty($conf['batch_download']) or !isset($conf['batch_download']['last_clean']))
     {

@@ -87,3 +87,4 @@ $lang['One size'] = 'Jeden rozmiar';
 $lang['Photo size'] = 'Rozmiar zdjęcia';
 $lang['Photo size choices'] = 'Wybór rozmiaru zdjęcia';
 $lang['%s plugin detected, albums will be downloadable according to permissions.'] = '%s wtyczka wykryta, albumy będą dostępne do ściagnięcia w zależności od uprawnienia dostępu.';
+$lang['%s lines printed, %s in total.'] = '%s linii wyświetlonych, %s wszystkich linii.';

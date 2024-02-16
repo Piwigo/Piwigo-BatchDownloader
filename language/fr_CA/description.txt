@@ -1,0 +1,1 @@
+Permet aux utilisateurs de télécharger les photos par lot. Compatible avec User Collections.

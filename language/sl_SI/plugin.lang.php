@@ -88,3 +88,4 @@ $lang['Number of archives'] = 'Število zbirk';
 $lang['Number of images'] = 'Število slik';
 $lang['One size'] = 'Ena velikost';
 $lang['%s plugin detected, albums will be downloadable according to permissions.'] = '%s vtičnik zaznan, albume bo moč prenesti v skladu z dovoljenji.';
+$lang['%s lines printed, %s in total.'] = '%s natisnjenih vrstic, skupno %s.';

@@ -1,6 +1,6 @@
 {combine_css path=$BATCH_DOWNLOAD_PATH|cat:"template/style.css"}
 
-{if $set.U_DOWNLOAD}
+{if $set.U_DOWNLOAD|default: null}
 {footer_script}
 setTimeout(function() {
   document.location.href = '{$set.U_DOWNLOAD}';
@@ -8,7 +8,7 @@ setTimeout(function() {
 {/footer_script}
 {/if}
 
-{if $missing_derivatives}
+{if $missing_derivatives|default: null}
 {combine_script id='jquery.progressBar' load='footer' path='themes/default/js/plugins/jquery.progressbar.min.js'}
 {combine_script id='jquery.ajaxmanager' load='footer' path='themes/default/js/plugins/jquery.ajaxmanager.js'}
 
@@ -80,8 +80,8 @@ setTimeout(next_derivative, 1000);
   {if $set.COMMENT}<blockquote class="comment">{$set.COMMENT}</blockquote>{/if}
 
   <ul class="set-infos">
-    <li class="error">{$elements_error}</li>
-    <li><b>{'%d photos'|translate:$set.NB_IMAGES}</b>{if $set.U_EDIT_SET}, <a href="{$set.U_EDIT_SET}" rel="nofollow">{'Edit the set'|translate}</a>{/if}</li>
+    <li class="error">{$elements_error|default:""}</li>
+    <li><b>{'%d photos'|translate:$set.NB_IMAGES}</b>{if $set.U_EDIT_SET|default:null}, <a href="{$set.U_EDIT_SET}" rel="nofollow">{'Edit the set'|translate}</a>{/if}</li>
     <li><b>{'Photo sizes'|translate}:</b> {if $set.SIZE=='original'}{'Original'|translate}{else}{$set.SIZE|translate}{/if} {if $set.SIZE_INFO}<span class="downloadSizeDetails">({$set.SIZE_INFO})</span>{/if}</li>
     <li><b>{'Estimated size'|translate}:</b> {$set.TOTAL_SIZE}</li>
     <li><b>{'Estimated number of archives'|translate}:</b> {$set.NB_ARCHIVES} <i>({'real number of archives can differ'|translate})</i></li>
@@ -89,7 +89,7 @@ setTimeout(next_derivative, 1000);
   </ul>
 </fieldset>
 
-{if $missing_derivatives}
+{if $missing_derivatives|default: null}
 <fieldset>
   <legend>{'Preparation'|translate}</legend>
 
@@ -109,7 +109,7 @@ setTimeout(next_derivative, 1000);
     <li class="warning">{'<b>Warning:</b> all files will be deleted within %d hours'|translate:$archive_timeout}</li>
   </ul>
 
-  {if $set.U_CANCEL}<a href="{$set.U_CANCEL}" class="cancel-down" onClick="return confirm('{'Are you sure?'|translate}');">{'Cancel this download'|translate}</a>{/if}
+  {if $set.U_CANCEL|default:null}<a href="{$set.U_CANCEL}" class="cancel-down" onClick="return confirm('{'Are you sure?'|translate}');">{'Cancel this download'|translate}</a>{/if}
 </fieldset>
 {/if}
 {/if}

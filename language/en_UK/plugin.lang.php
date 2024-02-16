@@ -130,3 +130,5 @@ $lang['Please fill out your profession'] = 'Please fill out your profession';
 $lang['Please give us a reason for your request'] = 'Please give us a reason for your request';
 $lang['Accepted by'] = 'Accepted by';
 $lang['Rejected by'] = 'Rejected by';
+$lang['%s lines printed, %s in total.'] = '%s lines printed, %s in total.';
+

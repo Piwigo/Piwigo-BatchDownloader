@@ -88,3 +88,4 @@ $lang['One size'] = 'En storlek';
 $lang['Photo size'] = 'Foto storlek';
 $lang['Photo size choices'] = 'Foto storleks val';
 $lang['%s plugin detected, albums will be downloadable according to permissions.'] = '%s plugin upptäckt, albumen blir nedladdade baserat på rättigheter';
+$lang['%s lines printed, %s in total.'] = '%s linjer utskrivna, %s totalt.';
