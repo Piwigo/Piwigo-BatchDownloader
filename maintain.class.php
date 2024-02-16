@@ -1,6 +1,7 @@
 <?php
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
+#[AllowDynamicProperties]
 class BatchDownloader_maintain extends PluginMaintain
 {
   private $table_download_sets;

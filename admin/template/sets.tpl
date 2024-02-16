@@ -59,7 +59,7 @@
 
     </tr>
   </thead>
-
+{if !empty($sets)}
   {foreach from=$sets item=set name=sets_loop}
   <tr class="{if $smarty.foreach.sets_loop.index is odd}row1{else}row2{/if}">
     <td>{$set.USERNAME}</td>
@@ -84,12 +84,12 @@
     </td>
   </tr>
   {/foreach}
+{else}
 
-  {if not $sets}
   <tr class="row2">
-    <td colspan="8" style="text-align:center;font-style:italic;">{'No result'|translate}</td>
+    <td colspan="12" style="text-align:center;font-style:italic;">{'No result'|translate}</td>
   </tr>
-  {/if}
+{/if}
 </table>
 
 <form action="{$F_FILTER_ACTION}" method="post">

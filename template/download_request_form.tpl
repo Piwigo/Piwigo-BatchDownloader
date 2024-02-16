@@ -1,5 +1,5 @@
 
-<form action="{$F_ACTION}" method="post" class="batch_dwn_form" id="request_form" data-toggle="validator">
+<form method="post" class="batch_dwn_form" id="request_form" data-toggle="validator">
   <div class="batch_dwn_input_group">
     <label for="firstname">{'First name'|translate}<span>*</span></label>
     <input type="text" name="firstname" id="firstname" size="60" required>
