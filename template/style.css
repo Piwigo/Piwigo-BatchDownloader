@@ -61,3 +61,122 @@ a.cancel-down {
   margin-top:-9px;
   text-shadow:0 0 3px #000;
 }
+
+.batch_dwn_form > .batch_dwn_input_group {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: baseline;
+  margin-right:10px;
+}
+
+.batch_dwn_form span{
+  color:red;
+}
+
+.batch_dwn_form p{
+  font-size:12px;
+  margin-bottom:0;
+  font-weight:700;
+  color:black;
+}
+
+.batch_dwn_input_group{
+  margin-bottom:1rem;
+}
+
+.batch_dwn_form input, 
+.batch_dwn_form textarea, 
+#batch_dwn_select_size SELECT{
+  border: rgb(240, 150, 00) 1px solid;
+  background: none;
+  padding: 5px;
+  border-radius: 5px;
+  width:100%;
+  width: calc(100% - 15px);
+  color:unset;
+}
+
+.batch_dwn_form .error-block {
+  display:none;
+  padding: 5px 0px;
+}
+
+.batch_dwn_form .error-block p{
+  text-align: left;
+  color: #ff0000;
+  font-weight:700;
+}
+
+/* Jconfirm styling */
+
+.jconfirm-type-uc, .jconfirm-type-uc-dark {
+  border-top: solid 7px rgb(240, 150, 00);
+}
+
+.jconfirm-type-uc .jconfirm-icon-c, .jconfirm-type-uc-dark .jconfirm-icon-c {
+  color: rgb(240, 150, 00) !important;
+}
+
+.jconfirm-type-uc button.btn-uc, .jconfirm-type-uc-dark button.btn-uc {
+  background-color: rgb(240, 150, 00);
+  color: white;
+}
+
+.jconfirm-type-uc button.btn-uc:hover, .jconfirm-type-uc-dark button.btn-uc:hover {
+  background-color: rgb(209, 140, 0);
+}
+
+.jconfirm-type-uc-dark {
+  background-color: #111 !important;
+}
+
+.jconfirm-type-uc-dark .jconfirm-title,
+.jconfirm-type-uc-dark p {
+  color: white !important;
+}
+
+.jconfirm-type-uc-dark .btn-default {
+  color: white !important;
+  background: #222 !important;
+}
+
+.jconfirm-type-uc-dark .btn-default:hover {
+  background: #181818 !important;
+}
+
+.jconfirm-type-uc-dark input, .jconfirm-type-uc-dark textarea {
+  color: white !important;
+}
+
+.jconfirm-type-uc-dark label {
+  color: white;
+}
+
+.jconfirm-type-uc-dark .shares_list {
+  color: white;
+}
+
+.jconfirm-type-uc-dark .uc_form a {
+  color: white;
+}
+
+.jconfirm.jconfirm-white .jconfirm-box, .jconfirm.jconfirm-light .jconfirm-box{
+  max-width:500px;
+}
+
+#bdwn_accepted_request_block,
+#bdwn_set_changed_block{
+  padding:15px;
+}
+
+#bdwn_accepted_request_block{
+  background-color:green;
+  color:white;
+}
+
+#bdwn_set_changed_block{
+  background-color:yellow;
+  color:black;
+}

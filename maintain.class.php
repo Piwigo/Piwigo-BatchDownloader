@@ -1,6 +1,7 @@
 <?php
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
+#[AllowDynamicProperties]
 class BatchDownloader_maintain extends PluginMaintain
 {
   private $table_download_sets;
@@ -21,6 +22,8 @@ class BatchDownloader_maintain extends PluginMaintain
     'one_archive'     => false,
     'force_pclzip'    => false,
     'direct'          => false,
+    'request_permission' => false,
+    'general_conditions_link' => null,
     );
   
   function __construct($id)
@@ -31,6 +34,7 @@ class BatchDownloader_maintain extends PluginMaintain
     $this->table_download_sets = $prefixeTable . 'download_sets';
     $this->table_download_sets_images = $prefixeTable . 'download_sets_images';
     $this->table_image_sizes = $prefixeTable . 'image_sizes';
+    $this->table_download_requests = $prefixeTable . 'download_requests';
   }
 
   function install($plugin_version, &$errors=array())
@@ -75,6 +79,15 @@ class BatchDownloader_maintain extends PluginMaintain
       {
         $new_conf['multisize'] = true;
       }
+      if (!isset($new_conf['request_permission']))
+      {
+        $new_conf['request_permission'] = false;
+      }
+      if (!isset($new_conf['general_conditions_link']))
+      {
+        $new_conf['general_conditions_link'] = '';
+      }
+
 
       conf_update_param('batch_download', $new_conf, true);
     }
@@ -136,7 +149,61 @@ CREATE TABLE IF NOT EXISTS `' . $this->table_image_sizes . '` (
 
     // add "ready" status
     pwg_query('ALTER TABLE `' . $this->table_download_sets . '` CHANGE `status` `status` enum("new","ready","download","done") NOT NULL DEFAULT "new";');
-  }
+  
+    $query = '
+    CREATE TABLE IF NOT EXISTS `' . $this->table_download_requests . '` (
+      `id` mediumint(8) NOT NULL AUTO_INCREMENT,
+      `type` varchar(25) NOT NULL,
+      `type_id` varchar(64) NOT NULL,
+      `user_id` int(64) NOT NULL,
+      `first_name` varchar(50) NOT NULL,
+      `last_name` varchar(50) NOT NULL,
+      `organisation` varchar(255),
+      `email` varchar(100) NOT NULL,
+      `telephone` varchar(50),
+      `profession` varchar(255),
+      `reason` TEXT NOT NULL,
+      `nb_images` mediumint(8) NOT NULL DEFAULT 0,
+      `request_date` datetime NOT NULL,
+      `request_status` enum("pending","reject","accept") NOT NULL DEFAULT "pending",
+      `status_change_date` datetime ,
+      `image_size` enum(
+        "square","thumb","2small","xsmall","small","medium","large","xlarge","xxlarge","original"
+        ) NOT NULL DEFAULT "original",
+      FOREIGN KEY(user_id) REFERENCES '.USERS_TABLE.'(id),
+      PRIMARY KEY (`id`)
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8
+    ;';
+    pwg_query($query);
+
+    $query = 'DESC `'.$prefixeTable . 'download_requests' .'`;';
+    $result = pwg_query($query);
+
+    while ($row = pwg_db_fetch_row($result))
+    {
+      if ('reason' == $row[0] and 'text' != strtolower($row[1]))
+      {
+        pwg_query('ALTER TABLE `' . $this->table_download_requests . '` modify COLUMN reason text;');
+      }
+
+      if ('organisation' == $row[0] and 'varchar(255)' != strtolower($row[1]))
+      {
+        pwg_query('ALTER TABLE `' . $this->table_download_requests . '` modify COLUMN organisation varchar(255);');
+      }
+
+      if ('profession' == $row[0] and 'varchar(255)' != strtolower($row[1]))
+      {
+        pwg_query('ALTER TABLE `' . $this->table_download_requests . '` modify COLUMN profession varchar(255);');
+      }
+    }
+
+    // add a "updated_by" column to download_requests, know who accepted or rejected request
+    $result = pwg_query('SHOW COLUMNS FROM `' . $this->table_download_requests . '` LIKE "updated_by";');
+    if (!pwg_db_num_rows($result))
+    {
+      pwg_query('ALTER TABLE `' . $this->table_download_requests . '` ADD `updated_by` int(64) ;');
+    }
+ }
 
   function update($old_version, $new_version, &$errors=array())
   {

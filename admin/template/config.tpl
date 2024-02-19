@@ -61,9 +61,6 @@ $('input[name="multisize"]').on('change', function() {
 {/footer_script}
 
 
-<div class="titrePage">
-	<h2>Batch Downloader</h2>
-</div>
 
 <form method="post" action="" class="properties">
 <fieldset>
@@ -120,6 +117,20 @@ $('input[name="multisize"]').on('change', function() {
         </select>
       </label>
     </li>
+    
+    {if $BATCH_DWN_REQUEST_CONF}
+    <li id="request_permission_setting">
+      <label>
+        <input type="checkbox" name="request_permission" {if $batch_download.request_permission}checked{/if}>
+        <b>{'User must request permission to download photos'|translate}</b>
+      </label>
+    </li>
+    <li>
+      <b>{'Link to general conditions of use page'|translate}</b>
+      <input id="batch_dwn_general_conditions_link" name="general_conditions_link" value="{$batch_download.general_conditions_link}" size="50">
+      <a class="icon-info-circled-1 showInfo" title="{'This is used in the email sent when a users download request is accepted.'|translate}"></a>
+    </li>
+    {/if}
   </ul>
 </fieldset>
 

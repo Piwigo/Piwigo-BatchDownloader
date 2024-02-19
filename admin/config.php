@@ -5,6 +5,11 @@ if (isset($_POST['save_config']))
 {
   if (!defined('USER_COLLEC_PATH')) $_POST['what']['collections'] = 'on';
 
+  if (!conf_get_param('batch_download_configure_request_permission', false) and isset($_POST['request_permission']))
+  {
+    die('You are not allowed to do this.');
+  }
+
   $conf['batch_download'] = array(
     'groups'          => isset($_POST['groups']) ? $_POST['groups'] : array(),
     'level'           => $_POST['level'],
@@ -19,6 +24,8 @@ if (isset($_POST['save_config']))
     'force_pclzip'    => isset($_POST['force_pclzip']),
     'direct'          => isset($_POST['direct']),
     'last_clean'      => $conf['batch_download']['last_clean'],
+    'request_permission' => isset($_POST['request_permission']),
+    'general_conditions_link' => isset($_POST['general_conditions_link']) ? $_POST['general_conditions_link'] : null,
     );
 
   conf_update_param('batch_download', $conf['batch_download']);
@@ -51,6 +58,11 @@ $sizes_options['original'] = l10n('Original');
 $conf['batch_download']['max_elements_value'] = isset($conf['batch_download_max_elements']) ? $conf['batch_download_max_elements'] : 1000;
 $conf['batch_download']['max_size_value'] =     isset($conf['batch_download_max_size']) ?     $conf['batch_download_max_size'] :     500;
 
+//Request permission
+$template->assign( 'BATCH_DWN_REQUEST_CONF', conf_get_param('batch_download_configure_request_permission', false));
+
+//General conditions of use link
+$template->assign( 'batch_dwn_general_conditions_link', conf_get_param('batch_dwn_general_conditions_link', ''));
 
 $template->assign(array(
   'group_options' => $group_options,

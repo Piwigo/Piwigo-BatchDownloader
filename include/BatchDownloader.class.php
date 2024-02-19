@@ -405,12 +405,17 @@ DELETE FROM '.IMAGE_SIZES_TABLE.'
   {
     $row['filename'] = stripslashes(get_filename_wo_extension($row['file']));
 
+    $row['name'] = str2url($row['name']);
+    global $logger; $logger->debug('name='.$row['name']);
+
     // datas
-    $search = array('%id%', '%filename%', '%author%', '%dimensions%');
+    $search = array('%id%', '%filename%', '%author%', '%dimensions%', '%name%', '%expiry_date%');
     $replace = array($row['id'], $row['filename']);
 
     $replace[2] = empty($row['author']) ? null : $row['author'];
     $replace[3] = empty($filesize) ? null : $filesize['width'].'x'.$filesize['height'];
+    $replace[4] = empty($row['name']) ? null : $row['name'];
+    $replace[5] = empty($row['expiry_date']) ? null : l10n('expiresOn').'-'.explode(' ', $row['expiry_date'])[0];
 
     $filename = str_replace($search, $replace, $this->conf['file_pattern']);
 
@@ -457,7 +462,7 @@ DELETE FROM '.IMAGE_SIZES_TABLE.'
       trigger_error('BatchDownloader::createNextArchive, the set is empty', E_USER_ERROR);
     }
 
-    global $conf;
+    global $conf, $pwg_loaded_plugins;
 
     // first zip
     if ($this->data['last_zip'] == 0)
@@ -493,7 +498,14 @@ DELETE FROM '.IMAGE_SIZES_TABLE.'
 SELECT
     id, name, file, path,
     rotation, filesize, width, height,
-    author, representative_ext
+    author, representative_ext';
+
+      if (isset($pwg_loaded_plugins['expiry_date']))
+      {
+        $query .= ', expiry_date';
+      }
+      
+      $query .= '
   FROM '.IMAGES_TABLE.'
   WHERE id IN ('.implode(',', $images_to_add).')
 ;';

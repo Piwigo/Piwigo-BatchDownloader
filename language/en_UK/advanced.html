@@ -12,7 +12,7 @@
 
 <dt><span>$conf['batch_download_file_pattern']</span></dt>
 <dd>Pattern for filenames in the archive.<br>
-Available fields are <span>%id%, %filename%, %author%, %dimensions%</span>.<br>
+Available fields are <span>%id%, %filename%, %author%, %dimensions%, %name%, %expiry_date%</span>.<br>
 Available functions are <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
 <i>Default value is <span>%id%_%filename%_%dimensions%</span>.</i><br>
 <i>Example: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
@@ -24,4 +24,8 @@ Available functions are <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xx
 
 <dt><span>$conf['batch_download_guest_allowed']</span></dt>
 <dd>Allow guest, ie not logged in visitors, to batch download files.<br>
+<i>Default is <span>false</span>.</i></dd>
+
+<dt><span>$conf['batch_download_configure_request_permission']</span></dt>
+<dd>Before downloading users must request permission<br>
 <i>Default is <span>false</span>.</i></dd>

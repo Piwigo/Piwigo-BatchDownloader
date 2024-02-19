@@ -53,7 +53,9 @@ function batch_download_page()
 /* add buttons on thumbnails list */
 function batch_download_index_button()
 {
-  global $page, $template, $user, $conf;
+  global $page, $template, $user, $conf, $prefixeTable;
+
+  $set = get_set_info_from_page();
 
   // check accesses
   if ( !count($page['items']) or !isset($page['section']) ) return;
@@ -84,7 +86,6 @@ function batch_download_index_button()
   // download the set
   if ( isset($_GET['action']) and $_GET['action']=='advdown_set' )
   {
-    $set = get_set_info_from_page();
 
     if ($set !== false && count($set['items']))
     {
@@ -140,21 +141,28 @@ function batch_download_index_button()
     'BATCH_DOWNLOAD_PATH' => BATCH_DOWNLOAD_PATH,
     'BATCH_DWN_COUNT' => count($page['items']),
     'BATCH_DWN_URL' => $url,
-    ));
+  ));
 
   if ($conf['batch_download']['multisize'])
   {
-    foreach (ImageStdParams::get_defined_type_map() as $params)
+    if ( false == $conf['batch_download']['request_permission'] or !conf_get_param('batch_download_configure_request_permission', false))
     {
-      $template->append(
-        'BATCH_DWN_SIZES',
-        array(
-          'TYPE' => $params->type,
-          'DISPLAY' => l10n($params->type),
-          'SIZE' => $params->sizing->ideal_size[0].' x '.$params->sizing->ideal_size[1],
-          )
-        );
-        if ($params->type == $conf['batch_download']['photo_size']) break;
+      foreach (ImageStdParams::get_defined_type_map() as $params)
+      {
+        $template->append(
+          'BATCH_DWN_SIZES',
+          array(
+            'TYPE' => $params->type,
+            'DISPLAY' => l10n($params->type),
+            'SIZE' => $params->sizing->ideal_size[0].' x '.$params->sizing->ideal_size[1],
+            )
+          );
+          if ($params->type == $conf['batch_download']['photo_size']) break;
+      }
+    }
+    else
+    {
+      $template->assign('BATCH_DWN_SIZE', $conf['batch_download']['photo_size']);
     }
     if ($conf['batch_download']['photo_size'] == 'original')
     {
@@ -168,18 +176,56 @@ function batch_download_index_button()
         );
     }
   }
-  else
+
+  $template->assign('BATCH_DWN_REQUEST_PARAM', $conf['batch_download']['request_permission']);
+
+  list($dbnow) = pwg_db_fetch_row(pwg_query('SELECT NOW();'));
+
+  if (null != $set)
   {
-    $template->assign('BATCH_DWN_SIZE', $conf['batch_download']['photo_size']);
+    $template->assign(
+      'PAGE_INFOS_FOR_REQUEST',
+      json_encode( 
+        array(
+          'type' =>  $set['type'],
+          'type_id' => $set['id'],
+          'user_id' =>$user['id'],
+          'nb_images' => count($set['items']),
+          'request_date' => $dbnow,
+        )
+      )
+    );
   }
+  
 
   $template->set_template_dir(realpath(BATCH_DOWNLOAD_PATH.'template/'));
+  $template->assign(
+    'batch_dwn_request_size',
+    array(
+      'original' => l10n('Original'),
+      'square' => l10n('Square (120 x 120)'),
+      'thumbnail' => l10n('Thumbnail (144 x 144)'),
+      '2small' => l10n('XXS - tiny (240 x 240)'),
+      'xsmall' => l10n('XS - extra small (432 x 324)'),
+      'small' => l10n('S - small (576 x 432)'),
+      'medium' => l10n('M - medium (792 x 594)'),
+      'large' => l10n('L - large (1008 x 756)'),
+      'xlarge' => l10n('XL - extra large (1224 x 918)'),
+      'xxlarge' => l10n('XXL - huge (1656 x 1242)'),
+    )
+  );
+
+  
+  $template->set_filename('batch_dwn_request_form', 'download_request_form.tpl');
+  $template->assign_var_from_handle('BATCH_DWN_REQUEST', 'batch_dwn_request_form');
+
   $template->set_filename('batchdwn_button', 'download_button.tpl');
   $button = $template->parse('batchdwn_button', true);
   $template->add_index_button($button, 50);
   $template->concat('COLLECTION_ACTIONS', $button);
-}
 
+
+}
 
 /* menu block */
 function batch_download_add_menublock($menu_ref_arr)
