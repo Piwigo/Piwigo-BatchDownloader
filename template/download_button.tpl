@@ -13,9 +13,7 @@
 
 {else}
 <a href="{$BATCH_DWN_URL}{$BATCH_DWN_SIZE|default:""}" id="batchDownloadLink" title="{'Download all pictures of this selection'|translate}" class="pwg-state-default pwg-button" rel="nofollow">
-  <span class="pwg-icon batch-downloader-icon fas fa-cloud-download-alt fa-fw" style="background:url('{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/images/zip.png') center center no-repeat;">&nbsp;</span><span class="d-lg-none ml-2 pwg-button-text">{'Download'|translate}</span>
-<a href="{$BATCH_DWN_URL}{$BATCH_DWN_SIZE|default:""}" id="batchDownloadLink" title="{'Download all pictures of this selection'|translate}" class="pwg-state-default pwg-button" rel="nofollow">
-  <span class="pwg-icon batch-downloader-icon" style="background:url('{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/images/zip.png') center center no-repeat;">&nbsp;</span><span class="pwg-button-text">{'Download'|translate}</span>
+  <span class="pwg-icon batch-downloader-icon fas fa-cloud-download-alt fa-fw" style="background:url('{$ROOT_URL}{$BATCH_DOWNLOAD_PATH}template/images/zip.png') center center no-repeat;">&nbsp;</span>
 </a>
 {/if}
 
