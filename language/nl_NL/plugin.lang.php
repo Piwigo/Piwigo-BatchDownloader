@@ -150,3 +150,4 @@ $lang['Batch downloader, your request has been processed'] = 'Batchdownloader, u
 $lang['Batch downloader, new download request '] = 'Batchdownloader, nieuw downloadverzoek';
 $lang['As a reminder, you agree to accept the general conditions of use and to respect the rights relating to intellectual property.'] = 'Ter herinnering: u gaat ermee akkoord de algemene gebruiksvoorwaarden te aanvaarden en de rechten met betrekking tot intellectuele eigendom te respecteren.';
 $lang['Accepted by'] = 'Geaccepteerd door';
+$lang['For more details or information, please %scontact the administrator%s.'] = 'Voor meer details of informatie, neem %scontact met de administrator%s. ';
