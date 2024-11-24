@@ -48,3 +48,14 @@ $lang['<b>Warning:</b> all files will be deleted within %d hours'] = '<b>Varoitu
 $lang['%s lines printed, %s in total.'] = '%s riviä tulostettu, %s riviä yhteensä';
 $lang['%d MB'] = '%d MT';
 $lang['%s plugin detected, albums will be downloadable according to permissions.'] = 'Liitännäinen %s todettu, albumeita voi ladata käyttöoikeuksien mukaisesti.';
+$lang['Number of archives'] = 'Arkistojen lukumäärä';
+$lang['Number of images'] = 'Kuvien lukumäärä';
+$lang['Number of photos'] = 'Kuvien lukumäärä';
+$lang['One size'] = 'Yksi koko';
+$lang['Link to general conditions of use page'] = 'Linkki yleisten käyttöehtojen sivulle';
+$lang['Maximum number of photos per download set'] = 'Suurin määrä kuvia lataussetissä';
+$lang['Maximum photo size'] = 'Suurin kuvakoko';
+$lang['Maximum size of each archive (in Megabytes)'] = 'Suurin arkistokoko (megatavuina)';
+$lang['No result'] = 'Ei tulosta';
+$lang['Here is the link to <a href="%s">our general conditions of use</a>.'] = 'Tässä on linkki <a href="%s">yleisiin käyttöehtoihimme</a>.';
+$lang['It saves space on the server but doesn\'t allow to restart failed downloads.'] = 'Säästää tilaa palvelimella mutta ei mahdollista epäonnistuneiden latausten uutta latausyritystä.';
