@@ -1,0 +1,31 @@
+<dt><span>$conf['batch_download_max_elements']</span></dt>
+<dd>ערך מרבי של מחוון <b>מספר התמונות המרבי לכל קבוצת הורדה</b>.<br>
+<i>ברירת מחדל היא <span>1000</span>.</i></dd>
+
+<dt><span>$conf['batch_download_max_size']</span></dt>
+<dd>ערך מרבי של מחוון <b>גודל מרבי לכל ארכיון</b>.<br>
+<i>ברירת מחדל היא <span>500</span>.</i></dd>
+
+<dt><span>$conf['batch_download_additional_ext']</span></dt>
+<dd>מערך הכולל סיומות קבצים להורדה (רגיש לאותיות).<br>
+<i>ברירת מחדל היא <span>$conf['picture_ext']</span>.</i></dd>
+
+<dt><span>$conf['batch_download_file_pattern']</span></dt>
+<dd>תבנית לשמות קבצים בארכיון.<br>
+שדות זמינים: <span>%id%, %filename%, %author%, %dimensions%, %name%, %expiry_date%</span>.<br>
+פונקציות זמינות: <span>$escape(xxx), $upper(xxx), $lower(xxx), $strpad(xxx, z, c)</span>.<br>
+<i>ערך ברירת המחדל הוא <span>%id%_%filename%_%dimensions%</span>.</i><br>
+<i>דוגמה: <span>$strpad(%id%,4,0)_$escape(%filename%)_$lower(%author%)_%dimensions%</span>.</i></dd>
+
+<dt><span>$conf['batch_download_use_representative_for_ext']</span></dt>
+<dd>עבור קובץ שאינו תמונה, כמו TIFF או PDF, ועבור גודל מרובה (כל דבר פרט למקור), האם המשתמש יוריד בכל זאת את המקור או את הגודל המתאים של התצוגה המקדימה (תמונה מייצגת). ניתן להגדיר זאת ב-Piwigo עבור כל סוג קובץ.<br>
+<i>ברירת מחדל היא <span>array('tif', 'TIF', 'tiff', 'TIFF')</span></i><br>
+<i>דוגמה: <span>array('pdf', 'PDF', 'tif', 'TIF')</span></i></dd>
+
+<dt><span>$conf['batch_download_guest_allowed']</span></dt>
+<dd>אפשר לאורחים, כלומר מבקרים שאינם מחוברים, להוריד קבצים בקבוצות.<br>
+<i>ברירת מחדל היא <span>false</span>.</i></dd>
+
+<dt><span>$conf['batch_download_configure_request_permission']</span></dt>
+<dd>לפני ההורדה, המשתמשים חייבים לבקש אישור.<br>
+<i>ברירת מחדל היא <span>false</span>.</i></dd>
