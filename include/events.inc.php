@@ -232,6 +232,11 @@ function batch_download_add_menublock($menu_ref_arr)
 {
   global $user;
 
+  if (is_a_guest())
+  {
+    return;
+  }
+
   $menu = &$menu_ref_arr[0];
   if ($menu->get_id() != 'menubar') return;
 
