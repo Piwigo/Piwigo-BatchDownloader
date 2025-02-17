@@ -90,12 +90,22 @@ a.cancel-down {
 .batch_dwn_form textarea, 
 #batch_dwn_select_size SELECT{
   border: rgb(240, 150, 00) 1px solid;
-  background: none;
+  background-color: transparent!important;
   padding: 5px;
   border-radius: 5px;
   width:100%;
-  width: calc(100% - 15px);
+  width: calc(100% - 30px);
+  margin:0 15px;
   color:unset;
+}
+
+#batch_dwn_select_size SELECT{
+  width: calc(100% - 15px);
+}
+
+.batch_dwn_form input:focus,
+#batch_dwn_select_size SELECT:focus{
+  box-shadow:0 0 2px #f70;
 }
 
 .batch_dwn_form .error-block {

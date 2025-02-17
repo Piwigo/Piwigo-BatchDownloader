@@ -121,15 +121,24 @@ $('input[name="multisize"]').on('change', function() {
     {if $BATCH_DWN_REQUEST_CONF}
     <li id="request_permission_setting">
       <label>
-        <input type="checkbox" name="request_permission" {if $batch_download.request_permission}checked{/if}>
+        <input type="checkbox" name="request_permission" id="request_permission" {if $batch_download.request_permission}checked{/if}>
         <b>{'User must request permission to download photos'|translate}</b>
       </label>
     </li>
-    <li>
-      <b>{'Link to general conditions of use page'|translate}</b>
-      <input id="batch_dwn_general_conditions_link" name="general_conditions_link" value="{$batch_download.general_conditions_link}" size="50">
-      <a class="icon-info-circled-1 showInfo" title="{'This is used in the email sent when a users download request is accepted.'|translate}"></a>
-    </li>
+    <div id="request_perm_options" {if !$batch_download.request_permission}style="display:none;"{/if}>
+      <li>
+        <b>{'Link to general conditions of use page'|translate}</b>
+        <input id="batch_dwn_general_conditions_link" name="general_conditions_link" value="{$batch_download.general_conditions_link}" size="50">
+        <a class="icon-info-circled-1 showInfo" title="{'This is used in the email sent when a users download request is accepted.'|translate}"></a>
+      </li>
+      <li id="request_permission_auto_accept">
+        <label>
+          <input type="checkbox" name="request_permission_auto_accept" {if $batch_download.request_permission_auto_accept}checked{/if}>
+          <b>{'Automatically accept user download requests'|translate}</b>
+          <a class="icon-info-circled-1 showInfo" title="{'All requests shall be accepted when submitted'|translate}"></a>
+        </label>
+      </li>
+    </div>
     {/if}
   </ul>
 </fieldset>
@@ -224,3 +233,17 @@ $('input[name="multisize"]').on('change', function() {
 </fieldset>
 
 </form>
+
+{if $BATCH_DWN_REQUEST_CONF}
+<script>
+
+$('#request_permission').change(function() {
+  if ($('#request_permission:checked').val()) {
+    $('#request_perm_options').show();
+  } else {
+    $('#request_perm_options').hide();
+  }
+});
+
+</script>
+{/if}

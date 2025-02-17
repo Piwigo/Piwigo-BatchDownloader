@@ -176,8 +176,15 @@ function batch_download_index_button()
         );
     }
   }
+  if (isset($conf['batch_download_configure_request_permission']) and $conf['batch_download_configure_request_permission'])
+  {
+    $template->assign('BATCH_DWN_REQUEST_PARAM', $conf['batch_download']['request_permission']);
+  }
+  else
+  {
+    $template->assign('BATCH_DWN_REQUEST_PARAM', false);
+  }
 
-  $template->assign('BATCH_DWN_REQUEST_PARAM', $conf['batch_download']['request_permission']);
 
   list($dbnow) = pwg_db_fetch_row(pwg_query('SELECT NOW();'));
 

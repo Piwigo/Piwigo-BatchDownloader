@@ -26,6 +26,7 @@ if (isset($_POST['save_config']))
     'last_clean'      => $conf['batch_download']['last_clean'],
     'request_permission' => isset($_POST['request_permission']),
     'general_conditions_link' => isset($_POST['general_conditions_link']) ? $_POST['general_conditions_link'] : null,
+    'request_permission_auto_accept' => isset($_POST['request_permission_auto_accept']),
     );
 
   conf_update_param('batch_download', $conf['batch_download']);

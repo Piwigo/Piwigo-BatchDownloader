@@ -64,7 +64,7 @@ function batch_download_ws_add_methods($arr)
  */
 function ws_downloadRequest_create($params, &$service)
 {
-  global $user;
+  global $user, $conf;
 
   // check status
   if (is_a_guest())
@@ -131,6 +131,8 @@ function ws_downloadRequest_create($params, &$service)
     $params
   );
 
+  $request_id = pwg_db_insert_id(BATCH_DOWNLOAD_TREQUESTS);
+
   $request_info_email = l10n("There is a new request to download a batch of photos.");
   $request_info_email .= "\n";
   $request_info_email .= l10n('Here are the details of the request:');
@@ -181,8 +183,36 @@ function ws_downloadRequest_create($params, &$service)
   $url_admin =get_absolute_root_url().BATCH_DOWNLOAD_ADMIN.'-requests';
   $request_info_email .= $url_admin;
 
+
   $subject =l10n('Batch downloader, new download request ');
   // $subject .= '#'.$request_id ;
+  
+  if ($conf['batch_download']['request_permission_auto_accept'])
+  {
+    if (!is_admin($params['user_id']))
+    {
+      list($dbnow) = pwg_db_fetch_row(pwg_query('SELECT NOW();'));
+
+      $update_data = array(
+        'id' => $request_id,
+        'status_change_date' => $dbnow,
+        'request_status' => 'accept',
+        'updated_by' => -1
+      );
+  
+      downloadRequest_update($update_data);
+      $request_info_email .= "\n\n";
+      $request_info_email .= l10n('Due to the batchdownloader settings, this request has automatically been accepted');
+    }
+    else
+    {
+      $request_info_email .= l10n('This request cannot be automatically accepted');
+    }
+  }
+  else
+  {
+
+  }
 
   pwg_mail_admins(
     array(
@@ -196,13 +226,16 @@ function ws_downloadRequest_create($params, &$service)
     false, // do not exclude current user
     false // only webmasters
   );
-
 }
 
 /**
  * Update status of a request
  */
- function ws_downloadRequest_update($params, &$service){
+function ws_downloadRequest_update($params, &$service){
+  downloadRequest_update($params);
+}
+
+function downloadRequest_update($params){
   global $conf, $conf_mail; 
 
   include_once(PHPWG_ROOT_PATH.'include/functions_user.inc.php');
@@ -400,9 +433,10 @@ SELECT
       'down_size'=>$request['image_size'],
       'request_id'=>$request['id'],
     );
-    
-    //Add auth key for automatic connection execpt for admins
+
+    //Add auth key for automatic connection except for admins
     $authkey = create_user_auth_key($requesting_user['user_id'], $requesting_user['status']);
+
     isset($authkey)? $url_parameters['auth'] = $authkey['auth_key'] : '';
 
     $url = str_replace('&amp;', '&', add_url_params($url, $url_parameters));
@@ -441,7 +475,7 @@ SELECT
       'content_format' => 'text/html',
     )
   );
- }
+}
 
 /**
 * Get a list of requests

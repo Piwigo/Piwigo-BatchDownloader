@@ -2,7 +2,7 @@
 <form method="post" class="batch_dwn_form" id="request_form" data-toggle="validator">
   <div class="batch_dwn_input_group">
     <label for="firstname">{'First name'|translate}<span>*</span></label>
-    <input type="text" name="firstname" id="firstname" size="60" required>
+    <input type="text" name="firstname" id="firstname" size="60" required autofocus>
     <div class="error-block firstname"></div>
   </div>
   <div class="batch_dwn_input_group">

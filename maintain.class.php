@@ -24,6 +24,7 @@ class BatchDownloader_maintain extends PluginMaintain
     'direct'          => false,
     'request_permission' => false,
     'general_conditions_link' => null,
+    'request_permission_auto_accept' => false,
     );
   
   function __construct($id)
@@ -87,8 +88,11 @@ class BatchDownloader_maintain extends PluginMaintain
       {
         $new_conf['general_conditions_link'] = '';
       }
-
-
+      if (!isset($new_conf['request_permission_auto_accept']))
+      {
+        $new_conf['request_permission_auto_accept'] = false;
+      }
+      
       conf_update_param('batch_download', $new_conf, true);
     }
 

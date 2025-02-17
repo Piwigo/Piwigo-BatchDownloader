@@ -132,3 +132,7 @@ $lang['Please give us a reason for your request'] = 'Merci de nous donner la rai
 $lang['Accepted by'] = 'Accepté par';
 $lang['Rejected by'] = 'Rejeté par';
 $lang['%s lines printed, %s in total.'] = '%s lines printed, %s in total.';
+$lang['Automatically accept user download requests'] = 'Accepter automatiquement les demandes de téléchargement des utilisateurs';
+$lang['All requests shall be accepted when submitted'] = 'Toutes les demandes seront acceptées une fois soumises';
+$lang['Due to the batchdownloader settings, this request has automatically been accepted'] = 'En raison des paramètres de batchdownloader, cette demande a été automatiquement acceptée';
+$lang['This request cannot be automatically accepted'] = 'Cette demande ne peut pas être automatiquement acceptée';
