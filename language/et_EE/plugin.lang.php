@@ -151,3 +151,7 @@ $lang['As a reminder, you agree to accept the general conditions of use and to r
 $lang['%s lines printed, %s in total.'] = '%s rida prinditud, kokku %s.';
 $lang['%s plugin detected, albums will be downloadable according to permissions.'] = 'Tuvastati %s pistikprogramm, albumeid saab alla laadida vastavalt lubadele.';
 $lang['Accepted by'] = 'Vastu võetud';
+$lang['All requests shall be accepted when submitted'] = 'Kõik taotlused võetakse vastu nende esitamisel';
+$lang['Automatically accept user download requests'] = 'Võta kasutajate allalaadimistaotlused automaatselt vastu';
+$lang['Due to the batchdownloader settings, this request has automatically been accepted'] = 'Partii allalaadija seadete tõttu võeti see taotlus automaatselt vastu';
+$lang['This request cannot be automatically accepted'] = 'Seda taotlust ei saa automaatselt vastu võtta';
