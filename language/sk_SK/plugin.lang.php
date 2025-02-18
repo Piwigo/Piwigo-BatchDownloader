@@ -151,3 +151,7 @@ $lang['Please choose a photo size for this set'] = 'Vyberte si veľkosť fotogra
 $lang['Please fill out your First name'] = 'Prosím, vyplňte svoje meno';
 $lang['Please fill out your Last name'] = 'Prosím, vyplňte svoje priezvisko';
 $lang['Please fill out your Organisation'] = 'Vyplňte svoju organizáciu';
+$lang['All requests shall be accepted when submitted'] = 'Všetky žiadosti sa prijímajú, ak sú predložené';
+$lang['Automatically accept user download requests'] = 'Automatické prijímanie žiadostí používateľov o prevzatie';
+$lang['Due to the batchdownloader settings, this request has automatically been accepted'] = 'Vzhľadom na nastavenia batchdownloaderu bola táto požiadavka automaticky prijatá';
+$lang['This request cannot be automatically accepted'] = 'Táto žiadosť nemôže byť automaticky prijatá';
