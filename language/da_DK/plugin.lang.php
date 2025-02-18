@@ -151,3 +151,7 @@ $lang['As a reminder, you agree to accept the general conditions of use and to r
 $lang['Batch downloader, new download request '] = 'Batch Downloader, nye downloadanmodning';
 $lang['Batch downloader, your request has been processed'] = 'Batch Downloader, din anmodning er blevet behandlet';
 $lang['Accepted by'] = 'Accepteret af';
+$lang['This request cannot be automatically accepted'] = 'Denne anmodning kan ikke accepteres automatisk';
+$lang['Due to the batchdownloader settings, this request has automatically been accepted'] = 'Batch Downloaders indstillinger har automatisk accepteret denne anmodning';
+$lang['All requests shall be accepted when submitted'] = 'Accepter alle anmodninger når de modtages';
+$lang['Automatically accept user download requests'] = 'Accepter automatisk downloadanmodninger fra brugere';
