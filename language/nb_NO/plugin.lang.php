@@ -152,3 +152,7 @@ $lang['Link to general conditions of use page'] = 'Link til siden for generelle 
 $lang['Number of photos'] = 'Antall bilder';
 $lang['Organisation'] = 'Organisasjon';
 $lang['Please choose a photo size for this set'] = 'Venligst velg en bildestørrelse for dette settet';
+$lang['All requests shall be accepted when submitted'] = 'Alle forespørsler skal aksepteres når de sendes inn';
+$lang['Automatically accept user download requests'] = 'Godta automatisk nedlastingsforespørsler fra brukere';
+$lang['Due to the batchdownloader settings, this request has automatically been accepted'] = 'På grunn av batchdownloader-innstillingene har denne forespørselen automatisk blitt akseptert';
+$lang['This request cannot be automatically accepted'] = 'Denne forespørselen kan ikke aksepteres automatisk';
