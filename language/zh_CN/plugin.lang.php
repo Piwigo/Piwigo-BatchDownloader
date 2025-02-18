@@ -151,3 +151,7 @@ $lang['Please fill out your First name'] = '请填写您的名字';
 $lang['Please fill out your Last name'] = '请填写您的姓氏';
 $lang['Please fill out your Organisation'] = '请填写您的组织';
 $lang['Email'] = 'Email';
+$lang['All requests shall be accepted when submitted'] = '所有提交的请求均会被接受';
+$lang['Automatically accept user download requests'] = '自动接受用户下载请求';
+$lang['Due to the batchdownloader settings, this request has automatically been accepted'] = '由于批量下载器的设置，此请求已被自动接受';
+$lang['This request cannot be automatically accepted'] = '此请求无法自动接受';
