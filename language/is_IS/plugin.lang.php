@@ -136,3 +136,7 @@ $lang['Batch downloader, your request has been processed'] = 'Lotu niðurhalari,
 $lang['Download request'] = 'Beiðni um niðurhal';
 $lang['Download requests'] = 'Beiðnir um niðurhal';
 $lang['First name'] = 'Fornafn';
+$lang['Due to the batchdownloader settings, this request has automatically been accepted'] = 'Vegna stillinga á lotuniðurhalara hefur þessi beiðni verið samþykkt sjálfkrafa';
+$lang['All requests shall be accepted when submitted'] = 'Allar beiðnir skulu samþykktar þegar þær eru sendar';
+$lang['Automatically accept user download requests'] = 'Samþykkja sjálfkrafa niðurhalsbeiðnir notenda';
+$lang['This request cannot be automatically accepted'] = 'Ekki er hægt að samþykkja þessa beiðni sjálfkrafa';
