@@ -151,3 +151,7 @@ $lang['Batch downloader, new download request '] = '批次下載，有新的下�
 $lang['Batch downloader, your request has been processed'] = '批次下載，您的要求已經處理完畢';
 $lang['Accepted by'] = '接受者';
 $lang['As a reminder, you agree to accept the general conditions of use and to respect the rights relating to intellectual property.'] = '提醒您：您同意只在正常情況下使用這些內容，同時尊重一切和智慧財產權相關的權益。';
+$lang['All requests shall be accepted when submitted'] = '當按下送出時，所有的下載請求都會被接受';
+$lang['Automatically accept user download requests'] = '自動接受使用者的下載請求';
+$lang['Due to the batchdownloader settings, this request has automatically been accepted'] = '因為目前批次下載功能的設定關係，這項請求被自動接受了';
+$lang['This request cannot be automatically accepted'] = '這項請求無法自動被接受';
