@@ -153,3 +153,7 @@ $lang['Download request'] = 'Anfrage herunterladen';
 $lang['Download requests'] = 'Herunterladen Anfragen';
 $lang['Accepted by'] = 'Angenommen von';
 $lang['As a reminder, you agree to accept the general conditions of use and to respect the rights relating to intellectual property.'] = 'Zur Erinnerung: Sie erklären sich damit einverstanden, die allgemeinen Nutzungsbedingungen zu akzeptieren und die Rechte am geistigen Eigentum zu respektieren.';
+$lang['Due to the batchdownloader settings, this request has automatically been accepted'] = 'Aufgrund der Einstellungen des Batchdownloaders wurde diese Anfrage automatisch angenommen';
+$lang['This request cannot be automatically accepted'] = 'Dieser Antrag kann nicht automatisch angenommen werden';
+$lang['All requests shall be accepted when submitted'] = 'Alle Anträge werden angenommen, wenn sie wie folgt eingereicht werden';
+$lang['Automatically accept user download requests'] = 'Automatische Annahme von Download-Anfragen der Benutzer';
