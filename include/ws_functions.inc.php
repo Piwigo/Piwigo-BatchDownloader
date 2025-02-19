@@ -189,6 +189,7 @@ function ws_downloadRequest_create($params, &$service)
   
   if ($conf['batch_download']['request_permission_auto_accept'])
   {
+    //Due to the use of create_user_auth_key in update, we can't automaticlly accept the request for them
     if (!is_admin($params['user_id']))
     {
       list($dbnow) = pwg_db_fetch_row(pwg_query('SELECT NOW();'));
@@ -197,7 +198,7 @@ function ws_downloadRequest_create($params, &$service)
         'id' => $request_id,
         'status_change_date' => $dbnow,
         'request_status' => 'accept',
-        'updated_by' => -1
+        'updated_by' => 0
       );
   
       downloadRequest_update($update_data);
@@ -208,10 +209,6 @@ function ws_downloadRequest_create($params, &$service)
     {
       $request_info_email .= l10n('This request cannot be automatically accepted');
     }
-  }
-  else
-  {
-
   }
 
   pwg_mail_admins(
