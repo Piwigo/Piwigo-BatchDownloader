@@ -404,8 +404,8 @@ DELETE FROM '.IMAGE_SIZES_TABLE.'
   function getFilename($row, $filesize=array())
   {
     $row['filename'] = stripslashes(get_filename_wo_extension($row['file']));
+    $row['name'] = str2url(render_element_name($row));
 
-    $row['name'] = str2url($row['name']);
     global $logger; $logger->debug('name='.$row['name']);
 
     // datas
