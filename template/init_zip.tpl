@@ -14,7 +14,7 @@ setTimeout(function() {
 
 {footer_script}
 var derivatives = {
-  elements: ["{'","'|@implode:$missing_derivatives}"],
+  elements: ["{$missing_derivatives|join:'","'}"],
   done: 0,
   total: {$missing_derivatives|@count},
 
