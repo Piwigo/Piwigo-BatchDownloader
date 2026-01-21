@@ -69,9 +69,9 @@ $lang['Warning: Only registered users can use Batch Downloader.'] = '警告：�
 $lang['What can be downloaded?'] = '可以下载什么？';
 $lang['No result'] = '没有结果';
 $lang['%d MB'] = '%d MB';
-$lang['Archive #%d (already downloaded)'] = '压缩文件 #%d(已经下载)';
+$lang['Archive #%d (already downloaded)'] = '压缩文件 #%d(已下载)';
 $lang['Archive #%d (pending)'] = '压缩文件 #%d(等待中)';
-$lang['Archive #%d (ready)'] = '压缩文件 #%d(准备中)';
+$lang['Archive #%d (ready)'] = '压缩文件 #%d(已准备)';
 $lang['Please wait, your download is being prepared. This page will automatically refresh when it is ready.'] = '请稍等，正在准备下载。准备完成后本页面将自动重载。';
 $lang['Preparation'] = '准备';
 $lang['Sorry, there is nothing to download. Some files may have been excluded because of <i title="Authorized types are : %s">filetype restrictions</i>.'] = '抱歉，没有可下载的文件。某些文件可能因为 <i title="被认可的类型 : %s">文件类型限制</i>而被排除了。';

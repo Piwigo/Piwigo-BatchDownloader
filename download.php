@@ -1,5 +1,11 @@
 <?php
-define('PHPWG_ROOT_PATH', '../../');
+//  check if the file /app/www/public/include/common.inc.php exists, 
+//  compatible with the directory installation method of https://github.com/linuxserver/docker-piwigo .
+if (file_exists('/app/www/public/include/common.inc.php')) {
+  define('PHPWG_ROOT_PATH', '/app/www/public/');
+} else {
+  define('PHPWG_ROOT_PATH', '../../');
+}
 include(PHPWG_ROOT_PATH.'include/common.inc.php');
 
 check_status(ACCESS_GUEST);
